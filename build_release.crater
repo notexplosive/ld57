@@ -1,0 +1,27 @@
+local info = require "info"
+local dotnet = lib "dotnet"
+local explogine = lib "explogine"
+
+local function platformBuild(csproj, platform)
+    local platformBuildDirectory = info.buildDirectoryForPlatform(platform)
+    dotnet.publish(csproj, platformBuildDirectory, platform)
+    for _, file in ipairs(files.list(platformBuildDirectory, true, "pdb")) do
+        files.delete(file)
+    end
+
+    return platformBuildDirectory
+end
+
+local function copyExtraFiles(platform, resourceDirectory, finalOutputDirectory)
+    -- Put files in the Resources directory so they can be locally accesssed
+    files.copy("Resource", resourceDirectory .. "/" .. "Resource")
+end
+
+files.deleteDirectory(info.buildDirectory)
+
+explogine.publish(info.appName, platformBuild, copyExtraFiles, info.iconPath, info.platformToProject,
+    info.buildDirectoryForPlatform)
+
+if system.platform() == 'macos' then
+    files.copy("mac-users-read-this.txt", info.buildDirectoryForPlatform("macos-universal"))
+end

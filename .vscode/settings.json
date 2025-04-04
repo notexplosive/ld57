@@ -1,0 +1,9 @@
+{
+    "Lua.diagnostics.globals": [
+        "love",
+        "program",
+        "files",
+        "strings",
+        "lib"
+    ]
+}
