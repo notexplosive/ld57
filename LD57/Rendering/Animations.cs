@@ -4,10 +4,10 @@ using ExTween;
 using Microsoft.Xna.Framework;
 
 namespace LD57.Rendering;
+public delegate void AnimationFactory(TweenableGlyph glyph, SequenceTween tween);
 
 public static class Animations
 {
-    public delegate void AnimationFactory(TweenableGlyph glyph, SequenceTween tween);
 
     public static AnimationFactory MakeWalk(Direction inputDirection, float pixels)
     {
@@ -68,14 +68,38 @@ public static class Animations
         {
             tween
                 .Add(glyph.StartOverridingColor)
-                .Add(glyph.ColorOverride.CallbackSetTo(defaultColor))
-                .Add(glyph.ColorOverride.TweenTo(flashColor, 0.25f, Ease.Linear))
+                .Add(glyph.ForegroundColorOverride.CallbackSetTo(defaultColor))
+                .Add(glyph.ForegroundColorOverride.TweenTo(flashColor, 0.25f, Ease.Linear))
                 .Add(new WaitSecondsTween(0.5f))
-                .Add(glyph.ColorOverride.TweenTo(defaultColor, 0.25f, Ease.Linear))
+                .Add(glyph.ForegroundColorOverride.TweenTo(defaultColor, 0.25f, Ease.Linear))
                 .Add(glyph.StopOverridingColor);
                 ;
 
                 tween.IsLooping = true;
+        };
+    }
+
+    public static AnimationFactory FloatOnWater(Color backgroundColor)
+    {
+        return (glyph, tween) =>
+        {
+            tween
+                .Add(new MultiplexTween()
+                    .Add(new SequenceTween()
+                        .Add(glyph.Scale.TweenTo(0.75f, 0.15f, Ease.Linear))
+                    )
+                    .Add(new SequenceTween()
+                        .Add(glyph.BackgroundColor.TweenTo(Color.White, 0.02f, Ease.Linear))
+                        .Add(glyph.BackgroundColor.TweenTo(backgroundColor, 0.15f, Ease.Linear))
+                    )
+                
+                )
+                .Add(new SequenceTween()
+                    .Add(glyph.Scale.TweenTo(0.9f, 0.5f, Ease.Linear))
+                    .Add(glyph.Scale.TweenTo(0.75f, 0.5f, Ease.Linear))
+                    .SetLooping(true)
+                )
+                ;
         };
     }
 }

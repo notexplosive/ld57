@@ -4,10 +4,11 @@ using LD57.Rendering;
 
 namespace LD57.Gameplay;
 
-public class World : IRoom
+public class World
 {
     private readonly List<Entity> _entities = new();
     private readonly GridPosition _roomSize;
+    private readonly HashSet<Entity> _entitiesToRemove = new();
 
     public World(GridPosition roomSize)
     {
@@ -20,9 +21,20 @@ public class World : IRoom
     public Room CurrentRoom { get; set; }
     public RuleComputer Rules { get; }
 
-    public IEnumerable<Entity> AllEntities()
+    public IEnumerable<Entity> AllEntitiesIncludingInactive()
     {
         return _entities;
+    }
+    
+    public IEnumerable<Entity> AllActiveEntities()
+    {
+        foreach (var entity in _entities)
+        {
+            if (entity.IsActive)
+            {
+                yield return entity;
+            }
+        }
     }
 
     public Entity AddEntity(Entity entity)
@@ -30,7 +42,7 @@ public class World : IRoom
         _entities.Add(entity);
         if (CurrentRoom.Contains(entity.Position))
         {
-            CurrentRoom.CalculateLiveEntities();
+            CurrentRoom.RecalculateLiveEntities();
         }
 
         return entity;
@@ -55,9 +67,9 @@ public class World : IRoom
         return new Room(this, topLeft, topLeft + _roomSize);
     }
 
-    public IEnumerable<Entity> GetEntitiesAt(GridPosition position)
+    public IEnumerable<Entity> GetActiveEntitiesAt(GridPosition position)
     {
-        foreach (var entity in CurrentRoom.Contains(position) ? CurrentRoom.AllEntities() : AllEntities())
+        foreach (var entity in CurrentRoom.Contains(position) ? CurrentRoom.AllActiveEntities() : AllActiveEntities())
         {
             if (entity.Position == position)
             {
@@ -82,5 +94,20 @@ public class World : IRoom
     public void OnMoveCompleted(MoveData moveData, MoveStatus status)
     {
         MoveCompleted?.Invoke(moveData, status);
+    }
+
+    public void Remove(Entity entity)
+    {
+        _entitiesToRemove.Add(entity);
+    }
+
+    public void UpdateEntityList()
+    {
+        foreach (var entity in _entitiesToRemove)
+        {
+            _entities.Remove(entity);
+        }
+        
+        CurrentRoom.RecalculateLiveEntities();
     }
 }

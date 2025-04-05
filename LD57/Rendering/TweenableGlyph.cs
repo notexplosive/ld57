@@ -12,7 +12,8 @@ public class TweenableGlyph
     public TweenableVector2 PixelOffset { get; } = new();
     public TweenableFloat Rotation { get; } = new();
     public TweenableFloat Scale { get; } = new(1f);
-    public TweenableColor ColorOverride { get; } = new(Color.White);
+    public TweenableColor ForegroundColorOverride { get; } = new(Color.White);
+    public TweenableColor BackgroundColor { get; } = new(Color.Transparent);
 
     public CallbackTween StartOverridingColor => new(() => { ShouldOverrideColor = true; });
     public CallbackTween StopOverridingColor => new(() => { ShouldOverrideColor = false; });
@@ -22,15 +23,19 @@ public class TweenableGlyph
         RootTween.SkipToEnd();
         RootTween.Clear();
         ShouldOverrideColor = false;
+        Rotation.Value = 0f;
+        Scale.Value = 1f;
+        PixelOffset.Value = Vector2.Zero;
+        BackgroundColor.Value = Color.Transparent;
     }
 
-    public void SetAnimation(Animations.AnimationFactory factory)
+    public void SetAnimation(AnimationFactory factory)
     {
         SkipCurrentAnimation();
         AddAnimation(factory);
     }
 
-    public void AddAnimation(Animations.AnimationFactory factory)
+    public void AddAnimation(AnimationFactory factory)
     {
         var sequence = new SequenceTween();
         RootTween.Add(sequence);

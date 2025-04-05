@@ -36,6 +36,8 @@ public class LdSession : Session
         _world.AddEntity(new Entity(new GridPosition(15, 6), LdResourceAssets.Instance.EntityTemplates["button"]));
         _world.AddEntity(new Entity(new GridPosition(62, 6), LdResourceAssets.Instance.EntityTemplates["crate"]));
         _world.AddEntity(new Entity(new GridPosition(-5, -5), LdResourceAssets.Instance.EntityTemplates["crate"]));
+        _world.AddEntity(new Entity(new GridPosition(15, 5), LdResourceAssets.Instance.EntityTemplates["water"]));
+        _world.AddEntity(new Entity(new GridPosition(16, 5), LdResourceAssets.Instance.EntityTemplates["water"]));
 
         _world.Rules.AddRule(new CameraFollowsEntity(_player));
 
@@ -44,7 +46,7 @@ public class LdSession : Session
 
     private void OnMoveCompleted(MoveData data, MoveStatus status)
     {
-        var entitiesAtDestination = _world.GetEntitiesAt(data.Destination).ToList();
+        var entitiesAtDestination = _world.GetActiveEntitiesAt(data.Destination).ToList();
         var glyph = data.Mover.TweenableGlyph;
         if (status.WasInterrupted)
         {
@@ -56,11 +58,17 @@ public class LdSession : Session
         {
             glyph.SetAnimation(Animations.MakeMoveNudge(data.Direction, _screen.TileSize / 4));
         }
+        
+        var waterAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Water").ToList();
+        if (waterAtDestination.Count > 0 && data.Mover.HasTag("FloatsInWater"))
+        {
+            glyph.SetAnimation(Animations.FloatOnWater(waterAtDestination.First().TileState.ForegroundColor));
+        }
 
         var buttonsAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Button").ToList();
         if (data.Mover.HasTag("PressesButtons") && buttonsAtDestination.Count > 0)
         {
-            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState.Color, Color.Yellow));
+            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState.ForegroundColor, ResourceAlias.Color("button")));
         }
     }
 
@@ -84,9 +92,9 @@ public class LdSession : Session
 
     public override void Update(float dt)
     {
-        var allSortedEntities = _world.CurrentRoom.AllEntitiesInVisualOrder();
-        var allEntities = _world.CurrentRoom.AllEntities().ToList();
-        foreach (var entity in allEntities)
+        var allDrawnEntities = _world.CurrentRoom.AllVisibleEntitiesInDrawOrder();
+        var allActiveEntities = _world.CurrentRoom.AllActiveEntities().ToList();
+        foreach (var entity in allDrawnEntities)
         {
             entity.TweenableGlyph.RootTween.Update(dt);
         }
@@ -121,7 +129,7 @@ public class LdSession : Session
             _inputTimer = 0.125f;
         }
 
-        foreach (var entity in allSortedEntities)
+        foreach (var entity in allDrawnEntities)
         {
             var renderedPosition = entity.Position - _world.CurrentRoom.TopLeftPosition;
             _screen.SetTile(renderedPosition, entity.TileState, entity.TweenableGlyph);
@@ -143,6 +151,9 @@ public class LdSession : Session
         _screen.SetTile(bottomHudTopLeft + new GridPosition(4, 0), TileState.Sprite(ResourceAlias.Entities, 14));
         _screen.PutString(bottomHudTopLeft + new GridPosition(7, 0), "X[ ]", Color.Gray);
         _screen.SetTile(bottomHudTopLeft + new GridPosition(9, 0), TileState.Sprite(ResourceAlias.Entities, 15));
+        
+        // Cleanup
+        _world.UpdateEntityList();
     }
 
     public override void Draw(Painter painter)

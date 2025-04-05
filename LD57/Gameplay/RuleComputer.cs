@@ -25,11 +25,13 @@ public class RuleComputer
             direction);
         var status = new MoveStatus(data);
 
-        var entitiesAtDestination = _world.GetEntitiesAt(data.Destination).ToList();
+        var entitiesAtDestination = _world.GetActiveEntitiesAt(data.Destination).ToList();
 
         if (mover.HasTag("Solid"))
         {
             var solidEntitiesAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Solid").ToList();
+            var waterEntitiesAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Water").ToList();
+            
             if (solidEntitiesAtDestination.Count > 0)
             {
                 if (!mover.HasTag("Pusher"))
@@ -50,6 +52,24 @@ public class RuleComputer
                             status.Interrupt();
                         }
                     }
+                }
+            }
+
+            if (waterEntitiesAtDestination.Count > 0)
+            {
+                if (!mover.HasTag("FloatsInWater"))
+                {
+                    status.Interrupt();
+                }
+
+                if (mover.HasTag("FillsWater"))
+                {
+                    foreach (var water in waterEntitiesAtDestination)
+                    {
+                        _world.Remove(water);
+                    }
+
+                    mover.SetActive(false);
                 }
             }
         }

@@ -9,6 +9,7 @@ public class Entity
 {
     private readonly IEntityAppearance? _appearance;
     private readonly HashSet<string> _tags = new();
+    public bool IsActive { get; private set; } = true;
 
     public Entity(GridPosition position, IEntityAppearance appearance)
     {
@@ -56,5 +57,10 @@ public class Entity
     public bool HasTag(string tag)
     {
         return _tags.Contains(tag);
+    }
+
+    public void SetActive(bool value)
+    {
+        IsActive = value;
     }
 }

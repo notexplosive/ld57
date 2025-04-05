@@ -2,10 +2,12 @@
     "sort_priority": 1,
     "sprite_sheet": "Entities",
     "frame": 1,
-    "color": "blue",
+    "color": "crate",
     "tags": [
         "Pushable",
         "Solid",
-        "PressesButtons"
+        "PressesButtons",
+        "FloatsInWater",
+        "FillsWater"
     ]
 }
