@@ -20,12 +20,14 @@ public class AsciiScreen
         _tileSize = tileSize;
         _tiles = new Dictionary<GridPosition, TileState>();
         _font = ResourceAlias.GameFont.GetFont(40);
+
+        Clear(TileState.Empty);
     }
 
     public int Width { get; }
     public int Height { get; }
 
-    public GridPosition BottomRight => new(Width - 1, Height - 1);
+    public GridPosition RoomSize => new(Width - 1, Height - 1);
 
     public void Draw(Painter painter)
     {

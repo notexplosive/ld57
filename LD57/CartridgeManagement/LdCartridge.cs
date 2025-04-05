@@ -24,15 +24,29 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
-        if (Client.Debug.IsPassiveOrActive)
+        var targetMode = Client.Args.GetValue<string>("mode");
+        if (targetMode == "play")
+        {
+            LoadGame();
+        }
+        else if (targetMode == "editor")
+        {
+            _session = _editorSession;
+        }
+        else if (Client.Debug.IsPassiveOrActive)
         {
             _session = _editorSession;
         }
         else
         {
-            // _gameSession.LoadCurrentLevel();
-            _session = _gameSession;
+            LoadGame();
         }
+    }
+
+    private void LoadGame()
+    {
+        // _gameSession.LoadCurrentLevel();
+        _session = _gameSession;
     }
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
@@ -72,6 +86,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     public override void AddCommandLineParameters(CommandLineParametersWriter parameters)
     {
+        parameters.RegisterParameter<string>("mode");
     }
 
     public override void OnHotReload()
