@@ -29,7 +29,7 @@ public class RuleComputer
 
         if (mover.HasTag("Solid"))
         {
-            var solidEntitiesAtDestination = EntitiesWithTag(entitiesAtDestination, "Solid").ToList();
+            var solidEntitiesAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Solid").ToList();
             if (solidEntitiesAtDestination.Count > 0)
             {
                 if (!mover.HasTag("Pusher"))
@@ -61,17 +61,6 @@ public class RuleComputer
 
         OnMoveCompleted(data, status);
         return status;
-    }
-
-    private IEnumerable<Entity> EntitiesWithTag(List<Entity> entities, string tag)
-    {
-        foreach (var entity in entities)
-        {
-            if (entity.HasTag(tag))
-            {
-                yield return entity;
-            }
-        }
     }
 
     public void AttemptWarp(Entity entity, GridPosition newPosition)

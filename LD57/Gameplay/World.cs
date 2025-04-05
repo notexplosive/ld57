@@ -66,6 +66,17 @@ public class World : IRoom
         }
     }
 
+    public IEnumerable<Entity> FilterToEntitiesWithTag(List<Entity> entities, string tag)
+    {
+        foreach (var entity in entities)
+        {
+            if (entity.HasTag(tag))
+            {
+                yield return entity;
+            }
+        }
+    }
+
     public event Action<MoveData, MoveStatus>? MoveCompleted;
 
     public void OnMoveCompleted(MoveData moveData, MoveStatus status)

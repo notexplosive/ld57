@@ -42,6 +42,12 @@ public class AsciiScreen
                 var tileState = _tiles[gridPosition];
                 var tweenableGlyph = _tweenableGlyphs.GetValueOrDefault(gridPosition) ?? new TweenableGlyph();
 
+                var color = tileState.Color;
+                if (tweenableGlyph.ShouldOverrideColor)
+                {
+                    color = tweenableGlyph.ColorOverride;
+                }
+                
                 var pixelOffset = tweenableGlyph.PixelOffset.Value;
                 var rotation = tweenableGlyph.Rotation.Value;
 
@@ -53,7 +59,7 @@ public class AsciiScreen
                         var measuredSize = _font.MeasureString(text);
                         var origin = new Vector2(measuredSize.X / 2f, _font.LineHeight * 4 / 6f);
                         // painter.DrawRectangle(measuredSize.ToRectangleF().Moved(rectangle.Center).Moved(-origin), new DrawSettings{Color = Color.White.WithMultipliedOpacity(0.5f)});
-                        painter.SpriteBatch.DrawString(_font, text, rectangle.Center + pixelOffset, tileState.Color, rotation, origin,
+                        painter.SpriteBatch.DrawString(_font, text, rectangle.Center + pixelOffset, color, rotation, origin,
                             Vector2.One);
                     }
                 }
@@ -63,7 +69,7 @@ public class AsciiScreen
                     {
                         tileState.SpriteSheet.DrawFrameAsRectangle(painter, tileState.Frame,
                             rectangle.MovedByOrigin(DrawOrigin.Center).Moved(pixelOffset),
-                            new DrawSettings {Color = tileState.Color, Origin = DrawOrigin.Center, Angle = rotation});
+                            new DrawSettings {Color = color, Origin = DrawOrigin.Center, Angle = rotation});
                     }
                 }
             }

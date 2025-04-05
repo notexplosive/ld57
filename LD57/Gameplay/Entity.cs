@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ExplogineMonoGame.Data;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
@@ -26,7 +25,11 @@ public class Entity
         {
             _tags.Add(tag);
         }
+
+        SortPriority = template.SortPriority;
     }
+
+    public int SortPriority { get; }
 
     public TweenableGlyph TweenableGlyph { get; } = new();
 

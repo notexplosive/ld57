@@ -18,4 +18,7 @@ public class EntityTemplate
 
     [JsonProperty("tags")]
     public List<string> Tags { get; set; } = new();
+    
+    [JsonProperty("sort_priority")]
+    public int SortPriority { get; set; }
 }

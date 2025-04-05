@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -25,6 +26,13 @@ public class Room : IRoom
     public IEnumerable<Entity> AllEntities()
     {
         return _activeEntities;
+    }
+
+    public List<Entity> AllEntitiesInVisualOrder()
+    {
+        var list = AllEntities().ToList();
+        list.Sort((entityA, entityB) => entityB.SortPriority.CompareTo(entityA.SortPriority));
+        return list;
     }
 
     public void CalculateLiveEntities()
@@ -57,6 +65,7 @@ public class Room : IRoom
 
     public bool Contains(GridPosition newPosition)
     {
-        return new Rectangle(_topLeft.ToPoint(), (_bottomRight - _topLeft).ToPoint() + new Point(1)).Contains(newPosition.ToPoint());
+        return new Rectangle(_topLeft.ToPoint(), (_bottomRight - _topLeft).ToPoint() + new Point(1)).Contains(
+            newPosition.ToPoint());
     }
 }
