@@ -41,9 +41,10 @@ public class Entity
 
     public GridPosition Position { get; set; }
 
-    public void AddTag(string tag)
+    public Entity AddTag(string tag)
     {
         _tags.Add(tag);
+        return this;
     }
 
     public bool HasTag(string tag)

@@ -5,5 +5,4 @@ namespace LD57.Rules;
 public interface IGameRule
 {
     void OnMoveCompleted(World world, MoveData moveData);
-    bool ShouldInterruptMove(World world, MoveData moveData);
 }

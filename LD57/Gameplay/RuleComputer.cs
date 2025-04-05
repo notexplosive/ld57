@@ -1,52 +1,82 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ExplogineMonoGame.Data;
 using LD57.Rendering;
 using LD57.Rules;
 
 namespace LD57.Gameplay;
 
-public record struct MoveStatus(bool WasInterrupted);
-
 public class RuleComputer
 {
+    private readonly List<IGameRule> _rules = new();
     private readonly World _world;
-    private List<IGameRule> _rules = new();
 
     public RuleComputer(World world)
     {
         _world = world;
     }
 
-    public MoveStatus AttemptMoveInDirection(Entity entity, Direction direction)
+    public MoveStatus AttemptMoveInDirection(Entity mover, Direction direction)
     {
-        var status = new MoveStatus();
-        var oldPosition = entity.Position;
-        var newPosition = entity.Position + new GridPosition(direction.ToPoint());
-        var moveData = new MoveData(entity, oldPosition, newPosition, direction);
-        
-        foreach (var rule in _rules)
+        var move = new MoveStatus();
+        var oldPosition = mover.Position;
+        var newPosition = mover.Position + new GridPosition(direction.ToPoint());
+        var moveData = new MoveData(mover, oldPosition, newPosition, direction);
+
+        var entitiesAtDestination = _world.GetEntitiesAt(moveData.NewPosition).ToList();
+
+        if (mover.HasTag("Solid"))
         {
-            if (rule.ShouldInterruptMove(_world, moveData))
+            var solidEntitiesAtDestination = EntitiesWithTag(entitiesAtDestination, "Solid").ToList();
+            if (solidEntitiesAtDestination.Count > 0)
             {
-                status.WasInterrupted = true;
-                break;
+                if (!mover.HasTag("Pusher"))
+                {
+                    move.Interrupt();
+                }
+                else
+                {
+                    foreach (var solidEntity in solidEntitiesAtDestination)
+                    {
+                        if (solidEntity.HasTag("Pushable"))
+                        {
+                            var secondaryMove = _world.Rules.AttemptMoveInDirection(solidEntity, moveData.Direction);
+                            move.DependOnMove(secondaryMove);
+                        }
+                        else
+                        {
+                            move.Interrupt();
+                        }
+                    }
+                }
             }
         }
 
-        if (!status.WasInterrupted)
+        if (!move.WasInterrupted)
         {
-            entity.Position = newPosition;
+            mover.Position = newPosition;
         }
 
         OnMoveCompleted(moveData);
-        return status;
+        return move;
+    }
+
+    private IEnumerable<Entity> EntitiesWithTag(List<Entity> entities, string tag)
+    {
+        foreach (var entity in entities)
+        {
+            if (entity.HasTag(tag))
+            {
+                yield return entity;
+            }
+        }
     }
 
     public void AttemptWarp(Entity entity, GridPosition newPosition)
     {
         var oldPosition = entity.Position;
         entity.Position = newPosition;
-        
+
         OnMoveCompleted(new MoveData(entity, oldPosition, newPosition, Direction.None));
     }
 

@@ -1,5 +1,6 @@
 ﻿using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
+using ExTween;
 using LD57.CartridgeManagement;
 using LD57.Gameplay;
 using LD57.Rendering;
@@ -17,6 +18,9 @@ public class LdSession : Session
     private Direction _inputDirection = Direction.None;
     private float _inputTimer;
 
+    private MultiplexTween _tween = new();
+    private TweenableRectangle _rectangle = new(Rectangle.Empty);
+
     public LdSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
     {
@@ -27,11 +31,11 @@ public class LdSession : Session
         _player = _world.AddEntity(new Entity(new GridPosition(5,5), LdResourceAssets.Instance.EntityTemplates["player"]));
         
         _world.AddEntity(new Entity(new GridPosition(10,5), LdResourceAssets.Instance.EntityTemplates["crate"]));
+        _world.AddEntity(new Entity(new GridPosition(12,6), LdResourceAssets.Instance.EntityTemplates["crate"]));
         _world.AddEntity(new Entity(new GridPosition(62,6), LdResourceAssets.Instance.EntityTemplates["crate"]));
         _world.AddEntity(new Entity(new GridPosition(-5,-5), LdResourceAssets.Instance.EntityTemplates["crate"]));
         
         _world.Rules.AddRule(new CameraFollowsEntity(_player));
-        _world.Rules.AddRule(new PushPushables());
     }
 
     public override void OnHotReload()
@@ -42,43 +46,25 @@ public class LdSession : Session
     {
         _inputDirection = Direction.None;
 
-        if (AnyDirectionTapped(input))
+        var frameInput = new InputState();
+        
+        if (frameInput.AnyDirectionTapped(input))
         {
             _inputTimer = 0;
         }
         
-        if (input.Keyboard.GetButton(Keys.Left).IsDown)
-        {
-            _inputDirection = Direction.Left;
-        }
-        
-        if (input.Keyboard.GetButton(Keys.Right).IsDown)
-        {
-            _inputDirection = Direction.Right;
-        }
-        
-        if (input.Keyboard.GetButton(Keys.Up).IsDown)
-        {
-            _inputDirection = Direction.Up;
-        }
-        
-        if (input.Keyboard.GetButton(Keys.Down).IsDown)
-        {
-            _inputDirection = Direction.Down;
-        }
-    }
-
-    private bool AnyDirectionTapped(ConsumableInput input)
-    {
-        return
-            input.Keyboard.GetButton(Keys.Left).WasPressed
-            || input.Keyboard.GetButton(Keys.Right).WasPressed
-            || input.Keyboard.GetButton(Keys.Down).WasPressed
-            || input.Keyboard.GetButton(Keys.Up).WasPressed;
+        _inputDirection = frameInput.HeldDirection(input);
     }
 
     public override void Update(float dt)
     {
+        _tween.Update(dt);
+
+        if (_tween.IsDone())
+        {
+            _tween.Clear();
+        }
+        
         _screen.Clear(TileState.Empty);
 
         _inputTimer -= dt;
@@ -95,13 +81,20 @@ public class LdSession : Session
                 _world.Rules.AttemptMoveInDirection(_player, _inputDirection);
             }
 
-            _inputTimer = 0.1f;
+            _inputTimer = 0.125f;
         }
         
         foreach (var entity in _world.CurrentRoom.AllEntities())
         {
             var renderedPosition = entity.Position - _world.CurrentRoom.TopLeftPosition;
             _screen.SetTile(renderedPosition, entity.TileState);
+        }
+        
+        // UI
+
+        if (_rectangle.Value.Width * _rectangle.Value.Height > 0)
+        {
+            _screen.PutRectangle(ResourceAlias.PopupFrame, new GridPosition(_rectangle.Value.Location), new GridPosition(_rectangle.Value.Location + _rectangle.Value.Size));
         }
         
         var bottomHudTopLeft = new GridPosition(0, 19);
@@ -116,6 +109,7 @@ public class LdSession : Session
 
     public override void Draw(Painter painter)
     {
+        painter.Clear(ColorExtensions.FromRgbHex(0x021c04));
         _screen.Draw(painter);
     }
 }
