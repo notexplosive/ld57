@@ -18,12 +18,14 @@ public class RuleComputer
 
     public MoveStatus AttemptMoveInDirection(Entity mover, Direction direction)
     {
-        var move = new MoveStatus();
-        var oldPosition = mover.Position;
-        var newPosition = mover.Position + new GridPosition(direction.ToPoint());
-        var moveData = new MoveData(mover, oldPosition, newPosition, direction);
+        var data = new MoveData(
+            mover,
+            mover.Position,
+            mover.Position + new GridPosition(direction.ToPoint()),
+            direction);
+        var status = new MoveStatus(data);
 
-        var entitiesAtDestination = _world.GetEntitiesAt(moveData.NewPosition).ToList();
+        var entitiesAtDestination = _world.GetEntitiesAt(data.Destination).ToList();
 
         if (mover.HasTag("Solid"))
         {
@@ -32,7 +34,7 @@ public class RuleComputer
             {
                 if (!mover.HasTag("Pusher"))
                 {
-                    move.Interrupt();
+                    status.Interrupt();
                 }
                 else
                 {
@@ -40,25 +42,25 @@ public class RuleComputer
                     {
                         if (solidEntity.HasTag("Pushable"))
                         {
-                            var secondaryMove = _world.Rules.AttemptMoveInDirection(solidEntity, moveData.Direction);
-                            move.DependOnMove(secondaryMove);
+                            var secondaryMove = _world.Rules.AttemptMoveInDirection(solidEntity, data.Direction);
+                            status.DependOnMove(secondaryMove);
                         }
                         else
                         {
-                            move.Interrupt();
+                            status.Interrupt();
                         }
                     }
                 }
             }
         }
 
-        if (!move.WasInterrupted)
+        if (!status.WasInterrupted)
         {
-            mover.Position = newPosition;
+            mover.Position = mover.Position + new GridPosition(direction.ToPoint());
         }
 
-        OnMoveCompleted(moveData);
-        return move;
+        OnMoveCompleted(data, status);
+        return status;
     }
 
     private IEnumerable<Entity> EntitiesWithTag(List<Entity> entities, string tag)
@@ -74,14 +76,17 @@ public class RuleComputer
 
     public void AttemptWarp(Entity entity, GridPosition newPosition)
     {
+        var status = new MoveStatus();
         var oldPosition = entity.Position;
         entity.Position = newPosition;
 
-        OnMoveCompleted(new MoveData(entity, oldPosition, newPosition, Direction.None));
+        OnMoveCompleted(new MoveData(entity, oldPosition, newPosition, Direction.None), status);
     }
 
-    private void OnMoveCompleted(MoveData moveData)
+    private void OnMoveCompleted(MoveData moveData, MoveStatus status)
     {
+        _world.OnMoveCompleted(moveData, status);
+        
         foreach (var rule in _rules)
         {
             rule.OnMoveCompleted(_world, moveData);

@@ -8,7 +8,7 @@ public class CameraFollowsEntity : IGameRule
 
     public void OnMoveCompleted(World world, MoveData moveData)
     {
-        if (!world.CurrentRoom.Contains(moveData.NewPosition))
+        if (!world.CurrentRoom.Contains(moveData.Destination))
         {
             world.CurrentRoom = world.GetRoomAt(_entityToFollow.Position);
         }

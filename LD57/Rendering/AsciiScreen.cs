@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ExplogineMonoGame;
 using ExplogineMonoGame.AssetManagement;
 using ExplogineMonoGame.Data;
@@ -9,20 +10,19 @@ namespace LD57.Rendering;
 
 public class AsciiScreen
 {
-    private readonly DynamicSpriteFont _font;
-    private readonly Dictionary<GridPosition, TileState> _tiles;
-    private readonly float _tileSize;
+    private readonly DynamicSpriteFont _font = ResourceAlias.GameFont.GetFont(40);
+    private readonly Dictionary<GridPosition, TileState> _tiles = new();
+    private readonly Dictionary<GridPosition, TweenableGlyph> _tweenableGlyphs = new();
 
     public AsciiScreen(int width, int height, float tileSize)
     {
         Width = width;
         Height = height;
-        _tileSize = tileSize;
-        _tiles = new Dictionary<GridPosition, TileState>();
-        _font = ResourceAlias.GameFont.GetFont(40);
-
+        TileSize = tileSize;
         Clear(TileState.Empty);
     }
+
+    public float TileSize { get; }
 
     public int Width { get; }
     public int Height { get; }
@@ -31,14 +31,19 @@ public class AsciiScreen
 
     public void Draw(Painter painter)
     {
-        var tileRect = new Vector2(_tileSize).ToRectangleF().Moved(new Vector2(0, _tileSize / 4f));
+        var tileRect = new Vector2(TileSize).ToRectangleF().Moved(new Vector2(0, TileSize / 4f));
         painter.BeginSpriteBatch();
         for (var x = 0; x < Width; x++)
         {
             for (var y = 0; y < Height; y++)
             {
-                var rectangle = tileRect.Moved(new Vector2(_tileSize * x, _tileSize * y));
-                var tileState = _tiles[new GridPosition(x, y)];
+                var rectangle = tileRect.Moved(new Vector2(TileSize * x, TileSize * y));
+                var gridPosition = new GridPosition(x, y);
+                var tileState = _tiles[gridPosition];
+                var tweenableGlyph = _tweenableGlyphs.GetValueOrDefault(gridPosition) ?? new TweenableGlyph();
+
+                var pixelOffset = tweenableGlyph.PixelOffset.Value;
+                var rotation = tweenableGlyph.Rotation.Value;
 
                 if (tileState.TileType == TileType.Character)
                 {
@@ -48,7 +53,7 @@ public class AsciiScreen
                         var measuredSize = _font.MeasureString(text);
                         var origin = new Vector2(measuredSize.X / 2f, _font.LineHeight * 4 / 6f);
                         // painter.DrawRectangle(measuredSize.ToRectangleF().Moved(rectangle.Center).Moved(-origin), new DrawSettings{Color = Color.White.WithMultipliedOpacity(0.5f)});
-                        painter.SpriteBatch.DrawString(_font, text, rectangle.Center, tileState.Color, 0, origin,
+                        painter.SpriteBatch.DrawString(_font, text, rectangle.Center + pixelOffset, tileState.Color, rotation, origin,
                             Vector2.One);
                     }
                 }
@@ -56,8 +61,9 @@ public class AsciiScreen
                 {
                     if (tileState.SpriteSheet != null)
                     {
-                        tileState.SpriteSheet.DrawFrameAsRectangle(painter, tileState.Frame, rectangle,
-                            new DrawSettings {Color = tileState.Color});
+                        tileState.SpriteSheet.DrawFrameAsRectangle(painter, tileState.Frame,
+                            rectangle.MovedByOrigin(DrawOrigin.Center).Moved(pixelOffset),
+                            new DrawSettings {Color = tileState.Color, Origin = DrawOrigin.Center, Angle = rotation});
                     }
                 }
             }
@@ -66,11 +72,19 @@ public class AsciiScreen
         painter.EndSpriteBatch();
     }
 
-    public void SetTile(GridPosition position, TileState tileState)
+    public void SetTile(GridPosition position, TileState tileState, TweenableGlyph? tweenableGlyph = null)
     {
         if (position.X >= 0 && position.X < Width && position.Y >= 0 && position.Y < Height)
         {
             _tiles[position] = tileState;
+            if (tweenableGlyph != null)
+            {
+                _tweenableGlyphs[position] = tweenableGlyph;
+            }
+            else
+            {
+                _tweenableGlyphs.Remove(position);
+            }
         }
     }
 

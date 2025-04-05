@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LD57.Rendering;
 
 namespace LD57.Gameplay;
@@ -31,12 +32,13 @@ public class World : IRoom
         {
             CurrentRoom.CalculateLiveEntities();
         }
+
         return entity;
     }
 
     public Room GetRoomAt(GridPosition position)
     {
-        var inflatedRoomSize = _roomSize + new GridPosition(1,1);
+        var inflatedRoomSize = _roomSize + new GridPosition(1, 1);
         var x = position.X % inflatedRoomSize.X;
         if (x < 0)
         {
@@ -48,7 +50,7 @@ public class World : IRoom
         {
             y += inflatedRoomSize.Y;
         }
-        
+
         var topLeft = position - new GridPosition(x, y);
         return new Room(this, topLeft, topLeft + _roomSize);
     }
@@ -62,5 +64,12 @@ public class World : IRoom
                 yield return entity;
             }
         }
+    }
+
+    public event Action<MoveData, MoveStatus>? MoveCompleted;
+
+    public void OnMoveCompleted(MoveData moveData, MoveStatus status)
+    {
+        MoveCompleted?.Invoke(moveData, status);
     }
 }

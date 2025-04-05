@@ -36,6 +36,22 @@ public class LdSession : Session
         _world.AddEntity(new Entity(new GridPosition(-5,-5), LdResourceAssets.Instance.EntityTemplates["crate"]));
         
         _world.Rules.AddRule(new CameraFollowsEntity(_player));
+
+        _world.MoveCompleted += (data, status) =>
+        {
+            if (status.WasInterrupted)
+            {
+                data.Mover.TweenableGlyph.Animate(Animations.MakeInPlaceNudge(data.Direction, _screen.TileSize / 4));
+            }
+            else
+            {
+                if (data.Mover.HasTag("Pushable"))
+                {
+                    data.Mover.TweenableGlyph.Animate(
+                        Animations.MakeMoveNudge(data.Direction, _screen.TileSize / 4));
+                }
+            }
+        };
     }
 
     public override void OnHotReload()
@@ -58,6 +74,11 @@ public class LdSession : Session
 
     public override void Update(float dt)
     {
+        foreach (var entity in _world.AllEntities())
+        {
+            entity.TweenableGlyph.Tween.Update(dt);
+        }
+        
         _tween.Update(dt);
 
         if (_tween.IsDone())
@@ -78,7 +99,11 @@ public class LdSession : Session
         {
             if (_inputDirection != Direction.None)
             {
-                _world.Rules.AttemptMoveInDirection(_player, _inputDirection);
+                var move = _world.Rules.AttemptMoveInDirection(_player, _inputDirection);
+                if (!move.WasInterrupted)
+                {
+                    _player.TweenableGlyph.Animate(Animations.MakeWalk(_inputDirection, _screen.TileSize / 4f));
+                }
             }
 
             _inputTimer = 0.125f;
@@ -87,7 +112,7 @@ public class LdSession : Session
         foreach (var entity in _world.CurrentRoom.AllEntities())
         {
             var renderedPosition = entity.Position - _world.CurrentRoom.TopLeftPosition;
-            _screen.SetTile(renderedPosition, entity.TileState);
+            _screen.SetTile(renderedPosition, entity.TileState, entity.TweenableGlyph);
         }
         
         // UI
