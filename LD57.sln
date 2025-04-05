@@ -27,6 +27,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Assets", "Assets\Assets.shp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LD57", "LD57\LD57.csproj", "{6AB71E10-A11C-4BC7-ABAE-50271A9A177E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLD57", "TestLD57\TestLD57.csproj", "{30327A8C-D622-4931-A5DE-F00BADA9D1DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,14 @@ Global
 		{6AB71E10-A11C-4BC7-ABAE-50271A9A177E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AB71E10-A11C-4BC7-ABAE-50271A9A177E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AB71E10-A11C-4BC7-ABAE-50271A9A177E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A4C746-88AA-4442-951D-AFD48522D580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A4C746-88AA-4442-951D-AFD48522D580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A4C746-88AA-4442-951D-AFD48522D580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A4C746-88AA-4442-951D-AFD48522D580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30327A8C-D622-4931-A5DE-F00BADA9D1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30327A8C-D622-4931-A5DE-F00BADA9D1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30327A8C-D622-4931-A5DE-F00BADA9D1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30327A8C-D622-4931-A5DE-F00BADA9D1DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B91377D3-0DFD-4684-B6EC-5B648767A985} = {2AAC9F48-EAE0-4DF3-A649-712824C3E893}

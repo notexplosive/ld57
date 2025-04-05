@@ -27,6 +27,10 @@ public class World : IRoom
     public Entity AddEntity(Entity entity)
     {
         _entities.Add(entity);
+        if (CurrentRoom.Contains(entity.Position))
+        {
+            CurrentRoom.CalculateLiveEntities();
+        }
         return entity;
     }
 
@@ -47,5 +51,16 @@ public class World : IRoom
         
         var topLeft = position - new GridPosition(x, y);
         return new Room(this, topLeft, topLeft + _roomSize);
+    }
+
+    public IEnumerable<Entity> GetEntitiesAt(GridPosition position)
+    {
+        foreach (var entity in CurrentRoom.Contains(position) ? CurrentRoom.AllEntities() : AllEntities())
+        {
+            if (entity.Position == position)
+            {
+                yield return entity;
+            }
+        }
     }
 }

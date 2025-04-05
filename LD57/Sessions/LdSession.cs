@@ -1,5 +1,6 @@
 ﻿using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
+using LD57.CartridgeManagement;
 using LD57.Gameplay;
 using LD57.Rendering;
 using LD57.Rules;
@@ -14,7 +15,7 @@ public class LdSession : Session
     private readonly World _world;
     private readonly Entity _player;
     private Direction _inputDirection = Direction.None;
-    private float _turnTimer;
+    private float _inputTimer;
 
     public LdSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -23,15 +24,14 @@ public class LdSession : Session
         var finalRoomSize = _screen.RoomSize - new GridPosition(0, 3);
         _world = new World(finalRoomSize);
         
-        _player = _world.AddEntity(new Entity(new GridPosition(5,5), new EntityAppearance(ResourceAlias.Entities, 0, Color.Orange)));
-        _world.AddEntity(new Entity(new GridPosition(10,5), new EntityAppearance(ResourceAlias.Entities, 1, Color.White)));
-        _world.AddEntity(new Entity(new GridPosition(62,6), new EntityAppearance(ResourceAlias.Entities, 1, Color.White)));
+        _player = _world.AddEntity(new Entity(new GridPosition(5,5), LdResourceAssets.Instance.EntityTemplates["player"]));
         
-        _world.AddEntity(new Entity(new GridPosition(-5,-5), new EntityAppearance(ResourceAlias.Entities, 1, Color.White)));
+        _world.AddEntity(new Entity(new GridPosition(10,5), LdResourceAssets.Instance.EntityTemplates["crate"]));
+        _world.AddEntity(new Entity(new GridPosition(62,6), LdResourceAssets.Instance.EntityTemplates["crate"]));
+        _world.AddEntity(new Entity(new GridPosition(-5,-5), LdResourceAssets.Instance.EntityTemplates["crate"]));
         
-        _world.CurrentRoom.CalculateLiveEntities();
-
         _world.Rules.AddRule(new CameraFollowsEntity(_player));
+        _world.Rules.AddRule(new PushPushables());
     }
 
     public override void OnHotReload()
@@ -41,6 +41,11 @@ public class LdSession : Session
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
         _inputDirection = Direction.None;
+
+        if (AnyDirectionTapped(input))
+        {
+            _inputTimer = 0;
+        }
         
         if (input.Keyboard.GetButton(Keys.Left).IsDown)
         {
@@ -63,20 +68,34 @@ public class LdSession : Session
         }
     }
 
+    private bool AnyDirectionTapped(ConsumableInput input)
+    {
+        return
+            input.Keyboard.GetButton(Keys.Left).WasPressed
+            || input.Keyboard.GetButton(Keys.Right).WasPressed
+            || input.Keyboard.GetButton(Keys.Down).WasPressed
+            || input.Keyboard.GetButton(Keys.Up).WasPressed;
+    }
+
     public override void Update(float dt)
     {
         _screen.Clear(TileState.Empty);
 
-        _turnTimer += dt;
+        _inputTimer -= dt;
+
+        if (_inputDirection == Direction.None)
+        {
+            _inputTimer = 0;
+        }
         
-        if (_turnTimer > 0.1f)
+        if (_inputTimer <= 0f)
         {
             if (_inputDirection != Direction.None)
             {
                 _world.Rules.AttemptMoveInDirection(_player, _inputDirection);
             }
 
-            _turnTimer = 0;
+            _inputTimer = 0.1f;
         }
         
         foreach (var entity in _world.CurrentRoom.AllEntities())

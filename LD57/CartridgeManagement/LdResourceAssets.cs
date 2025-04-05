@@ -8,6 +8,7 @@ using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.AssetManagement;
 using FontStashSharp;
+using LD57.Gameplay;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -39,6 +40,7 @@ public class LdResourceAssets
     public Dictionary<string, SoundEffect> SoundEffects { get; set; } = new();
     public Dictionary<string, byte[]> RawFontBytes { get; } = new();
     public Dictionary<string, FontSystem> FontSystems { get; } = new();
+    public Dictionary<string, EntityTemplate> EntityTemplates { get; } = new();
 
     public IEnumerable<ILoadEvent> LoadEvents(Painter painter)
     {

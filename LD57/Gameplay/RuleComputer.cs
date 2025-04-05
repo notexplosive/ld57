@@ -5,6 +5,8 @@ using LD57.Rules;
 
 namespace LD57.Gameplay;
 
+public record struct MoveStatus(bool WasInterrupted);
+
 public class RuleComputer
 {
     private readonly World _world;
@@ -15,13 +17,29 @@ public class RuleComputer
         _world = world;
     }
 
-    public void AttemptMoveInDirection(Entity entity, Direction direction)
+    public MoveStatus AttemptMoveInDirection(Entity entity, Direction direction)
     {
+        var status = new MoveStatus();
         var oldPosition = entity.Position;
         var newPosition = entity.Position + new GridPosition(direction.ToPoint());
-        entity.Position = newPosition;
+        var moveData = new MoveData(entity, oldPosition, newPosition, direction);
         
-        OnMoveCompleted(new MoveCompletedData(entity, oldPosition, newPosition));
+        foreach (var rule in _rules)
+        {
+            if (rule.ShouldInterruptMove(_world, moveData))
+            {
+                status.WasInterrupted = true;
+                break;
+            }
+        }
+
+        if (!status.WasInterrupted)
+        {
+            entity.Position = newPosition;
+        }
+
+        OnMoveCompleted(moveData);
+        return status;
     }
 
     public void AttemptWarp(Entity entity, GridPosition newPosition)
@@ -29,14 +47,14 @@ public class RuleComputer
         var oldPosition = entity.Position;
         entity.Position = newPosition;
         
-        OnMoveCompleted(new MoveCompletedData(entity, oldPosition, newPosition));
+        OnMoveCompleted(new MoveData(entity, oldPosition, newPosition, Direction.None));
     }
 
-    private void OnMoveCompleted(MoveCompletedData moveCompletedData)
+    private void OnMoveCompleted(MoveData moveData)
     {
         foreach (var rule in _rules)
         {
-            rule.OnMoveCompleted(_world, moveCompletedData);
+            rule.OnMoveCompleted(_world, moveData);
         }
     }
 

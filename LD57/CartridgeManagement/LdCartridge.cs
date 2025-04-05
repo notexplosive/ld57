@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.Json.Nodes;
 using ExplogineCore;
 using ExplogineMonoGame;
 using ExplogineMonoGame.AssetManagement;
 using ExplogineMonoGame.Cartridges;
 using ExplogineMonoGame.Data;
+using LD57.Gameplay;
 using LD57.Sessions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
 
 namespace LD57.CartridgeManagement;
 
@@ -117,6 +121,19 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(0, tileSize * 2), tileSizeSquare));
             selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(0, tileSize), tileSizeSquare));
             LdResourceAssets.Instance.AddSpriteSheet("PopupFrameParts", selectFrameSpriteSheet);
+        });
+        
+        yield return new VoidLoadEvent("Entities", () =>
+        {
+            var fileSystem = Client.Debug.RepoFileSystem.GetDirectory("Resource/Entities");
+            foreach (var path in fileSystem.GetFilesAt("."))
+            {
+                var template = JsonConvert.DeserializeObject<EntityTemplate>(fileSystem.ReadFile(path));
+                if (template != null)
+                {
+                    LdResourceAssets.Instance.EntityTemplates.Add(path.RemoveFileExtension(), template);
+                }
+            }
         });
     }
 }

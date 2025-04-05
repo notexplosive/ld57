@@ -1,0 +1,8 @@
+{
+    "sprite_sheet": "Entities",
+    "frame": 1,
+    "color": "6eadf5",
+    "tags": [
+        "Pushable"
+    ]
+}

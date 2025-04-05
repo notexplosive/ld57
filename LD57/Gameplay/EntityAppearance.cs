@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace LD57.Gameplay;
 
-public record EntityAppearance(SpriteSheet SpriteSheet, int Frame, Color Color)
+public record EntityAppearance(SpriteSheet SpriteSheet, int Frame, Color Color) : IEntityAppearance
 {
     public TileState TileState => TileState.Sprite(SpriteSheet, Frame, Color);
 }
