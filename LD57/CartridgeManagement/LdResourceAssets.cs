@@ -140,6 +140,11 @@ public class LdResourceAssets
         Sheets.Add(key, generateSpriteSheet(canvas.Texture));
     }
 
+    public void AddSpriteSheet(string key, SpriteSheet spriteSheet)
+    {
+        Sheets[key] = spriteSheet;
+    }
+
     public void AddSound(IFileSystem resourceFiles, string path)
     {
         var vorbis = ReadOgg.ReadVorbis(Path.Join(resourceFiles.GetCurrentDirectory(), path));

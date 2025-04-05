@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ExplogineCore;
 using ExplogineMonoGame;
+using ExplogineMonoGame.AssetManagement;
 using ExplogineMonoGame.Cartridges;
 using ExplogineMonoGame.Data;
 using LD57.Sessions;
@@ -16,7 +17,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
     private LdSession? _gameSession;
     private ISession? _session;
 
-    public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.LinearWrap);
+    public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.PointClamp);
 
     public override void OnCartridgeStarted()
     {
@@ -85,5 +86,22 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         {
             yield return item;
         }
+
+        yield return new VoidLoadEvent("PopupFrameParts", "Graphics", () =>
+        {
+            var texture = LdResourceAssets.Instance.Sheets["PopupFrame"].SourceTexture;
+            var selectFrameSpriteSheet = new SelectFrameSpriteSheet(texture);
+            var tileSize = 11;
+            var tileSizeSquare = new Point(tileSize);
+            selectFrameSpriteSheet.AddFrame(new Rectangle(Point.Zero, tileSizeSquare));
+            selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(tileSize, 0), tileSizeSquare));
+            selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(tileSize * 2, 0), tileSizeSquare));
+            selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(tileSize * 2, tileSize), tileSizeSquare));
+            selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(tileSize * 2, tileSize * 2), tileSizeSquare));
+            selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(tileSize, tileSize * 2), tileSizeSquare));
+            selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(0, tileSize * 2), tileSizeSquare));
+            selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(0, tileSize), tileSizeSquare));
+            LdResourceAssets.Instance.AddSpriteSheet("PopupFrameParts", selectFrameSpriteSheet);
+        });
     }
 }
