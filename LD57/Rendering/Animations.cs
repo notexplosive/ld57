@@ -62,7 +62,7 @@ public static class Animations
         };
     }
 
-    public static AnimationFactory FlashColor(Color defaultColor, Color flashColor)
+    public static AnimationFactory PulseColorLoop(Color defaultColor, Color flashColor)
     {
         return (glyph, tween) =>
         {

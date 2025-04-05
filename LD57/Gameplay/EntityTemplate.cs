@@ -14,7 +14,7 @@ public class EntityTemplate
     public int Frame { get; set; }
 
     [JsonProperty("color")]
-    public string ColorHex { get; set; } = "ffffff";
+    public string Color { get; set; } = "ffffff";
 
     [JsonProperty("tags")]
     public List<string> Tags { get; set; } = new();

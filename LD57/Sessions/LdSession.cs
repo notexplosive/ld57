@@ -60,7 +60,7 @@ public class LdSession : Session
         var buttonsAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Button").ToList();
         if (data.Mover.HasTag("PressesButtons") && buttonsAtDestination.Count > 0)
         {
-            glyph.AddAnimation(Animations.FlashColor(data.Mover.TileState.Color, Color.Yellow));
+            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState.Color, Color.Yellow));
         }
     }
 

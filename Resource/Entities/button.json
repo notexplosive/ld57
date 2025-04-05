@@ -2,7 +2,7 @@
     "sort_priority": 2,
     "sprite_sheet": "Entities",
     "frame": 2,
-    "color": "ffffff",
+    "color": "white",
     "tags": [
         "Button"
     ]

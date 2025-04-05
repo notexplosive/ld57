@@ -2,7 +2,7 @@
     "sort_priority": 0,
     "sprite_sheet": "Entities",
     "frame": 0,
-    "color": "edcb07",
+    "color": "player",
     "tags": [
         "Pusher",
         "Solid",

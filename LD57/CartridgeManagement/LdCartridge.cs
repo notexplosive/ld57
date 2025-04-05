@@ -105,6 +105,16 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         {
             yield return item;
         }
+        
+        yield return new VoidLoadEvent("Colors", () =>
+        {
+            var fileSystem = Client.Debug.RepoFileSystem.GetDirectory("Resource");
+            var colorTable = JsonConvert.DeserializeObject<Dictionary<string,string>>(fileSystem.ReadFile("colors.json"));
+            if (colorTable != null)
+            {
+                LdResourceAssets.Instance.AddKnownColors(colorTable);
+            }
+        });
 
         yield return new VoidLoadEvent("PopupFrameParts", "Graphics", () =>
         {

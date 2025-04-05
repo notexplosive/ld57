@@ -19,8 +19,7 @@ public class Entity
     public Entity(GridPosition position, EntityTemplate template)
     {
         Position = position;
-        _appearance = new EntityAppearance(LdResourceAssets.Instance.Sheets[template.SpriteSheetName], template.Frame,
-            ColorExtensions.FromRgbaHexString(template.ColorHex));
+        _appearance = new EntityAppearance(LdResourceAssets.Instance.Sheets[template.SpriteSheetName], template.Frame, ResourceAlias.Color(template.Color));
         foreach (var tag in template.Tags)
         {
             _tags.Add(tag);

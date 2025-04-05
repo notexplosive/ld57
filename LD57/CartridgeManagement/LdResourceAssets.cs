@@ -7,6 +7,7 @@ using ExplogineCore.Aseprite;
 using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.AssetManagement;
+using ExplogineMonoGame.Data;
 using FontStashSharp;
 using LD57.Gameplay;
 using Microsoft.Xna.Framework;
@@ -21,6 +22,7 @@ public class LdResourceAssets
     private static LdResourceAssets? instanceImpl;
 
     private readonly Dictionary<string, Canvas> _dynamicTextures = new();
+    private readonly Dictionary<string, Color?> _namedColors = new();
 
     public static LdResourceAssets Instance
     {
@@ -41,6 +43,7 @@ public class LdResourceAssets
     public Dictionary<string, byte[]> RawFontBytes { get; } = new();
     public Dictionary<string, FontSystem> FontSystems { get; } = new();
     public Dictionary<string, EntityTemplate> EntityTemplates { get; } = new();
+    public static Color MissingColor { get; } = new(1, 0, 1);
 
     public IEnumerable<ILoadEvent> LoadEvents(Painter painter)
     {
@@ -53,7 +56,7 @@ public class LdResourceAssets
             {
                 return;
             }
-            
+
             var texture = Texture2D.FromFile(Client.Graphics.Device, texturePath);
             var sheetInfo = JsonConvert.DeserializeObject<AsepriteSheetData>(resourceFiles.ReadFile("atlas.json"));
 
@@ -192,5 +195,23 @@ public class LdResourceAssets
     {
         Instance.Unload();
         instanceImpl = null;
+    }
+
+    public void AddKnownColors(Dictionary<string, string> colorTable)
+    {
+        foreach (var keyValuePair in colorTable)
+        {
+            _namedColors.Add(keyValuePair.Key, ColorExtensions.FromRgbaHexString(keyValuePair.Value));
+        }
+    }
+
+    public bool HasNamedColor(string name)
+    {
+        return _namedColors.ContainsKey(name);
+    }
+
+    public Color GetNamedColor(string name)
+    {
+        return _namedColors.GetValueOrDefault(name) ?? MissingColor;
     }
 }
