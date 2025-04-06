@@ -44,4 +44,16 @@ public static class ResourceAlias
 
         return result;
     }
+
+    public static MessageContent Messages(string messageName)
+    {
+        var message = LdResourceAssets.Instance.Messages.GetValueOrDefault(messageName);
+
+        if (message == null)
+        {
+            return new MessageContent("???");
+        }
+        
+        return message;
+    }
 }

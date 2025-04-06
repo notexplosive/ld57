@@ -127,40 +127,10 @@ public class AsciiScreen
         var height = Math.Abs(cornerA.Y - cornerB.Y);
 
         var topLeft = new GridPosition(minX, minY);
-        var bottomRight = new GridPosition(minX + width, minY + height);
-        var bottomLeft = new GridPosition(minX, minY +height);
-        var topRight = new GridPosition(minX+width, minY);
 
-        PutTile(topLeft, tileState);
-        for (var i = 1; i < width; i++)
+        for (var x = 0; x < width+1; x++)
         {
-            PutTile(topLeft + new GridPosition(i, 0), tileState);
-        }
-
-        PutTile(topRight, tileState);
-
-        for (var i = 1; i < height; i++)
-        {
-            PutTile(topRight + new GridPosition(0, i), tileState);
-        }
-
-        PutTile(bottomRight, tileState);
-
-        for (var i = 1; i < width; i++)
-        {
-            PutTile(bottomLeft + new GridPosition(i, 0), tileState);
-        }
-
-        PutTile(bottomLeft, tileState);
-
-        for (var i = 1; i < height; i++)
-        {
-            PutTile(topLeft + new GridPosition(0, i), tileState);
-        }
-
-        for (var x = 1; x < width; x++)
-        {
-            for (var y = 1; y < height; y++)
+            for (var y = 0; y < height+1; y++)
             {
                 PutTile(topLeft + new GridPosition(x, y), tileState);
             }

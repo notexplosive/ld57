@@ -1,0 +1,13 @@
+A damaged sign,
+barely legible...
+#
+{i:Entities:24} VILLAGE
+
+CATACOMBS {i:Entities:21}
+#
+{c:white}There is a message
+scribbled underneath...
+#
+{c:blood}{i:Entities:25}
+      TURN BACK!
+                      {i:Entities:25}

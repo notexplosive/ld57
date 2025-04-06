@@ -46,4 +46,9 @@ public class InputState
 
         return direction;
     }
+
+    public bool AnyActionTapped(ConsumableInput input)
+    {
+        return input.Keyboard.GetButton(Keys.X).WasPressed || input.Keyboard.GetButton(Keys.Z).WasPressed;
+    }
 }

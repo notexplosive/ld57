@@ -450,7 +450,7 @@ public class EditorSession : Session
         world.SetCurrentRoom(new Room(world, _cameraPosition, _cameraPosition + _screen.RoomSize));
         world.CameraPosition = _cameraPosition;
 
-        world.PopulateOnScreen(_screen, dt);
+        world.PaintToScreen(_screen, dt);
 
         if (_hoveredTilePosition.HasValue)
         {

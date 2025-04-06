@@ -153,5 +153,18 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
                 }
             }
         });
+        
+        yield return new VoidLoadEvent("Messages", () =>
+        {
+            var fileSystem = Client.Debug.RepoFileSystem.GetDirectory("Resource/Messages");
+            foreach (var path in fileSystem.GetFilesAt("."))
+            {
+                var content = fileSystem.ReadFile(path);
+                {
+                    var key = path.RemoveFileExtension();
+                    LdResourceAssets.Instance.Messages.Add(key, new MessageContent(content));
+                }
+            }
+        });
     }
 }

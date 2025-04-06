@@ -1,0 +1,7 @@
+{
+    "sort_priority": 9,
+    "sprite_sheet": "Entities",
+    "frame": 25,
+    "color": "blood",
+    "tags": []
+}

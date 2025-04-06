@@ -43,6 +43,7 @@ public class LdResourceAssets
     public Dictionary<string, byte[]> RawFontBytes { get; } = new();
     public Dictionary<string, FontSystem> FontSystems { get; } = new();
     public Dictionary<string, EntityTemplate> EntityTemplates { get; } = new();
+    public Dictionary<string, MessageContent> Messages { get; } = new();
     public static Color MissingColor { get; } = new(1, 0, 1);
 
     public IEnumerable<ILoadEvent> LoadEvents(Painter painter)
@@ -114,6 +115,9 @@ public class LdResourceAssets
         Unload(SoundEffects);
         Unload(SoundInstances);
         Unload(FontSystems);
+        RawFontBytes.Clear();
+        Messages.Clear();
+        EntityTemplates.Clear();
     }
 
     private void Unload<T>(Dictionary<string, T> dictionary) where T : IDisposable

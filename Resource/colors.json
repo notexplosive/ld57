@@ -1,12 +1,13 @@
 {
-    "crate": "968b7b",
     "white": "ffffff",
+    "crate": "968b7b",
     "player": "edcb07",
     "button": "bfb4d6",
     "water": "537599",
     "grass": "50a642",
     "rock": "d9d4b8",
     "red_brick": "c77463",
+    "blood": "f54040",
     "blue_brick": "4298c9",
     "wood": "de8e33",
     "background": "171717"

@@ -1,0 +1,7 @@
+A damaged sign...
+a message is scrawled
+#
+{c:blood}{i:Entities:25}DO NOT ENTER{i:Entities:25}
+#
+{c:blood}{i:Entities:25} ONCE YOU ENTER
+YOU CAN NEVER LEAVE {i:Entities:25}

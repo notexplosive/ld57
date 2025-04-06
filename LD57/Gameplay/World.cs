@@ -13,6 +13,8 @@ public class World
     private readonly GridPosition _roomSize;
 
     public event Action<string>? RequestLoad;
+    public event Action<string>? RequestZoneNameChange;
+    public event Action<string>? RequestShow;
     
     public World(GridPosition roomSize, WorldTemplate worldTemplate)
     {
@@ -41,13 +43,31 @@ public class World
                 if (splitCommand.Length >= 2)
                 {
                     var commandName = splitCommand[0];
-                    var arg = splitCommand[1];
+                    var remainingArgs = splitCommand.ToList();
+                    remainingArgs.RemoveAt(0);
+                    var arg = string.Join(" ", remainingArgs);
 
                     if (commandName == "load")
                     {
                         entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () =>
                         {
                             RequestLoad?.Invoke(arg);
+                        }));
+                    }
+
+                    if (commandName == "zone")
+                    {
+                        entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnEnter, () =>
+                        {
+                            RequestZoneNameChange?.Invoke(arg);
+                        }));
+                    }
+
+                    if (commandName == "show")
+                    {
+                        entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () =>
+                        {
+                            RequestShow?.Invoke(arg);
                         }));
                     }
                 }
@@ -68,6 +88,10 @@ public class World
     {
         CurrentRoom = room;
         CameraPosition = room.TopLeftPosition;
+        foreach (var entity in room.AllActiveEntities())
+        {
+            entity.TriggerBehavior(BehaviorTrigger.OnEnter);
+        }
     }
 
     public IEnumerable<Entity> AllEntitiesIncludingInactive()
@@ -170,7 +194,7 @@ public class World
         CurrentRoom.RecalculateLiveEntities();
     }
 
-    public void PopulateOnScreen(AsciiScreen screen, float dt)
+    public void PaintToScreen(AsciiScreen screen, float dt)
     {
         var allDrawnEntities = CurrentRoom.AllVisibleEntitiesInDrawOrder();
 
