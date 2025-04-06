@@ -21,4 +21,6 @@ public class EntityTemplate
     
     [JsonProperty("sort_priority")]
     public int SortPriority { get; set; }
+
+    public string TemplateName { get; set; } = string.Empty;
 }

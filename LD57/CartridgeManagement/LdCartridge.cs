@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Text.Json.Nodes;
 using ExplogineCore;
 using ExplogineMonoGame;
 using ExplogineMonoGame.AssetManagement;
@@ -17,9 +15,9 @@ namespace LD57.CartridgeManagement;
 
 public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 {
-    private EditorSession? _editorSession;
-    private LdSession? _gameSession;
-    private ISession? _session;
+    private EditorSession _editorSession = null!;
+    private LdSession _gameSession = null!;
+    private ISession _session = null!;
 
     public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.PointClamp);
 
@@ -27,6 +25,12 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
     {
         _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
+
+        _editorSession.RequestPlay += (position) =>
+        {
+            _gameSession.LoadWorld(_editorSession.WorldTemplate, position);
+            _session = _gameSession;
+        };
 
         var targetMode = Client.Args.GetValue<string>("mode");
         if (targetMode == "play")
@@ -63,13 +67,14 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             }
         }
 
-        _session?.UpdateInput(input, hitTestStack);
+        _session.UpdateInput(input, hitTestStack);
     }
 
     private void ToggleSession()
     {
         if (_session == _editorSession)
         {
+            _gameSession.LoadWorld(_editorSession.WorldTemplate);
             _session = _gameSession;
         }
         else
@@ -80,12 +85,12 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     public override void Update(float dt)
     {
-        _session?.Update(dt);
+        _session.Update(dt);
     }
 
     public override void Draw(Painter painter)
     {
-        _session?.Draw(painter);
+        _session.Draw(painter);
     }
 
     public override void AddCommandLineParameters(CommandLineParametersWriter parameters)
@@ -95,7 +100,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     public override void OnHotReload()
     {
-        _session?.OnHotReload();
+        _session.OnHotReload();
     }
 
     public override IEnumerable<ILoadEvent> LoadEvents(Painter painter)
@@ -105,11 +110,12 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         {
             yield return item;
         }
-        
+
         yield return new VoidLoadEvent("Colors", () =>
         {
             var fileSystem = Client.Debug.RepoFileSystem.GetDirectory("Resource");
-            var colorTable = JsonConvert.DeserializeObject<Dictionary<string,string>>(fileSystem.ReadFile("colors.json"));
+            var colorTable =
+                JsonConvert.DeserializeObject<Dictionary<string, string>>(fileSystem.ReadFile("colors.json"));
             if (colorTable != null)
             {
                 LdResourceAssets.Instance.AddKnownColors(colorTable);
@@ -132,7 +138,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             selectFrameSpriteSheet.AddFrame(new Rectangle(new Point(0, tileSize), tileSizeSquare));
             LdResourceAssets.Instance.AddSpriteSheet("PopupFrameParts", selectFrameSpriteSheet);
         });
-        
+
         yield return new VoidLoadEvent("Entities", () =>
         {
             var fileSystem = Client.Debug.RepoFileSystem.GetDirectory("Resource/Entities");
@@ -141,7 +147,9 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
                 var template = JsonConvert.DeserializeObject<EntityTemplate>(fileSystem.ReadFile(path));
                 if (template != null)
                 {
-                    LdResourceAssets.Instance.EntityTemplates.Add(path.RemoveFileExtension(), template);
+                    var key = path.RemoveFileExtension();
+                    template.TemplateName = key;
+                    LdResourceAssets.Instance.EntityTemplates.Add(key, template);
                 }
             }
         });

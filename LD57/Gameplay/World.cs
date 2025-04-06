@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using LD57.CartridgeManagement;
 using LD57.Rendering;
 
 namespace LD57.Gameplay;
@@ -7,25 +8,45 @@ namespace LD57.Gameplay;
 public class World
 {
     private readonly List<Entity> _entities = new();
-    private readonly GridPosition _roomSize;
     private readonly HashSet<Entity> _entitiesToRemove = new();
+    private readonly GridPosition _roomSize;
 
-    public World(GridPosition roomSize)
+    public World(GridPosition roomSize, WorldTemplate worldTemplate)
     {
         _roomSize = roomSize;
         Rules = new RuleComputer(this);
         var gridPosition = new GridPosition(0, 0);
         CurrentRoom = new Room(this, gridPosition, gridPosition + roomSize);
+
+        foreach (var placedEntity in worldTemplate.PlacedEntities)
+        {
+            if (placedEntity.TemplateName == "player")
+            {
+                continue;
+            }
+            AddEntityFast(new Entity(placedEntity.Position,
+                LdResourceAssets.Instance.EntityTemplates[placedEntity.TemplateName]));
+        }
+
+        CurrentRoom.RecalculateLiveEntities();
     }
 
-    public Room CurrentRoom { get; set; }
+    public Room CurrentRoom { get; private set; }
     public RuleComputer Rules { get; }
+
+    public GridPosition CameraPosition { get; set; }
+
+    public void SetCurrentRoom(Room room)
+    {
+        CurrentRoom = room;
+        CameraPosition = room.TopLeftPosition;
+    }
 
     public IEnumerable<Entity> AllEntitiesIncludingInactive()
     {
         return _entities;
     }
-    
+
     public IEnumerable<Entity> AllActiveEntities()
     {
         foreach (var entity in _entities)
@@ -35,6 +56,11 @@ public class World
                 yield return entity;
             }
         }
+    }
+
+    private void AddEntityFast(Entity entity)
+    {
+        _entities.Add(entity);
     }
 
     public Entity AddEntity(Entity entity)
@@ -107,7 +133,23 @@ public class World
         {
             _entities.Remove(entity);
         }
-        
+
         CurrentRoom.RecalculateLiveEntities();
+    }
+
+    public void PopulateOnScreen(AsciiScreen screen, float dt)
+    {
+        var allDrawnEntities = CurrentRoom.AllVisibleEntitiesInDrawOrder();
+
+        foreach (var entity in allDrawnEntities)
+        {
+            entity.TweenableGlyph.RootTween.Update(dt);
+        }
+
+        foreach (var entity in allDrawnEntities)
+        {
+            var renderedPosition = entity.Position - CameraPosition;
+            screen.PutTile(renderedPosition, entity.TileState, entity.TweenableGlyph);
+        }
     }
 }

@@ -22,12 +22,15 @@ public class Room
     }
 
     public GridPosition TopLeftPosition => _topLeft;
+    public GridPosition BottomRightPosition => _bottomRight;
+
+    public Rectangle Rectangle => new(_topLeft.ToPoint(), (_bottomRight - _topLeft).ToPoint() + new Point(1));
 
     public IEnumerable<Entity> AllEntitiesIncludingInactive()
     {
         return _entitiesInRoom;
     }
-    
+
     public IEnumerable<Entity> AllActiveEntities()
     {
         foreach (var entity in _entitiesInRoom)
@@ -83,7 +86,7 @@ public class Room
 
     public bool Contains(GridPosition newPosition)
     {
-        return new Rectangle(_topLeft.ToPoint(), (_bottomRight - _topLeft).ToPoint() + new Point(1)).Contains(
+        return Rectangle.Contains(
             newPosition.ToPoint());
     }
 }

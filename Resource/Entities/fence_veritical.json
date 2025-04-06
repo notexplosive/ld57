@@ -1,9 +1,9 @@
 {
     "sort_priority": 10,
     "sprite_sheet": "Walls",
-    "frame": 0,
-    "color": "water",
+    "frame": 9,
+    "color": "wood",
     "tags": [
-        "Water"
+        "Solid"
     ]
 }

@@ -55,8 +55,8 @@ public static class Animations
         {
             tween
                 .Add(new SequenceTween()
-                    .Add(glyph.PixelOffset.TweenTo(inputDirection.ToGridCellSizedVector(pixels), 0.1f, Ease.Linear))
-                    .Add(glyph.PixelOffset.TweenTo(Vector2.Zero, 0.1f, Ease.Linear))
+                    .Add(glyph.PixelOffset.TweenTo(inputDirection.ToGridCellSizedVector(pixels), 0.05f, Ease.Linear))
+                    .Add(glyph.PixelOffset.TweenTo(Vector2.Zero, 0.05f, Ease.Linear))
                 )
                 ;
         };

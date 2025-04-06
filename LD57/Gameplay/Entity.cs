@@ -9,6 +9,7 @@ public class Entity
 {
     private readonly IEntityAppearance? _appearance;
     private readonly HashSet<string> _tags = new();
+    private readonly int _rawSortPriority;
     public bool IsActive { get; private set; } = true;
 
     public Entity(GridPosition position, IEntityAppearance appearance)
@@ -26,10 +27,10 @@ public class Entity
             _tags.Add(tag);
         }
 
-        SortPriority = template.SortPriority;
+        _rawSortPriority = template.SortPriority;
     }
 
-    public int SortPriority { get; }
+    public int SortPriority => _rawSortPriority * 2 + (IsActive ? 0 : 1);
 
     public TweenableGlyph TweenableGlyph { get; } = new();
 

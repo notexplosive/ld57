@@ -10,7 +10,7 @@ public class GameplayTests
 
     public GameplayTests()
     {
-        _world = new World(new GridPosition(10, 10));
+        _world = new World(new GridPosition(10, 10), new WorldTemplate());
     }
 
     [Fact]

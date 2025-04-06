@@ -14,7 +14,7 @@ public readonly record struct TileState(
 {
     public static readonly TileState Empty = new(TileType.Empty, Color.White);
 
-    public static TileState Glyph(string content, Color? color = null)
+    public static TileState StringCharacter(string content, Color? color = null)
     {
         return new TileState(TileType.Character, color ?? Color.White, content);
     }
