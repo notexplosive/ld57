@@ -109,4 +109,9 @@ public class WorldTemplate
     {
         PlacedEntities.Remove(entity);
     }
+
+    public void AddExactEntity(PlacedEntity item)
+    {
+        PlacedEntities.Add(item);
+    }
 }

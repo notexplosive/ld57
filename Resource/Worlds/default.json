@@ -1996,14 +1996,6 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 68,
-        "y": 11
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
         "x": 50,
         "y": 2
       }
@@ -3046,22 +3038,6 @@
       "position": {
         "x": 48,
         "y": -7
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 48,
-        "y": -17
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 50,
-        "y": -12
       }
     },
     {
@@ -4994,17 +4970,9 @@
     },
     {
       "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 67,
-        "y": -26
-      }
-    },
-    {
-      "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 44,
+        "x": 45,
         "y": -29
       }
     },
@@ -7116,38 +7084,6 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 46,
-        "y": -41
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 46,
-        "y": -40
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 47,
-        "y": -41
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 47,
-        "y": -40
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 48,
         "y": -41
       }
@@ -7230,38 +7166,6 @@
       "position": {
         "x": 51,
         "y": -39
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 66,
-        "y": -41
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 66,
-        "y": -40
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 67,
-        "y": -41
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 67,
-        "y": -40
       }
     },
     {
@@ -7334,54 +7238,6 @@
       "position": {
         "x": 72,
         "y": -40
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 73,
-        "y": -41
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 73,
-        "y": -40
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 73,
-        "y": -39
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 74,
-        "y": -41
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 74,
-        "y": -40
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 74,
-        "y": -39
       }
     },
     {
@@ -7540,16 +7396,8 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 44,
+        "x": 45,
         "y": -32
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 47,
-        "y": -35
       }
     },
     {
@@ -7572,7 +7420,7 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 50,
+        "x": 51,
         "y": -31
       }
     },
@@ -7676,46 +7524,6 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 73,
-        "y": -35
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 73,
-        "y": -34
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 73,
-        "y": -31
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 74,
-        "y": -34
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 74,
-        "y": -31
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
         "x": 75,
         "y": -35
       }
@@ -7797,14 +7605,6 @@
       "template_name": "floor_grass_3",
       "position": {
         "x": 68,
-        "y": -26
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 68,
         "y": -25
       }
     },
@@ -7837,14 +7637,6 @@
       "template_name": "floor_grass_3",
       "position": {
         "x": 73,
-        "y": -30
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 73,
         "y": -24
       }
     },
@@ -7852,24 +7644,8 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 74,
+        "x": 46,
         "y": -30
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 45,
-        "y": -30
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 45,
-        "y": -28
       }
     },
     {
@@ -7884,15 +7660,7 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 49,
-        "y": -26
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 50,
+        "x": 51,
         "y": -30
       }
     },
@@ -7900,7 +7668,7 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 50,
+        "x": 51,
         "y": -29
       }
     },
@@ -7908,7 +7676,7 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 50,
+        "x": 51,
         "y": -26
       }
     },
@@ -7980,24 +7748,8 @@
       "extra_data": {},
       "template_name": "floor_grass_2",
       "position": {
-        "x": 45,
+        "x": 46,
         "y": -31
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 45,
-        "y": -27
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 45,
-        "y": -26
       }
     },
     {
@@ -8116,30 +7868,6 @@
       "extra_data": {},
       "template_name": "floor_grass_2",
       "position": {
-        "x": 73,
-        "y": -33
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 74,
-        "y": -33
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 73,
-        "y": -32
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
         "x": 72,
         "y": -31
       }
@@ -8150,14 +7878,6 @@
       "position": {
         "x": 71,
         "y": -30
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 71,
-        "y": -28
       }
     },
     {
@@ -8228,30 +7948,6 @@
       "extra_data": {},
       "template_name": "floor_grass",
       "position": {
-        "x": 46,
-        "y": -35
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 46,
-        "y": -34
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 47,
-        "y": -34
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
         "x": 48,
         "y": -33
       }
@@ -8260,7 +7956,15 @@
       "extra_data": {},
       "template_name": "floor_grass",
       "position": {
-        "x": 50,
+        "x": 51,
+        "y": -32
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_grass",
+      "position": {
+        "x": 46,
         "y": -32
       }
     },
@@ -8269,14 +7973,6 @@
       "template_name": "floor_grass",
       "position": {
         "x": 45,
-        "y": -32
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 44,
         "y": -31
       }
     },
@@ -8284,7 +7980,7 @@
       "extra_data": {},
       "template_name": "floor_grass",
       "position": {
-        "x": 44,
+        "x": 45,
         "y": -30
       }
     },
@@ -8292,32 +7988,8 @@
       "extra_data": {},
       "template_name": "floor_grass",
       "position": {
-        "x": 45,
+        "x": 46,
         "y": -29
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 50,
-        "y": -28
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 50,
-        "y": -27
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 48,
-        "y": -26
       }
     },
     {
@@ -8557,14 +8229,6 @@
       "template_name": "floor_grass",
       "position": {
         "x": 69,
-        "y": -18
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 67,
         "y": -18
       }
     },
@@ -8877,14 +8541,6 @@
       "template_name": "floor_grass",
       "position": {
         "x": 64,
-        "y": -37
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 66,
         "y": -37
       }
     },
@@ -9052,14 +8708,6 @@
       "extra_data": {},
       "template_name": "floor_grass",
       "position": {
-        "x": 49,
-        "y": -19
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
         "x": 51,
         "y": -22
       }
@@ -9108,38 +8756,6 @@
       "extra_data": {},
       "template_name": "floor_grass",
       "position": {
-        "x": 49,
-        "y": -18
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 50,
-        "y": -18
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 50,
-        "y": -17
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 50,
-        "y": -16
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
         "x": 51,
         "y": -16
       }
@@ -9174,14 +8790,6 @@
       "position": {
         "x": 51,
         "y": -14
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass",
-      "position": {
-        "x": 50,
-        "y": -13
       }
     },
     {
@@ -10700,7 +10308,7 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 49,
+        "x": 50,
         "y": -27
       }
     },
@@ -10708,7 +10316,7 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 49,
+        "x": 50,
         "y": -28
       }
     },
@@ -10716,7 +10324,7 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 49,
+        "x": 50,
         "y": -29
       }
     },
@@ -10724,7 +10332,7 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 49,
+        "x": 50,
         "y": -30
       }
     },
@@ -10732,6 +10340,30 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
+        "x": 49,
+        "y": -29
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 49,
+        "y": -28
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 49,
+        "y": -27
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "blue_brick",
+      "position": {
         "x": 48,
         "y": -29
       }
@@ -10757,7 +10389,7 @@
       "template_name": "blue_brick",
       "position": {
         "x": 47,
-        "y": -29
+        "y": -27
       }
     },
     {
@@ -10773,30 +10405,6 @@
       "template_name": "blue_brick",
       "position": {
         "x": 47,
-        "y": -27
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 46,
-        "y": -27
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 46,
-        "y": -28
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 46,
         "y": -29
       }
     },
@@ -10804,16 +10412,8 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 46,
+        "x": 47,
         "y": -30
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 46,
-        "y": -32
       }
     },
     {
@@ -10844,7 +10444,15 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 49,
+        "x": 50,
+        "y": -32
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 50,
         "y": -31
       }
     },
@@ -10852,7 +10460,7 @@
       "extra_data": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 46,
+        "x": 47,
         "y": -31
       }
     },
@@ -10860,7 +10468,7 @@
       "extra_data": {},
       "template_name": "floor_blue",
       "position": {
-        "x": 47,
+        "x": 48,
         "y": -30
       }
     },
@@ -10868,14 +10476,6 @@
       "extra_data": {},
       "template_name": "floor_blue",
       "position": {
-        "x": 47,
-        "y": -31
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_blue",
-      "position": {
         "x": 48,
         "y": -31
       }
@@ -10884,7 +10484,15 @@
       "extra_data": {},
       "template_name": "floor_blue",
       "position": {
-        "x": 48,
+        "x": 49,
+        "y": -31
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 49,
         "y": -30
       }
     },
@@ -11852,30 +11460,6 @@
       "extra_data": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 44,
-        "y": -1
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 45,
-        "y": 0
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 45,
-        "y": 1
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
         "x": 46,
         "y": 1
       }
@@ -11885,22 +11469,6 @@
       "template_name": "floor_grass_3",
       "position": {
         "x": 46,
-        "y": 2
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 45,
-        "y": 2
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "floor_grass_3",
-      "position": {
-        "x": 44,
         "y": 2
       }
     },
@@ -13838,22 +13406,6 @@
       "extra_data": {},
       "template_name": "tree",
       "position": {
-        "x": 46,
-        "y": -39
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
-        "x": 47,
-        "y": -39
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
         "x": 49,
         "y": -40
       }
@@ -14038,14 +13590,6 @@
       "extra_data": {},
       "template_name": "tree",
       "position": {
-        "x": 67,
-        "y": -39
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
         "x": 70,
         "y": -39
       }
@@ -14094,14 +13638,6 @@
       "extra_data": {},
       "template_name": "tree",
       "position": {
-        "x": 74,
-        "y": -37
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
         "x": 77,
         "y": -39
       }
@@ -14119,22 +13655,6 @@
       "template_name": "tree",
       "position": {
         "x": 75,
-        "y": -38
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
-        "x": 74,
-        "y": -38
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
-        "x": 73,
         "y": -38
       }
     },
@@ -14814,22 +14334,6 @@
       "extra_data": {},
       "template_name": "tree",
       "position": {
-        "x": 46,
-        "y": -38
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
-        "x": 47,
-        "y": -37
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
         "x": 51,
         "y": -37
       }
@@ -14864,30 +14368,6 @@
       "position": {
         "x": 65,
         "y": -39
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
-        "x": 66,
-        "y": -39
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
-        "x": 66,
-        "y": -38
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
-        "x": 67,
-        "y": -38
       }
     },
     {
@@ -14942,14 +14422,6 @@
       "extra_data": {},
       "template_name": "tree",
       "position": {
-        "x": 74,
-        "y": -35
-      }
-    },
-    {
-      "extra_data": {},
-      "template_name": "tree",
-      "position": {
         "x": 75,
         "y": -34
       }
@@ -14996,14 +14468,6 @@
     },
     {
       "extra_data": {},
-      "template_name": "tree",
-      "position": {
-        "x": 74,
-        "y": -32
-      }
-    },
-    {
-      "extra_data": {},
       "template_name": "sigil",
       "position": {
         "x": 64,
@@ -15024,6 +14488,806 @@
       "position": {
         "x": 59,
         "y": -23
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 44,
+        "y": 3
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 44,
+        "y": 2
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 44,
+        "y": 1
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 44,
+        "y": 0
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 45,
+        "y": 0
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 45,
+        "y": 1
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 45,
+        "y": 2
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 45,
+        "y": 3
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 69,
+        "y": 13
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 68,
+        "y": 13
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 68,
+        "y": 12
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 68,
+        "y": 11
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 68,
+        "y": 10
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 69,
+        "y": 10
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 69,
+        "y": 11
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 69,
+        "y": 12
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 49,
+        "y": -15
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 49,
+        "y": -16
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 50,
+        "y": -16
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 50,
+        "y": -15
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 49,
+        "y": -19
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 49,
+        "y": -18
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 50,
+        "y": -19
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 50,
+        "y": -18
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 50,
+        "y": -17
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 49,
+        "y": -17
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -42
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -41
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -40
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -39
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -38
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -37
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -36
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -35
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 46,
+        "y": -34
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -42
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -41
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -40
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -39
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -38
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -37
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -36
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -35
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 47,
+        "y": -34
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 66,
+        "y": -42
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 66,
+        "y": -41
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 66,
+        "y": -40
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 66,
+        "y": -39
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 66,
+        "y": -38
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 66,
+        "y": -37
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 66,
+        "y": -36
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 67,
+        "y": -42
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 67,
+        "y": -41
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 67,
+        "y": -40
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 67,
+        "y": -39
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 67,
+        "y": -38
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 67,
+        "y": -37
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 67,
+        "y": -36
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -42
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -41
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -40
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -39
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -38
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -37
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -36
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -35
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -34
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -33
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -32
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -31
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 73,
+        "y": -30
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -42
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -41
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -40
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -39
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -38
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -37
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -36
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -35
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -34
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -33
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -32
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -31
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "wood_wall",
+      "position": {
+        "x": 74,
+        "y": -30
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 46,
+        "y": -28
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 46,
+        "y": -27
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 51,
+        "y": -28
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 51,
+        "y": -27
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 47,
+        "y": -26
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 48,
+        "y": -26
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 49,
+        "y": -26
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 50,
+        "y": -26
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 66,
+        "y": -28
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 66,
+        "y": -27
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 67,
+        "y": -26
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 68,
+        "y": -26
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 69,
+        "y": -26
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 70,
+        "y": -26
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 71,
+        "y": -28
+      }
+    },
+    {
+      "extra_data": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 71,
+        "y": -27
       }
     }
   ]

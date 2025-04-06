@@ -28,6 +28,8 @@ public class EditorSession : Session
     private GridPosition? _selectionAnchor;
     private Rectangle? _selectionRectangle;
     private bool _shouldClosePopup;
+    private List<PlacedEntity> _moveBuffer = new();
+    private GridPosition? _moveStart;
 
     public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -292,6 +294,18 @@ public class EditorSession : Session
 
                 break;
             case EditorTool.Move:
+                if (_moveStart != null && HoveredTileWorldPosition.HasValue && _selectionRectangle != null)
+                {
+                    var offset = HoveredTileWorldPosition.Value - _moveStart.Value;
+                    _selectionRectangle = _selectionRectangle.Value.Moved(offset.ToPoint());
+
+                    foreach (var item in _moveBuffer)
+                    {
+                        item.Position += offset;
+                    }
+
+                    _moveStart = HoveredTileWorldPosition.Value;
+                }
                 break;
             case EditorTool.Connect:
                 break;
@@ -314,6 +328,7 @@ public class EditorSession : Session
                     _selectionAnchor = position;
                     break;
                 case EditorTool.Move:
+                    _moveStart = position;
                     break;
                 case EditorTool.Fill:
                     DoFillAt(position);
@@ -405,6 +420,12 @@ public class EditorSession : Session
 
                     break;
                 case EditorTool.Move:
+                    foreach (var item in _moveBuffer)
+                    {
+                        WorldTemplate.RemoveEntitiesAt(item.Position);
+                        WorldTemplate.AddExactEntity(item);
+                    }
+                    _moveStart = null;
                     break;
             }
         }
@@ -415,23 +436,31 @@ public class EditorSession : Session
         }
     }
 
+    private void ClearSelection()
+    {
+        _selectionRectangle = null;
+        _moveBuffer.Clear();
+    }
+    
     private void CreateSelection(GridPosition position)
     {
         if (!_selectionAnchor.HasValue)
         {
             return;
         }
-
-        if (position == _selectionAnchor.Value)
+        
+        _selectionRectangle = RectangleF.FromCorners(position.ToPoint().ToVector2(),
+            _selectionAnchor.Value.ToPoint().ToVector2()).ToRectangle();
+        
+        _moveBuffer.Clear();
+        foreach (var grabbedPosition in Constants.AllPositionsInRectangle(
+                     new GridPosition(_selectionRectangle.Value.Location),
+                     new GridPosition(_selectionRectangle.Value.Location +
+                                      _selectionRectangle.Value.Size)))
         {
-            _selectionRectangle = null;
+            _moveBuffer.AddRange(WorldTemplate.AllEntitiesAt(grabbedPosition));
         }
-        else
-        {
-            _selectionRectangle = RectangleF.FromCorners(position.ToPoint().ToVector2(),
-                _selectionAnchor.Value.ToPoint().ToVector2()).ToRectangle();
-        }
-
+        
         _selectionAnchor = null;
     }
 
