@@ -51,7 +51,7 @@ public class TitleCard
             new Point(textWidth, height));
         var expandDuration = 0.5f;
         var contractDuration = 0.5f;
-        var topRectangle = startingRectangle.Moved(new Vector2(0,-center.Y - 4));
+        var topRectangle = startingRectangle.Moved(new Point(0,-center.Y - 4));
         tween
             .Add(SetVisibilityCallback(true))
             .Add(_rectangle.CallbackSetTo(topRectangle))
