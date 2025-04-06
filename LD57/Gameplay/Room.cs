@@ -63,7 +63,7 @@ public class Room
     public void RecalculateLiveEntities()
     {
         _entitiesInRoom.Clear();
-        _entitiesInRoom.AddRange(_world.CalculateEntitiesInRoom(false, _corners));
+        _entitiesInRoom.AddRange(_world.CalculateEntitiesInRoom(_corners, false));
     }
 
     public bool Contains(GridPosition position)

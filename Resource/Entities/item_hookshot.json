@@ -1,0 +1,12 @@
+{
+    "sort_priority": 5,
+    "sprite_sheet": "Entities",
+    "frame": 5,
+    "color": "treasure",
+    "tags": [
+        "Item"
+    ],
+    "state": {
+        "item_behavior": "hookshot"
+    }
+}

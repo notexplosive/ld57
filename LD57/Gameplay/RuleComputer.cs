@@ -24,7 +24,8 @@ public class RuleComputer
             mover.Position,
             mover.Position + new GridPosition(direction.ToPoint()),
             direction);
-        var status = new MoveStatus(data);
+        
+        var status = new MoveStatus();
 
         var targets = _world.GetActiveEntitiesAt(data.Destination).ToList();
 
@@ -115,16 +116,7 @@ public class RuleComputer
 
     public void WarpToPosition(Entity entity, GridPosition newPosition)
     {
-        var status = new MoveStatus
-        {
-            MoveData = new MoveData
-            {
-                Destination = newPosition,
-                Direction = Direction.None,
-                Mover = entity,
-                Source = entity.Position
-            }
-        };
+        var status = new MoveStatus();
 
         var oldPosition = entity.Position;
         entity.Position = newPosition;

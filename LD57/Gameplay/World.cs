@@ -87,7 +87,7 @@ public class World
 
                     if (wasPressed != isPressed)
                     {
-                        foreach (var otherEntities in CurrentRoom.AllActiveEntities()
+                        foreach (var otherEntities in EntitiesInSameRoom(entity.Position)
                                      .Where(a => a.State.GetIntOrFallback("channel", 0) == channel))
                         {
                             otherEntities.SelfTriggerBehavior(BehaviorTrigger.OnSignalChange);
@@ -100,7 +100,7 @@ public class World
             {
                 entity.AddBehavior(BehaviorTrigger.OnSignalChange, () =>
                 {
-                    var buttons = CurrentRoom.AllActiveEntities()
+                    var buttons = EntitiesInSameRoom(entity.Position)
                         .Where(a => a.HasTag("Button") && a.State.GetIntOrFallback("channel", 0) == channel).ToList();
 
                     var shouldOpen = false;
@@ -144,10 +144,10 @@ public class World
 
     private IEnumerable<Entity> EntitiesInSameRoom(GridPosition position)
     {
-        return CalculateEntitiesInRoom(true, GetRoomCornersAt(position));
+        return CalculateEntitiesInRoom(GetRoomCornersAt(position), true);
     }
 
-    public IEnumerable<Entity> CalculateEntitiesInRoom(bool onlyActive, GridPositionCorners corners)
+    public IEnumerable<Entity> CalculateEntitiesInRoom(GridPositionCorners corners, bool onlyActive)
     {
         var rectangle = corners.Rectangle(true);
         foreach (var entity in onlyActive ? AllActiveEntities() : AllEntitiesIncludingInactive())
@@ -287,7 +287,19 @@ public class World
 
     public void OnMoveCompleted(MoveData moveData, MoveStatus status)
     {
-        foreach (var entity in CurrentRoom.AllActiveEntities())
+        var entities = new List<Entity>();
+        var roomCornersAtSource = GetRoomCornersAt(moveData.Source);
+        var roomCornersAtDestination = GetRoomCornersAt(moveData.Destination);
+        
+        entities.AddRange(CalculateEntitiesInRoom(roomCornersAtSource, true));
+        
+        if (roomCornersAtSource != roomCornersAtDestination && status.WasSuccessful)
+        {
+            // If the move spanned multiple rooms AND the move was successful, update both rooms
+            entities.AddRange(CalculateEntitiesInRoom(roomCornersAtDestination, true));
+        }
+
+        foreach (var entity in entities)
         {
             if (entity.Position == moveData.Destination)
             {

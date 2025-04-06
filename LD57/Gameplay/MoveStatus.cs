@@ -1,6 +1,6 @@
 ﻿namespace LD57.Gameplay;
 
-public record struct MoveStatus(MoveData MoveData)
+public record struct MoveStatus()
 {
     public void Fail()
     {

@@ -313,5 +313,20 @@ public class GameplayTests
         AssertPassable(room2Closed.Position, ["Solid"], false);
     }
 
+    [Fact]
+    public void Door_Airlock()
+    {
+        var solidPresser = CreateEntity(new GridPosition(0, 0), ["PressesButtons", "Solid"]);
+        var button = CreateEntity(new GridPosition(1, 0), ["Button", "Signal"]);
+        var door = CreateEntity(new GridPosition(2, 0), ["Door", "Signal"]);
+        
+        MoveEntity(solidPresser, Direction.Right); // press button
+        MoveEntity(solidPresser, Direction.Right); // walk onto door (is now closed)
+        MoveEntity(solidPresser, Direction.Right); // walk off of door
+        MoveEntity(solidPresser, Direction.Left); // walk back towards door, can't go anymore
+        
+        Assert.Equivalent(new GridPosition(3, 0), solidPresser.Position);
+    }
+
     private readonly record struct StateKeyValue(string Key, string Value);
 }

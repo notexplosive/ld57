@@ -45,139 +45,13 @@
       }
     },
     {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 1
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 2
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
+      "extra_state": {
+        "channel": "1"
+      },
       "template_name": "door",
       "position": {
         "x": -1,
         "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 11
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 12
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 13
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 14
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 15
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 16
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "door",
-      "position": {
-        "x": -1,
-        "y": 17
       }
     },
     {
@@ -530,6 +404,98 @@
       "position": {
         "x": 27,
         "y": 2
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "button",
+      "position": {
+        "x": 0,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": -2,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": -1,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 0,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 1,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 1,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 0,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": -1,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": -2,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "button",
+      "position": {
+        "x": -8,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "item_hookshot",
+      "position": {
+        "x": -13,
+        "y": 5
       }
     }
   ]
