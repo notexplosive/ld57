@@ -12,17 +12,13 @@ public class World
     private readonly HashSet<Entity> _entitiesToRemove = new();
     private readonly GridPosition _roomSize;
 
-    public event Action<string>? RequestLoad;
-    public event Action<string>? RequestZoneNameChange;
-    public event Action<string>? RequestShow;
-    
     public World(GridPosition roomSize, WorldTemplate worldTemplate)
     {
         _roomSize = roomSize;
         Rules = new RuleComputer(this);
         var gridPosition = new GridPosition(0, 0);
         CurrentRoom = new Room(this, gridPosition, gridPosition + roomSize);
-        
+
         foreach (var placedEntity in worldTemplate.PlacedEntities)
         {
             if (placedEntity.TemplateName == "player")
@@ -32,57 +28,120 @@ public class World
 
             if (LdResourceAssets.Instance.EntityTemplates.ContainsKey(placedEntity.TemplateName))
             {
-                AddEntityFast(
-                    new Entity(placedEntity.Position, ResourceAlias.EntityTemplate(placedEntity.TemplateName)));
+                AddEntityFast(CreateEntityFromTemplate(placedEntity));
             }
             else
             {
-                var splitCommand = placedEntity.ExtraData.GetValueOrDefault("command")?.Split() ?? [];
-                var entity = new Entity(placedEntity.Position, new Invisible());
-
-                if (splitCommand.Length >= 2)
-                {
-                    var commandName = splitCommand[0];
-                    var remainingArgs = splitCommand.ToList();
-                    remainingArgs.RemoveAt(0);
-                    var arg = string.Join(" ", remainingArgs);
-
-                    if (commandName == "load")
-                    {
-                        entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () =>
-                        {
-                            RequestLoad?.Invoke(arg);
-                        }));
-                    }
-
-                    if (commandName == "zone")
-                    {
-                        entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnEnter, () =>
-                        {
-                            RequestZoneNameChange?.Invoke(arg);
-                        }));
-                    }
-
-                    if (commandName == "show")
-                    {
-                        entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () =>
-                        {
-                            RequestShow?.Invoke(arg);
-                        }));
-                    }
-                }
-                
-                AddEntityFast(entity);
+                // no template, this is a command-only entity
+                AddEntityFast(CreateTriggerEntityFromTemplate(placedEntity));
             }
         }
 
         CurrentRoom.RecalculateLiveEntities();
     }
 
+    private Entity CreateEntityFromTemplate(PlacedEntity placedEntity)
+    {
+        var entityTemplate = ResourceAlias.EntityTemplate(placedEntity.TemplateName);
+        var entity = new Entity(placedEntity.Position, entityTemplate);
+        entity.State.AddFromDictionary(placedEntity.ExtraState);
+
+        if (entity.HasTag("Signal"))
+        {
+            var channel = entity.State.GetInt("channel") ?? 0;
+
+            entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnWorldStart, () =>
+            {
+                var signalColor = ResourceAlias.Color("signal_" + channel);
+                if (entity.Appearance != null && entity.Appearance.TileState.HasValue)
+                {
+                    entity.Appearance.TileState = entity.Appearance.TileState.Value with { ForegroundColor = signalColor };
+                }
+            }));
+            
+            if (entity.HasTag("Button"))
+            {
+                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () =>
+                {
+                    var isPressed = CurrentRoom.AllActiveEntities()
+                        .Where(a => a.Position == entity.Position).Any(a => a.HasTag("PressesButton"));
+
+                    var wasPressed = entity.State.GetBool("is_pressed");
+                    entity.State.Set("is_pressed", isPressed);
+
+                    if (wasPressed != isPressed)
+                    {
+                        foreach (var otherEntities in CurrentRoom.AllActiveEntities()
+                                     .Where(a => a.State.GetInt("channel") == channel))
+                        {
+                            otherEntities.TriggerBehavior(BehaviorTrigger.OnSignalChange);
+                        }
+                    }
+                }));
+            }
+
+            if (entity.HasTag("Door"))
+            {
+                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnSignalChange, () =>
+                {
+                    var allButtonsPressed = CurrentRoom.AllActiveEntities()
+                        .Where(a => a.HasTag("Button") && a.State.GetInt("channel") == channel)
+                        .All(a => a.State.GetBool("is_pressed") == true);
+
+                    entity.State.Set("is_open", allButtonsPressed);
+                }));
+                
+                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnStateChanged, () =>
+                {
+                    // if state == is_open
+                    // then change tile
+                }));
+            }
+        }
+
+        return entity;
+    }
+
     public Room CurrentRoom { get; private set; }
     public RuleComputer Rules { get; }
 
     public GridPosition CameraPosition { get; set; }
+
+    public event Action<string>? RequestLoad;
+    public event Action<string>? RequestZoneNameChange;
+    public event Action<string>? RequestShow;
+
+    private Entity CreateTriggerEntityFromTemplate(PlacedEntity placedEntity)
+    {
+        var splitCommand = placedEntity.ExtraState.GetValueOrDefault("command")?.Split() ?? [];
+        var entity = new Entity(placedEntity.Position, new Invisible());
+
+        if (splitCommand.Length >= 2)
+        {
+            var commandName = splitCommand[0];
+            var remainingArgs = splitCommand.ToList();
+            remainingArgs.RemoveAt(0);
+            var arg = string.Join(" ", remainingArgs);
+
+            if (commandName == "load")
+            {
+                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () => { RequestLoad?.Invoke(arg); }));
+            }
+
+            if (commandName == "zone")
+            {
+                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnEnter,
+                    () => { RequestZoneNameChange?.Invoke(arg); }));
+            }
+
+            if (commandName == "show")
+            {
+                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () => { RequestShow?.Invoke(arg); }));
+            }
+        }
+
+        return entity;
+    }
 
     public void SetCurrentRoom(Room room)
     {
@@ -113,11 +172,12 @@ public class World
     private void AddEntityFast(Entity entity)
     {
         _entities.Add(entity);
+        entity.Start();
     }
 
     public Entity AddEntity(Entity entity)
     {
-        _entities.Add(entity);
+        AddEntityFast(entity);
         if (CurrentRoom.Contains(entity.Position))
         {
             CurrentRoom.RecalculateLiveEntities();
@@ -175,7 +235,7 @@ public class World
         {
             entity.TriggerBehavior(BehaviorTrigger.OnTouch);
         }
-        
+
         MoveCompleted?.Invoke(moveData, status);
     }
 
@@ -206,7 +266,7 @@ public class World
         foreach (var entity in allDrawnEntities)
         {
             var renderedPosition = entity.Position - CameraPosition;
-            if(entity.TileState.HasValue)
+            if (entity.TileState.HasValue)
             {
                 screen.PutTile(renderedPosition, entity.TileState.Value, entity.TweenableGlyph);
             }

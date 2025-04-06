@@ -183,6 +183,11 @@ public class LdSession : Session
         _world.RequestLoad += TransitionWorld;
         _world.RequestZoneNameChange += DisplayZoneName;
         _world.RequestShow += DisplayDialogueMessage;
+        
+        foreach (var entity in _world.CurrentRoom.AllActiveEntities())
+        {
+            entity.TriggerBehavior(BehaviorTrigger.OnEnter);
+        }
     }
 
     private void DisplayDialogueMessage(string messageName)

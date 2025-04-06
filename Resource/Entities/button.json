@@ -4,6 +4,7 @@
     "frame": 2,
     "color": "button",
     "tags": [
-        "Button"
+        "Button",
+        "Signal"
     ]
 }

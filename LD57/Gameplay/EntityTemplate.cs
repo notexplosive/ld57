@@ -22,5 +22,8 @@ public class EntityTemplate
     [JsonProperty("sort_priority")]
     public int SortPriority { get; set; }
 
+    [JsonProperty("state")]
+    public Dictionary<string, string> State { get; set; } = new();
+
     public string TemplateName { get; set; } = string.Empty;
 }

@@ -17,6 +17,7 @@ namespace LD57.Sessions;
 
 public class EditorSession : Session
 {
+    private readonly List<PlacedEntity> _moveBuffer = new();
     private readonly List<UiElement> _uiElements = new();
     private GridPosition _cameraPosition;
     private UiElement? _currentPopup;
@@ -25,13 +26,12 @@ public class EditorSession : Session
     private GridPosition? _hoveredTilePosition;
     private bool _isDraggingPrimary;
     private bool _isDraggingSecondary;
+    private GridPosition? _moveStart;
     private AsciiScreen _screen;
     private EntityTemplate? _selectedTemplate;
     private GridPosition? _selectionAnchor;
     private Rectangle? _selectionRectangle;
     private bool _shouldClosePopup;
-    private List<PlacedEntity> _moveBuffer = new();
-    private GridPosition? _moveStart;
 
     public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -40,16 +40,21 @@ public class EditorSession : Session
         _cameraPosition += new GridPosition(-3, -4);
 
         WorldTemplate = new WorldTemplate();
-        
-        _cameraPosition = HotReloadCache.EditorCameraPosition;
+
         if (HotReloadCache.EditorOpenFileName != null)
         {
-            var data = Client.Debug.RepoFileSystem.ReadFile($"Resource/Worlds/{HotReloadCache.EditorOpenFileName}.json");
+            var data = Client.Debug.RepoFileSystem.ReadFile(
+                $"Resource/Worlds/{HotReloadCache.EditorOpenFileName}.json");
             var template = JsonConvert.DeserializeObject<WorldTemplate>(data);
             if (template != null)
             {
                 SetTemplate(HotReloadCache.EditorOpenFileName, template);
             }
+        }
+
+        if (HotReloadCache.EditorCameraPosition.HasValue)
+        {
+            _cameraPosition = HotReloadCache.EditorCameraPosition.Value;
         }
     }
 
@@ -121,7 +126,8 @@ public class EditorSession : Session
         foreach (var template in LdResourceAssets.Instance.EntityTemplates.Values)
         {
             var tempEntity = new Entity(new GridPosition(0, 0), template);
-            tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1), tempEntity.TileState ?? TileState.Empty,
+            tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1),
+                tempEntity.TileState ?? TileState.Empty,
                 selectedTemplate, () => { _selectedTemplate = template; }));
             i++;
         }
@@ -153,7 +159,7 @@ public class EditorSession : Session
             if (HoveredTileWorldPosition.HasValue)
             {
                 var metadataEntity = WorldTemplate.GetMetadataAt(HoveredTileWorldPosition.Value);
-                if (metadataEntity != null && metadataEntity.ExtraData.TryGetValue("command", out var status))
+                if (metadataEntity != null && metadataEntity.ExtraState.TryGetValue("command", out var status))
                 {
                     return "command: " + status;
                 }
@@ -165,12 +171,13 @@ public class EditorSession : Session
 
     public override void OnHotReload()
     {
-        HotReloadCache.EditorOpenFileName = _fileName;
-        HotReloadCache.EditorCameraPosition = _cameraPosition;
     }
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
+        HotReloadCache.EditorOpenFileName = _fileName;
+        HotReloadCache.EditorCameraPosition = _cameraPosition;
+
         if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
         {
             if (_hoveredTilePosition.HasValue)
@@ -241,12 +248,12 @@ public class EditorSession : Session
             }
         }
 
-        if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.O,true).WasPressed)
+        if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.O, true).WasPressed)
         {
             Open();
         }
-        
-        if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.N,true).WasPressed)
+
+        if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.N, true).WasPressed)
         {
             Save();
             SetTemplate(null, new WorldTemplate());
@@ -327,8 +334,7 @@ public class EditorSession : Session
 
                     _moveStart = HoveredTileWorldPosition.Value;
                 }
-                break;
-            case EditorTool.Connect:
+
                 break;
         }
 
@@ -337,7 +343,8 @@ public class EditorSession : Session
 
     private void Open()
     {
-        var fullPath = PlatformFileApi.OpenFileDialogue("Open World", new PlatformFileApi.ExtensionDescription("json", "JSON"));
+        var fullPath =
+            PlatformFileApi.OpenFileDialogue("Open World", new PlatformFileApi.ExtensionDescription("json", "JSON"));
         if (!string.IsNullOrEmpty(fullPath))
         {
             var fileName = new FileInfo(fullPath).Name;
@@ -358,7 +365,7 @@ public class EditorSession : Session
     {
         _fileName = newFileName;
         WorldTemplate = newWorld;
-        _cameraPosition = new GridPosition(0,0);
+        _cameraPosition = new GridPosition(0, 0);
     }
 
     public event Action<GridPosition>? RequestPlay;
@@ -385,9 +392,9 @@ public class EditorSession : Session
                     var defaultText = "";
                     if (foundMetaEntity != null)
                     {
-                        defaultText = foundMetaEntity.ExtraData.GetValueOrDefault("command") ?? defaultText;
+                        defaultText = foundMetaEntity.ExtraState.GetValueOrDefault("command") ?? defaultText;
                     }
-                    
+
                     var isUsingSelection = _selectionRectangle.HasValue &&
                                            Constants.ContainsInclusive(_selectionRectangle.Value, position);
                     RequestText("Enter Command", defaultText,
@@ -401,7 +408,7 @@ public class EditorSession : Session
                                 }
                                 else
                                 {
-                                    foundMetaEntity.ExtraData["command"] = text;
+                                    foundMetaEntity.ExtraState["command"] = text;
                                 }
                             }
                             else
@@ -436,12 +443,53 @@ public class EditorSession : Session
                     }
 
                     break;
+                case EditorTool.Connect:
+                    IncrementSignalAt(position, 1);
+
+                    break;
             }
         }
 
         if (mouseButton == MouseButton.Right)
         {
+            if (_editorTool == EditorTool.Connect)
+            {
+                IncrementSignalAt(position, -1);
+            }
+
             _isDraggingSecondary = true;
+        }
+    }
+
+    private void IncrementSignalAt(GridPosition position, int delta)
+    {
+        foreach (var entity in WorldTemplate.AllEntitiesAt(position))
+        {
+            var templateName = entity.TemplateName;
+            if (string.IsNullOrEmpty(templateName))
+            {
+                return;
+            }
+
+            var template = ResourceAlias.EntityTemplate(templateName);
+            if (template.Tags.Contains("Signal"))
+            {
+                if (entity.ExtraState.TryGetValue("channel", out var result))
+                {
+                    var newValue = int.Parse(result) + delta;
+                    if (!LdResourceAssets.Instance.HasNamedColor($"signal_{newValue}"))
+                    {
+                        newValue = 0;
+                    }
+
+                    entity.ExtraState["channel"] = newValue.ToString();
+                }
+                else
+                {
+                    // assume that no value == 0
+                    entity.ExtraState["channel"] = (0 + delta).ToString();
+                }
+            }
         }
     }
 
@@ -488,6 +536,7 @@ public class EditorSession : Session
                         WorldTemplate.RemoveEntitiesAt(item.Position);
                         WorldTemplate.AddExactEntity(item);
                     }
+
                     _moveStart = null;
                     break;
             }
@@ -504,17 +553,17 @@ public class EditorSession : Session
         _selectionRectangle = null;
         _moveBuffer.Clear();
     }
-    
+
     private void CreateSelection(GridPosition position)
     {
         if (!_selectionAnchor.HasValue)
         {
             return;
         }
-        
+
         _selectionRectangle = RectangleF.FromCorners(position.ToPoint().ToVector2(),
             _selectionAnchor.Value.ToPoint().ToVector2()).ToRectangle();
-        
+
         _moveBuffer.Clear();
         foreach (var grabbedPosition in Constants.AllPositionsInRectangle(
                      new GridPosition(_selectionRectangle.Value.Location),
@@ -523,7 +572,7 @@ public class EditorSession : Session
         {
             _moveBuffer.AddRange(WorldTemplate.AllEntitiesAt(grabbedPosition));
         }
-        
+
         _selectionAnchor = null;
     }
 
@@ -551,10 +600,21 @@ public class EditorSession : Session
             var uiElement = HitUiElement(_hoveredTilePosition.Value);
             if (uiElement == null)
             {
-                if (_editorTool == EditorTool.Brush || _editorTool == EditorTool.Connect ||
-                    _editorTool == EditorTool.Play)
+                if (_editorTool == EditorTool.Brush || _editorTool == EditorTool.Connect)
                 {
                     var tile = originalTile with {BackgroundColor = Color.LightBlue};
+                    _screen.PutTile(_hoveredTilePosition.Value, tile);
+                }
+
+                if (_editorTool == EditorTool.Write)
+                {
+                    var tile = TileState.StringCharacter("!");
+                    _screen.PutTile(_hoveredTilePosition.Value, tile);
+                }
+
+                if (_editorTool == EditorTool.Play)
+                {
+                    var tile = TileState.Sprite(ResourceAlias.Entities, 0);
                     _screen.PutTile(_hoveredTilePosition.Value, tile);
                 }
             }
@@ -610,10 +670,18 @@ public class EditorSession : Session
         {
             foreach (var placedEntity in WorldTemplate.PlacedEntities)
             {
-                if (placedEntity.ExtraData.Count > 0)
+                if (placedEntity.ExtraState.ContainsKey("command"))
                 {
                     _screen.PutTile(placedEntity.Position - _cameraPosition,
                         TileState.StringCharacter("!", Color.OrangeRed));
+                }
+
+                if (placedEntity.ExtraState.ContainsKey("channel"))
+                {
+                    /*
+                    _screen.PutTile(placedEntity.Position - _cameraPosition,
+                        TileState.Sprite(ResourceAlias.Tools, 4, ResourceAlias.Color("signal_"+ placedEntity.ExtraData["channel"])));
+                        */
                 }
             }
         }

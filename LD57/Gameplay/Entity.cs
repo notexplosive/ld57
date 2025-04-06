@@ -1,50 +1,63 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ExplogineMonoGame.Data;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
 
 namespace LD57.Gameplay;
 
-public enum BehaviorTrigger
-{
-    OnTouch,
-    OnEnter
-}
-
 public class Entity
 {
-    private readonly IEntityAppearance? _appearance;
-    private readonly HashSet<string> _tags = new();
+    public IEntityAppearance? Appearance { get; }
+    private readonly List<EntityBehavior> _behaviors = new();
     private readonly int _rawSortPriority;
-    private List<EntityBehavior> _behaviors = new();
-    public bool IsActive { get; private set; } = true;
+    private readonly HashSet<string> _tags = new();
+    private bool _hasStarted;
 
     public Entity(GridPosition position, IEntityAppearance appearance)
     {
         Position = position;
-        _appearance = appearance;
+        Appearance = appearance;
+        State.Updated += OnStateUpdated;
     }
 
     public Entity(GridPosition position, EntityTemplate template)
+        : this(position, new EntityAppearance(LdResourceAssets.Instance.Sheets[template.SpriteSheetName],
+            template.Frame,
+            ResourceAlias.Color(template.Color)))
     {
-        Position = position;
-        _appearance = new EntityAppearance(LdResourceAssets.Instance.Sheets[template.SpriteSheetName], template.Frame, ResourceAlias.Color(template.Color));
+        State.AddFromDictionary(template.State);
+        
         foreach (var tag in template.Tags)
         {
             _tags.Add(tag);
         }
-
+        
         _rawSortPriority = template.SortPriority;
     }
+
+    public bool IsActive { get; private set; } = true;
+
+    public State State { get; } = new();
 
     public int SortPriority => _rawSortPriority * 2 + (IsActive ? 0 : 1);
 
     public TweenableGlyph TweenableGlyph { get; } = new();
 
-    public TileState? TileState => _appearance?.TileState;
+    public TileState? TileState => Appearance?.TileState;
 
     public GridPosition Position { get; set; }
+
+    public void Start()
+    {
+        TriggerBehavior(BehaviorTrigger.OnWorldStart);
+        
+        _hasStarted = true;
+    }
+    
+    private void OnStateUpdated(string key, string value)
+    {
+        TriggerBehavior(BehaviorTrigger.OnStateChanged);
+    }
 
     public Entity AddTag(string tag)
     {
@@ -64,6 +77,14 @@ public class Entity
 
     public void AddBehavior(EntityBehavior entityBehavior)
     {
+        if (_hasStarted)
+        {
+            if (entityBehavior.Trigger == BehaviorTrigger.OnWorldStart)
+            {
+                entityBehavior.DoAction();
+            }
+        }
+
         _behaviors.Add(entityBehavior);
     }
 

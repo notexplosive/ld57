@@ -4,5 +4,5 @@ namespace LD57.Gameplay;
 
 public class Invisible : IEntityAppearance
 {
-    public TileState? TileState => null;
+    public TileState? TileState { get; set; } = null;
 }

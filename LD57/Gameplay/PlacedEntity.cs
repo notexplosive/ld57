@@ -14,6 +14,6 @@ public class PlacedEntity
     [JsonProperty("position")]
     public GridPosition Position { get; set; }
     
-    [JsonProperty("extra_data")]
-    public Dictionary<string, string> ExtraData = new(); 
+    [JsonProperty("extra_state")]
+    public Dictionary<string, string> ExtraState = new(); 
 }

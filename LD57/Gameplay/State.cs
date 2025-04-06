@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using ExplogineMonoGame.Data;
+using Microsoft.Xna.Framework;
+
+namespace LD57.Gameplay;
+
+public class State
+{
+    private readonly Dictionary<string, string> _table = new();
+
+    public delegate void StateUpdateDelegate(string key, string value);
+    
+    public event StateUpdateDelegate? Updated;
+    
+    public void SetString(string key, string value)
+    {
+        _table[key] = value;
+        Updated?.Invoke(key, value);
+    }
+
+    public void Set<T>(string key, T data) where T : notnull
+    {
+        SetString(key, data.ToString() ?? "");
+    }
+
+    public void Remove(string key)
+    {
+        _table.Remove(key);
+    }
+
+    public int? GetInt(string key)
+    {
+        return GetAsTOrDefault(key, value =>
+        {
+            if (int.TryParse(value, out var result))
+            {
+                return result;
+            }
+
+            return new int?();
+        });
+    }
+
+    public Color? GetColor(string key)
+    {
+        return GetAsTOrDefault(key, value =>
+        {
+            if (ColorExtensions.TryFromRgbaHexString(value, out var result))
+            {
+                return result;
+            }
+
+            return new Color?();
+        });
+    }
+
+    private T? GetAsTOrDefault<T>(string key, Func<string, T?> tryParse)
+    {
+        var stringResult = GetString(key);
+        if (stringResult == null)
+        {
+            return default;
+        }
+
+        var parsed = tryParse(stringResult);
+        if (parsed == null)
+        {
+            return default;
+        }
+
+        return parsed;
+    }
+
+    public string? GetString(string key)
+    {
+        return _table.GetValueOrDefault(key);
+    }
+
+    public bool? GetBool(string key)
+    {
+        return GetAsTOrDefault(key, value =>
+        {
+            if (bool.TryParse(value, out var result))
+            {
+                return result;
+            }
+
+            return new bool?();
+        });
+    }
+
+    public void AddFromDictionary(Dictionary<string, string> extraData)
+    {
+        foreach (var data in extraData)
+        {
+            SetString(data.Key, data.Value);
+        }
+    }
+}

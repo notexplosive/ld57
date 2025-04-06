@@ -27,7 +27,7 @@ public static class ResourceAlias
 
         if (ColorExtensions.TryFromRgbaHexString(colorString, out var color))
         {
-            return color.Value;
+            return color;
         }
 
         return LdResourceAssets.MissingColor;

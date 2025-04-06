@@ -26,9 +26,4 @@ public class CameraFollowsEntity : IGameRule
             world.SetCurrentRoom(world.GetRoomAt(_entityToFollow.Position));
         }
     }
-
-    public bool ShouldInterruptMove(World world, MoveData moveData)
-    {
-        return false;
-    }
 }

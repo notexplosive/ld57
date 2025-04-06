@@ -80,7 +80,7 @@ public class WorldTemplate
         {
             Position = position,
             TemplateName = string.Empty,
-            ExtraData = new Dictionary<string, string>
+            ExtraState = new Dictionary<string, string>
             {
                 {"command", command}
             }
@@ -96,7 +96,7 @@ public class WorldTemplate
     {
         foreach (var entity in AllEntitiesAt(position))
         {
-            if (entity.ExtraData.Count > 0)
+            if (entity.ExtraState.Count > 0)
             {
                 return entity;
             }
