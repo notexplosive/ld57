@@ -66,8 +66,13 @@ public class TextInputElement : ISubElement
     }
 
     public event Action<string>? Submitted;
+    public event Action? Cancelled;
 
     public void UpdateKeyboardInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
     {
+        if (inputKeyboard.GetButton(Keys.Escape).WasPressed)
+        {
+            Cancelled?.Invoke();
+        }
     }
 }

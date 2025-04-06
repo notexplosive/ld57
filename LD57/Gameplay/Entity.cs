@@ -1,15 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ExplogineMonoGame.Data;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
 
 namespace LD57.Gameplay;
 
+public enum BehaviorTrigger
+{
+    OnTouch,
+    OnEnter
+}
+
 public class Entity
 {
     private readonly IEntityAppearance? _appearance;
     private readonly HashSet<string> _tags = new();
     private readonly int _rawSortPriority;
+    private List<EntityBehavior> _behaviors = new();
     public bool IsActive { get; private set; } = true;
 
     public Entity(GridPosition position, IEntityAppearance appearance)
@@ -34,18 +42,7 @@ public class Entity
 
     public TweenableGlyph TweenableGlyph { get; } = new();
 
-    public TileState TileState
-    {
-        get
-        {
-            if (_appearance == null)
-            {
-                return TileState.Empty;
-            }
-
-            return _appearance.TileState;
-        }
-    }
+    public TileState? TileState => _appearance?.TileState;
 
     public GridPosition Position { get; set; }
 
@@ -63,5 +60,18 @@ public class Entity
     public void SetActive(bool value)
     {
         IsActive = value;
+    }
+
+    public void AddBehavior(EntityBehavior entityBehavior)
+    {
+        _behaviors.Add(entityBehavior);
+    }
+
+    public void TriggerBehavior(BehaviorTrigger trigger)
+    {
+        foreach (var behavior in _behaviors.Where(behavior => behavior.Trigger == trigger))
+        {
+            behavior.DoAction();
+        }
     }
 }

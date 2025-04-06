@@ -45,6 +45,17 @@ public class WorldTemplate
         PlacedEntities.RemoveAll(a => a.Position == position);
     }
 
+    public IEnumerable<PlacedEntity> AllEntitiesAt(GridPosition position)
+    {
+        foreach (var entity in PlacedEntities)
+        {
+            if (entity.Position == position)
+            {
+                yield return entity;
+            }
+        }
+    }
+
     public void EraseRectangle(Rectangle rectangle)
     {
         for (var x = rectangle.X; x < rectangle.X + rectangle.Width + 1; x++)
@@ -63,8 +74,39 @@ public class WorldTemplate
         PlaceEntity(position, template);
     }
 
+    public void AddMetaEntity(GridPosition position, string command)
+    {
+        PlacedEntities.Add(new PlacedEntity
+        {
+            Position = position,
+            TemplateName = string.Empty,
+            ExtraData = new Dictionary<string, string>
+            {
+                {"command", command}
+            }
+        });
+    }
+
     public PlacedEntity? GetPlayerEntity()
     {
         return PlacedEntities.FirstOrDefault(a => a.TemplateName == "player");
+    }
+
+    public PlacedEntity? GetMetadataAt(GridPosition position)
+    {
+        foreach (var entity in AllEntitiesAt(position))
+        {
+            if (entity.ExtraData.Count > 0)
+            {
+                return entity;
+            }
+        }
+
+        return null;
+    }
+
+    public void RemoveExactEntity(PlacedEntity entity)
+    {
+        PlacedEntities.Remove(entity);
     }
 }

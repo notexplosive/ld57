@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
 
@@ -11,21 +12,48 @@ public class World
     private readonly HashSet<Entity> _entitiesToRemove = new();
     private readonly GridPosition _roomSize;
 
+    public event Action<string>? RequestLoad;
+    
     public World(GridPosition roomSize, WorldTemplate worldTemplate)
     {
         _roomSize = roomSize;
         Rules = new RuleComputer(this);
         var gridPosition = new GridPosition(0, 0);
         CurrentRoom = new Room(this, gridPosition, gridPosition + roomSize);
-
+        
         foreach (var placedEntity in worldTemplate.PlacedEntities)
         {
             if (placedEntity.TemplateName == "player")
             {
                 continue;
             }
-            AddEntityFast(new Entity(placedEntity.Position,
-                LdResourceAssets.Instance.EntityTemplates[placedEntity.TemplateName]));
+
+            if (LdResourceAssets.Instance.EntityTemplates.ContainsKey(placedEntity.TemplateName))
+            {
+                AddEntityFast(
+                    new Entity(placedEntity.Position, ResourceAlias.EntityTemplate(placedEntity.TemplateName)));
+            }
+            else
+            {
+                var splitCommand = placedEntity.ExtraData.GetValueOrDefault("command")?.Split() ?? [];
+                var entity = new Entity(placedEntity.Position, new Invisible());
+
+                if (splitCommand.Length >= 2)
+                {
+                    var commandName = splitCommand[0];
+                    var arg = splitCommand[1];
+
+                    if (commandName == "load")
+                    {
+                        entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () =>
+                        {
+                            RequestLoad?.Invoke(arg);
+                        }));
+                    }
+                }
+                
+                AddEntityFast(entity);
+            }
         }
 
         CurrentRoom.RecalculateLiveEntities();
@@ -119,6 +147,11 @@ public class World
 
     public void OnMoveCompleted(MoveData moveData, MoveStatus status)
     {
+        foreach (var entity in CurrentRoom.AllActiveEntities().Where(a => a.Position == moveData.Destination))
+        {
+            entity.TriggerBehavior(BehaviorTrigger.OnTouch);
+        }
+        
         MoveCompleted?.Invoke(moveData, status);
     }
 
@@ -149,7 +182,10 @@ public class World
         foreach (var entity in allDrawnEntities)
         {
             var renderedPosition = entity.Position - CameraPosition;
-            screen.PutTile(renderedPosition, entity.TileState, entity.TweenableGlyph);
+            if(entity.TileState.HasValue)
+            {
+                screen.PutTile(renderedPosition, entity.TileState.Value, entity.TweenableGlyph);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExTween;
 using Microsoft.Xna.Framework;
@@ -17,7 +18,7 @@ public static class Animations
 
             if (horizontalSign == 0)
             {
-                horizontalSign = inputDirection.ToPoint().Y;
+                horizontalSign = Client.Random.Dirty.NextSign();
             }
 
             glyph.RootTween

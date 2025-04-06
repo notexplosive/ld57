@@ -6,5 +6,5 @@ namespace LD57.Gameplay;
 
 public record EntityAppearance(SpriteSheet SpriteSheet, int Frame, Color Color) : IEntityAppearance
 {
-    public TileState TileState => TileState.Sprite(SpriteSheet, Frame, Color);
+    public TileState? TileState => Rendering.TileState.Sprite(SpriteSheet, Frame, Color);
 }

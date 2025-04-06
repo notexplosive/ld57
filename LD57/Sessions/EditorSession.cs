@@ -27,6 +27,7 @@ public class EditorSession : Session
     private EntityTemplate? _selectedTemplate;
     private GridPosition? _selectionAnchor;
     private Rectangle? _selectionRectangle;
+    private bool _shouldClosePopup;
 
     public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -35,9 +36,10 @@ public class EditorSession : Session
         _cameraPosition += new GridPosition(-3, -4);
 
         _fileName = "default";
-        var template = JsonConvert.DeserializeObject<WorldTemplate>(Client.Debug.RepoFileSystem.GetDirectory("Resource/Worlds")
+        var template = JsonConvert.DeserializeObject<WorldTemplate>(Client.Debug.RepoFileSystem
+            .GetDirectory("Resource/Worlds")
             .ReadFile(_fileName + ".json"));
-        
+
         WorldTemplate = template ?? new WorldTemplate();
     }
 
@@ -109,7 +111,7 @@ public class EditorSession : Session
         foreach (var template in LdResourceAssets.Instance.EntityTemplates.Values)
         {
             var tempEntity = new Entity(new GridPosition(0, 0), template);
-            tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1), tempEntity.TileState,
+            tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1), tempEntity.TileState ?? TileState.Empty,
                 selectedTemplate, () => { _selectedTemplate = template; }));
             i++;
         }
@@ -130,10 +132,22 @@ public class EditorSession : Session
         {
             return "Pencil";
         }
-        
+
         if (_editorTool == EditorTool.Play)
         {
             return "Play from Select Location";
+        }
+
+        if (_editorTool == EditorTool.Write)
+        {
+            if (HoveredTileWorldPosition.HasValue)
+            {
+                var metadataEntity = WorldTemplate.GetMetadataAt(HoveredTileWorldPosition.Value);
+                if (metadataEntity != null && metadataEntity.ExtraData.TryGetValue("command", out var status))
+                {
+                    return "command: " + status;
+                }
+            }
         }
 
         return string.Empty;
@@ -186,11 +200,17 @@ public class EditorSession : Session
             element.UpdateKeyboardInput(input.Keyboard);
         }
 
+        if (_shouldClosePopup)
+        {
+            _currentPopup = null;
+            _shouldClosePopup = false;
+        }
+
         if (_currentPopup != null)
         {
             var enteredCharacters = input.Keyboard.GetEnteredCharacters();
-            _currentPopup.UpdateKeyboardInput(input.Keyboard);
             _currentPopup.OnTextInput(enteredCharacters);
+            _currentPopup.UpdateKeyboardInput(input.Keyboard);
             return;
         }
 
@@ -299,6 +319,32 @@ public class EditorSession : Session
                     DoFillAt(position);
                     break;
                 case EditorTool.Write:
+                    var foundMetaEntity = WorldTemplate.GetMetadataAt(position);
+                    var defaultText = "";
+                    if (foundMetaEntity != null)
+                    {
+                        defaultText = foundMetaEntity.ExtraData.GetValueOrDefault("command") ?? defaultText;
+                    }
+
+                    RequestText("Enter Command", defaultText,
+                        text =>
+                        {
+                            if (foundMetaEntity != null)
+                            {
+                                if (string.IsNullOrEmpty(text))
+                                {
+                                    WorldTemplate.RemoveExactEntity(foundMetaEntity);
+                                }
+                                else
+                                {
+                                    foundMetaEntity.ExtraData["command"] = text;
+                                }
+                            }
+                            else
+                            {
+                                WorldTemplate.AddMetaEntity(position, text);
+                            }
+                        });
                     break;
                 case EditorTool.Play:
                     if (_fileName != null)
@@ -310,6 +356,7 @@ public class EditorSession : Session
                     {
                         Client.Debug.Log("Name the level first!");
                     }
+
                     break;
             }
         }
@@ -318,6 +365,23 @@ public class EditorSession : Session
         {
             _isDraggingSecondary = true;
         }
+    }
+
+    private void RequestText(string message, string? defaultText, Action<string> onSubmit)
+    {
+        var topLeft = new GridPosition(4, 12);
+        var textModal = new UiElement(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 3));
+        textModal.AddStaticText(new GridPosition(1, 1), message);
+        var textInput = textModal.AddTextInput(new GridPosition(1, 2), defaultText ?? string.Empty);
+
+        _currentPopup = textModal;
+        textInput.Submitted += text =>
+        {
+            onSubmit(text);
+            CloseCurrentPopup();
+        };
+
+        textInput.Cancelled += CloseCurrentPopup;
     }
 
     private void DoFillAt(GridPosition position)
@@ -395,7 +459,8 @@ public class EditorSession : Session
             var uiElement = HitUiElement(_hoveredTilePosition.Value);
             if (uiElement == null)
             {
-                if (_editorTool == EditorTool.Brush || _editorTool == EditorTool.Connect || _editorTool == EditorTool.Play)
+                if (_editorTool == EditorTool.Brush || _editorTool == EditorTool.Connect ||
+                    _editorTool == EditorTool.Play)
                 {
                     var tile = originalTile with {BackgroundColor = Color.LightBlue};
                     _screen.PutTile(_hoveredTilePosition.Value, tile);
@@ -446,6 +511,18 @@ public class EditorSession : Session
                 var previousTileState = _screen.GetTile(position);
                 _screen.PutTile(position,
                     previousTileState with {BackgroundColor = Color.LimeGreen, ForegroundColor = Color.Green});
+            }
+        }
+
+        if (MathF.Sin(Client.TotalElapsedTime * 10) > 0)
+        {
+            foreach (var placedEntity in WorldTemplate.PlacedEntities)
+            {
+                if (placedEntity.ExtraData.Count > 0)
+                {
+                    _screen.PutTile(placedEntity.Position - _cameraPosition,
+                        TileState.StringCharacter("!", Color.OrangeRed));
+                }
             }
         }
 
@@ -507,7 +584,12 @@ public class EditorSession : Session
         {
             _fileName = text;
             Save();
-            _currentPopup = null;
+            CloseCurrentPopup();
         };
+    }
+
+    private void CloseCurrentPopup()
+    {
+        _shouldClosePopup = true;
     }
 }

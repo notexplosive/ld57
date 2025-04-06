@@ -4,5 +4,5 @@ namespace LD57.Gameplay;
 
 public interface IEntityAppearance
 {
-    TileState TileState { get; }
+    TileState? TileState { get; }
 }

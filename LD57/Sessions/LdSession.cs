@@ -6,6 +6,7 @@ using LD57.Gameplay;
 using LD57.Rendering;
 using LD57.Rules;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace LD57.Sessions;
 
@@ -42,13 +43,13 @@ public class LdSession : Session
         var waterAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Water").ToList();
         if (waterAtDestination.Count > 0 && data.Mover.HasTag("FloatsInWater"))
         {
-            glyph.SetAnimation(Animations.FloatOnWater(waterAtDestination.First().TileState.ForegroundColor));
+            glyph.SetAnimation(Animations.FloatOnWater(waterAtDestination.First().TileState!.Value.ForegroundColor));
         }
 
         var buttonsAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Button").ToList();
         if (data.Mover.HasTag("PressesButtons") && buttonsAtDestination.Count > 0)
         {
-            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState.ForegroundColor,
+            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState!.Value.ForegroundColor,
                 ResourceAlias.Color("button")));
         }
     }
@@ -148,5 +149,16 @@ public class LdSession : Session
 
         _world.Rules.AddRule(new CameraFollowsEntity(_world, _player));
         _world.MoveCompleted += OnMoveCompleted;
+        _world.RequestLoad += TransitionWorld;
+    }
+
+    private void TransitionWorld(string worldName)
+    {
+        var worldData = Client.Debug.RepoFileSystem.GetDirectory("Resource/Worlds").ReadFile(worldName+".json");
+        var worldTemplate = JsonConvert.DeserializeObject<WorldTemplate>(worldData);
+        if (worldTemplate != null)
+        {
+            LoadWorld(worldTemplate);
+        }
     }
 }
