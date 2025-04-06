@@ -4,18 +4,23 @@ namespace LD57.Gameplay;
 
 public class EntityBehavior
 {
-    private readonly Action _action;
+    private readonly Action<IBehaviorTriggerPayload> _action;
 
-    public EntityBehavior(BehaviorTrigger trigger, Action action)
+    public EntityBehavior(IBehaviorTrigger trigger, Action<IBehaviorTriggerPayload> action)
     {
         Trigger = trigger;
         _action = action;
     }
 
-    public BehaviorTrigger Trigger { get; }
+    public IBehaviorTrigger Trigger { get; }
 
-    public void DoAction()
+    public void DoAction(IBehaviorTriggerPayload payload)
     {
-        _action();
+        _action(payload);
+    }
+
+    public void DoActionEmptyPayload()
+    {
+        _action(new EmptyBehaviorPayload());
     }
 }

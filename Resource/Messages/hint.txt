@@ -1,0 +1,11 @@
+
+{c:light_blue_text}Sometimes a puzzle is not a puzzle
+
+#
+{c:light_blue_text}Instead of thinking about the
+"solution," think about how to
+solve the problem.
+#
+{c:light_blue_text}The Catacombs do not play fair, and neither should you.
+#
+

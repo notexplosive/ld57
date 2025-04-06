@@ -36,7 +36,7 @@ public class LdSession : Session
     {
         var entitiesAtDestination = _world.GetActiveEntitiesAt(data.Destination).ToList();
         var glyph = data.Mover.TweenableGlyph;
-        if (status.WasInterrupted)
+        if (!status.WasSuccessful)
         {
             glyph.SetAnimation(Animations.MakeInPlaceNudge(data.Direction, _screen.TileSize / 4));
             return;
@@ -139,7 +139,7 @@ public class LdSession : Session
             if (_inputDirection != Direction.None)
             {
                 var move = _world.Rules.AttemptMoveInDirection(_player, _inputDirection);
-                if (!move.WasInterrupted)
+                if (move.WasSuccessful)
                 {
                     _player.TweenableGlyph.SetAnimation(Animations.MakeWalk(_inputDirection, _screen.TileSize / 4f));
                 }
@@ -186,13 +186,14 @@ public class LdSession : Session
         
         foreach (var entity in _world.CurrentRoom.AllActiveEntities())
         {
-            entity.TriggerBehavior(BehaviorTrigger.OnEnter);
+            entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
         }
     }
 
     private void DisplayDialogueMessage(string messageName)
     {
         var message = ResourceAlias.Messages(messageName);
+        _cutsceneTween.SkipToEnd();
         _dialogueBox.ShowMessage(_cutsceneTween, message);
     }
 

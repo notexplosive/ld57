@@ -7,24 +7,21 @@ namespace LD57.Gameplay;
 
 public class Room
 {
-    private readonly GridPosition _bottomRight;
     private readonly List<Entity> _entitiesInRoom = new();
-    private readonly GridPosition _topLeft;
     private readonly World _world;
+    private readonly GridPositionCorners _corners;
 
-    public Room(World parentWorld, GridPosition topLeft, GridPosition bottomRight)
+    public Room(World parentWorld, GridPosition a, GridPosition b)
     {
         _world = parentWorld;
-        _topLeft = topLeft;
-        _bottomRight = bottomRight;
+        _corners = new GridPositionCorners(a, b);
 
         RecalculateLiveEntities();
     }
 
-    public GridPosition TopLeftPosition => _topLeft;
-    public GridPosition BottomRightPosition => _bottomRight;
-
-    public Rectangle Rectangle => new(_topLeft.ToPoint(), (_bottomRight - _topLeft).ToPoint() + new Point(1));
+    public GridPosition TopLeft => _corners.TopLeft;
+    public GridPosition BottomRight => _corners.BottomRight;
+    public Rectangle Rectangle => _corners.Rectangle(true);
 
     public IEnumerable<Entity> AllEntitiesIncludingInactive()
     {
@@ -43,6 +40,17 @@ public class Room
     }
 
     /// <summary>
+    ///     A "turn" is whatever arbitrary thing we decide (right now: whenever the player moves)
+    /// </summary>
+    public void TriggerTurn()
+    {
+        foreach (var entity in _entitiesInRoom)
+        {
+            entity.SelfTriggerBehavior(BehaviorTrigger.OnTurn);
+        }
+    }
+
+    /// <summary>
     ///     Includes "Inactive" Entities
     /// </summary>
     public List<Entity> AllVisibleEntitiesInDrawOrder()
@@ -55,38 +63,11 @@ public class Room
     public void RecalculateLiveEntities()
     {
         _entitiesInRoom.Clear();
-        _entitiesInRoom.AddRange(CalculateEntitiesInRoom(false));
+        _entitiesInRoom.AddRange(_world.CalculateEntitiesInRoom(false, _corners));
     }
 
-    private IEnumerable<Entity> CalculateEntitiesInRoom(bool onlyActive)
+    public bool Contains(GridPosition position)
     {
-        var rectangle = new Rectangle(_topLeft.ToPoint(), (_bottomRight - _topLeft).ToPoint() + new Point(1));
-        foreach (var entity in onlyActive ? _world.AllActiveEntities() : _world.AllEntitiesIncludingInactive())
-        {
-            if (rectangle.Contains(entity.Position.ToPoint()))
-            {
-                yield return entity;
-            }
-        }
-    }
-
-    public IEnumerable<GridPosition> AffectedCells()
-    {
-        var width = _bottomRight.X - _topLeft.X;
-        var height = _bottomRight.Y - _topLeft.Y;
-
-        for (var x = 0; x < width; x++)
-        {
-            for (var y = 0; y < height; y++)
-            {
-                yield return new GridPosition(x, y);
-            }
-        }
-    }
-
-    public bool Contains(GridPosition newPosition)
-    {
-        return Rectangle.Contains(
-            newPosition.ToPoint());
+        return Rectangle.Contains(position.ToPoint());
     }
 }

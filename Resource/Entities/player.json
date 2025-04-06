@@ -4,6 +4,7 @@
     "frame": 0,
     "color": "player",
     "tags": [
+        "Player",
         "Pusher",
         "Solid",
         "PressesButtons"

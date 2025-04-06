@@ -8,7 +8,7 @@ namespace LD57.Gameplay;
 public class EntityTemplate
 {
     [JsonProperty("sprite_sheet")]
-    public string SpriteSheetName { get; set; } = "Entities";
+    public string? SpriteSheetName { get; set; }
     
     [JsonProperty("frame")]
     public int Frame { get; set; }

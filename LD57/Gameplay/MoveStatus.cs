@@ -2,18 +2,18 @@
 
 public record struct MoveStatus(MoveData MoveData)
 {
-    public void Interrupt()
+    public void Fail()
     {
-        WasInterrupted = true;
+        WasSuccessful = false;
     }
 
-    public bool WasInterrupted { get; set; }
+    public bool WasSuccessful { get; private set; } = true;
 
     public void DependOnMove(MoveStatus cascadedMove)
     {
-        if (cascadedMove.WasInterrupted)
+        if (!cascadedMove.WasSuccessful)
         {
-            Interrupt();
+            Fail();
         }
     }
 }

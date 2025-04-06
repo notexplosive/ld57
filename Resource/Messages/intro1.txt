@@ -1,12 +1,10 @@
 A damaged sign,
 barely legible...
 #
-{i:Entities:24} VILLAGE
-
-CATACOMBS {i:Entities:21}
+CATACOMBS OF UZ'UTHAL {i:Entities:21}
 #
 {c:white}There is a message
-scribbled underneath...
+scribbled over the original...
 #
 {c:blood}{i:Entities:25}
       TURN BACK!

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
@@ -7,7 +8,6 @@ namespace LD57.Gameplay;
 
 public class Entity
 {
-    public IEntityAppearance? Appearance { get; }
     private readonly List<EntityBehavior> _behaviors = new();
     private readonly int _rawSortPriority;
     private readonly HashSet<string> _tags = new();
@@ -21,19 +21,23 @@ public class Entity
     }
 
     public Entity(GridPosition position, EntityTemplate template)
-        : this(position, new EntityAppearance(LdResourceAssets.Instance.Sheets[template.SpriteSheetName],
-            template.Frame,
-            ResourceAlias.Color(template.Color)))
+        : this(position, template.SpriteSheetName != null
+            ? new EntityAppearance(LdResourceAssets.Instance.Sheets[template.SpriteSheetName],
+                template.Frame,
+                ResourceAlias.Color(template.Color))
+            : new Invisible())
     {
         State.AddFromDictionary(template.State);
-        
+
         foreach (var tag in template.Tags)
         {
             _tags.Add(tag);
         }
-        
+
         _rawSortPriority = template.SortPriority;
     }
+
+    public IEntityAppearance? Appearance { get; }
 
     public bool IsActive { get; private set; } = true;
 
@@ -49,14 +53,16 @@ public class Entity
 
     public void Start()
     {
-        TriggerBehavior(BehaviorTrigger.OnWorldStart);
-        
+        SelfTriggerBehavior(BehaviorTrigger.OnWorldStart);
+        SelfTriggerBehavior(BehaviorTrigger.OnSignalChange);
+        SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnEntityMoved, new BehaviorTriggerWithEntity.Payload(this));
         _hasStarted = true;
     }
-    
+
     private void OnStateUpdated(string key, string value)
     {
-        TriggerBehavior(BehaviorTrigger.OnStateChanged);
+        SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnStateChanged,
+            new BehaviorTriggerWithKeyValuePair.Payload(key, value));
     }
 
     public Entity AddTag(string tag)
@@ -75,24 +81,55 @@ public class Entity
         IsActive = value;
     }
 
-    public void AddBehavior(EntityBehavior entityBehavior)
+    private void AddBehavior(EntityBehavior entityBehavior)
     {
         if (_hasStarted)
         {
+            // if this is an OnWorldStart trigger, and we've already started, just fire it immediately
             if (entityBehavior.Trigger == BehaviorTrigger.OnWorldStart)
             {
-                entityBehavior.DoAction();
+                entityBehavior.DoActionEmptyPayload();
             }
         }
 
         _behaviors.Add(entityBehavior);
     }
 
-    public void TriggerBehavior(BehaviorTrigger trigger)
+    public void AddBehavior(BehaviorTriggerBasic basicTrigger, Action result)
+    {
+        AddBehavior(new EntityBehavior(basicTrigger, _ => { result(); }));
+    }
+
+    public void AddBehavior<TPayload>(IBehaviorTrigger<TPayload> behaviorTriggerWithString, Action<TPayload> result)
+        where TPayload : IBehaviorTriggerPayload
+    {
+        AddBehavior(new EntityBehavior(behaviorTriggerWithString, payload =>
+        {
+            if (payload is TPayload realPayload)
+            {
+                result(realPayload);
+            }
+            else
+            {
+                result(behaviorTriggerWithString.CreateEmptyPayload());
+            }
+        }));
+    }
+
+    public void SelfTriggerBehavior(BehaviorTriggerBasic trigger)
     {
         foreach (var behavior in _behaviors.Where(behavior => behavior.Trigger == trigger))
         {
-            behavior.DoAction();
+            behavior.DoActionEmptyPayload();
+        }
+    }
+
+    public void SelfTriggerBehaviorWithPayload<TPayload>(IBehaviorTrigger<TPayload> trigger, TPayload payload)
+        where TPayload : IBehaviorTriggerPayload
+    {
+        foreach (var behavior in _behaviors.Where(behavior => behavior.Trigger == trigger))
+        {
+            behavior.DoAction(payload);
         }
     }
 }

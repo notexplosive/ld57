@@ -37,7 +37,7 @@ public class EditorSession : Session
         runtimeFileSystem)
     {
         _screen = RebuildScreenWithWidth(50);
-        _cameraPosition += new GridPosition(-3, -4);
+        _cameraPosition = DefaultCameraPosition();
 
         WorldTemplate = new WorldTemplate();
 
@@ -56,6 +56,11 @@ public class EditorSession : Session
         {
             _cameraPosition = HotReloadCache.EditorCameraPosition.Value;
         }
+    }
+
+    private static GridPosition DefaultCameraPosition()
+    {
+        return new GridPosition(-3, -4);
     }
 
     public WorldTemplate WorldTemplate { get; private set; }
@@ -271,22 +276,22 @@ public class EditorSession : Session
 
         if (input.Keyboard.GetButton(Keys.A).WasPressed)
         {
-            _cameraPosition = _cameraPosition + new GridPosition(-_screen.Width / 4, 0);
+            _cameraPosition += new GridPosition(-_screen.Width / 4, 0);
         }
 
         if (input.Keyboard.GetButton(Keys.D).WasPressed)
         {
-            _cameraPosition = _cameraPosition + new GridPosition(_screen.Width / 4, 0);
+            _cameraPosition += new GridPosition(_screen.Width / 4, 0);
         }
 
         if (input.Keyboard.GetButton(Keys.W).WasPressed)
         {
-            _cameraPosition = _cameraPosition + new GridPosition(0, -_screen.Height / 4);
+            _cameraPosition += new GridPosition(0, -_screen.Height / 4);
         }
 
         if (input.Keyboard.GetButton(Keys.S).WasPressed)
         {
-            _cameraPosition = _cameraPosition + new GridPosition(0, _screen.Height / 4);
+            _cameraPosition += new GridPosition(0, _screen.Height / 4);
         }
 
         switch (_editorTool)
@@ -365,7 +370,7 @@ public class EditorSession : Session
     {
         _fileName = newFileName;
         WorldTemplate = newWorld;
-        _cameraPosition = new GridPosition(0, 0);
+        _cameraPosition = DefaultCameraPosition();
     }
 
     public event Action<GridPosition>? RequestPlay;
@@ -439,13 +444,13 @@ public class EditorSession : Session
                     }
                     else
                     {
+                        Save();
                         Client.Debug.Log("Name the level first!");
                     }
 
                     break;
                 case EditorTool.Connect:
                     IncrementSignalAt(position, 1);
-
                     break;
             }
         }
@@ -477,20 +482,24 @@ public class EditorSession : Session
                 if (entity.ExtraState.TryGetValue("channel", out var result))
                 {
                     var newValue = int.Parse(result) + delta;
-                    if (!LdResourceAssets.Instance.HasNamedColor($"signal_{newValue}"))
-                    {
-                        newValue = 0;
-                    }
-
-                    entity.ExtraState["channel"] = newValue.ToString();
+                    SetChannelValue(entity, newValue);
                 }
                 else
                 {
-                    // assume that no value == 0
-                    entity.ExtraState["channel"] = (0 + delta).ToString();
+                    SetChannelValue(entity, 0 + delta);
                 }
             }
         }
+    }
+
+    private static void SetChannelValue(PlacedEntity entity, int newValue)
+    {
+        if (!LdResourceAssets.Instance.HasNamedColor($"signal_{newValue}"))
+        {
+            return;
+        }
+
+        entity.ExtraState["channel"] = newValue.ToString();
     }
 
     private void RequestText(string message, string? defaultText, Action<string> onSubmit)
@@ -534,6 +543,10 @@ public class EditorSession : Session
                     foreach (var item in _moveBuffer)
                     {
                         WorldTemplate.RemoveEntitiesAt(item.Position);
+                    }
+
+                    foreach (var item in _moveBuffer)
+                    {
                         WorldTemplate.AddExactEntity(item);
                     }
 
@@ -631,8 +644,8 @@ public class EditorSession : Session
         if (HoveredTileWorldPosition.HasValue)
         {
             var hoveredRoom = world.GetRoomAt(HoveredTileWorldPosition.Value);
-            foreach (var position in Constants.TraceRectangle(hoveredRoom.TopLeftPosition - _cameraPosition,
-                         hoveredRoom.BottomRightPosition - _cameraPosition))
+            foreach (var position in Constants.TraceRectangle(hoveredRoom.TopLeft - _cameraPosition,
+                         hoveredRoom.BottomRight - _cameraPosition))
             {
                 var previousTileState = _screen.GetTile(position);
                 _screen.PutTile(position, previousTileState with {BackgroundColor = Color.LightBlue});

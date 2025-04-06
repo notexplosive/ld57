@@ -7,12 +7,12 @@ namespace LD57.Gameplay;
 
 public class State
 {
+    public delegate void StateUpdateDelegate(string key, string value);
+
     private readonly Dictionary<string, string> _table = new();
 
-    public delegate void StateUpdateDelegate(string key, string value);
-    
     public event StateUpdateDelegate? Updated;
-    
+
     public void SetString(string key, string value)
     {
         _table[key] = value;
@@ -40,6 +40,11 @@ public class State
 
             return new int?();
         });
+    }
+
+    public int GetIntOrFallback(string key, int fallback)
+    {
+        return GetInt(key) ?? fallback;
     }
 
     public Color? GetColor(string key)
@@ -96,5 +101,10 @@ public class State
         {
             SetString(data.Key, data.Value);
         }
+    }
+
+    public bool GetBoolOrFallback(string key, bool defaultBool)
+    {
+        return GetBool(key) ?? defaultBool;
     }
 }

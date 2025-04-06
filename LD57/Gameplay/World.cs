@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
+using Microsoft.Xna.Framework;
 
 namespace LD57.Gameplay;
 
@@ -16,8 +17,7 @@ public class World
     {
         _roomSize = roomSize;
         Rules = new RuleComputer(this);
-        var gridPosition = new GridPosition(0, 0);
-        CurrentRoom = new Room(this, gridPosition, gridPosition + roomSize);
+        CurrentRoom = GetRoomAt(new GridPosition(0, 0));
 
         foreach (var placedEntity in worldTemplate.PlacedEntities)
         {
@@ -28,7 +28,7 @@ public class World
 
             if (LdResourceAssets.Instance.EntityTemplates.ContainsKey(placedEntity.TemplateName))
             {
-                AddEntityFast(CreateEntityFromTemplate(placedEntity));
+                AddEntityFast(CreateEntityFromPlacement(placedEntity));
             }
             else
             {
@@ -40,31 +40,47 @@ public class World
         CurrentRoom.RecalculateLiveEntities();
     }
 
-    private Entity CreateEntityFromTemplate(PlacedEntity placedEntity)
+    public Room CurrentRoom { get; private set; }
+    public RuleComputer Rules { get; }
+
+    public GridPosition CameraPosition { get; set; }
+    
+    private Entity CreateEntityFromPlacement(PlacedEntity placedEntity)
     {
         var entityTemplate = ResourceAlias.EntityTemplate(placedEntity.TemplateName);
-        var entity = new Entity(placedEntity.Position, entityTemplate);
-        entity.State.AddFromDictionary(placedEntity.ExtraState);
+        return CreateEntityFromTemplate(entityTemplate, placedEntity.Position, placedEntity.ExtraState);
+    }
 
+    public Entity CreateEntityFromTemplate(EntityTemplate entityTemplate, GridPosition position, Dictionary<string,string> extraState)
+    {
+        var entity = new Entity(position, entityTemplate);
+        entity.State.AddFromDictionary(extraState);
+        
         if (entity.HasTag("Signal"))
         {
-            var channel = entity.State.GetInt("channel") ?? 0;
+            var channel = entity.State.GetIntOrFallback("channel", 0);
 
-            entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnWorldStart, () =>
+            entity.AddBehavior(BehaviorTrigger.OnWorldStart, () =>
             {
                 var signalColor = ResourceAlias.Color("signal_" + channel);
                 if (entity.Appearance != null && entity.Appearance.TileState.HasValue)
                 {
-                    entity.Appearance.TileState = entity.Appearance.TileState.Value with { ForegroundColor = signalColor };
+                    entity.Appearance.TileState =
+                        entity.Appearance.TileState.Value with {ForegroundColor = signalColor};
                 }
-            }));
-            
+            });
+
             if (entity.HasTag("Button"))
             {
-                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () =>
+                entity.AddBehavior(BehaviorTrigger.OnEntityMoved, (entityPayload) =>
                 {
-                    var isPressed = CurrentRoom.AllActiveEntities()
-                        .Where(a => a.Position == entity.Position).Any(a => a.HasTag("PressesButton"));
+                    if (entityPayload.Entity == null)
+                    {
+                        return;
+                    }
+                    
+                    var isPressed = EntitiesInSameRoom(entity.Position)
+                        .Where(a => a.Position == entity.Position).Any(a => a.HasTag("PressesButtons"));
 
                     var wasPressed = entity.State.GetBool("is_pressed");
                     entity.State.Set("is_pressed", isPressed);
@@ -72,40 +88,76 @@ public class World
                     if (wasPressed != isPressed)
                     {
                         foreach (var otherEntities in CurrentRoom.AllActiveEntities()
-                                     .Where(a => a.State.GetInt("channel") == channel))
+                                     .Where(a => a.State.GetIntOrFallback("channel", 0) == channel))
                         {
-                            otherEntities.TriggerBehavior(BehaviorTrigger.OnSignalChange);
+                            otherEntities.SelfTriggerBehavior(BehaviorTrigger.OnSignalChange);
                         }
                     }
-                }));
+                });
             }
 
             if (entity.HasTag("Door"))
             {
-                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnSignalChange, () =>
+                entity.AddBehavior(BehaviorTrigger.OnSignalChange, () =>
                 {
-                    var allButtonsPressed = CurrentRoom.AllActiveEntities()
-                        .Where(a => a.HasTag("Button") && a.State.GetInt("channel") == channel)
-                        .All(a => a.State.GetBool("is_pressed") == true);
+                    var buttons = CurrentRoom.AllActiveEntities()
+                        .Where(a => a.HasTag("Button") && a.State.GetIntOrFallback("channel", 0) == channel).ToList();
 
-                    entity.State.Set("is_open", allButtonsPressed);
-                }));
-                
-                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnStateChanged, () =>
+                    var shouldOpen = false;
+                    
+                    if (buttons.Count > 0)
+                    {
+                        shouldOpen = buttons.All(a => a.State.GetBool("is_pressed") == true);
+                    }
+
+                    if (entity.State.GetBoolOrFallback("is_inverted", false))
+                    {
+                        shouldOpen = !shouldOpen;
+                    }
+
+                    entity.State.Set("is_open", shouldOpen);
+                });
+
+                entity.AddBehavior(BehaviorTrigger.OnStateChanged, payload =>
                 {
-                    // if state == is_open
-                    // then change tile
-                }));
+                    if (payload.Key == "is_open")
+                    {
+                        var isOpen = entity.State.GetBool("is_open") == true;
+                        var sheet = entity.State.GetString("sheet") ?? "Entities";
+                        
+                        if (entity.Appearance?.TileState.HasValue == true)
+                        {
+                            var openFrame = entity.State.GetInt("open_frame") ?? 0;
+                            var closedFrame = entity.State.GetInt("closed_frame") ?? 0;
+
+                            var frame = isOpen ? openFrame : closedFrame;
+                            
+                            entity.Appearance.TileState = entity.Appearance.TileState.Value with {Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]};
+                        }
+                    }
+                });
             }
         }
-
+        
         return entity;
     }
 
-    public Room CurrentRoom { get; private set; }
-    public RuleComputer Rules { get; }
+    private IEnumerable<Entity> EntitiesInSameRoom(GridPosition position)
+    {
+        return CalculateEntitiesInRoom(true, GetRoomCornersAt(position));
+    }
 
-    public GridPosition CameraPosition { get; set; }
+    public IEnumerable<Entity> CalculateEntitiesInRoom(bool onlyActive, GridPositionCorners corners)
+    {
+        var rectangle = corners.Rectangle(true);
+        foreach (var entity in onlyActive ? AllActiveEntities() : AllEntitiesIncludingInactive())
+        {
+            if (rectangle.Contains(entity.Position.ToPoint()))
+            {
+                yield return entity;
+            }
+        }
+    }
 
     public event Action<string>? RequestLoad;
     public event Action<string>? RequestZoneNameChange;
@@ -125,18 +177,17 @@ public class World
 
             if (commandName == "load")
             {
-                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () => { RequestLoad?.Invoke(arg); }));
+                entity.AddBehavior(BehaviorTrigger.OnTouch, () => { RequestLoad?.Invoke(arg); });
             }
 
             if (commandName == "zone")
             {
-                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnEnter,
-                    () => { RequestZoneNameChange?.Invoke(arg); }));
+                entity.AddBehavior(BehaviorTrigger.OnEnter, () => { RequestZoneNameChange?.Invoke(arg); });
             }
 
             if (commandName == "show")
             {
-                entity.AddBehavior(new EntityBehavior(BehaviorTrigger.OnTouch, () => { RequestShow?.Invoke(arg); }));
+                entity.AddBehavior(BehaviorTrigger.OnTouch, () => { RequestShow?.Invoke(arg); });
             }
         }
 
@@ -146,10 +197,10 @@ public class World
     public void SetCurrentRoom(Room room)
     {
         CurrentRoom = room;
-        CameraPosition = room.TopLeftPosition;
+        CameraPosition = room.TopLeft;
         foreach (var entity in room.AllActiveEntities())
         {
-            entity.TriggerBehavior(BehaviorTrigger.OnEnter);
+            entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
         }
     }
 
@@ -182,11 +233,16 @@ public class World
         {
             CurrentRoom.RecalculateLiveEntities();
         }
-
         return entity;
     }
 
     public Room GetRoomAt(GridPosition position)
+    {
+        var corners = GetRoomCornersAt(position);
+        return new Room(this, corners.TopLeft, corners.BottomRight);
+    }
+
+    private GridPositionCorners GetRoomCornersAt(GridPosition position)
     {
         var inflatedRoomSize = _roomSize + new GridPosition(1, 1);
         var x = position.X % inflatedRoomSize.X;
@@ -202,7 +258,7 @@ public class World
         }
 
         var topLeft = position - new GridPosition(x, y);
-        return new Room(this, topLeft, topLeft + _roomSize);
+        return new GridPositionCorners(topLeft, topLeft + _roomSize);
     }
 
     public IEnumerable<Entity> GetActiveEntitiesAt(GridPosition position)
@@ -231,15 +287,21 @@ public class World
 
     public void OnMoveCompleted(MoveData moveData, MoveStatus status)
     {
-        foreach (var entity in CurrentRoom.AllActiveEntities().Where(a => a.Position == moveData.Destination))
+        foreach (var entity in CurrentRoom.AllActiveEntities())
         {
-            entity.TriggerBehavior(BehaviorTrigger.OnTouch);
+            if (entity.Position == moveData.Destination)
+            {
+                // even if the move failed, we still count that as a "touch"
+                entity.SelfTriggerBehavior(BehaviorTrigger.OnTouch);
+            }
+            
+            entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnEntityMoved, new BehaviorTriggerWithEntity.Payload(moveData.Mover));
         }
-
+        
         MoveCompleted?.Invoke(moveData, status);
     }
 
-    public void Remove(Entity entity)
+    public void Destroy(Entity entity)
     {
         _entitiesToRemove.Add(entity);
     }
@@ -271,5 +333,10 @@ public class World
                 screen.PutTile(renderedPosition, entity.TileState.Value, entity.TweenableGlyph);
             }
         }
+    }
+
+    public bool IsDestroyed(Entity water)
+    {
+        return _entitiesToRemove.Contains(water) || !_entities.Contains(water);
     }
 }

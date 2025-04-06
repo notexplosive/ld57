@@ -1,7 +1,7 @@
 {
     "sort_priority": 10,
     "sprite_sheet": "Entities",
-    "frame": 3,
+    "frame": 4,
     "color": "white",
     "tags": [
         "Door",
@@ -9,6 +9,7 @@
     ],
     "state": {
         "open_frame": 4,
-        "closed_frame": 3
+        "closed_frame": 3,
+        "is_inverted": true
     }
 }
