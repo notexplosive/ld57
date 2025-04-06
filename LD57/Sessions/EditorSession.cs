@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using ExplogineCore;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExplogineMonoGame.Input;
@@ -37,15 +39,21 @@ public class EditorSession : Session
         _screen = RebuildScreenWithWidth(50);
         _cameraPosition += new GridPosition(-3, -4);
 
-        _fileName = "default";
-        var template = JsonConvert.DeserializeObject<WorldTemplate>(Client.Debug.RepoFileSystem
-            .GetDirectory("Resource/Worlds")
-            .ReadFile(_fileName + ".json"));
-
-        WorldTemplate = template ?? new WorldTemplate();
+        WorldTemplate = new WorldTemplate();
+        
+        _cameraPosition = HotReloadCache.EditorCameraPosition;
+        if (HotReloadCache.EditorOpenFileName != null)
+        {
+            var data = Client.Debug.RepoFileSystem.ReadFile($"Resource/Worlds/{HotReloadCache.EditorOpenFileName}.json");
+            var template = JsonConvert.DeserializeObject<WorldTemplate>(data);
+            if (template != null)
+            {
+                SetTemplate(HotReloadCache.EditorOpenFileName, template);
+            }
+        }
     }
 
-    public WorldTemplate WorldTemplate { get; }
+    public WorldTemplate WorldTemplate { get; private set; }
 
     public GridPosition? HoveredTileWorldPosition
     {
@@ -157,6 +165,8 @@ public class EditorSession : Session
 
     public override void OnHotReload()
     {
+        HotReloadCache.EditorOpenFileName = _fileName;
+        HotReloadCache.EditorCameraPosition = _cameraPosition;
     }
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
@@ -229,6 +239,17 @@ public class EditorSession : Session
                 input.Keyboard.Consume(Keys.S);
                 SaveAs();
             }
+        }
+
+        if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.O,true).WasPressed)
+        {
+            Open();
+        }
+        
+        if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.N,true).WasPressed)
+        {
+            Save();
+            SetTemplate(null, new WorldTemplate());
         }
 
         if (input.Keyboard.GetButton(Keys.OemMinus).WasPressed)
@@ -314,6 +335,32 @@ public class EditorSession : Session
         _hoveredTilePosition = _screen.GetHoveredTile(input, hitTestStack, Vector2.Zero);
     }
 
+    private void Open()
+    {
+        var fullPath = PlatformFileApi.OpenFileDialogue("Open World", new PlatformFileApi.ExtensionDescription("json", "JSON"));
+        if (!string.IsNullOrEmpty(fullPath))
+        {
+            var fileName = new FileInfo(fullPath).Name;
+
+            var json = Client.Debug.RepoFileSystem.ReadFile(fullPath);
+            var newWorld = JsonConvert.DeserializeObject<WorldTemplate>(json);
+
+            if (newWorld != null)
+            {
+                Client.Debug.RepoFileSystem.WriteToFile($"Resource/Worlds/{fileName}", json);
+                var newFileName = fileName.RemoveFileExtension();
+                SetTemplate(newFileName, newWorld);
+            }
+        }
+    }
+
+    private void SetTemplate(string? newFileName, WorldTemplate newWorld)
+    {
+        _fileName = newFileName;
+        WorldTemplate = newWorld;
+        _cameraPosition = new GridPosition(0,0);
+    }
+
     public event Action<GridPosition>? RequestPlay;
 
     private void StartMousePressInWorld(GridPosition position, MouseButton mouseButton)
@@ -340,7 +387,9 @@ public class EditorSession : Session
                     {
                         defaultText = foundMetaEntity.ExtraData.GetValueOrDefault("command") ?? defaultText;
                     }
-
+                    
+                    var isUsingSelection = _selectionRectangle.HasValue &&
+                                           Constants.ContainsInclusive(_selectionRectangle.Value, position);
                     RequestText("Enter Command", defaultText,
                         text =>
                         {
@@ -357,7 +406,21 @@ public class EditorSession : Session
                             }
                             else
                             {
-                                WorldTemplate.AddMetaEntity(position, text);
+                                if (!string.IsNullOrEmpty(text))
+                                {
+                                    if (isUsingSelection)
+                                    {
+                                        foreach (var cell in Constants.AllPositionsInRectangle(_selectionRectangle!
+                                                     .Value))
+                                        {
+                                            WorldTemplate.AddMetaEntity(cell, text);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        WorldTemplate.AddMetaEntity(position, text);
+                                    }
+                                }
                             }
                         });
                     break;

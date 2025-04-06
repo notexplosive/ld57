@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExplogineMonoGame.Data;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -26,6 +27,12 @@ public static class Constants
 
         return new Rectangle(topLeft.ToPoint(),
             (bottomRight - topLeft + extra).ToPoint());
+    }
+
+    public static IEnumerable<GridPosition> AllPositionsInRectangle(Rectangle rectangle)
+    {
+        return AllPositionsInRectangle(new GridPosition(rectangle.Location),
+            new GridPosition(rectangle.Location + rectangle.Size));
     }
 
     public static IEnumerable<GridPosition> AllPositionsInRectangle(GridPosition a, GridPosition b)
@@ -82,5 +89,10 @@ public static class Constants
         {
             yield return topLeft + new GridPosition(0, i);
         }
+    }
+
+    public static bool ContainsInclusive(Rectangle selectionRectangle, GridPosition position)
+    {
+        return new Rectangle(selectionRectangle.Location, selectionRectangle.Size + new Point(1)).Contains(position.ToPoint());
     }
 }

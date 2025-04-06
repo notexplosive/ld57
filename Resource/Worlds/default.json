@@ -13224,7 +13224,7 @@
     },
     {
       "extra_data": {
-        "command": "load main"
+        "command": "load interior"
       },
       "template_name": "",
       "position": {
@@ -13234,7 +13234,7 @@
     },
     {
       "extra_data": {
-        "command": "load main"
+        "command": "load interior"
       },
       "template_name": "",
       "position": {
