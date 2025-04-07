@@ -111,7 +111,7 @@ public class Inventory
         return entity;
     }
 
-    public static string GetItemName(Entity entity)
+    public static string GetHumanReadableName(Entity entity)
     {
         return entity.State.GetStringOrDefault("item_name", "Unknown Item");
     }
@@ -149,5 +149,11 @@ public class Inventory
     private string Status()
     {
         return "";
+    }
+
+    public void ClearItems()
+    {
+        _itemEntities.Clear();
+        _itemBehaviors.Clear();
     }
 }

@@ -5,7 +5,6 @@ using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExTween;
-using LD57.CartridgeManagement;
 using LD57.Gameplay;
 using LD57.Rendering;
 using LD57.Rules;
@@ -19,20 +18,26 @@ public class LdSession : Session
     private readonly SequenceTween _cutsceneTween = new();
     private readonly DialogueBox _dialogueBox;
     private readonly Inventory _inventory = new();
+    private readonly SequenceTween _itemTween = new();
     private readonly Queue<ModalEvent> _modalQueue = new();
+    private readonly HashSet<string> _preservedItems = new();
     private readonly PromptBox _promptBox;
     private readonly AsciiScreen _screen;
     private readonly TitleCard _titleCard;
     private readonly SequenceTween _transitionTween = new();
+    private ITransition? _currentTransition;
     private string? _currentZoneName;
+    private bool _hasResetButNotEnteredSanctuary = true;
     private float _inputTimer;
+    private bool _isPendingResetButton;
+    private WorldTemplate? _mostRecentlyLoadedWorld;
+    private int _numberOfTimesEnteredSanctuary;
     private ActionButton _pendingActionButton;
     private Direction _pendingDirection = Direction.None;
     private Entity _player = new(new GridPosition(), new Invisible());
     private bool _skipClear;
     private bool _skipDrawingMain;
     private World _world = new(Constants.GameRoomSize, new WorldTemplate());
-    private ITransition? _currentTransition;
 
     public LdSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -63,30 +68,31 @@ public class LdSession : Session
         DisplayPrompt(mainMenuPrompt);
     }
 
-    private void CrossFadeTransition(ITransition lsdTransition, Action action)
+    private void CrossFadeTransition(ITransition transition, Action action)
     {
-        _currentTransition = lsdTransition;
-        
+        _currentTransition = transition;
+
         _transitionTween.SkipToEnd();
 
         _transitionTween
             .Add(_currentTransition.FadeIn())
             .Add(new CallbackTween(action))
+            .Add(new WaitUntilTween(() => _modalQueue.Count == 0))
             ;
-        
+
         FadeOutTransition();
-    } 
-    
+    }
+
     private void FadeOutTransition()
     {
         if (_currentTransition == null)
         {
             return;
         }
-        
+
         _transitionTween
             .Add(_currentTransition.FadeOut())
-            .Add(new CallbackTween(()=>_currentTransition = null))
+            .Add(new CallbackTween(() => _currentTransition = null))
             ;
     }
 
@@ -127,11 +133,6 @@ public class LdSession : Session
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
-        if (_inventory.IsPlayingItemAnimation || !_transitionTween.IsDone())
-        {
-            return;
-        }
-
         var frameInput = new FrameInput();
 
         if (FrameInput.PrimaryActionTapped(input))
@@ -153,6 +154,19 @@ public class LdSession : Session
         {
             _pendingDirection = frameInput.HeldDirection(input);
         }
+
+        if (FrameInput.CancelPressed(input))
+        {
+            if (_dialogueBox.IsVisible)
+            {
+                _dialogueBox.DoCloseAnimation(_cutsceneTween);
+            }
+        }
+
+        if (FrameInput.ResetPressed(input))
+        {
+            _isPendingResetButton = true;
+        }
     }
 
     public override void Update(float dt)
@@ -171,6 +185,12 @@ public class LdSession : Session
         if (_cutsceneTween.IsDone())
         {
             _cutsceneTween.Clear();
+        }
+
+        _itemTween.Update(dt);
+        if (_itemTween.IsDone())
+        {
+            _itemTween.Clear();
         }
 
         if (!_skipClear)
@@ -262,11 +282,27 @@ public class LdSession : Session
             {
                 // if we have modals pending, don't react to any input
             }
+            else if (!_transitionTween.IsDone())
+            {
+                // if playing a transition, don't take input
+            }
+            else if (_inventory.IsPlayingItemAnimation)
+            {
+                // if playing an item animation, don't take input
+            }
             else
             {
-                if (_pendingActionButton != ActionButton.None)
+                if (_isPendingResetButton)
                 {
-                    _inventory.AnimateUse(_pendingActionButton, _world, _player, _cutsceneTween);
+                    DisplayPrompt(new Prompt("Reset All Puzzles?", Orientation.Horizontal,
+                    [
+                        new PromptOption("Cancel", () => { }),
+                        new PromptOption("Reset", () => { AnimateReset(); })
+                    ]));
+                }
+                else if (_pendingActionButton != ActionButton.None)
+                {
+                    _inventory.AnimateUse(_pendingActionButton, _world, _player, _itemTween);
                 }
                 else
                 {
@@ -287,6 +323,86 @@ public class LdSession : Session
 
         _pendingActionButton = ActionButton.None;
         _pendingDirection = Direction.None;
+        _isPendingResetButton = false;
+    }
+
+    private void AnimateReset()
+    {
+        CrossFadeTransition(new LsdTransition(_screen), () => { ExecuteReset(); });
+    }
+
+    private void ExecuteReset()
+    {
+        foreach (var item in GetHeldItems())
+        {
+            var humanReadableItemName = Inventory.GetHumanReadableName(item);
+            var templateName = item.State.GetString("template_name");
+            if (templateName != null && !_preservedItems.Contains(templateName))
+            {
+                DisplayDynamicDialogueMessage($"{humanReadableItemName} was lost.\n\nTake it back to The Sanctuary\nto preserve it");
+            }
+        }
+
+        _inventory.ClearItems();
+
+        var entitiesToPreserve = new List<Entity>();
+        var oldRooms = new List<Room>();
+
+        foreach (var entity in _world.AllActiveEntities())
+        {
+            if (entity.State.GetString("command") == "preserve")
+            {
+                var room = _world.GetRoomAt(entity.Position);
+                oldRooms.Add(room);
+                entitiesToPreserve.AddRange(room.AllActiveEntities());
+            }
+        }
+
+        // make sure we're not preserving the player
+        entitiesToPreserve.Remove(_player);
+
+        if (_mostRecentlyLoadedWorld != null)
+        {
+            LoadWorld(_mostRecentlyLoadedWorld);
+            var newWorld = _world;
+
+            // preserve the NEW player from the NEW world
+            entitiesToPreserve.Add(_player);
+
+            // remove them so we don't accidentally double-add them
+            _world.Destroy(_player);
+
+            // wipe the rooms in the new world
+            foreach (var room in oldRooms)
+            {
+                var newRoom = newWorld.GetRoomAt(room.TopLeft);
+                foreach (var entity in newRoom.AllEntitiesIncludingInactive())
+                {
+                    newWorld.Destroy(entity);
+                }
+            }
+
+            foreach (var entityToRestore in entitiesToPreserve)
+            {
+                entityToRestore.ClearBehaviors();
+                
+                var isTrigger = !entityToRestore.State.HasKey("template_name");
+                if (isTrigger)
+                {
+                    newWorld.SetupTriggerEntityBehaviors(entityToRestore);
+                }
+                else
+                {
+                    newWorld.SetupNormalEntityBehaviors(entityToRestore);
+                }
+                newWorld.AddEntity(entityToRestore);
+            }
+        }
+
+        foreach (var entity in _world.AllActiveEntitiesCached())
+        {
+            entity.SelfTriggerBehavior(BehaviorTrigger.OnReset);
+        }
     }
 
     public override void Draw(Painter painter)
@@ -297,6 +413,7 @@ public class LdSession : Session
 
     public void LoadWorld(WorldTemplate worldTemplate, GridPosition? playerSpawnPoint = null)
     {
+        _mostRecentlyLoadedWorld = worldTemplate;
         var playerSpawn = new GridPosition(0, 0);
         if (playerSpawnPoint.HasValue)
         {
@@ -317,6 +434,7 @@ public class LdSession : Session
         _player = _world.AddEntity(new Entity(playerSpawn, ResourceAlias.EntityTemplate("player")));
 
         _world.Rules.AddRule(new CameraFollowsEntity(_world, _player));
+        _world.EnteredSanctuary += OnEnterSanctuary;
         _world.MoveCompleted += OnMoveCompleted;
         _world.RequestLoad += TransitionWorld;
         _world.RequestZoneNameChange += DisplayZoneName;
@@ -324,11 +442,77 @@ public class LdSession : Session
         _world.RequestShowDynamicMessage += DisplayDynamicDialogueMessage;
         _world.RequestShowPrompt += DisplayPrompt;
         _world.RequestEquipItem += EquipItem;
+        _world.AttemptedVictory += OnAttemptVictory;
+        _world.RequestSpawnFromStorage += SpawnFromStorage;
 
         foreach (var entity in _world.CurrentRoom.AllActiveEntities())
         {
             entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
         }
+    }
+
+    private void SpawnFromStorage(string itemName, GridPosition position)
+    {
+        if (ResourceAlias.HasEntityTemplate(itemName) && _preservedItems.Contains(itemName))
+        {
+            var template = ResourceAlias.EntityTemplate(itemName);
+            _world.AddEntity(new Entity(position, template));
+        }
+    }
+
+    private void OnAttemptVictory()
+    {
+        DisplayDynamicDialogueMessage("You have (X/X) coins.");
+    }
+
+    private void OnEnterSanctuary()
+    {
+        foreach (var item in GetHeldItems())
+        {
+            var humanReadableName = Inventory.GetHumanReadableName(item);
+            var templateName = item.State.GetString("template_name");
+
+            if (templateName == null)
+            {
+                continue;
+            }
+            
+            if (!_preservedItems.Contains(templateName))
+            {
+                DisplayDynamicDialogueMessage(
+                    $"{humanReadableName} will be preserved\nin The Sanctuary.");
+            }
+
+            _preservedItems.Add(templateName);
+        }
+
+        if (_hasResetButNotEnteredSanctuary)
+        {
+            if (_numberOfTimesEnteredSanctuary == 0)
+            {
+                DisplayScriptedDialogueMessage("enter_sanctuary");
+            }
+
+            if (_numberOfTimesEnteredSanctuary == 1)
+            {
+                DisplayScriptedDialogueMessage("reset_1");
+            }
+
+            _numberOfTimesEnteredSanctuary++;
+            _hasResetButNotEnteredSanctuary = false;
+        }
+    }
+
+    private IEnumerable<Entity> GetHeldItems()
+    {
+        List<Entity?> items =
+            [
+                _inventory.GetEntityInSlot(ActionButton.Primary),
+                _inventory.GetEntityInSlot(ActionButton.Secondary)
+            ]
+            ;
+
+        return items.OfType<Entity>();
     }
 
     private void EquipItem(ActionButton slot, Entity item)
@@ -337,7 +521,7 @@ public class LdSession : Session
         if (_inventory.HasSomethingInSlot(slot))
         {
             var existingItem = _inventory.RemoveFromSlot(slot, _world, _player);
-            DisplayDynamicDialogueMessage($"You dropped\n{Inventory.GetItemName(existingItem)}");
+            DisplayDynamicDialogueMessage($"You dropped\n{Inventory.GetHumanReadableName(existingItem)}");
         }
 
         _inventory.Equip(slot, item);
@@ -362,10 +546,7 @@ public class LdSession : Session
     {
         if (_currentTransition != null)
         {
-            _transitionTween.Add(new CallbackTween(() =>
-            {
-                DisplayZoneNameImmediate(newZoneName);
-            }));
+            _transitionTween.Add(new CallbackTween(() => { DisplayZoneNameImmediate(newZoneName); }));
         }
         else
         {
@@ -388,11 +569,7 @@ public class LdSession : Session
         var worldTemplate = JsonConvert.DeserializeObject<WorldTemplate>(worldData);
         if (worldTemplate != null)
         {
-            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () =>
-            {
-                LoadWorld(worldTemplate);
-            });
-
+            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () => { LoadWorld(worldTemplate); });
         }
     }
 }

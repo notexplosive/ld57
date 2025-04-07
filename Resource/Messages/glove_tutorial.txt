@@ -2,5 +2,8 @@
 {i:Entities:17} Capture Gauntlet {i:Entities:17}
 
 #
-Captures an object into a
-pocket dimension.
+Captures an object into 
+a pocket dimension.
+
+items can then be dropped 
+into any vacant space.

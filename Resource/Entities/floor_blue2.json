@@ -2,9 +2,7 @@
     "sort_priority": 9,
     "sprite_sheet": "Floors",
     "frame": 7,
-    "color": "blue_brick",
-    "tags": [
-        // not actually floor!
-        "Wall"
-    ]
+    // not actually blue
+    "color": "rock",
+    "tags": []
 }

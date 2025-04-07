@@ -68,7 +68,8 @@ public class CaptureGloveItemBehavior : ItemBehavior
             return false;
         }
 
-        return world.Rules.CouldMoveTo(_capturedEntity, targetPosition);
+        var isEmptyAtTarget = world.GetActiveEntitiesAt(targetPosition).All(a => a.Appearance?.TileState.HasValue != true);
+        return isEmptyAtTarget;
     }
 
     private static Entity? CalculateThingToCapture(World world, GridPosition targetPosition)

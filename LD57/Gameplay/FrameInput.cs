@@ -61,4 +61,14 @@ public class FrameInput
     {
         return input.Keyboard.GetButton(Keys.X).WasPressed || input.Keyboard.GetButton(Keys.LeftShift).WasPressed || input.Keyboard.GetButton(Keys.RightShift).WasPressed;
     }
+
+    public static bool CancelPressed(ConsumableInput input)
+    {
+        return input.Keyboard.GetButton(Keys.Escape).WasPressed;
+    }
+
+    public static bool ResetPressed(ConsumableInput input)
+    {
+        return input.Keyboard.GetButton(Keys.R).WasPressed || input.Keyboard.GetButton(Keys.Escape).WasPressed;
+    }
 }

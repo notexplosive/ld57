@@ -13,7 +13,6 @@ public class World
     private readonly List<Entity> _entities = new();
     private readonly HashSet<Entity> _entitiesToRemove = new();
     private readonly GridPosition _roomSize;
-    public bool IsEditMode { get; }
 
     public World(GridPosition roomSize, WorldTemplate worldTemplate, bool isEditMode = false)
     {
@@ -36,13 +35,14 @@ public class World
             else
             {
                 // no template, this is a command-only entity
-                AddEntityFast(CreateTriggerEntityFromTemplate(placedEntity));
+                AddEntityFast(CreateTriggerEntityFromPlacement(placedEntity));
             }
         }
 
         CurrentRoom.RecalculateLiveEntities();
     }
 
+    public bool IsEditMode { get; }
     public Room CurrentRoom { get; private set; }
     public RuleComputer Rules { get; }
 
@@ -59,7 +59,12 @@ public class World
     {
         var entity = new Entity(position, entityTemplate);
         entity.State.AddFromDictionary(extraState);
+        SetupNormalEntityBehaviors(entity);
+        return entity;
+    }
 
+    public void SetupNormalEntityBehaviors(Entity entity)
+    {
         if (entity.HasTag("Water"))
         {
             if (!IsEditMode)
@@ -70,7 +75,7 @@ public class World
 
         if (entity.HasTag("Item"))
         {
-            var humanReadableName = Inventory.GetItemName(entity);
+            var humanReadableName = Inventory.GetHumanReadableName(entity);
 
             entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
             {
@@ -173,8 +178,6 @@ public class World
                 });
             }
         }
-
-        return entity;
     }
 
     private IEnumerable<Entity> EntitiesInSameRoom(GridPosition position)
@@ -194,19 +197,50 @@ public class World
         }
     }
 
+    public event Action? AttemptedVictory;
+    public event Action? EnteredSanctuary;
     public event Action<string>? RequestLoad;
     public event Action<string>? RequestZoneNameChange;
     public event Action<string>? RequestShowScriptedMessage;
     public event Action<string>? RequestShowDynamicMessage;
     public event Action<Prompt>? RequestShowPrompt;
+    public event Action<string, GridPosition>? RequestSpawnFromStorage;
     public event Action<ActionButton, Entity>? RequestEquipItem;
 
-    private Entity CreateTriggerEntityFromTemplate(PlacedEntity placedEntity)
+    private Entity CreateTriggerEntityFromPlacement(PlacedEntity placedEntity)
     {
-        var splitCommand = placedEntity.ExtraState.GetValueOrDefault("command")?.Split() ?? [];
         var entity = new Entity(placedEntity.Position, new Invisible());
+        entity.State.AddFromDictionary(placedEntity.ExtraState);
+        SetupTriggerEntityBehaviors(entity);
+        return entity;
+    }
 
-        if (splitCommand.Length >= 2)
+    public void SetupTriggerEntityBehaviors(Entity entity)
+    {
+        var splitCommand = entity.State.GetString("command")?.Trim().Split() ?? [];
+        if (splitCommand.Length == 1)
+        {
+            var commandName = splitCommand[0];
+            if (commandName == "preserve")
+            {
+                entity.AddBehavior(BehaviorTrigger.OnEnter, () =>
+                {
+                    EnteredSanctuary?.Invoke();
+                });
+            }
+
+            if (commandName == "vault")
+            {
+                entity.AddBehavior(BehaviorTrigger.OnTouch, (payload) =>
+                {
+                    if (payload.Entity?.HasTag("Player") == true)
+                    {
+                        AttemptedVictory?.Invoke();
+                    }
+                });
+            }
+        }
+        else if (splitCommand.Length >= 2)
         {
             var commandName = splitCommand[0];
             var remainingArgs = splitCommand.ToList();
@@ -239,9 +273,12 @@ public class World
                     }
                 });
             }
+            
+            if (commandName == "store")
+            {
+                entity.AddBehavior(BehaviorTrigger.OnReset, () => { RequestSpawnFromStorage?.Invoke(arg, entity.Position); });
+            }
         }
-
-        return entity;
     }
 
     public void SetCurrentRoom(Room room)
@@ -259,6 +296,11 @@ public class World
         return _entities;
     }
 
+    public IEnumerable<Entity> AllActiveEntitiesCached()
+    {
+        return AllActiveEntities().ToList();
+    }
+    
     public IEnumerable<Entity> AllActiveEntities()
     {
         foreach (var entity in _entities)

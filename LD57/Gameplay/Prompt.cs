@@ -60,14 +60,14 @@ public class Prompt
         else
         {
             var padding = 1;
-            var width = 0;
+            var widthOfOptions = 0;
             foreach (var option in Options)
             {
-                width += option.Width();
-                width += padding;
+                widthOfOptions += option.Width();
+                widthOfOptions += padding;
             }
             
-            return width + 1;
+            return Math.Max(widthOfOptions, Title.Count)  + 1;
         }
     }
 

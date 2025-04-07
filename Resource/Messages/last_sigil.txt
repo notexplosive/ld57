@@ -1,0 +1,9 @@
+{c:blood}{i:Entities:25}{i:Entities:25} I WARNED YOU {i:Entities:25}{i:Entities:25}
+#
+{c:blood}
+The only way to leave this place
+is to collect all 10 Crystals...
+#
+{c:blood}And then hope that whatever is in
+that Vault will free you from the
+Curse of the Catacombs.

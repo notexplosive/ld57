@@ -4,6 +4,7 @@
     "frame": 0,
     "color": "blue_brick",
     "tags": [
+        // not actually floor!
         "Solid"
     ]
 }

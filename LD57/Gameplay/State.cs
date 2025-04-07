@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ExplogineMonoGame.Data;
 using Microsoft.Xna.Framework;
 
@@ -111,5 +112,10 @@ public class State
     public string GetStringOrDefault(string key, string fallback)
     {
         return GetString(key) ?? fallback;
+    }
+
+    public bool HasKey(string key)
+    {
+        return _table.ContainsKey(key);
     }
 }

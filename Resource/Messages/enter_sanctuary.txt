@@ -1,0 +1,8 @@
+You wander in the inky blackness
+in a dreamlike state.
+#
+Suddenly, you wake up.
+#
+You feel a {c:blue_text}new power...
+#
+How did you get here?

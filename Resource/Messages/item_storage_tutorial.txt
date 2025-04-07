@@ -1,5 +1,4 @@
-{c:blue_text}Bring back Magical Treasures to 
-this room and they will be preserved.
+{c:blue_text}Magical Items you've collected
+will be preserved here.
 #
-{c:blue_text}Items will be kept at 
-their respective podiums
+{c:blue_text}Each podium will store an item.

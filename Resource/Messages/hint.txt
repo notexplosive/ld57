@@ -1,11 +1,9 @@
-
-{c:light_blue_text}Sometimes a puzzle is not a puzzle
-
+{c:green_text}A word of advice...
 #
-{c:light_blue_text}Instead of thinking about the
-"solution," think about how to
-solve the problem.
+{c:green_text}The Catacombs do not play fair, 
+and neither should you.
 #
-{c:light_blue_text}The Catacombs do not play fair, and neither should you.
+{c:green_text}It's not cheating if you
+solved the puzzle.
 #
-
+{c:green_text}Think outside the box!

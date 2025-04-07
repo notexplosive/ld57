@@ -28,6 +28,7 @@ public class Entity
                 ResourceAlias.Color(template.Color))
             : new Invisible())
     {
+        State.SetString("template_name", template.TemplateName);
         State.AddFromDictionary(template.State);
 
         foreach (var tag in template.Tags)
@@ -142,5 +143,10 @@ public class Entity
         {
             behavior.DoAction(payload);
         }
+    }
+
+    public void ClearBehaviors()
+    {
+        _behaviors.Clear();
     }
 }

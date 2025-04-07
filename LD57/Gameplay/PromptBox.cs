@@ -133,6 +133,7 @@ public class PromptBox
 
     public void ShowPrompt(SequenceTween tween, Prompt prompt)
     {
+        tween.SkipToEnd();
         HasMadeAChoice = false;
         _selectedIndex = 0;
         _currentPrompt = prompt;

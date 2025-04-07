@@ -2630,14 +2630,6 @@
     },
     {
       "extra_state": {},
-      "template_name": "player",
-      "position": {
-        "x": 15,
-        "y": 16
-      }
-    },
-    {
-      "extra_state": {},
       "template_name": "blue_brick",
       "position": {
         "x": 11,
@@ -2683,6 +2675,64 @@
       "template_name": "",
       "position": {
         "x": 11,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 14,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 14,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 15,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 16,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 16,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "player",
+      "position": {
+        "x": 13,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "command": "load main"
+      },
+      "template_name": "",
+      "position": {
+        "x": 15,
         "y": 15
       }
     }

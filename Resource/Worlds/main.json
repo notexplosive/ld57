@@ -348,22 +348,6 @@
       "extra_state": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 28,
-        "y": -1
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 28,
-        "y": 0
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 29,
         "y": -1
       }
@@ -389,22 +373,6 @@
       "template_name": "blue_brick",
       "position": {
         "x": 30,
-        "y": 0
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 31,
-        "y": -1
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 31,
         "y": 0
       }
     },
@@ -444,22 +412,6 @@
       "extra_state": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 34,
-        "y": -1
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 34,
-        "y": 0
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 35,
         "y": -1
       }
@@ -477,30 +429,6 @@
       "template_name": "blue_brick",
       "position": {
         "x": 36,
-        "y": -1
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 36,
-        "y": 0
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 37,
-        "y": -1
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 37,
         "y": 0
       }
     },
@@ -846,14 +774,6 @@
       "position": {
         "x": 4,
         "y": 18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 4,
-        "y": 20
       }
     },
     {
@@ -3744,14 +3664,6 @@
     },
     {
       "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 28,
-        "y": 1
-      }
-    },
-    {
-      "extra_state": {},
       "template_name": "blue_brick_with_sign",
       "position": {
         "x": 28,
@@ -3776,14 +3688,6 @@
       "position": {
         "x": 28,
         "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 31,
-        "y": 1
       }
     },
     {
@@ -3816,14 +3720,6 @@
     },
     {
       "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 34,
-        "y": 1
-      }
-    },
-    {
-      "extra_state": {},
       "template_name": "blue_brick_with_sign",
       "position": {
         "x": 34,
@@ -3848,14 +3744,6 @@
       "position": {
         "x": 34,
         "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 37,
-        "y": 1
       }
     },
     {
@@ -3932,14 +3820,6 @@
       "position": {
         "x": 31,
         "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 32,
-        "y": 6
       }
     },
     {
@@ -4423,14 +4303,6 @@
       }
     },
     {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 17,
-        "y": 5
-      }
-    },
-    {
       "extra_state": {
         "command": "show reset_tutorial"
       },
@@ -4476,16 +4348,6 @@
       "position": {
         "x": 44,
         "y": 5
-      }
-    },
-    {
-      "extra_state": {
-        "command": "zone South Hall"
-      },
-      "template_name": "",
-      "position": {
-        "x": 1,
-        "y": 24
       }
     },
     {
@@ -7810,6 +7672,372 @@
       "position": {
         "x": 16,
         "y": -8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick_with_sign",
+      "position": {
+        "x": 9,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {
+        "command": "show hint"
+      },
+      "template_name": "",
+      "position": {
+        "x": 9,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "item_glove",
+      "position": {
+        "x": 9,
+        "y": 25
+      }
+    },
+    {
+      "extra_state": {
+        "command": "show last_sigil"
+      },
+      "template_name": "",
+      "position": {
+        "x": 19,
+        "y": 27
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "sign",
+      "position": {
+        "x": 19,
+        "y": 27
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "sigil",
+      "position": {
+        "x": 20,
+        "y": 28
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "campfire",
+      "position": {
+        "x": 17,
+        "y": 29
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "campfire",
+      "position": {
+        "x": 22,
+        "y": 31
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "campfire",
+      "position": {
+        "x": 24,
+        "y": 29
+      }
+    },
+    {
+      "extra_state": {
+        "command": "zone South Hall"
+      },
+      "template_name": "",
+      "position": {
+        "x": 4,
+        "y": 20
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 4,
+        "y": 20
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 9,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 17,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 32,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 27,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 29,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 30,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 31,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 32,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 33,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 34,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 35,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 36,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 37,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 38,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 28,
+        "y": -1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 28,
+        "y": 0
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 28,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 31,
+        "y": 0
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 31,
+        "y": -1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 34,
+        "y": 0
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 34,
+        "y": -1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 37,
+        "y": 0
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 37,
+        "y": -1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 36,
+        "y": -1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 17,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 9,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 27,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 29,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 30,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 32,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 33,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 35,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 36,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 38,
+        "y": 2
       }
     }
   ]

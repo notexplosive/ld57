@@ -60,6 +60,8 @@ public class DialogueBox
         IsClosed = false;
         _pageIndex = 0;
         _currentMessage = message;
+        
+        tween.SkipToEnd();
 
         tween.Add(_rectangle.CallbackSetTo(SmallCenterRectangle()));
 
@@ -108,7 +110,7 @@ public class DialogueBox
         return startingRectangle;
     }
 
-    private void DoCloseAnimation(SequenceTween tween)
+    public void DoCloseAnimation(SequenceTween tween)
     {
         tween
             .Add(SetTextVisibilityCallback(false))

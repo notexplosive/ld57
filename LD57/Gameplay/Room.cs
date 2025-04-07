@@ -9,19 +9,19 @@ public class Room
 {
     private readonly List<Entity> _entitiesInRoom = new();
     private readonly World _world;
-    private readonly GridPositionCorners _corners;
+    public GridPositionCorners Corners { get; }
 
     public Room(World parentWorld, GridPosition a, GridPosition b)
     {
         _world = parentWorld;
-        _corners = new GridPositionCorners(a, b);
+        Corners = new GridPositionCorners(a, b);
 
         RecalculateLiveEntities();
     }
 
-    public GridPosition TopLeft => _corners.TopLeft;
-    public GridPosition BottomRight => _corners.BottomRight;
-    public Rectangle Rectangle => _corners.Rectangle(true);
+    public GridPosition TopLeft => Corners.TopLeft;
+    public GridPosition BottomRight => Corners.BottomRight;
+    public Rectangle Rectangle => Corners.Rectangle(true);
 
     public IEnumerable<Entity> AllEntitiesIncludingInactive()
     {
@@ -63,7 +63,7 @@ public class Room
     public void RecalculateLiveEntities()
     {
         _entitiesInRoom.Clear();
-        _entitiesInRoom.AddRange(_world.CalculateEntitiesInRoom(_corners, false));
+        _entitiesInRoom.AddRange(_world.CalculateEntitiesInRoom(Corners, false));
     }
 
     public bool Contains(GridPosition position)

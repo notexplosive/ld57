@@ -1,2 +1,13 @@
-{c:blue_text}Bring back Magical Treasures to 
-this room and they will be preserved.
+{c:blue_text}You are blessed with the power
+of the Catacombs of Time.
+#
+{c:blue_text}You may reset to the moment you 
+first entered The Sanctuary.
+#
+{c:blue_text}The Sanctuary itself will be
+preserved across time.
+#
+{c:blue_text}You can use this to bring items
+back with you.
+#
+{c:green_text}Press R to Reset all Puzzles.
