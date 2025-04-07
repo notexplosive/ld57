@@ -1,4 +1,5 @@
-﻿using ExTween;
+﻿using ExplogineCore.Data;
+using ExTween;
 using LD57.Rendering;
 
 namespace LD57.Gameplay;
@@ -54,6 +55,7 @@ public class AnchorItemBehavior : ItemBehavior
         {
             // fade both at once, snappy!
             beforeWarp
+                .Add(ResourceAlias.CallbackPlaySound("pure-glass", new SoundEffectSettings()))
                 .Add(
                     new MultiplexTween()
                         .Add(user.TweenableGlyph.Scale.TweenTo(smallScale, snappyDuration, Ease.Linear))
@@ -81,6 +83,7 @@ public class AnchorItemBehavior : ItemBehavior
         {
             // Drop anchor for the first time
             afterWarp
+                .Add(ResourceAlias.CallbackPlaySound("pure-glass", new SoundEffectSettings{Pitch = 0.5f}))
                 .Add(new MultiplexTween()
                     .Add(new SequenceTween()
                         .Add(user.TweenableGlyph.StartOverridingColor)

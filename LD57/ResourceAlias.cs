@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExplogineCore.Data;
 using ExplogineMonoGame.AssetManagement;
 using ExplogineMonoGame.Data;
+using ExTween;
 using FontStashSharp;
 using LD57.CartridgeManagement;
 using LD57.Gameplay;
@@ -69,5 +71,21 @@ public static class ResourceAlias
     public static bool HasEntityTemplate(string name)
     {
         return LdResourceAssets.Instance.EntityTemplates.ContainsKey(name);
+    }
+
+    public static void PlaySound(string name, SoundEffectSettings soundEffectSettings)
+    {
+        var path = $"Sound/{name}";
+        LdResourceAssets.Instance.PlaySound(path, soundEffectSettings);
+    }
+
+    public static ITween CallbackPlaySound(string name, SoundEffectSettings soundEffectSettings)
+    {
+        var path = $"Sound/{name}";
+
+        return new CallbackTween(() =>
+        {
+            LdResourceAssets.Instance.PlaySound(path, soundEffectSettings);
+        });
     }
 }

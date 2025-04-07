@@ -12,5 +12,8 @@
         "FillsWater",
         "PulledByHook",
         "Swappable"
-    ]
+    ],
+    "state": {
+        "move_sound": "clank"
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ExplogineCore.Data;
 using ExplogineMonoGame.Data;
 using LD57.Rendering;
 using LD57.Rules;
@@ -164,6 +165,12 @@ public class RuleComputer
     private void OnMoveCompleted(MoveData moveData, MoveStatus status)
     {
         moveData.Mover.MostRecentMoveDirection = moveData.Direction;
+
+        var moveSound= moveData.Mover.State.GetString("move_sound");
+        if (moveSound != null)
+        {
+            ResourceAlias.PlaySound(moveSound, new SoundEffectSettings());
+        }
 
         _world.OnMoveCompleted(moveData, status);
 

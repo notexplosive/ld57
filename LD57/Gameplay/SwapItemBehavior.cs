@@ -1,4 +1,5 @@
-﻿using ExplogineMonoGame.Data;
+﻿using ExplogineCore.Data;
+using ExplogineMonoGame.Data;
 using ExTween;
 using ExTweenMonoGame;
 using LD57.Rendering;
@@ -86,6 +87,7 @@ public class SwapItemBehavior : ItemBehavior
         var swapColor = ResourceAlias.Color("swap");
         
         var tween = new SequenceTween()
+                .Add(ResourceAlias.CallbackPlaySound("eeeee", new SoundEffectSettings{Pitch = 0.5f}))
                 .Add(new CallbackTween(()=>_showProjectile = true))
                 .Add(projectilePosition.CallbackSetTo(user.Position.ToPoint().ToVector2()))
                 .Add(projectilePosition.TweenTo(
@@ -98,6 +100,7 @@ public class SwapItemBehavior : ItemBehavior
         if (targetEntity != null && CanSwapWith(targetEntity))
         {
             tween
+                .Add(ResourceAlias.CallbackPlaySound("eeeee", new SoundEffectSettings{Pitch = 1f}))
                 .Add(new MultiplexTween()
                     .Add(user.TweenableGlyph.Scale.TweenTo(smallScale, falloffDuration, Ease.Linear))
                     .Add(targetEntity.TweenableGlyph.Scale.TweenTo(smallScale, falloffDuration, Ease.Linear))
@@ -126,6 +129,7 @@ public class SwapItemBehavior : ItemBehavior
         else
         {
             tween
+                .Add(ResourceAlias.CallbackPlaySound("eeeee", new SoundEffectSettings{Pitch = -0.5f}))
                 .Add(ExecuteCallbackTween(world, user));
         }
         

@@ -171,17 +171,20 @@ public class PromptBox
                 {
                     MoveSelection(inputDirection.ToPoint().Y);
                     AnimateCursorMove(inputDirection);
+                    ResourceAlias.PlaySound("key", new SoundEffectSettings { Pitch = 1f });
                 }
 
                 if (_currentPrompt.Orientation == Orientation.Horizontal)
                 {
                     MoveSelection(inputDirection.ToPoint().X);
                     AnimateCursorMove(inputDirection);
+                    ResourceAlias.PlaySound("key", new SoundEffectSettings { Pitch = 1f });
                 }
             }
 
             if (actionButton == ActionButton.Primary)
             {
+                ResourceAlias.PlaySound("key", new SoundEffectSettings { });
                 _currentPrompt.Options[_selectedIndex].Choose();
                 HasMadeAChoice = true;
             }

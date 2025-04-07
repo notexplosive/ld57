@@ -1,4 +1,5 @@
 ﻿using System;
+using ExplogineCore.Data;
 using ExplogineMonoGame.Data;
 using ExTween;
 using ExTweenMonoGame;
@@ -111,6 +112,7 @@ public class HookItemBehavior : ItemBehavior
         if (targetEntity == null)
         {
             return new SequenceTween()
+                    .Add(ResourceAlias.CallbackPlaySound("book", new SoundEffectSettings(){Pitch = 0.6f}))
                     .Add(new CallbackTween(() => _showChain = true))
                     .Add(_chainHeadPosition.CallbackSetTo(user.Position.ToPoint().ToVector2()))
                     .Add(_chainHeadPosition.TweenTo((user.Position + new GridPosition(user.MostRecentMoveDirection) * distance).ToPoint().ToVector2(), extendDuration,
@@ -123,6 +125,7 @@ public class HookItemBehavior : ItemBehavior
 
 
         var tween = new SequenceTween()
+                .Add(ResourceAlias.CallbackPlaySound("book", new SoundEffectSettings(){Pitch = 0.6f}))
                 .Add(new CallbackTween(() => _showChain = true))
                 .Add(_chainHeadPosition.CallbackSetTo(user.Position.ToPoint().ToVector2()))
                 .Add(_chainHeadPosition.TweenTo(targetEntity.Position.ToPoint().ToVector2(), extendDuration,
@@ -132,11 +135,13 @@ public class HookItemBehavior : ItemBehavior
         if (ShouldPullTarget(targetEntity))
         {
             tween
+                .Add(ResourceAlias.CallbackPlaySound("book", new()))
                 .Add(new WaitSecondsTween(0.1f))
                 .Add(new CallbackTween(()=>_currentPulledThing = targetEntity))
                 .Add(new WaitSecondsTween(0.2f))
                 .Add(ExecuteCallbackTween(world, user))
                 .Add(_chainHeadPosition.TweenTo(user.Position.ToPoint().ToVector2(), extendDuration, Ease.QuadFastSlow))
+                .Add(ResourceAlias.CallbackPlaySound("book", new SoundEffectSettings(){Pitch = 0.5f}))
                 .Add(new CallbackTween(()=>_currentPulledThing = null))
                 ;
         }
@@ -146,10 +151,12 @@ public class HookItemBehavior : ItemBehavior
 
             tween
                 .Add(new WaitSecondsTween(0.1f))
+                .Add(ResourceAlias.CallbackPlaySound("book", new SoundEffectSettings() {Pitch = -0.5f}))
                 .Add(ExecuteCallbackTween(world, user))
                 .Add(new CallbackTween(() => { _showDummyUser = true; }))
                 .Add(_dummyPosition.CallbackSetTo(user.Position.ToPoint().ToVector2()))
                 .Add(_dummyPosition.TweenTo(destination.ToPoint().ToVector2(), extendDuration, Ease.QuadFastSlow))
+                .Add(ResourceAlias.CallbackPlaySound("book", new SoundEffectSettings() {Pitch = -1f}))
                 .Add(new CallbackTween(() => _showDummyUser = false))
                 ;
         }
@@ -158,6 +165,7 @@ public class HookItemBehavior : ItemBehavior
             // reject target
             tween
                 .Add(ExecuteCallbackTween(world, user))
+                .Add(ResourceAlias.CallbackPlaySound("blem", new SoundEffectSettings() {Pitch = -1f}))
                 .Add(_chainHeadPosition.TweenTo(user.Position.ToPoint().ToVector2(), extendDuration, Ease.QuadFastSlow))
                 ;
         }

@@ -6,10 +6,15 @@ made within those 72 hours.
    Art
     Code
      Words
-      Sounds
        Puzzles
 
 by NotExplosive
+#
+Some sounds borrowed from
+freesound.org
+
+See attributions.txt for
+more info.
 #
 Thanks for playing!
 Hope you liked it!

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using ExplogineCore.Data;
 using ExplogineMonoGame.Data;
 using ExTween;
 using LD57.Rendering;
@@ -116,6 +117,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
         var duration = 0.15f;
 
         return new SequenceTween()
+                .Add(ResourceAlias.CallbackPlaySound("brush", new SoundEffectSettings()))
                 .Add(new CallbackTween(() => { entityToCapture.TweenableGlyph.SkipCurrentAnimation(); }))
                 .Add(new MultiplexTween()
                     .Add(entityToCapture.TweenableGlyph.Scale.TweenTo(0.15f, duration, Ease.QuadSlowFast))
@@ -144,6 +146,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
         var duration = 0.15f;
 
         return new SequenceTween()
+                .Add(ResourceAlias.CallbackPlaySound("brush", new SoundEffectSettings{Pitch = -1f}))
                 .Add(new CallbackTween(() => { entityToDrop.TweenableGlyph.SkipCurrentAnimation(); }))
                 .Add(ExecuteCallbackTween(world, user))
                 .Add(new CallbackTween(() => { DefaultHudTile = _savedDefaultHudTile; }))
@@ -172,6 +175,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
         var error = ResourceAlias.Color("blood");
         var normal = ResourceAlias.Color("white");
         return new SequenceTween()
+            .Add(ResourceAlias.CallbackPlaySound("clank", new SoundEffectSettings{Pitch =1f}))
             .Add(new CallbackTween(() => _showRejection = true))
             .Add(new MultiplexTween()
                 .Add(new SequenceTween()

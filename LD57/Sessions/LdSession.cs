@@ -71,13 +71,14 @@ public class LdSession : Session
         DisplayPrompt(mainMenuPrompt);
     }
 
-    private void CrossFadeTransition(ITransition transition, Action action)
+    private void CrossFadeTransition(ITransition transition, Action action, string sound,  SoundEffectSettings settings)
     {
         _currentTransition = transition;
 
         _transitionTween.SkipToEnd();
-
+        
         _transitionTween
+            .Add(ResourceAlias.CallbackPlaySound(sound, settings))
             .Add(_currentTransition.FadeIn())
             .Add(new CallbackTween(action))
             .Add(new WaitUntilTween(() => _modalQueue.Count == 0))
@@ -103,6 +104,7 @@ public class LdSession : Session
 
     private void OnMoveCompleted(MoveData data, MoveStatus status)
     {
+        ResourceAlias.PlaySound("concrete_footstep", new SoundEffectSettings{Pitch = Client.Random.Dirty.NextFloat(-0.25f, 0.25f), Volume = 0.15f});
         var entitiesAtDestination = _world.GetActiveEntitiesAt(data.Destination).ToList();
         var glyph = data.Mover.TweenableGlyph;
         if (!status.WasSuccessful)
@@ -336,7 +338,7 @@ public class LdSession : Session
 
     private void AnimateReset()
     {
-        CrossFadeTransition(new LsdTransition(_screen), () => { ExecuteReset(); });
+        CrossFadeTransition(new LsdTransition(_screen), () => { ExecuteReset(); }, "ohm_over_10", new SoundEffectSettings());
     }
 
     private void ExecuteReset()
@@ -651,7 +653,7 @@ public class LdSession : Session
         var worldTemplate = JsonConvert.DeserializeObject<WorldTemplate>(worldData);
         if (worldTemplate != null)
         {
-            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () => { LoadWorld(worldTemplate); });
+            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () => { LoadWorld(worldTemplate); }, "speaker_crackle1", new SoundEffectSettings{Pitch = -1});
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExTween;
@@ -85,6 +86,7 @@ public static class Animations
         return (glyph, tween) =>
         {
             tween
+                .Add(ResourceAlias.CallbackPlaySound("splash_small_inspectorj", new SoundEffectSettings()))
                 .Add(new MultiplexTween()
                     .Add(new SequenceTween()
                         .Add(glyph.Scale.TweenTo(0.75f, 0.15f, Ease.Linear))
