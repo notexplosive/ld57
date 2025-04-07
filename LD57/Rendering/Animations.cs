@@ -80,7 +80,7 @@ public static class Animations
         };
     }
 
-    public static AnimationFactory FloatOnWater(Color backgroundColor)
+    public static AnimationFactory FloatOnWater()
     {
         return (glyph, tween) =>
         {
@@ -89,18 +89,48 @@ public static class Animations
                     .Add(new SequenceTween()
                         .Add(glyph.Scale.TweenTo(0.75f, 0.15f, Ease.Linear))
                     )
-                    .Add(new SequenceTween()
-                        .Add(glyph.BackgroundColor.TweenTo(Color.White, 0.02f, Ease.Linear))
-                        .Add(glyph.BackgroundColor.TweenTo(backgroundColor, 0.15f, Ease.Linear))
-                    )
-                
                 )
+                .Add(
+                    new MultiplexTween()
+                        .Add(new SequenceTween()
+                            .Add(glyph.Scale.TweenTo(0.9f, 1f, Ease.Linear))
+                            .Add(glyph.Scale.TweenTo(0.8f, 1f, Ease.Linear))
+                            .SetLooping(true)
+                        )                  
+                    )
+                ;
+        };
+    }
+
+    public static AnimationFactory WaterSway(float randomFloat)
+    {
+        return (glyph, tween) =>
+        {
+            var swaySegmentDuration = 0.73f;
+            var growDuration = 1.44f;
+            var bigScale = 1.15f;
+            var midScale = 1.1f;
+            var lowScale = 1f;
+
+            var swayAmount = 2;
+            
+            tween
                 .Add(new SequenceTween()
-                    .Add(glyph.Scale.TweenTo(0.9f, 0.5f, Ease.Linear))
-                    .Add(glyph.Scale.TweenTo(0.75f, 0.5f, Ease.Linear))
+                    .Add(glyph.PixelOffset.TweenTo(new Vector2(-swayAmount, 0), swaySegmentDuration, Ease.SineFastSlow))
+                    .Add(glyph.PixelOffset.TweenTo(new Vector2(0, 0), swaySegmentDuration, Ease.SineSlowFast))
+                    .Add(glyph.PixelOffset.TweenTo(new Vector2(swayAmount, 0), swaySegmentDuration, Ease.SineFastSlow))
+                    .Add(glyph.PixelOffset.TweenTo(new Vector2(0, 0), swaySegmentDuration, Ease.SineSlowFast))
                     .SetLooping(true)
                 )
+                .Add(new SequenceTween()
+                    .Add(glyph.Scale.TweenTo(bigScale, growDuration, Ease.SineFastSlow))
+                    .Add(glyph.Scale.TweenTo(midScale, growDuration, Ease.SineSlowFast))
+                    .Add(glyph.Scale.TweenTo(lowScale, growDuration, Ease.SineFastSlow))
+                    .Add(glyph.Scale.TweenTo(midScale, growDuration, Ease.SineSlowFast))
+                )
                 ;
+
+            tween.Update(randomFloat);
         };
     }
 }

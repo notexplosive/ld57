@@ -42,6 +42,7 @@ public class TitleCard
         var screenRectangle = new Rectangle(Point.Zero, _screenSize.ToPoint());
 
         var center = screenRectangle.Center;
+        center -= new Point(0, 5);
 
         var textWidth = content.Length + 1;
         var height = 2;
@@ -49,9 +50,8 @@ public class TitleCard
             new Point(1, height));
         var desiredRectangle = new Rectangle(center - new Point(textWidth / 2, 1),
             new Point(textWidth, height));
-        var expandDuration = 0.5f;
+        var expandDuration = 0.25f;
         var contractDuration = 0.5f;
-        var topRectangle = startingRectangle.Moved(new Point(0,-center.Y - 4));
         tween
             .Add(SetVisibilityCallback(true))
             .Add(_rectangle.CallbackSetTo(startingRectangle))
@@ -61,15 +61,14 @@ public class TitleCard
             .Add(
                 new MultiplexTween()
                     .Add(_rectangle.TweenTo(desiredRectangle, expandDuration, Ease.QuadFastSlow))
-                    .Add(_characterIndex.TweenTo(content.Length, expandDuration, Ease.QuadFastSlow))
             )
+            .Add(_characterIndex.CallbackSetTo(content.Length))
             .Add(new WaitSecondsTween(1.5f))
+            .Add(_characterIndex.CallbackSetTo(0))
             .Add(new MultiplexTween()
-                .Add(_characterIndex.TweenTo(0, contractDuration, Ease.QuadFastSlow))
                 .Add(_rectangle.TweenTo(startingRectangle, contractDuration, Ease.QuadFastSlow))
             )
             .Add(new WaitSecondsTween(0.1f))
-            .Add(_rectangle.TweenTo(topRectangle, 0.5f, Ease.Linear))
             .Add(SetVisibilityCallback(false))
             ;
     }

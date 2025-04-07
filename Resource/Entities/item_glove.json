@@ -4,7 +4,8 @@
     "frame": 17,
     "color": "treasure",
     "tags": [
-        "Item"
+        "Item",
+        "Capturable"
     ],
     "state": {
         "item_behavior": "glove",

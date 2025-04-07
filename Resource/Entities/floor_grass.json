@@ -3,5 +3,7 @@
     "sprite_sheet": "Floors",
     "frame": 1,
     "color": "grass",
-    "tags": []
+    "tags": [
+        "Capturable"
+    ]
 }

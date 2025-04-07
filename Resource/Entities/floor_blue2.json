@@ -3,5 +3,8 @@
     "sprite_sheet": "Floors",
     "frame": 7,
     "color": "blue_brick",
-    "tags": []
+    "tags": [
+        // not actually floor!
+        "Wall"
+    ]
 }

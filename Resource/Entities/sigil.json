@@ -3,5 +3,8 @@
     "sprite_sheet": "Entities",
     "frame": 25,
     "color": "blood",
-    "tags": []
+    "tags": [
+        "Capturable",
+        "ClearOnDrop"
+    ]
 }

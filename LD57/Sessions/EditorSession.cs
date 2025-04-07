@@ -593,7 +593,7 @@ public class EditorSession : Session
     {
         _screen.Clear(TileState.Empty);
 
-        var world = new World(Constants.GameRoomSize, WorldTemplate);
+        var world = new World(Constants.GameRoomSize, WorldTemplate, true);
 
         var player = WorldTemplate.GetPlayerEntity();
         if (player != null)

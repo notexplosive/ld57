@@ -24,10 +24,45 @@ public class RuleComputer
             mover.Position,
             mover.Position + new GridPosition(direction.ToPoint()),
             direction);
-        
+        var status = EvaluateMove(data);
+        status.ExecuteActions();
+
+        if (status.WasSuccessful)
+        {
+            mover.Position = data.Destination;
+        }
+
+        OnMoveCompleted(data, status);
+        return status;
+    }
+
+    public void WarpToPosition(Entity mover, GridPosition newPosition)
+    {
+        var data = new MoveData(
+            mover,
+            mover.Position,
+            newPosition,
+            mover.MostRecentMoveDirection);
+        var status = EvaluateMove(data);
+        status.ExecuteActions();
+
+        if (status.WasSuccessful)
+        {
+            // warp doesn't care if it succeeds or not
+        }
+
+        mover.Position = newPosition;
+
+        OnMoveCompleted(data, status);
+    }
+
+    private MoveStatus EvaluateMove(MoveData data)
+    {
         var status = new MoveStatus();
+        var mover = data.Mover;
 
         var targets = _world.GetActiveEntitiesAt(data.Destination).ToList();
+        targets.Remove(data.Mover);
 
         foreach (var target in targets)
         {
@@ -67,25 +102,25 @@ public class RuleComputer
                     [Is("FillsWater"), Is("FloatsInWater")],
                     [Is("Water")]))
             {
-                _world.Destroy(target);
-                mover.SetActive(false);
+                status.AddAction(() =>
+                {
+                    _world.Destroy(target);
+                    mover.SetActive(false);
+                });
             }
 
             if (tags.Check(
                     [Is("FillsWater"), IsNot("FloatsInWater")],
                     [Is("Water")]))
             {
-                _world.Destroy(target);
-                _world.Destroy(mover);
+                status.AddAction(() =>
+                {
+                    _world.Destroy(target);
+                    _world.Destroy(mover);
+                });
             }
         }
 
-        if (status.WasSuccessful)
-        {
-            mover.Position += new GridPosition(direction.ToPoint());
-        }
-
-        OnMoveCompleted(data, status);
         return status;
     }
 
@@ -114,20 +149,10 @@ public class RuleComputer
         return new SingleTagOwnership(tag, false);
     }
 
-    public void WarpToPosition(Entity entity, GridPosition newPosition)
-    {
-        var status = new MoveStatus();
-
-        var oldPosition = entity.Position;
-        entity.Position = newPosition;
-
-        OnMoveCompleted(new MoveData(entity, oldPosition, newPosition, Direction.None), status);
-    }
-
     private void OnMoveCompleted(MoveData moveData, MoveStatus status)
     {
         moveData.Mover.MostRecentMoveDirection = moveData.Direction;
-        
+
         _world.OnMoveCompleted(moveData, status);
 
         foreach (var rule in _rules)
@@ -139,6 +164,18 @@ public class RuleComputer
     public void AddRule(IGameRule rule)
     {
         _rules.Add(rule);
+    }
+
+    public bool CouldMoveTo(Entity mover, GridPosition position)
+    {
+        var data = new MoveData(
+            mover,
+            mover.Position,
+            position,
+            Direction.None);
+
+        var status = EvaluateMove(data);
+        return status.WasSuccessful;
     }
 }
 

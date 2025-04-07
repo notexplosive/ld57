@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExplogineCore.Data;
+using ExplogineMonoGame;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
 
@@ -12,9 +13,11 @@ public class World
     private readonly List<Entity> _entities = new();
     private readonly HashSet<Entity> _entitiesToRemove = new();
     private readonly GridPosition _roomSize;
+    public bool IsEditMode { get; }
 
-    public World(GridPosition roomSize, WorldTemplate worldTemplate)
+    public World(GridPosition roomSize, WorldTemplate worldTemplate, bool isEditMode = false)
     {
+        IsEditMode = isEditMode;
         _roomSize = roomSize;
         Rules = new RuleComputer(this);
         CurrentRoom = GetRoomAt(new GridPosition(0, 0));
@@ -57,6 +60,14 @@ public class World
         var entity = new Entity(position, entityTemplate);
         entity.State.AddFromDictionary(extraState);
 
+        if (entity.HasTag("Water"))
+        {
+            if (!IsEditMode)
+            {
+                entity.TweenableGlyph.SetAnimation(Animations.WaterSway(Client.Random.Dirty.NextFloat() * 100));
+            }
+        }
+
         if (entity.HasTag("Item"))
         {
             var humanReadableName = Inventory.GetItemName(entity);
@@ -67,8 +78,10 @@ public class World
                 {
                     // RequestShowDynamicMessage?.Invoke($"You find \n{humanReadableName}");
                     RequestShowPrompt?.Invoke(new Prompt($"Equip {humanReadableName}?", Orientation.Vertical, [
-                        new PromptOption("Equip to [Z]", () => { RequestEquipItem?.Invoke(ActionButton.Primary, entity); }),
-                        new PromptOption("Equip to [X]", () => { RequestEquipItem?.Invoke(ActionButton.Secondary, entity); }),
+                        new PromptOption("Equip to [Z]",
+                            () => { RequestEquipItem?.Invoke(ActionButton.Primary, entity); }),
+                        new PromptOption("Equip to [X]",
+                            () => { RequestEquipItem?.Invoke(ActionButton.Secondary, entity); }),
                         new PromptOption("Leave it", () => { })
                     ]));
                 }
@@ -260,7 +273,7 @@ public class World
     private void AddEntityFast(Entity entity)
     {
         _entities.Add(entity);
-        entity.Start();
+        entity.Start(this);
     }
 
     public Entity AddEntity(Entity entity)
@@ -342,7 +355,8 @@ public class World
             if (entity.Position == moveData.Destination)
             {
                 // even if the move failed, we still count that as a "touch"
-                entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnTouch, new(moveData.Mover));
+                entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnTouch,
+                    new BehaviorTriggerWithEntity.Payload(moveData.Mover));
             }
 
             entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnEntityMoved,
@@ -363,6 +377,7 @@ public class World
         {
             _entities.Remove(entity);
         }
+
         _entitiesToRemove.Clear();
 
         CurrentRoom.RecalculateLiveEntities();

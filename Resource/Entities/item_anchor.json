@@ -4,7 +4,8 @@
     "frame": 14,
     "color": "treasure",
     "tags": [
-        "Item"
+        "Item",
+        "Capturable"
     ],
     "state": {
         "item_behavior": "xyzzy",

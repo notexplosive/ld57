@@ -23,6 +23,14 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     public override void OnCartridgeStarted()
     {
+        var targetMode = Client.Args.GetValue<string>("mode");
+        var levelName = Client.Args.GetValue<string>("level");
+        
+        if (!string.IsNullOrEmpty(levelName))
+        {
+            HotReloadCache.EditorOpenFileName ??= levelName;
+        }
+        
         _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
@@ -32,7 +40,6 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             _session = _gameSession;
         };
 
-        var targetMode = Client.Args.GetValue<string>("mode");
         if (targetMode == "play")
         {
             LoadGame();
@@ -53,7 +60,6 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     private void LoadGame()
     {
-        // _gameSession.LoadCurrentLevel();
         _session = _gameSession;
     }
 
@@ -96,6 +102,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
     public override void AddCommandLineParameters(CommandLineParametersWriter parameters)
     {
         parameters.RegisterParameter<string>("mode");
+        parameters.RegisterParameter<string>("level");
     }
 
     public override void OnHotReload()

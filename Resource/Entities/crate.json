@@ -5,6 +5,7 @@
     "color": "crate",
     "tags": [
         "Pushable",
+        "Capturable",
         "Solid",
         "PressesButtons",
         "FloatsInWater",

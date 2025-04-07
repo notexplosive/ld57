@@ -237,9 +237,9 @@ public class GameplayTests
     [Fact]
     public void Door_NoButtonsMeansClosed()
     {
-        var door = 
+        var door =
             CreateEntity(new GridPosition(5, 5), ["Door", "Signal"], [new StateKeyValue("channel", "0")]);
-        
+
         AssertPassable(door.Position, ["Solid"], false);
     }
 
@@ -247,34 +247,34 @@ public class GameplayTests
     public void Door_Overlapping()
     {
         var position = new GridPosition(5, 5);
-        var open = 
+        var open =
             CreateEntity(position, ["Door", "Signal"], [new StateKeyValue("channel", "0")]);
         var closed =
             CreateEntity(position, ["Door", "Signal"], [new StateKeyValue("channel", "1")]);
-        var presser = 
+        var presser =
             CreateEntity(new GridPosition(0, 0), ["PressesButtons"]);
-        var buttonInFirstRoom = 
+        var buttonInFirstRoom =
             CreateEntity(new GridPosition(0, 0), ["Button", "Signal"], [new StateKeyValue("channel", "0")]);
-        
+
         AssertPassable(position, ["Solid"], false);
     }
 
     [Fact]
     public void Door_OpenThenChangeRoom()
     {
-        var presser = 
+        var presser =
             CreateEntity(new GridPosition(0, 0), ["PressesButtons"]);
-        
-        var buttonInFirstRoom = 
+
+        var buttonInFirstRoom =
             CreateEntity(new GridPosition(1, 0), ["Button", "Signal"], [new StateKeyValue("channel", "0")]);
-        var buttonInOtherRoom = 
+        var buttonInOtherRoom =
             CreateEntity(new GridPosition(-4, -4), ["Button", "Signal"], [new StateKeyValue("channel", "0")]);
-        
-        var room1ToOpen = 
+
+        var room1ToOpen =
             CreateEntity(new GridPosition(5, 5), ["Door", "Signal"], [new StateKeyValue("channel", "0")]);
         var room1Closed =
             CreateEntity(new GridPosition(6, 6), ["Door", "Signal"], [new StateKeyValue("channel", "1")]);
-        var room2ToOpen = 
+        var room2ToOpen =
             CreateEntity(new GridPosition(-5, -5), ["Door", "Signal"], [new StateKeyValue("channel", "0")]);
         var room2Closed =
             CreateEntity(new GridPosition(-2, -2), ["Door", "Signal"], [new StateKeyValue("channel", "1")]);
@@ -297,13 +297,13 @@ public class GameplayTests
         AssertPassable(room2Closed.Position, ["Solid"], false);
 
         WarpEntity(presser, buttonInOtherRoom.Position);
-        
+
         // close door in current room, open door in other room (even though it's not the current room)
         AssertPassable(room1ToOpen.Position, ["Solid"], false);
         AssertPassable(room1Closed.Position, ["Solid"], false);
         AssertPassable(room2ToOpen.Position, ["Solid"], true);
         AssertPassable(room2Closed.Position, ["Solid"], false);
-        
+
         _world.SetCurrentRoom(otherRoom);
 
         // nothing changed, we're agnostic to the current room
@@ -319,12 +319,12 @@ public class GameplayTests
         var solidPresser = CreateEntity(new GridPosition(0, 0), ["PressesButtons", "Solid"]);
         var button = CreateEntity(new GridPosition(1, 0), ["Button", "Signal"]);
         var door = CreateEntity(new GridPosition(2, 0), ["Door", "Signal"]);
-        
+
         MoveEntity(solidPresser, Direction.Right); // press button
         MoveEntity(solidPresser, Direction.Right); // walk onto door (is now closed)
         MoveEntity(solidPresser, Direction.Right); // walk off of door
         MoveEntity(solidPresser, Direction.Left); // walk back towards door, can't go anymore
-        
+
         Assert.Equivalent(new GridPosition(3, 0), solidPresser.Position);
     }
 
@@ -332,26 +332,127 @@ public class GameplayTests
     public void Item_Xyzzy()
     {
         var spawnPosition = new GridPosition(5, 5);
-        var firstUsePosition = new GridPosition(2,3);
-        var secondUsePosition = new GridPosition(7,2);
-        var thirdUsePosition = new GridPosition(-300,-200);
+        var firstUsePosition = new GridPosition(2, 3);
+        var secondUsePosition = new GridPosition(7, 2);
+        var thirdUsePosition = new GridPosition(-300, -200);
         var user = CreateEntity(spawnPosition, [], []);
         var anchor = new AnchorItemBehavior();
 
         WarpEntity(user, firstUsePosition);
         UseItem(user, anchor);
         Assert.Equivalent(firstUsePosition, user.Position);
-        
+
         WarpEntity(user, secondUsePosition);
         UseItem(user, anchor);
         Assert.Equivalent(firstUsePosition, user.Position);
-        
+
         WarpEntity(user, thirdUsePosition);
         UseItem(user, anchor);
         Assert.Equivalent(secondUsePosition, user.Position);
-        
+
         UseItem(user, anchor);
         Assert.Equivalent(thirdUsePosition, user.Position);
+    }
+
+    [Fact]
+    public void Item_Capture_Basic()
+    {
+        var item = new CaptureGloveItemBehavior();
+        var user = CreateEntity(new GridPosition(0, 0), [], []);
+        user.MostRecentMoveDirection = Direction.Right;
+        var thingToGrab = CreateEntity(new GridPosition(1, 0), ["Capturable"], []);
+
+        UseItem(user, item);
+
+        Assert.True(_world.IsDestroyed(thingToGrab));
+
+        WarpEntity(user, new GridPosition(5, 5));
+        MoveEntity(user, Direction.Left);
+
+        UseItem(user, item);
+
+        Assert.False(_world.IsDestroyed(thingToGrab));
+        Assert.Equivalent(new GridPosition(3, 5), thingToGrab.Position);
+
+        MoveEntity(user, Direction.Right);
+        UseItem(user, item);
+
+        // grabbed thing is unaffected
+        Assert.False(_world.IsDestroyed(thingToGrab));
+        Assert.Equivalent(new GridPosition(3, 5), thingToGrab.Position);
+    }
+
+    [Fact]
+    public void Item_Capture_DropIntoWater()
+    {
+        var item = new CaptureGloveItemBehavior();
+        var user = CreateEntity(new GridPosition(0, 0), [], []);
+        user.MostRecentMoveDirection = Direction.Right;
+        var thingToGrab = CreateEntity(new GridPosition(1, 0), ["Capturable", "FillsWater"], []);
+        var water = CreateEntity(new GridPosition(5, 5), ["Water"], []);
+
+        UseItem(user, item);
+
+        WarpEntity(user, new GridPosition(4, 5));
+        MoveEntity(user, Direction.Right);
+
+        UseItem(user, item);
+        
+        _world.UpdateEntityList();
+
+        Assert.True(_world.IsDestroyed(water));
+        AssertPassable(new GridPosition(5, 5), ["Solid"], true);
+    }
+    
+    [Fact]
+    public void Item_Capture_CantCapture()
+    {
+        // todo: attempt to drop into a solid
+
+        var item = new CaptureGloveItemBehavior();
+        var user = CreateEntity(new GridPosition(0, 0), [], []);
+        user.MostRecentMoveDirection = Direction.Right;
+        var thingToGrab = CreateEntity(new GridPosition(1, 0), [], []);
+
+        UseItem(user, item);
+
+        Assert.False(_world.IsDestroyed(thingToGrab));
+    }
+
+    [Fact]
+    public void Item_Capture_CantDrop()
+    {
+        var item = new CaptureGloveItemBehavior();
+        var user = CreateEntity(new GridPosition(0, 0), [], []);
+        user.MostRecentMoveDirection = Direction.Right;
+        var thingToGrab = CreateEntity(new GridPosition(1, 0), ["Capturable", "Solid"], []);
+        var blocker = CreateEntity(new GridPosition(5, 5), ["Solid"], []);
+
+        UseItem(user, item);
+        
+        WarpEntity(user, blocker.Position - new GridPosition(1,0));
+        
+        UseItem(user, item);
+
+        Assert.True(_world.IsDestroyed(thingToGrab));
+    }
+    
+    [Fact]
+    public void Item_Capture_OverridesTile()
+    {
+        var item = new CaptureGloveItemBehavior();
+        var user = CreateEntity(new GridPosition(0, 0), [], []);
+        user.MostRecentMoveDirection = Direction.Right;
+        var thingToGrab = CreateEntity(new GridPosition(1, 0), ["Capturable", "ReplaceOnDrop"], []);
+        var blocker = CreateEntity(new GridPosition(5, 5), ["Solid"], []);
+
+        UseItem(user, item);
+        
+        WarpEntity(user, blocker.Position - new GridPosition(1,0));
+        
+        UseItem(user, item);
+
+        AssertPassable(blocker.Position, ["Solid"], true);
     }
 
     private void UseItem(Entity user, ItemBehavior item)

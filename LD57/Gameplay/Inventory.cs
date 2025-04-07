@@ -81,7 +81,7 @@ public class Inventory
 
         if (behaviorName == "glove")
         {
-            return new GloveItemBehavior();
+            return new CaptureGloveItemBehavior();
         }
 
         return new EmptyItemBehavior();

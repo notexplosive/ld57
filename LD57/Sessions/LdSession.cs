@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExTween;
@@ -8,26 +7,25 @@ using LD57.Gameplay;
 using LD57.Rendering;
 using LD57.Rules;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 
 namespace LD57.Sessions;
 
 public class LdSession : Session
 {
+    private readonly SequenceTween _cutsceneTween = new();
+    private readonly DialogueBox _dialogueBox;
+    private readonly Inventory _inventory = new();
+    private readonly PromptBox _promptBox;
     private readonly AsciiScreen _screen;
-    private Direction _pendingDirection = Direction.None;
+    private readonly TitleCard _titleCard;
+    private string? _currentZoneName;
     private float _inputTimer;
+    private readonly Queue<ModalEvent> _modalQueue = new();
+    private ActionButton _pendingActionButton;
+    private Direction _pendingDirection = Direction.None;
     private Entity _player = new(new GridPosition(), new Invisible());
     private World _world = new(Constants.GameRoomSize, new WorldTemplate());
-    private string? _currentZoneName;
-    private readonly SequenceTween _cutsceneTween = new();
-    private readonly TitleCard _titleCard;
-    private readonly DialogueBox _dialogueBox;
-    private readonly PromptBox _promptBox;
-    private ActionButton _pendingActionButton;
-    private Queue<ModalEvent> _modalQueue = new();
-    private readonly Inventory _inventory = new();
 
     public LdSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -58,7 +56,7 @@ public class LdSession : Session
         var waterAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Water").ToList();
         if (waterAtDestination.Count > 0 && data.Mover.HasTag("FloatsInWater"))
         {
-            glyph.SetAnimation(Animations.FloatOnWater(waterAtDestination.First().TileState!.Value.ForegroundColor));
+            glyph.SetAnimation(Animations.FloatOnWater());
         }
 
         var buttonsAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Button").ToList();
@@ -79,19 +77,9 @@ public class LdSession : Session
         {
             return;
         }
-        
-        var frameInput = new FrameInput();
-        
-        if (_dialogueBox.IsVisible)
-        {
-            if (FrameInput.AnyActionTapped(input))
-            {
-                _dialogueBox.NextPage(_cutsceneTween);
-            }
 
-            return;
-        }
-        
+        var frameInput = new FrameInput();
+
         if (FrameInput.PrimaryActionTapped(input))
         {
             _pendingActionButton = ActionButton.Primary;
@@ -101,7 +89,7 @@ public class LdSession : Session
         {
             _pendingActionButton = ActionButton.Secondary;
         }
-        
+
         if (frameInput.AnyDirectionTapped(input))
         {
             _inputTimer = 0;
@@ -121,9 +109,9 @@ public class LdSession : Session
 
         _screen.Clear(TileState.Empty);
         _world.PaintToScreen(_screen, dt);
-        _inventory.PaintWorldOverlay(ActionButton.Primary,_screen, _world, _player, dt);
-        _inventory.PaintWorldOverlay(ActionButton.Secondary,_screen, _world, _player, dt);
-        
+        _inventory.PaintWorldOverlay(ActionButton.Primary, _screen, _world, _player, dt);
+        _inventory.PaintWorldOverlay(ActionButton.Secondary, _screen, _world, _player, dt);
+
         _cutsceneTween.Update(dt);
         if (_cutsceneTween.IsDone())
         {
@@ -133,7 +121,7 @@ public class LdSession : Session
         _titleCard.PaintToScreen(_screen);
 
         // UI
-        _inventory.DrawHud(_screen, _currentZoneName ,dt);
+        _inventory.DrawHud(_screen, _currentZoneName, dt);
 
         // Dialogue
         if (_dialogueBox.IsVisible)
@@ -151,7 +139,7 @@ public class LdSession : Session
                 _promptBox.DoCloseAnimation(_cutsceneTween);
             }
         }
-        
+
         // Cleanup
         _world.UpdateEntityList();
     }
@@ -189,9 +177,20 @@ public class LdSession : Session
 
         if (_inputTimer <= 0f)
         {
-            if (_promptBox.IsVisible)
+            if (_dialogueBox.IsVisible)
+            {
+                if (_pendingActionButton != ActionButton.None)
+                {
+                    _dialogueBox.NextPage(_cutsceneTween);
+                }
+            }
+            else if (_promptBox.IsVisible)
             {
                 _promptBox.DoInput(_pendingDirection, _pendingActionButton);
+            }
+            else if (_modalQueue.Count > 0)
+            {
+                // if we have modals pending, don't react to any input
             }
             else
             {
@@ -255,7 +254,7 @@ public class LdSession : Session
         _world.RequestShowDynamicMessage += DisplayDynamicDialogueMessage;
         _world.RequestShowPrompt += DisplayPrompt;
         _world.RequestEquipItem += EquipItem;
-        
+
         foreach (var entity in _world.CurrentRoom.AllActiveEntities())
         {
             entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
@@ -270,7 +269,7 @@ public class LdSession : Session
             var existingItem = _inventory.RemoveFromSlot(slot, _world, _player);
             DisplayDynamicDialogueMessage($"You dropped\n{Inventory.GetItemName(existingItem)}");
         }
-        
+
         _inventory.Equip(slot, item);
     }
 
@@ -283,7 +282,7 @@ public class LdSession : Session
     {
         _modalQueue.Enqueue(new DialogueModalEvent(new MessageContent(rawMessage), _dialogueBox, _cutsceneTween));
     }
-    
+
     private void DisplayScriptedDialogueMessage(string messageName)
     {
         _modalQueue.Enqueue(new DialogueModalEvent(ResourceAlias.Messages(messageName), _dialogueBox, _cutsceneTween));

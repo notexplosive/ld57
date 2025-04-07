@@ -3,5 +3,8 @@
     "sprite_sheet": "Floors",
     "frame": 6,
     "color": "grass",
-    "tags": []
+    "tags": [
+        "Capturable",
+        "BecomeWaterOnSteppedOff"
+    ]
 }

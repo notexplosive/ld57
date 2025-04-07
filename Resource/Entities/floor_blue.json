@@ -3,5 +3,7 @@
     "sprite_sheet": "Floors",
     "frame": 0,
     "color": "blue_brick",
-    "tags": []
+    "tags": [
+        "Solid"
+    ]
 }

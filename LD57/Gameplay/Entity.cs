@@ -53,11 +53,15 @@ public class Entity
     public GridPosition Position { get; set; }
     public Direction MostRecentMoveDirection { get; set; } = Direction.None;
 
-    public void Start()
+    public void Start(World world)
     {
-        SelfTriggerBehavior(BehaviorTrigger.OnWorldStart);
+        if (!_hasStarted)
+        {
+            SelfTriggerBehavior(BehaviorTrigger.OnWorldStart);
+        }
+
         SelfTriggerBehavior(BehaviorTrigger.OnSignalChange);
-        SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnEntityMoved, new BehaviorTriggerWithEntity.Payload(this));
+        world.Rules.WarpToPosition(this, Position);
         _hasStarted = true;
     }
 

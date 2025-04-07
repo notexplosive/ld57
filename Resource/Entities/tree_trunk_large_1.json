@@ -4,6 +4,7 @@
     "frame": 13,
     "color": "wood",
     "tags": [
-        "Solid"
+        "Solid",
+        "Capturable"
     ]
 }

@@ -3,11 +3,5 @@
     "sprite_sheet": "Entities",
     "frame": 14,
     "color": "phantom",
-    "tags": [
-        "Item"
-    ],
-    "state": {
-        "item_behavior": "xyzzy",
-        "item_name": "Xyzzy Anchor"
-    }
+    "tags": []
 }
