@@ -6,7 +6,8 @@
     "tags": [
         "Item",
         "Capturable",
-        "PulledByHook"
+        "PulledByHook",
+        "Swappable"
     ],
     "state": {
         "item_behavior": "hook",

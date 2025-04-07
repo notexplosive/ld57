@@ -6,6 +6,7 @@
     "tags": [
         "Solid",
         "Capturable",
-        "HookAnchor"
+        "HookAnchor",
+        "Swappable"
     ]
 }
