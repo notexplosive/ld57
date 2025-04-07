@@ -5,6 +5,7 @@
     "color": "grass",
     "tags": [
         "Capturable",
-        "BecomeWaterOnSteppedOff"
+        "BecomeWaterOnSteppedOff",
+        "Swappable"
     ]
 }

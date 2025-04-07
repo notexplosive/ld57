@@ -51,7 +51,7 @@ public class TitleCard
         var desiredRectangle = new Rectangle(center - new Point(textWidth / 2, 1),
             new Point(textWidth, height));
         var expandDuration = 0.25f;
-        var contractDuration = 0.5f;
+        var contractDuration = 0.25f;
         tween
             .Add(SetVisibilityCallback(true))
             .Add(_rectangle.CallbackSetTo(startingRectangle))
@@ -66,7 +66,7 @@ public class TitleCard
             .Add(new WaitSecondsTween(1.5f))
             .Add(_characterIndex.CallbackSetTo(0))
             .Add(new MultiplexTween()
-                .Add(_rectangle.TweenTo(startingRectangle, contractDuration, Ease.QuadFastSlow))
+                .Add(_rectangle.TweenTo(startingRectangle, contractDuration, Ease.QuadSlowFast))
             )
             .Add(new WaitSecondsTween(0.1f))
             .Add(SetVisibilityCallback(false))

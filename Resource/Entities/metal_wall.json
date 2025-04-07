@@ -1,8 +1,8 @@
 {
-    "sort_priority": 5,
+    "sort_priority": 10,
     "sprite_sheet": "Walls",
-    "frame": 11,
-    "color": "blue_brick",
+    "frame": 18,
+    "color": "metal",
     "tags": [
         "Solid"
     ]

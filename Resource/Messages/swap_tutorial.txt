@@ -1,0 +1,6 @@
+
+{i:Entities:16} Swap Gizmo {i:Entities:16}
+
+#
+Shoot a projectile at an object
+to swap places with it.

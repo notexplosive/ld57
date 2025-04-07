@@ -1,0 +1,6 @@
+
+{i:Entities:17} Capture Gauntlet {i:Entities:17}
+
+#
+Captures an object into a
+pocket dimension.

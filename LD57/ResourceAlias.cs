@@ -18,6 +18,15 @@ public static class ResourceAlias
     public static SpriteSheet PopupFrame => LdResourceAssets.Instance.Sheets["PopupFrameParts"];
     public static SpriteSheet Tools => LdResourceAssets.Instance.Sheets["Tools"];
 
+    public static IEnumerable<SpriteSheet> Sheets()
+    {
+        yield return Walls;
+        yield return Floors;
+        yield return Entities;
+        yield return PopupFrame;
+        yield return Tools;
+    }
+
     public static Color Color(string colorString)
     {
         if (LdResourceAssets.Instance.HasNamedColor(colorString))

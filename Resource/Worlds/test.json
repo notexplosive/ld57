@@ -27,14 +27,6 @@
       }
     },
     {
-      "extra_state": {},
-      "template_name": "player",
-      "position": {
-        "x": 8,
-        "y": 5
-      }
-    },
-    {
       "extra_state": {
         "channel": "1"
       },
@@ -2634,6 +2626,64 @@
       "position": {
         "x": 24,
         "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "player",
+      "position": {
+        "x": 15,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 11,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 10,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 12,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 10,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "command": "load test"
+      },
+      "template_name": "",
+      "position": {
+        "x": 11,
+        "y": 15
       }
     }
   ]

@@ -75,8 +75,8 @@ public class Prompt
     {
         if (Orientation == Orientation.Vertical)
         {
-            // each option plus title plus spacer
-            return Options.Count + 2;
+            // each option plus title plus spacer, plus 1 more for good luck
+            return Options.Count + 3;
         }
 
         // title + options row + spacer

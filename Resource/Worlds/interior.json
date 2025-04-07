@@ -1325,30 +1325,6 @@
       "template_name": "blue_brick",
       "position": {
         "x": 25,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 25,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 25,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 25,
         "y": 6
       }
     },
@@ -1710,14 +1686,6 @@
       "position": {
         "x": 27,
         "y": -1
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 27,
-        "y": 0
       }
     },
     {
@@ -1933,22 +1901,6 @@
       "template_name": "blue_brick",
       "position": {
         "x": 28,
-        "y": 0
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 28,
-        "y": 1
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 28,
         "y": 2
       }
     },
@@ -2092,14 +2044,6 @@
       "extra_state": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 25,
-        "y": 2
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 20,
         "y": 5
       }
@@ -2162,90 +2106,10 @@
     },
     {
       "extra_state": {},
-      "template_name": "lily_pad",
-      "position": {
-        "x": 18,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "lily_pad",
-      "position": {
-        "x": 19,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 19,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 20,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 21,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 21,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
       "template_name": "water",
       "position": {
         "x": 22,
         "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 18,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 17,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 17,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 16,
-        "y": 7
       }
     },
     {
@@ -3494,30 +3358,6 @@
       "position": {
         "x": 14,
         "y": -20
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 14,
-        "y": -19
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 14,
-        "y": -18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 14,
-        "y": -17
       }
     },
     {
@@ -5828,14 +5668,6 @@
       "extra_state": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 17,
-        "y": -27
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 16,
         "y": -25
       }
@@ -5965,14 +5797,6 @@
       "template_name": "blue_brick",
       "position": {
         "x": 21,
-        "y": -30
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 20,
         "y": -30
       }
     },
@@ -6182,22 +6006,6 @@
       "extra_state": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 16,
-        "y": -19
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 15,
-        "y": -19
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 21,
         "y": -21
       }
@@ -6238,30 +6046,6 @@
       "extra_state": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 20,
-        "y": -23
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 20,
-        "y": -24
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 21,
-        "y": -29
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 15,
         "y": -31
       }
@@ -6287,14 +6071,6 @@
       "template_name": "blue_brick",
       "position": {
         "x": 22,
-        "y": -24
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 21,
         "y": -24
       }
     },
@@ -8746,22 +8522,6 @@
     },
     {
       "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 16,
-        "y": -13
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 15,
-        "y": -13
-      }
-    },
-    {
-      "extra_state": {},
       "template_name": "crate",
       "position": {
         "x": 20,
@@ -8858,6 +8618,246 @@
       "position": {
         "x": 23,
         "y": -24
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 21,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 21,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 22,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 23,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 24,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 24,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 25,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 25,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 24,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 25,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 25,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 28,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 29,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 15,
+        "y": -18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 15,
+        "y": -16
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 18,
+        "y": -18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 19,
+        "y": -18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 16,
+        "y": -19
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 15,
+        "y": -19
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 14,
+        "y": -19
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 14,
+        "y": -18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 14,
+        "y": -17
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 15,
+        "y": -13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 16,
+        "y": -13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 20,
+        "y": -23
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 20,
+        "y": -24
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 17,
+        "y": -27
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_rubble",
+      "position": {
+        "x": 21,
+        "y": -29
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 21,
+        "y": -24
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 20,
+        "y": -30
       }
     }
   ]

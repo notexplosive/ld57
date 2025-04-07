@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ExplogineCore;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
@@ -163,8 +164,18 @@ public class EditorSession : Session
         {
             if (HoveredTileWorldPosition.HasValue)
             {
-                var metadataEntity = WorldTemplate.GetMetadataAt(HoveredTileWorldPosition.Value);
-                if (metadataEntity != null && metadataEntity.ExtraState.TryGetValue("command", out var status))
+                var metadataEntities = WorldTemplate.GetMetadataAt(HoveredTileWorldPosition.Value).ToList();
+
+                if (metadataEntities.Count > 1)
+                {
+                    for (int i = 1; i < metadataEntities.Count; i++)
+                    {
+                        Client.Debug.Log("Removed duplicate metadata");
+                        WorldTemplate.RemoveExactEntity(metadataEntities[i]);
+                    }
+                }
+                
+                if (metadataEntities.Count > 0 &&  metadataEntities.First().ExtraState.TryGetValue("command", out var status))
                 {
                     return "command: " + status;
                 }
@@ -306,7 +317,7 @@ public class EditorSession : Session
 
                     if (_isDraggingSecondary)
                     {
-                        WorldTemplate.RemoveEntitiesAt(HoveredTileWorldPosition.Value);
+                        WorldTemplate.RemoveEntitiesAtExceptMetadata(HoveredTileWorldPosition.Value);
                     }
                 }
 
@@ -393,7 +404,7 @@ public class EditorSession : Session
                     DoFillAt(position);
                     break;
                 case EditorTool.Write:
-                    var foundMetaEntity = WorldTemplate.GetMetadataAt(position);
+                    var foundMetaEntity = WorldTemplate.GetMetadataAt(position).FirstOrDefault();
                     var defaultText = "";
                     if (foundMetaEntity != null)
                     {
@@ -644,11 +655,45 @@ public class EditorSession : Session
         if (HoveredTileWorldPosition.HasValue)
         {
             var hoveredRoom = world.GetRoomAt(HoveredTileWorldPosition.Value);
-            foreach (var position in Constants.TraceRectangle(hoveredRoom.TopLeft - _cameraPosition,
-                         hoveredRoom.BottomRight - _cameraPosition))
+            var hoveredRoomTopLeft = hoveredRoom.TopLeft - _cameraPosition;
+            var hoveredRoomBottomRight = hoveredRoom.BottomRight - _cameraPosition;
+            
+            var width = (hoveredRoomBottomRight.X - hoveredRoomTopLeft.X);
+            var height = (hoveredRoomBottomRight.Y - hoveredRoomTopLeft.Y);
+            
+            foreach (var position in Constants.TraceRectangle(hoveredRoomTopLeft, hoveredRoomBottomRight))
             {
+                var color = Color.LightBlue;
                 var previousTileState = _screen.GetTile(position);
-                _screen.PutTile(position, previousTileState with {BackgroundColor = Color.LightBlue});
+                var increment = 2;
+
+                var normalX = (position.X - hoveredRoomTopLeft.X);
+                var normalY = (position.Y - hoveredRoomTopLeft.Y);
+                
+                if (normalX % increment == 0 && (normalY == 0 || normalY == height))
+                {
+                    color = Color.Lime;
+                }
+
+                if (normalY % increment == 0 && (normalX == 0 || normalX == width))
+                {
+                    color = Color.ForestGreen;
+                }
+                
+                var midX = hoveredRoomTopLeft.X + width / 2;
+                if (position.X == midX || position.X == midX + 1)
+                {
+                    color = Color.Orange;
+                }
+
+                var midY = hoveredRoomTopLeft.Y + height / 2;
+
+                if (position.Y == midY || position.Y == midY + 1)
+                {
+                    color = Color.Orange;
+                }
+
+                _screen.PutTile(position, previousTileState with {BackgroundColor = color});
             }
         }
 

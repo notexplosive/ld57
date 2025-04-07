@@ -1,0 +1,5 @@
+{c:blue_text}Bring back Magical Treasures to 
+this room and they will be preserved.
+#
+{c:blue_text}Items will be kept at 
+their respective podiums

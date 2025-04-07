@@ -34,6 +34,11 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
+        _gameSession.RequestLevelEditor += () =>
+        {
+            _session = _editorSession;
+        };
+        
         _editorSession.RequestPlay += (position) =>
         {
             _gameSession.LoadWorld(_editorSession.WorldTemplate, position);

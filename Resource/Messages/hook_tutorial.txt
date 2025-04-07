@@ -1,0 +1,7 @@
+
+{i:Entities:5} Hook Device {i:Entities:5}
+
+#
+Grapple things at a distance
+either pulls them to you
+or pulls you to them.

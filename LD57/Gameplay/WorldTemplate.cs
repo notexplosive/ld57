@@ -20,7 +20,7 @@ public class WorldTemplate
             for (var y = rectangle.Y; y < rectangle.Y + rectangle.Height + 1; y++)
             {
                 var position = new GridPosition(x, y);
-                RemoveEntitiesAt(position);
+                RemoveEntitiesAtExceptMetadata(position);
                 PlaceEntity(position, template);
             }
         }
@@ -44,6 +44,11 @@ public class WorldTemplate
     {
         PlacedEntities.RemoveAll(a => a.Position == position);
     }
+    
+    public void RemoveEntitiesAtExceptMetadata(GridPosition position)
+    {
+        PlacedEntities.RemoveAll(a => a.TemplateName != string.Empty && a.Position == position);
+    }
 
     public IEnumerable<PlacedEntity> AllEntitiesAt(GridPosition position)
     {
@@ -63,14 +68,14 @@ public class WorldTemplate
             for (var y = rectangle.Y; y < rectangle.Y + rectangle.Height + 1; y++)
             {
                 var position = new GridPosition(x, y);
-                RemoveEntitiesAt(position);
+                RemoveEntitiesAtExceptMetadata(position);
             }
         }
     }
 
     public void SetTile(GridPosition position, EntityTemplate template)
     {
-        RemoveEntitiesAt(position);
+        RemoveEntitiesAtExceptMetadata(position);
         PlaceEntity(position, template);
     }
 
@@ -92,17 +97,15 @@ public class WorldTemplate
         return PlacedEntities.FirstOrDefault(a => a.TemplateName == "player");
     }
 
-    public PlacedEntity? GetMetadataAt(GridPosition position)
+    public IEnumerable<PlacedEntity> GetMetadataAt(GridPosition position)
     {
         foreach (var entity in AllEntitiesAt(position))
         {
             if (entity.ExtraState.Count > 0)
             {
-                return entity;
+                yield return entity;
             }
         }
-
-        return null;
     }
 
     public void RemoveExactEntity(PlacedEntity entity)

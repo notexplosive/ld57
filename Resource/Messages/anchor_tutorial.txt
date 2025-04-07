@@ -1,0 +1,6 @@
+
+{i:Entities:14} Xyzzy Anchor {i:Entities:14}
+
+#
+Teleport from the last place
+you teleported from.

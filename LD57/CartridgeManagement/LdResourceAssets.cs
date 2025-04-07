@@ -44,6 +44,20 @@ public class LdResourceAssets
     public Dictionary<string, FontSystem> FontSystems { get; } = new();
     public Dictionary<string, EntityTemplate> EntityTemplates { get; } = new();
     public Dictionary<string, MessageContent> Messages { get; } = new();
+    public IEnumerable<Color> AllKnownColors
+    {
+        get
+        {
+            foreach (var color in _namedColors.Values)
+            {
+                if (color.HasValue)
+                {
+                    yield return color.Value;
+                }
+            }
+        }
+    }
+
     public static Color MissingColor { get; } = new(255, 0, 255);
 
     public IEnumerable<ILoadEvent> LoadEvents(Painter painter)

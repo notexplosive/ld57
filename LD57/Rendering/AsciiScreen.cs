@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ExplogineCore.Data;
 using ExplogineMonoGame;
@@ -231,5 +232,10 @@ public class AsciiScreen
     public TileState GetTile(GridPosition hoveredTilePosition)
     {
         return _tiles.GetValueOrDefault(hoveredTilePosition);
+    }
+
+    public IEnumerable<GridPosition> AllTiles()
+    {
+        return Constants.AllPositionsInRectangle(new GridPosition(0, 0), RoomSize);
     }
 }
