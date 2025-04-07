@@ -54,8 +54,7 @@ public class TitleCard
         var topRectangle = startingRectangle.Moved(new Point(0,-center.Y - 4));
         tween
             .Add(SetVisibilityCallback(true))
-            .Add(_rectangle.CallbackSetTo(topRectangle))
-            .Add(_rectangle.TweenTo(startingRectangle, 0.5f, Ease.Linear))
+            .Add(_rectangle.CallbackSetTo(startingRectangle))
             .Add(_characterIndex.CallbackSetTo(0))
             .Add(new CallbackTween(() => { _currentMessage = content; }))
             .Add(new WaitSecondsTween(0.1f))

@@ -110,6 +110,16 @@ public class AsciiScreen
         }
     }
 
+    public void PutSequence(GridPosition position, IEnumerable<TileState> tiles)
+    {
+        var index = 0;
+        foreach(var tile in tiles)
+        {
+            PutTile(position + new GridPosition(index, 0), tile);
+            index++;
+        }
+    }
+
     public void PutString(GridPosition position, string content, Color? color = null)
     {
         for (var index = 0; index < content.Length; index++)

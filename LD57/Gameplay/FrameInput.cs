@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LD57.Gameplay;
 
-public class InputState
+public class FrameInput
 {
     public bool AnyDirectionTapped(ConsumableInput input)
     {
@@ -47,8 +47,18 @@ public class InputState
         return direction;
     }
 
-    public bool AnyActionTapped(ConsumableInput input)
+    public static bool AnyActionTapped(ConsumableInput input)
     {
-        return input.Keyboard.GetButton(Keys.X).WasPressed || input.Keyboard.GetButton(Keys.Z).WasPressed;
+        return PrimaryActionTapped(input) || SecondaryActionTapped(input);
+    }
+
+    public static bool PrimaryActionTapped(ConsumableInput input)
+    {
+        return input.Keyboard.GetButton(Keys.Z).WasPressed || input.Keyboard.GetButton(Keys.Space).WasPressed || input.Keyboard.GetButton(Keys.Enter).WasPressed;
+    }
+
+    public static bool SecondaryActionTapped(ConsumableInput input)
+    {
+        return input.Keyboard.GetButton(Keys.X).WasPressed || input.Keyboard.GetButton(Keys.LeftShift).WasPressed || input.Keyboard.GetButton(Keys.RightShift).WasPressed;
     }
 }

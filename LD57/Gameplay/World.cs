@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ExplogineCore.Data;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
-using Microsoft.Xna.Framework;
 
 namespace LD57.Gameplay;
 
@@ -44,18 +44,38 @@ public class World
     public RuleComputer Rules { get; }
 
     public GridPosition CameraPosition { get; set; }
-    
+
     private Entity CreateEntityFromPlacement(PlacedEntity placedEntity)
     {
         var entityTemplate = ResourceAlias.EntityTemplate(placedEntity.TemplateName);
         return CreateEntityFromTemplate(entityTemplate, placedEntity.Position, placedEntity.ExtraState);
     }
 
-    public Entity CreateEntityFromTemplate(EntityTemplate entityTemplate, GridPosition position, Dictionary<string,string> extraState)
+    public Entity CreateEntityFromTemplate(EntityTemplate entityTemplate, GridPosition position,
+        Dictionary<string, string> extraState)
     {
         var entity = new Entity(position, entityTemplate);
         entity.State.AddFromDictionary(extraState);
-        
+
+        if (entity.HasTag("Item"))
+        {
+            var itemBehavior = entity.State.GetString("item_behavior");
+            var humanReadableName = entity.State.GetString("item_name");
+
+            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+            {
+                if (payload.Entity != null && payload.Entity.HasTag("Player"))
+                {
+                    RequestShowDynamicMessage?.Invoke($"You find \n{humanReadableName}");
+                    RequestShowPrompt?.Invoke(new Prompt($"Equip {humanReadableName}?", Orientation.Vertical, [
+                        new PromptOption("Equip to [Z]", () => { }),
+                        new PromptOption("Equip to [X]", () => { }),
+                        new PromptOption("Leave it", () => { })
+                    ]));
+                }
+            });
+        }
+
         if (entity.HasTag("Signal"))
         {
             var channel = entity.State.GetIntOrFallback("channel", 0);
@@ -72,13 +92,13 @@ public class World
 
             if (entity.HasTag("Button"))
             {
-                entity.AddBehavior(BehaviorTrigger.OnEntityMoved, (entityPayload) =>
+                entity.AddBehavior(BehaviorTrigger.OnEntityMoved, entityPayload =>
                 {
                     if (entityPayload.Entity == null)
                     {
                         return;
                     }
-                    
+
                     var isPressed = EntitiesInSameRoom(entity.Position)
                         .Where(a => a.Position == entity.Position).Any(a => a.HasTag("PressesButtons"));
 
@@ -104,7 +124,7 @@ public class World
                         .Where(a => a.HasTag("Button") && a.State.GetIntOrFallback("channel", 0) == channel).ToList();
 
                     var shouldOpen = false;
-                    
+
                     if (buttons.Count > 0)
                     {
                         shouldOpen = buttons.All(a => a.State.GetBool("is_pressed") == true);
@@ -124,21 +144,24 @@ public class World
                     {
                         var isOpen = entity.State.GetBool("is_open") == true;
                         var sheet = entity.State.GetString("sheet") ?? "Entities";
-                        
+
                         if (entity.Appearance?.TileState.HasValue == true)
                         {
                             var openFrame = entity.State.GetInt("open_frame") ?? 0;
                             var closedFrame = entity.State.GetInt("closed_frame") ?? 0;
 
                             var frame = isOpen ? openFrame : closedFrame;
-                            
-                            entity.Appearance.TileState = entity.Appearance.TileState.Value with {Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]};
+
+                            entity.Appearance.TileState = entity.Appearance.TileState.Value with
+                            {
+                                Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]
+                            };
                         }
                     }
                 });
             }
         }
-        
+
         return entity;
     }
 
@@ -161,7 +184,9 @@ public class World
 
     public event Action<string>? RequestLoad;
     public event Action<string>? RequestZoneNameChange;
-    public event Action<string>? RequestShow;
+    public event Action<string>? RequestShowScriptedMessage;
+    public event Action<string>? RequestShowDynamicMessage;
+    public event Action<Prompt>? RequestShowPrompt;
 
     private Entity CreateTriggerEntityFromTemplate(PlacedEntity placedEntity)
     {
@@ -177,7 +202,13 @@ public class World
 
             if (commandName == "load")
             {
-                entity.AddBehavior(BehaviorTrigger.OnTouch, () => { RequestLoad?.Invoke(arg); });
+                entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+                {
+                    if (payload.Entity?.HasTag("Player") == true)
+                    {
+                        RequestLoad?.Invoke(arg);
+                    }
+                });
             }
 
             if (commandName == "zone")
@@ -187,7 +218,13 @@ public class World
 
             if (commandName == "show")
             {
-                entity.AddBehavior(BehaviorTrigger.OnTouch, () => { RequestShow?.Invoke(arg); });
+                entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+                {
+                    if (payload.Entity?.HasTag("Player") == true)
+                    {
+                        RequestShowScriptedMessage?.Invoke(arg);
+                    }
+                });
             }
         }
 
@@ -233,6 +270,7 @@ public class World
         {
             CurrentRoom.RecalculateLiveEntities();
         }
+
         return entity;
     }
 
@@ -290,9 +328,9 @@ public class World
         var entities = new List<Entity>();
         var roomCornersAtSource = GetRoomCornersAt(moveData.Source);
         var roomCornersAtDestination = GetRoomCornersAt(moveData.Destination);
-        
+
         entities.AddRange(CalculateEntitiesInRoom(roomCornersAtSource, true));
-        
+
         if (roomCornersAtSource != roomCornersAtDestination && status.WasSuccessful)
         {
             // If the move spanned multiple rooms AND the move was successful, update both rooms
@@ -304,12 +342,13 @@ public class World
             if (entity.Position == moveData.Destination)
             {
                 // even if the move failed, we still count that as a "touch"
-                entity.SelfTriggerBehavior(BehaviorTrigger.OnTouch);
+                entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnTouch, new(moveData.Mover));
             }
-            
-            entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnEntityMoved, new BehaviorTriggerWithEntity.Payload(moveData.Mover));
+
+            entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnEntityMoved,
+                new BehaviorTriggerWithEntity.Payload(moveData.Mover));
         }
-        
+
         MoveCompleted?.Invoke(moveData, status);
     }
 

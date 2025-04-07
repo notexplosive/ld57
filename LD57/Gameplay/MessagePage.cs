@@ -15,6 +15,15 @@ public class MessagePage
 
     public void AddLine(string rawText)
     {
+        var line = BuildLine(rawText, ref _currentColor);
+
+        Width = Math.Max(Width, line.Count);
+        
+        _lines.Add(line);
+    }
+
+    public static List<TileState> BuildLine(string rawText, ref Color currentColor)
+    {
         var line = new List<TileState>();
 
         var isReadingCommand = false;
@@ -30,7 +39,7 @@ public class MessagePage
                 {
                     if (splitCommand.Length == 2)
                     {
-                        _currentColor = ResourceAlias.Color(splitCommand[1]);
+                        currentColor = ResourceAlias.Color(splitCommand[1]);
                     }
                 }
 
@@ -38,7 +47,7 @@ public class MessagePage
                 {
                     if (splitCommand.Length == 3)
                     {
-                        line.Add(TileState.Sprite(LdResourceAssets.Instance.Sheets[splitCommand[1]], int.Parse(splitCommand[2]), _currentColor));
+                        line.Add(TileState.Sprite(LdResourceAssets.Instance.Sheets[splitCommand[1]], int.Parse(splitCommand[2]), currentColor));
                     }
                 }
             }
@@ -54,15 +63,13 @@ public class MessagePage
                 continue;
             }
 
-            line.Add(TileState.StringCharacter(rawText.Substring(index, 1), _currentColor));
+            line.Add(TileState.StringCharacter(rawText.Substring(index, 1), currentColor));
         }
 
-        Width = Math.Max(Width, line.Count);
-        
-        _lines.Add(line);
+        return line;
     }
 
-    private string GetCommandSubstring(string rawText, int start)
+    private static string GetCommandSubstring(string rawText, int start)
     {
         var end = rawText.Length;
         for (var i = start; i < rawText.Length; i++)

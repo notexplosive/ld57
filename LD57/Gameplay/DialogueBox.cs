@@ -1,4 +1,5 @@
-﻿using ExplogineMonoGame.Data;
+﻿using System.Text;
+using ExplogineMonoGame.Data;
 using ExTween;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
@@ -19,6 +20,7 @@ public class DialogueBox
     }
 
     public bool IsVisible { get; private set; }
+    public bool IsClosed { get; private set; }
 
     private CallbackTween SetVisibilityCallback(bool isVisible)
     {
@@ -49,14 +51,13 @@ public class DialogueBox
                         page.PaintToScreen(topLeft + new GridPosition(1, 1), screen);
                     }
                 }
-                
-                screen.PutString(new GridPosition(_rectangle.Value.BottomRight.Rounded().ToPoint()) - new GridPosition(5,0), "[Z/X]", Color.White);
             }
         }
     }
 
     public void ShowMessage(SequenceTween tween, MessageContent message)
     {
+        IsClosed = false;
         _pageIndex = 0;
         _currentMessage = message;
 
@@ -113,6 +114,7 @@ public class DialogueBox
             .Add(SetTextVisibilityCallback(false))
             .Add(_rectangle.TweenTo(SmallCenterRectangle(), 0.25f, Ease.Linear))
             .Add(SetVisibilityCallback(false))
+            .Add(new CallbackTween(()=> IsClosed = true))
             ;
     }
 

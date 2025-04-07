@@ -23,11 +23,11 @@ public static class Animations
 
             glyph.RootTween
                 .Add(new MultiplexTween()
-                    .Add(new SequenceTween()
-                        .Add(glyph.Rotation.TweenTo(MathF.PI / 32 * horizontalSign, 0.1f, Ease.Linear))
-                        .Add(glyph.Rotation.TweenTo(-MathF.PI / 32 * horizontalSign, 0.1f, Ease.Linear))
-                        .Add(glyph.Rotation.TweenTo(0, 0.1f, Ease.Linear))
-                    )
+                    // .Add(new SequenceTween()
+                    //     .Add(glyph.Rotation.TweenTo(MathF.PI / 32 * horizontalSign, 0.1f, Ease.Linear))
+                    //     .Add(glyph.Rotation.TweenTo(-MathF.PI / 32 * horizontalSign, 0.1f, Ease.Linear))
+                    //     .Add(glyph.Rotation.TweenTo(0, 0.1f, Ease.Linear))
+                    // )
                     .Add(new SequenceTween()
                         .Add(glyph.PixelOffset.CallbackSetTo(inputDirection.ToGridCellSizedVector(-pixels)))
                         .Add(glyph.PixelOffset.TweenTo(inputDirection.ToGridCellSizedVector(pixels), 0.1f, Ease.Linear))

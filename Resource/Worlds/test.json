@@ -494,8 +494,8 @@
       "extra_state": {},
       "template_name": "item_hookshot",
       "position": {
-        "x": -13,
-        "y": 5
+        "x": 20,
+        "y": 14
       }
     }
   ]

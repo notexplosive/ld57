@@ -7,6 +7,7 @@
         "Item"
     ],
     "state": {
-        "item_behavior": "hookshot"
+        "item_behavior": "hookshot",
+        "item_name": "The Grappling Hook"
     }
 }
