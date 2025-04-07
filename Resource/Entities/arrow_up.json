@@ -1,0 +1,12 @@
+{
+    "sort_priority": 6,
+    "sprite_sheet": "Entities",
+    "frame": 21,
+    "color": "arrow",
+    "tags": [
+        "ForceMove"
+    ],
+    "state": {
+        "direction": "Up"
+    }
+}

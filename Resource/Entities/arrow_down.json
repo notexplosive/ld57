@@ -1,0 +1,12 @@
+{
+    "sort_priority": 6,
+    "sprite_sheet": "Entities",
+    "frame": 23,
+    "color": "arrow",
+    "tags": [
+        "ForceMove"
+    ],
+    "state": {
+        "direction": "Down"
+    }
+}wdwsa

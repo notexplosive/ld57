@@ -129,13 +129,20 @@ public class EditorSession : Session
         var tilePalette = new UiElement(new GridPosition(3, 0), new GridPosition(screen.Width - 1, 3));
         var selectedTemplate = new EditorSelector();
         var i = 0;
+        int j = 0;
         foreach (var template in LdResourceAssets.Instance.EntityTemplates.Values)
         {
             var tempEntity = new Entity(new GridPosition(0, 0), template);
-            tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1),
+            tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1 + j),
                 tempEntity.TileState ?? TileState.Empty,
                 selectedTemplate, () => { _selectedTemplate = template; }));
+            
             i++;
+            if (i > tilePalette.Width - 3)
+            {
+                i = 0;
+                j++;
+            }
         }
 
         _uiElements.Add(tilePalette);

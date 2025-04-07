@@ -1,4 +1,4 @@
-{c:blood}{i:Entities:25}{i:Entities:25} I WARNED YOU {i:Entities:25}{i:Entities:25}
+{c:blood}I tried to warn you... {i:Entities:25}
 #
 {c:blood}
 The only way to leave this place

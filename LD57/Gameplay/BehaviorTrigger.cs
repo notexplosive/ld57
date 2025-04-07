@@ -9,6 +9,7 @@ public class BehaviorTrigger
     public static readonly BehaviorTriggerBasic OnReset = new(nameof(OnReset));
     public static readonly BehaviorTriggerWithEntity OnTouch = new(nameof(OnTouch));
     public static readonly BehaviorTriggerWithEntity OnEntityMoved = new(nameof(OnEntityMoved));
+    public static readonly BehaviorTriggerWithEntity OnSteppedOff = new(nameof(OnSteppedOff));
     public static readonly BehaviorTriggerWithKeyValuePair OnStateChanged = new(nameof(OnStateChanged));
     
 }

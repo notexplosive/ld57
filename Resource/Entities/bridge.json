@@ -1,0 +1,15 @@
+{
+    "sort_priority": 8,
+    "sprite_sheet": "Floors",
+    "frame": 5,
+    "color": "white",
+    "tags": [
+        "Bridge",
+        "Signal"
+    ],
+    "state": {
+        "open_frame": 5,
+        "closed_frame": 7,
+        "sheet": "Floors"
+    }
+}

@@ -376,10 +376,7 @@ public class LdSession : Session
         entitiesToPreserve.Add(_player);
 
         // destroy everything
-        foreach (var entity in _world.AllEntitiesIncludingInactive())
-        {
-            _world.Destroy(entity);
-        }
+        _world.ClearAllEntities();
 
         if (_mostRecentlyLoadedWorld != null)
         {

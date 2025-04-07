@@ -116,6 +116,18 @@ public class World
                 }
             });
         }
+        
+        if (entity.HasTag("BecomeWaterOnSteppedOff"))
+        {
+            entity.AddBehavior(BehaviorTrigger.OnSteppedOff, (entityPayload) =>
+            {
+                if (entityPayload.Entity?.HasTag("Solid") == true)
+                {
+                    Destroy(entity);
+                    AddEntity(CreateEntityFromTemplate(ResourceAlias.EntityTemplate("water"), entity.Position, []));
+                }
+            });
+        }
 
         if (entity.HasTag("Signal"))
         {
@@ -157,26 +169,38 @@ public class World
                 });
             }
 
+            if (entity.HasTag("Bridge"))
+            {
+                entity.AddBehavior(BehaviorTrigger.OnSignalChange, () => { SetIsOpenBasedOnSignal(entity, channel); });
+                
+                entity.AddBehavior(BehaviorTrigger.OnStateChanged, payload =>
+                {
+                    if (payload.Key == "is_open")
+                    {
+                        var isOpen = entity.State.GetBool("is_open") == true;
+                        var sheet = entity.State.GetString("sheet") ?? "Entities";
+
+                        if (entity.Appearance?.TileState.HasValue == true)
+                        {
+                            var openFrame = entity.State.GetInt("open_frame") ?? 0;
+                            var closedFrame = entity.State.GetInt("closed_frame") ?? 0;
+
+                            var frame = isOpen ? openFrame : closedFrame;
+
+                            entity.Appearance.TileState = entity.Appearance.TileState.Value with
+                            {
+                                Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]
+                            };
+                        }
+                    }
+                });
+            }
+
             if (entity.HasTag("Door"))
             {
                 entity.AddBehavior(BehaviorTrigger.OnSignalChange, () =>
                 {
-                    var buttons = EntitiesInSameRoom(entity.Position)
-                        .Where(a => a.HasTag("Button") && a.State.GetIntOrFallback("channel", 0) == channel).ToList();
-
-                    var shouldOpen = false;
-
-                    if (buttons.Count > 0)
-                    {
-                        shouldOpen = buttons.All(a => a.State.GetBool("is_pressed") == true);
-                    }
-
-                    if (entity.State.GetBoolOrFallback("is_inverted", false))
-                    {
-                        shouldOpen = !shouldOpen;
-                    }
-
-                    entity.State.Set("is_open", shouldOpen);
+                    SetIsOpenBasedOnSignal(entity, channel);
                 });
 
                 entity.AddBehavior(BehaviorTrigger.OnStateChanged, payload =>
@@ -202,6 +226,26 @@ public class World
                 });
             }
         }
+    }
+
+    private void SetIsOpenBasedOnSignal(Entity entity, int channel)
+    {
+        var buttons = EntitiesInSameRoom(entity.Position)
+            .Where(a => a.HasTag("Button") && a.State.GetIntOrFallback("channel", 0) == channel).ToList();
+
+        var shouldOpen = false;
+
+        if (buttons.Count > 0)
+        {
+            shouldOpen = buttons.All(a => a.State.GetBool("is_pressed") == true);
+        }
+
+        if (entity.State.GetBoolOrFallback("is_inverted", false))
+        {
+            shouldOpen = !shouldOpen;
+        }
+
+        entity.State.Set("is_open", shouldOpen);
     }
 
     private IEnumerable<Entity> EntitiesInSameRoom(GridPosition position)
@@ -426,6 +470,12 @@ public class World
                     new BehaviorTriggerWithEntity.Payload(moveData.Mover));
             }
 
+            if (status.WasSuccessful && entity.Position == moveData.Source)
+            {
+                entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnSteppedOff,
+                    new BehaviorTriggerWithEntity.Payload(moveData.Mover));
+            }
+
             entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnEntityMoved,
                 new BehaviorTriggerWithEntity.Payload(moveData.Mover));
         }
@@ -472,5 +522,11 @@ public class World
     public bool IsDestroyed(Entity water)
     {
         return _entitiesToRemove.Contains(water) || !_entities.Contains(water);
+    }
+
+    public void ClearAllEntities()
+    {
+        _entities.Clear();
+        _entitiesToRemove.Clear();
     }
 }

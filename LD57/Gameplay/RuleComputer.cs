@@ -61,12 +61,24 @@ public class RuleComputer
         var status = new MoveStatus();
         var mover = data.Mover;
 
+        var sources = _world.GetActiveEntitiesAt(data.Source).ToList();
+        
         var targets = _world.GetActiveEntitiesAt(data.Destination).ToList();
         targets.Remove(data.Mover);
 
         foreach (var target in targets)
         {
             var tags = new TagComparer(mover, target);
+            
+            if(tags.Check([], [Is("ForceMove")]))
+            {
+                var forcedDirection = Direction.FromName(target.State.GetString("direction"));
+                if (forcedDirection != data.Direction)
+                {
+                    status.Fail();
+                }
+            }
+            
             if (tags.Check(
                     [Is("Solid")],
                     [Is("Solid")]))
