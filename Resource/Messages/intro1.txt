@@ -1,11 +1,9 @@
 A damaged sign,
 barely legible...
 #
-CATACOMBS OF UZ'UTHAL {i:Entities:21}
+CATACOMBS OF {c:ludum}LÜD'M {c:dare}DÆR {c:white}{i:Entities:21}
 #
 {c:white}There is a message
 scribbled over the original...
 #
-{c:blood}{i:Entities:25}
-      TURN BACK!
-                      {i:Entities:25}
+{c:blood}{i:Entities:25} TURN BACK WHILE YOU CAN {i:Entities:25}

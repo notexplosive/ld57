@@ -36,7 +36,7 @@ public class Prompt
     {
         Orientation = orientation;
 
-        var color = Color.White;
+        var color = ResourceAlias.Color("blue_text");
         Title = MessagePage.BuildLine(title, ref color);
         Options = options;
     }
@@ -66,10 +66,8 @@ public class Prompt
                 width += option.Width();
                 width += padding;
             }
-
-            // remove last padding
-            width -= padding;
-            return width;
+            
+            return width + 1;
         }
     }
 
@@ -82,6 +80,6 @@ public class Prompt
         }
 
         // title + options row + spacer
-        return 3;
+        return 4;
     }
 }

@@ -112,7 +112,7 @@ public class DialogueBox
     {
         tween
             .Add(SetTextVisibilityCallback(false))
-            .Add(_rectangle.TweenTo(SmallCenterRectangle(), 0.25f, Ease.Linear))
+            .Add(_rectangle.TweenTo(SmallCenterRectangle(), 0.15f, Ease.Linear))
             .Add(SetVisibilityCallback(false))
             .Add(new CallbackTween(()=> IsClosed = true))
             ;
@@ -131,7 +131,7 @@ public class DialogueBox
         tween
             .Add(SetVisibilityCallback(true))
             .Add(SetTextVisibilityCallback(false))
-            .Add(_rectangle.TweenTo(desiredRectangle, 0.5f, Ease.QuadFastSlow))
+            .Add(_rectangle.TweenTo(desiredRectangle, 0.15f, Ease.QuadFastSlow))
             .Add(SetTextVisibilityCallback(true))
             ;
     }

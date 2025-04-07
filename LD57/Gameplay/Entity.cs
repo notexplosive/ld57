@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ExplogineMonoGame.Data;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
 
@@ -50,6 +51,7 @@ public class Entity
     public TileState? TileState => Appearance?.TileState;
 
     public GridPosition Position { get; set; }
+    public Direction MostRecentMoveDirection { get; set; } = Direction.None;
 
     public void Start()
     {

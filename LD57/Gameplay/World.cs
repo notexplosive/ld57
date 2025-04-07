@@ -59,17 +59,16 @@ public class World
 
         if (entity.HasTag("Item"))
         {
-            var itemBehavior = entity.State.GetString("item_behavior");
-            var humanReadableName = entity.State.GetString("item_name");
+            var humanReadableName = Inventory.GetItemName(entity);
 
             entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
             {
                 if (payload.Entity != null && payload.Entity.HasTag("Player"))
                 {
-                    RequestShowDynamicMessage?.Invoke($"You find \n{humanReadableName}");
+                    // RequestShowDynamicMessage?.Invoke($"You find \n{humanReadableName}");
                     RequestShowPrompt?.Invoke(new Prompt($"Equip {humanReadableName}?", Orientation.Vertical, [
-                        new PromptOption("Equip to [Z]", () => { }),
-                        new PromptOption("Equip to [X]", () => { }),
+                        new PromptOption("Equip to [Z]", () => { RequestEquipItem?.Invoke(ActionButton.Primary, entity); }),
+                        new PromptOption("Equip to [X]", () => { RequestEquipItem?.Invoke(ActionButton.Secondary, entity); }),
                         new PromptOption("Leave it", () => { })
                     ]));
                 }
@@ -187,6 +186,7 @@ public class World
     public event Action<string>? RequestShowScriptedMessage;
     public event Action<string>? RequestShowDynamicMessage;
     public event Action<Prompt>? RequestShowPrompt;
+    public event Action<ActionButton, Entity>? RequestEquipItem;
 
     private Entity CreateTriggerEntityFromTemplate(PlacedEntity placedEntity)
     {
@@ -363,6 +363,7 @@ public class World
         {
             _entities.Remove(entity);
         }
+        _entitiesToRemove.Clear();
 
         CurrentRoom.RecalculateLiveEntities();
     }

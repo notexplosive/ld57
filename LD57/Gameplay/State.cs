@@ -107,4 +107,9 @@ public class State
     {
         return GetBool(key) ?? defaultBool;
     }
+
+    public string GetStringOrDefault(string key, string fallback)
+    {
+        return GetString(key) ?? fallback;
+    }
 }

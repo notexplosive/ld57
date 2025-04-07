@@ -11,6 +11,6 @@ public record PromptModalEvent(PromptBox PromptBox,Prompt Prompt, SequenceTween 
 
     public override bool IsDoneInternal()
     {
-        return PromptBox.HasMadeAChoice;
+        return PromptBox.HasMadeAChoice && !PromptBox.IsVisible;
     }
 }

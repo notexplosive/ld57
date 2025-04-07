@@ -1,13 +1,13 @@
 {
     "sort_priority": 5,
     "sprite_sheet": "Entities",
-    "frame": 5,
+    "frame": 17,
     "color": "treasure",
     "tags": [
         "Item"
     ],
     "state": {
-        "item_behavior": "hook",
-        "item_name": "Hook Device"
+        "item_behavior": "glove",
+        "item_name": "Capture Gauntlet"
     }
 }

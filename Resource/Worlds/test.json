@@ -36,16 +36,6 @@
     },
     {
       "extra_state": {
-        "command": "zone Hello"
-      },
-      "template_name": "",
-      "position": {
-        "x": 18,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {
         "channel": "1"
       },
       "template_name": "door",
@@ -496,6 +486,74 @@
       "position": {
         "x": 20,
         "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "item_anchor",
+      "position": {
+        "x": 24,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 18,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {
+        "command": "zone Hello"
+      },
+      "template_name": "",
+      "position": {
+        "x": -2,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "sign",
+      "position": {
+        "x": 20,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {
+        "command": "show intro1"
+      },
+      "template_name": "",
+      "position": {
+        "x": 20,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "item_swap",
+      "position": {
+        "x": 24,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "item_glove",
+      "position": {
+        "x": 20,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 27,
+        "y": 12
       }
     }
   ]

@@ -64,7 +64,7 @@ public class PromptBox
                 }
                 else
                 {
-                    var x = 0;
+                    var x = 1;
                     for (var index = 0; index < _currentPrompt.Options.Count; index++)
                     {
                         var option = _currentPrompt.Options[index];
@@ -126,7 +126,7 @@ public class PromptBox
     {
         tween
             .Add(SetTextVisibilityCallback(false))
-            .Add(_rectangle.TweenTo(SmallCenterRectangle(), 0.25f, Ease.Linear))
+            .Add(_rectangle.TweenTo(SmallCenterRectangle(), 0.15f, Ease.Linear))
             .Add(SetVisibilityCallback(false))
             ;
     }
@@ -143,7 +143,7 @@ public class PromptBox
             .Add(SetTextVisibilityCallback(false))
             .Add(SetVisibilityCallback(true))
             .Add(_rectangle.CallbackSetTo(SmallCenterRectangle()))
-            .Add(_rectangle.TweenTo(desiredRectangle, 0.5f, Ease.QuadFastSlow))
+            .Add(_rectangle.TweenTo(desiredRectangle, 0.25f, Ease.QuadFastSlow))
             .Add(new WaitSecondsTween(0.15f))
             .Add(SetTextVisibilityCallback(true))
             ;

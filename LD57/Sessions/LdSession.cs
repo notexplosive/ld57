@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExTween;
@@ -26,6 +27,7 @@ public class LdSession : Session
     private readonly PromptBox _promptBox;
     private ActionButton _pendingActionButton;
     private Queue<ModalEvent> _modalQueue = new();
+    private readonly Inventory _inventory = new();
 
     public LdSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -34,6 +36,7 @@ public class LdSession : Session
         _titleCard = new TitleCard(Constants.GameRoomSize);
         _dialogueBox = new DialogueBox(Constants.GameRoomSize);
         _promptBox = new PromptBox(Constants.GameRoomSize);
+        _inventory = new Inventory();
         LoadWorld(new WorldTemplate());
     }
 
@@ -72,6 +75,11 @@ public class LdSession : Session
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
+        if (_inventory.IsPlayingItemAnimation)
+        {
+            return;
+        }
+        
         var frameInput = new FrameInput();
         
         if (_dialogueBox.IsVisible)
@@ -113,24 +121,19 @@ public class LdSession : Session
 
         _screen.Clear(TileState.Empty);
         _world.PaintToScreen(_screen, dt);
+        _inventory.PaintWorldOverlay(ActionButton.Primary,_screen, _world, _player, dt);
+        _inventory.PaintWorldOverlay(ActionButton.Secondary,_screen, _world, _player, dt);
         
         _cutsceneTween.Update(dt);
         if (_cutsceneTween.IsDone())
         {
             _cutsceneTween.Clear();
         }
-        
+
         _titleCard.PaintToScreen(_screen);
 
         // UI
-        var bottomHudTopLeft = new GridPosition(0, 19);
-        _screen.PutFrameRectangle(ResourceAlias.PopupFrame, bottomHudTopLeft,
-            bottomHudTopLeft + new GridPosition(_screen.Width - 1, 2));
-        _screen.PutString(bottomHudTopLeft + new GridPosition(1, 1), "Status: OK");
-        _screen.PutString(bottomHudTopLeft + new GridPosition(2, 0), "Z[ ]");
-        _screen.PutTile(bottomHudTopLeft + new GridPosition(4, 0), TileState.Sprite(ResourceAlias.Entities, 14));
-        _screen.PutString(bottomHudTopLeft + new GridPosition(7, 0), "X[ ]", Color.Gray);
-        _screen.PutTile(bottomHudTopLeft + new GridPosition(9, 0), TileState.Sprite(ResourceAlias.Entities, 15));
+        _inventory.DrawHud(_screen, _currentZoneName ,dt);
 
         // Dialogue
         if (_dialogueBox.IsVisible)
@@ -192,13 +195,20 @@ public class LdSession : Session
             }
             else
             {
-                if (_pendingDirection != Direction.None)
+                if (_pendingActionButton != ActionButton.None)
                 {
-                    var move = _world.Rules.AttemptMoveInDirection(_player, _pendingDirection);
-                    if (move.WasSuccessful)
+                    _inventory.AnimateUse(_pendingActionButton, _world, _cutsceneTween);
+                }
+                else
+                {
+                    if (_pendingDirection != Direction.None)
                     {
-                        _player.TweenableGlyph.SetAnimation(Animations.MakeWalk(_pendingDirection,
-                            _screen.TileSize / 4f));
+                        var move = _world.Rules.AttemptMoveInDirection(_player, _pendingDirection);
+                        if (move.WasSuccessful)
+                        {
+                            _player.TweenableGlyph.SetAnimation(Animations.MakeWalk(_pendingDirection,
+                                _screen.TileSize / 4f));
+                        }
                     }
                 }
             }
@@ -244,11 +254,26 @@ public class LdSession : Session
         _world.RequestShowScriptedMessage += DisplayScriptedDialogueMessage;
         _world.RequestShowDynamicMessage += DisplayDynamicDialogueMessage;
         _world.RequestShowPrompt += DisplayPrompt;
+        _world.RequestEquipItem += EquipItem;
         
         foreach (var entity in _world.CurrentRoom.AllActiveEntities())
         {
             entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
         }
+    }
+
+    private void EquipItem(ActionButton slot, Entity item)
+    {
+        _world.Destroy(item);
+        if (_inventory.HasSomethingInSlot(slot))
+        {
+            var existingItem = _inventory.RemoveFromSlot(slot);
+            existingItem.Position = _player.Position;
+            _world.AddEntity(existingItem);
+            DisplayDynamicDialogueMessage($"You dropped\n{Inventory.GetItemName(existingItem)}");
+        }
+        
+        _inventory.Equip(slot, item);
     }
 
     private void DisplayPrompt(Prompt prompt)

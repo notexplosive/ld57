@@ -126,6 +126,8 @@ public class RuleComputer
 
     private void OnMoveCompleted(MoveData moveData, MoveStatus status)
     {
+        moveData.Mover.MostRecentMoveDirection = moveData.Direction;
+        
         _world.OnMoveCompleted(moveData, status);
 
         foreach (var rule in _rules)
