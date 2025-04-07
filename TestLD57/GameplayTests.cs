@@ -328,5 +328,36 @@ public class GameplayTests
         Assert.Equivalent(new GridPosition(3, 0), solidPresser.Position);
     }
 
+    [Fact]
+    public void Item_Xyzzy()
+    {
+        var spawnPosition = new GridPosition(5, 5);
+        var firstUsePosition = new GridPosition(2,3);
+        var secondUsePosition = new GridPosition(7,2);
+        var thirdUsePosition = new GridPosition(-300,-200);
+        var user = CreateEntity(spawnPosition, [], []);
+        var anchor = new AnchorItemBehavior();
+
+        WarpEntity(user, firstUsePosition);
+        UseItem(user, anchor);
+        Assert.Equivalent(firstUsePosition, user.Position);
+        
+        WarpEntity(user, secondUsePosition);
+        UseItem(user, anchor);
+        Assert.Equivalent(firstUsePosition, user.Position);
+        
+        WarpEntity(user, thirdUsePosition);
+        UseItem(user, anchor);
+        Assert.Equivalent(secondUsePosition, user.Position);
+        
+        UseItem(user, anchor);
+        Assert.Equivalent(thirdUsePosition, user.Position);
+    }
+
+    private void UseItem(Entity user, ItemBehavior item)
+    {
+        item.Execute(_world, user);
+    }
+
     private readonly record struct StateKeyValue(string Key, string Value);
 }

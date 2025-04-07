@@ -45,7 +45,7 @@ public class Inventory
     public void Equip(ActionButton slot, Entity entity)
     {
         _itemEntities[slot] = entity;
-        var itemBehavior = CreateBehavior(slot);
+        var itemBehavior = CreateBehavior(slot, GetBehaviorName(_itemEntities[slot]));
         if (entity.TileState.HasValue)
         {
             itemBehavior.SetUiTile(entity.TileState.Value);
@@ -54,26 +54,32 @@ public class Inventory
         _itemBehaviors[slot] = itemBehavior;
     }
 
-    private ItemBehavior CreateBehavior(ActionButton slot)
+    /// <summary>
+    /// For unit tests
+    /// </summary>
+    public void EquipBehaviorDirectly(ActionButton slot, string itemBehavior)
     {
-        var behavior = GetBehaviorName(_itemEntities[slot]);
+        _itemBehaviors[slot] = CreateBehavior(slot, itemBehavior);
+    }
 
-        if (behavior == "hook")
+    private ItemBehavior CreateBehavior(ActionButton slot, string behaviorName)
+    {
+        if (behaviorName == "hook")
         {
             return new HookItemBehavior();
         }
 
-        if (behavior == "swap")
+        if (behaviorName == "swap")
         {
             return new SwapItemBehavior();
         }
 
-        if (behavior == "xyzzy")
+        if (behaviorName == "xyzzy")
         {
             return new AnchorItemBehavior();
         }
 
-        if (behavior == "glove")
+        if (behaviorName == "glove")
         {
             return new GloveItemBehavior();
         }

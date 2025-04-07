@@ -53,7 +53,12 @@ public static class ResourceAlias
         {
             return new MessageContent("???");
         }
-        
+
         return message;
+    }
+
+    public static bool HasEntityTemplate(string name)
+    {
+        return LdResourceAssets.Instance.EntityTemplates.ContainsKey(name);
     }
 }

@@ -6003,14 +6003,6 @@
       }
     },
     {
-      "extra_state": {},
-      "template_name": "crate",
-      "position": {
-        "x": 23,
-        "y": -28
-      }
-    },
-    {
       "extra_state": {
         "SignalChannel": "0",
         "channel": "0"
@@ -8822,6 +8814,50 @@
       "position": {
         "x": 24,
         "y": -22
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "crate",
+      "position": {
+        "x": 23,
+        "y": -27
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 22,
+        "y": -29
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 23,
+        "y": -29
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "door_inverted",
+      "position": {
+        "x": 22,
+        "y": -25
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "door_inverted",
+      "position": {
+        "x": 23,
+        "y": -24
       }
     }
   ]

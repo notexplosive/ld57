@@ -1,0 +1,9 @@
+{
+    "sort_priority": 10,
+    "sprite_sheet": "Walls",
+    "frame": 1,
+    "color": "blue_brick_bright",
+    "tags": [
+        "Solid"
+    ]
+}

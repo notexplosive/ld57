@@ -5,7 +5,13 @@ namespace LD57.Gameplay;
 
 public class AnchorItemBehavior : ItemBehavior
 {
+    private readonly TweenableGlyph _icon;
     private Entity? _anchorEntity;
+
+    public AnchorItemBehavior()
+    {
+        _icon = new TweenableGlyph();
+    }
 
     public override void Execute(World world, Entity user)
     {
@@ -23,7 +29,14 @@ public class AnchorItemBehavior : ItemBehavior
 
     private static EntityTemplate PhantomTemplate()
     {
-        return ResourceAlias.EntityTemplate("phantom_anchor");
+        if (ResourceAlias.HasEntityTemplate("phantom_anchor"))
+        {
+            return ResourceAlias.EntityTemplate("phantom_anchor");
+        }
+        else
+        {
+            return new EntityTemplate();
+        }
     }
 
     public override SequenceTween PlayAnimation(World world, Entity user)
@@ -84,9 +97,13 @@ public class AnchorItemBehavior : ItemBehavior
         }
 
         return new SequenceTween()
-                .Add(beforeWarp)
-                .Add(ExecuteCallbackTween(world, user))
-                .Add(afterWarp)
+                .Add(new MultiplexTween()
+                    .Add(new SequenceTween()
+                        .Add(beforeWarp)
+                        .Add(ExecuteCallbackTween(world, user))
+                        .Add(afterWarp)
+                    )
+                )
             ;
     }
 
@@ -96,7 +113,7 @@ public class AnchorItemBehavior : ItemBehavior
 
     public override TweenableGlyph? GetTweenableGlyph()
     {
-        return null;
+        return _icon;
     }
 
     public override void OnRemove(World world, Entity player)
