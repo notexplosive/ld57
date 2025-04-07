@@ -9,6 +9,7 @@
         "Solid",
         "PressesButtons",
         "FloatsInWater",
-        "FillsWater"
+        "FillsWater",
+        "PulledByHook",
     ]
 }

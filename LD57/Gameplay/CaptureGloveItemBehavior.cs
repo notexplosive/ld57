@@ -201,7 +201,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
                 rejectionTile = _capturedEntity.TileState ?? rejectionTile;
             }
 
-            screen.PutTile(TargetPosition(user), rejectionTile, _rejectionTweenable);
+            screen.PutTile(TargetPosition(user) - world.CameraPosition, rejectionTile, _rejectionTweenable);
         }
     }
 

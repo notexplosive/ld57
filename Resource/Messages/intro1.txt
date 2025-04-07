@@ -1,9 +1,12 @@
-A damaged sign,
-barely legible...
+A message written in a
+long-dead language.
+You translate it
 #
-CATACOMBS OF {c:ludum}LÜD'M {c:dare}DÆR {c:white}{i:Entities:21}
+{c:white}Up Ahead {i:Entities:21}
+Catacombs of {c:ludum}Lüd'm {c:dare}Dær
 #
-{c:white}There is a message
-scribbled over the original...
+{c:white}Below is another message,
+in a more modern dialect.
 #
-{c:blood}{i:Entities:25} TURN BACK WHILE YOU CAN {i:Entities:25}
+{c:blood}
+{i:Entities:25}{i:Entities:25} TURN BACK WHILE YOU STILL CAN {i:Entities:25}{i:Entities:25}

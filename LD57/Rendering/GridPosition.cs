@@ -75,6 +75,11 @@ public readonly record struct GridPosition
     {
         return new GridPosition(a.X - b.X, a.Y - b.Y);
     }
+    
+    public static GridPosition operator *(GridPosition a, int scalar)
+    {
+        return new GridPosition(a.X * scalar, a.Y * scalar);
+    }
 
     public Point ToPoint()
     {

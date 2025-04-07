@@ -61,7 +61,12 @@ public class Entity
         }
 
         SelfTriggerBehavior(BehaviorTrigger.OnSignalChange);
-        world.Rules.WarpToPosition(this, Position);
+        
+        if (!world.IsEditMode)
+        {
+            world.Rules.WarpToPosition(this, Position);
+        }
+
         _hasStarted = true;
     }
 

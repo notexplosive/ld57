@@ -2796,38 +2796,6 @@
       "extra_state": {},
       "template_name": "floor_rock_path",
       "position": {
-        "x": 58,
-        "y": -2
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_rock_path",
-      "position": {
-        "x": 58,
-        "y": -3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_rock_path",
-      "position": {
-        "x": 58,
-        "y": -4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_rock_path",
-      "position": {
-        "x": 59,
-        "y": -2
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_rock_path",
-      "position": {
         "x": 59,
         "y": -12
       }
@@ -2846,22 +2814,6 @@
       "position": {
         "x": 58,
         "y": -11
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_rock_path",
-      "position": {
-        "x": 58,
-        "y": -6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_rock_path",
-      "position": {
-        "x": 59,
-        "y": -6
       }
     },
     {
@@ -9730,14 +9682,6 @@
     },
     {
       "extra_state": {},
-      "template_name": "sigil",
-      "position": {
-        "x": 57,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
       "template_name": "floor_rock_path",
       "position": {
         "x": 57,
@@ -9750,24 +9694,6 @@
       "position": {
         "x": 57,
         "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "sign",
-      "position": {
-        "x": 58,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {
-        "command": "show intro1"
-      },
-      "template_name": "",
-      "position": {
-        "x": 58,
-        "y": 6
       }
     },
     {
@@ -12595,32 +12521,6 @@
       }
     },
     {
-      "extra_state": {
-        "command": "load interior"
-      },
-      "template_name": "",
-      "position": {
-        "x": 59,
-        "y": -32
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 59,
-        "y": -31
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 59,
-        "y": -30
-      }
-    },
-    {
       "extra_state": {},
       "template_name": "fence",
       "position": {
@@ -12698,32 +12598,6 @@
       "position": {
         "x": 60,
         "y": -35
-      }
-    },
-    {
-      "extra_state": {
-        "command": "load interior"
-      },
-      "template_name": "",
-      "position": {
-        "x": 60,
-        "y": -32
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 60,
-        "y": -31
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 60,
-        "y": -30
       }
     },
     {
@@ -14218,7 +14092,7 @@
     },
     {
       "extra_state": {
-        "command": "zone Gium Dikay Ruins"
+        "command": "zone Gium Decay Ruins"
       },
       "template_name": "",
       "position": {
@@ -15656,6 +15530,148 @@
       "position": {
         "x": 50,
         "y": -31
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 58,
+        "y": -6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "sigil",
+      "position": {
+        "x": 58,
+        "y": -5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 59,
+        "y": -6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "sign",
+      "position": {
+        "x": 59,
+        "y": -5
+      }
+    },
+    {
+      "extra_state": {
+        "command": "show intro1"
+      },
+      "template_name": "",
+      "position": {
+        "x": 59,
+        "y": -5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 58,
+        "y": 0
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 58,
+        "y": -1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 58,
+        "y": -2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 59,
+        "y": -2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 59,
+        "y": -3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue2",
+      "position": {
+        "x": 59,
+        "y": -31
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue2",
+      "position": {
+        "x": 59,
+        "y": -30
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue2",
+      "position": {
+        "x": 60,
+        "y": -30
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue2",
+      "position": {
+        "x": 60,
+        "y": -31
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue2",
+      "position": {
+        "x": 59,
+        "y": -29
+      }
+    },
+    {
+      "extra_state": {
+        "command": "load interior"
+      },
+      "template_name": "",
+      "position": {
+        "x": 59,
+        "y": -32
+      }
+    },
+    {
+      "extra_state": {
+        "command": "load interior"
+      },
+      "template_name": "",
+      "position": {
+        "x": 60,
+        "y": -32
       }
     }
   ]

@@ -318,30 +318,6 @@
       "extra_state": {},
       "template_name": "water",
       "position": {
-        "x": 24,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 25,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 26,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
         "x": 27,
         "y": 8
       }
@@ -560,14 +536,6 @@
       "extra_state": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 13,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 14,
         "y": 7
       }
@@ -578,30 +546,6 @@
       "position": {
         "x": 16,
         "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 13,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 14,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 16,
-        "y": 6
       }
     },
     {
@@ -624,14 +568,6 @@
       "extra_state": {},
       "template_name": "blue_brick",
       "position": {
-        "x": 16,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
         "x": 17,
         "y": 8
       }
@@ -642,38 +578,6 @@
       "position": {
         "x": 18,
         "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 17,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 18,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 17,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_blue",
-      "position": {
-        "x": 18,
-        "y": 6
       }
     },
     {
@@ -2382,22 +2286,6 @@
     },
     {
       "extra_state": {},
-      "template_name": "blue_brick_bright",
-      "position": {
-        "x": 15,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick_bright",
-      "position": {
-        "x": 15,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
       "template_name": "sigil",
       "position": {
         "x": 23,
@@ -2426,6 +2314,326 @@
       "position": {
         "x": 21,
         "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick_dragon",
+      "position": {
+        "x": 13,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 12,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 12,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 12,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 13,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 14,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 15,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 15,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 17,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 18,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 18,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 19,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 16,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 16,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick_dragon",
+      "position": {
+        "x": 15,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick_dragon",
+      "position": {
+        "x": 17,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 12,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 13,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 14,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 15,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 16,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_blue",
+      "position": {
+        "x": 17,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 12,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 13,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 14,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 15,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 16,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 17,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 18,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 19,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 11,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 20,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 19,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass",
+      "position": {
+        "x": 25,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass",
+      "position": {
+        "x": 22,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass",
+      "position": {
+        "x": 27,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 27,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 26,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 25,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 24,
+        "y": 8
       }
     }
   ]

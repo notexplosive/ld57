@@ -5,6 +5,7 @@
     "color": "grass",
     "tags": [
         "Solid",
-        "Capturable"
+        "Capturable",
+        "HookAnchor"
     ]
 }

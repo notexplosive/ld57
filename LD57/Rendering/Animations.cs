@@ -108,25 +108,40 @@ public static class Animations
         {
             var swaySegmentDuration = 0.73f;
             var growDuration = 1.44f;
-            var bigScale = 1.15f;
+            var bigScale = 1.2f;
             var midScale = 1.1f;
             var lowScale = 1f;
-
+            
             var swayAmount = 2;
             
             tween
-                .Add(new SequenceTween()
-                    .Add(glyph.PixelOffset.TweenTo(new Vector2(-swayAmount, 0), swaySegmentDuration, Ease.SineFastSlow))
-                    .Add(glyph.PixelOffset.TweenTo(new Vector2(0, 0), swaySegmentDuration, Ease.SineSlowFast))
-                    .Add(glyph.PixelOffset.TweenTo(new Vector2(swayAmount, 0), swaySegmentDuration, Ease.SineFastSlow))
-                    .Add(glyph.PixelOffset.TweenTo(new Vector2(0, 0), swaySegmentDuration, Ease.SineSlowFast))
-                    .SetLooping(true)
-                )
-                .Add(new SequenceTween()
-                    .Add(glyph.Scale.TweenTo(bigScale, growDuration, Ease.SineFastSlow))
-                    .Add(glyph.Scale.TweenTo(midScale, growDuration, Ease.SineSlowFast))
-                    .Add(glyph.Scale.TweenTo(lowScale, growDuration, Ease.SineFastSlow))
-                    .Add(glyph.Scale.TweenTo(midScale, growDuration, Ease.SineSlowFast))
+                .Add(new MultiplexTween()
+                    .Add(new SequenceTween()
+                        .Add(glyph.PixelOffset.TweenTo(new Vector2(-swayAmount, 0), swaySegmentDuration,
+                            Ease.SineFastSlow))
+                        .Add(glyph.PixelOffset.TweenTo(new Vector2(0, 0), swaySegmentDuration, Ease.SineSlowFast))
+                        .Add(glyph.PixelOffset.TweenTo(new Vector2(swayAmount, 0), swaySegmentDuration,
+                            Ease.SineFastSlow))
+                        .Add(glyph.PixelOffset.TweenTo(new Vector2(0, 0), swaySegmentDuration, Ease.SineSlowFast))
+                        .SetLooping(true)
+                    )
+                    .Add(new SequenceTween()
+                        .Add(glyph.Scale.TweenTo(bigScale, growDuration, Ease.SineFastSlow))
+                        .Add(glyph.Scale.TweenTo(midScale, growDuration, Ease.SineSlowFast))
+                        .Add(glyph.Scale.TweenTo(lowScale, growDuration, Ease.SineFastSlow))
+                        .Add(glyph.Scale.TweenTo(midScale, growDuration, Ease.SineSlowFast))
+                        .SetLooping(true)
+                    )
+                    .Add(new SequenceTween()
+                        .Add(glyph.StartOverridingColor)
+                        .Add(glyph.ForegroundColorOverride.TweenTo(ResourceAlias.Color("water2"), 0.5f, Ease.Linear))
+                        .Add(glyph.ForegroundColorOverride.TweenTo(ResourceAlias.Color("water"), 3, Ease.Linear))
+                        .Add(new WaitSecondsTween(2))
+                        .Add(glyph.ForegroundColorOverride.TweenTo(ResourceAlias.Color("water2"), 0.3f, Ease.Linear))
+                        .Add(glyph.ForegroundColorOverride.TweenTo(ResourceAlias.Color("water"), 5, Ease.Linear))
+                        .Add(new WaitSecondsTween(1.3f))
+                        .SetLooping(true)
+                    )
                 )
                 ;
 

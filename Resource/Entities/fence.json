@@ -5,6 +5,7 @@
     "color": "wood",
     "tags": [
         "Solid",
-        "Capturable"
+        "Capturable",
+        "HookAnchor"
     ]
 }
