@@ -6,6 +6,11 @@ namespace LD57.Gameplay;
 
 public class EmptyItemBehavior : ItemBehavior
 {
+    public EmptyItemBehavior()
+    {
+        DefaultHudTile = TileState.Empty;
+    }
+    
     public override void Execute(World world, Entity user)
     {
         Client.Debug.Log("Do nothing");
@@ -18,7 +23,7 @@ public class EmptyItemBehavior : ItemBehavior
             ;
     }
 
-    public override void PaintInWorld(AsciiScreen screen, World world, Entity player, float dt)
+    public override void PaintInWorld(AsciiScreen screen, World world, Entity user, float dt)
     {
     }
     

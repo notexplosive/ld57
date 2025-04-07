@@ -443,7 +443,7 @@ public class GameplayTests
         var item = new CaptureGloveItemBehavior();
         var user = CreateEntity(new GridPosition(0, 0), [], []);
         user.MostRecentMoveDirection = Direction.Right;
-        var thingToGrab = CreateEntity(new GridPosition(1, 0), ["Capturable", "ReplaceOnDrop"], []);
+        var thingToGrab = CreateEntity(new GridPosition(1, 0), ["Capturable", "ClearOnDrop"], []);
         var blocker = CreateEntity(new GridPosition(5, 5), ["Solid"], []);
 
         UseItem(user, item);

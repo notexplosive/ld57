@@ -107,7 +107,7 @@ public class AnchorItemBehavior : ItemBehavior
             ;
     }
 
-    public override void PaintInWorld(AsciiScreen screen, World world, Entity player, float dt)
+    public override void PaintInWorld(AsciiScreen screen, World world, Entity user, float dt)
     {
     }
 
