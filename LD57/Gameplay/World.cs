@@ -21,6 +21,11 @@ public class World
         Rules = new RuleComputer(this);
         CurrentRoom = GetRoomAt(new GridPosition(0, 0));
 
+        PopulateFromTemplate(worldTemplate);
+    }
+
+    public void PopulateFromTemplate(WorldTemplate worldTemplate)
+    {
         foreach (var placedEntity in worldTemplate.PlacedEntities)
         {
             if (placedEntity.TemplateName == "player")
@@ -73,6 +78,25 @@ public class World
             }
         }
 
+        if (entity.HasTag("Crystal"))
+        {
+            if (!IsEditMode)
+            {
+                entity.TweenableGlyph.SetAnimation(Animations.CrystalShimmer(ResourceAlias.Color("blood"),ResourceAlias.Color("white"),ResourceAlias.Color("blue_text")));
+            }
+        }
+
+        if (entity.HasTag("Crystal"))
+        {
+            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+            {
+                if (payload.Entity != null && payload.Entity.HasTag("Player"))
+                {
+                    RequestClaimCrystal?.Invoke(entity);
+                }
+            });
+        }
+        
         if (entity.HasTag("Item"))
         {
             var humanReadableName = Inventory.GetHumanReadableName(entity);
@@ -203,6 +227,7 @@ public class World
     public event Action<string>? RequestZoneNameChange;
     public event Action<string>? RequestShowScriptedMessage;
     public event Action<string>? RequestShowDynamicMessage;
+    public event Action<Entity>? RequestClaimCrystal;
     public event Action<Prompt>? RequestShowPrompt;
     public event Action<string, GridPosition>? RequestSpawnFromStorage;
     public event Action<ActionButton, Entity>? RequestEquipItem;

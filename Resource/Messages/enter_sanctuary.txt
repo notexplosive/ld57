@@ -1,8 +1,10 @@
 You wander in the inky blackness
 in a dreamlike state.
 #
-Suddenly, you wake up.
+You wake from your trance.
+How long has it been?
 #
-You feel a {c:blue_text}new power...
+You feel different.
+You feel a new {c:blue_text}power...
 #
 How did you get here?

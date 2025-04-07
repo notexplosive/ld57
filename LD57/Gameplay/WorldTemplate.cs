@@ -32,11 +32,19 @@ public class WorldTemplate
         {
             PlacedEntities.RemoveAll(a => a.TemplateName == "player");
         }
-        
+
+        var extraState = new Dictionary<string, string>();
+
+        if (template.Tags.Contains("Unique"))
+        {
+            extraState.Add("unique_id", ((int)DateTimeOffset.Now.ToUnixTimeMilliseconds()).ToString());
+        }
+
         PlacedEntities.Add(new PlacedEntity
         {
             Position = position,
-            TemplateName = template.TemplateName
+            TemplateName = template.TemplateName,
+            ExtraState = extraState
         });
     }
 
@@ -44,7 +52,7 @@ public class WorldTemplate
     {
         PlacedEntities.RemoveAll(a => a.Position == position);
     }
-    
+
     public void RemoveEntitiesAtExceptMetadata(GridPosition position)
     {
         PlacedEntities.RemoveAll(a => a.TemplateName != string.Empty && a.Position == position);

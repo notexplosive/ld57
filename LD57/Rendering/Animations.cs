@@ -148,4 +148,22 @@ public static class Animations
             tween.Update(randomFloat);
         };
     }
+
+    public static AnimationFactory CrystalShimmer(Color evil, Color neutral, Color good)
+    {
+        return (glyph, tween) =>
+        {
+            glyph.ForegroundColorOverride.Value = evil;
+            var duration = 0.5f;
+            tween
+                .Add(glyph.StartOverridingColor)
+                .Add(glyph.ForegroundColorOverride.TweenTo(neutral, duration, Ease.Linear))
+                .Add(glyph.ForegroundColorOverride.TweenTo(good, duration, Ease.Linear))
+                .Add(glyph.ForegroundColorOverride.TweenTo(neutral, duration, Ease.Linear))
+                .Add(glyph.ForegroundColorOverride.TweenTo(evil, duration, Ease.Linear))
+                .SetLooping(true)
+                ;
+            
+        };
+    }
 }

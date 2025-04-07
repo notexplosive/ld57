@@ -149,4 +149,9 @@ public class Entity
     {
         _behaviors.Clear();
     }
+
+    public void UnStart()
+    {
+        _hasStarted = false;
+    }
 }

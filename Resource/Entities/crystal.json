@@ -1,0 +1,13 @@
+{
+    "sort_priority": 5,
+    "sprite_sheet": "Entities",
+    "frame": 26,
+    "color": "white",
+    "tags": [
+        "Crystal",
+        "Unique",
+        "PulledByHook",
+        "Swappable",
+        "Capturable"
+    ]
+}

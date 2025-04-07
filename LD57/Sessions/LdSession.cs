@@ -17,6 +17,7 @@ public class LdSession : Session
 {
     private readonly SequenceTween _cutsceneTween = new();
     private readonly DialogueBox _dialogueBox;
+    private readonly HashSet<int> _foundCrystals = new();
     private readonly Inventory _inventory = new();
     private readonly SequenceTween _itemTween = new();
     private readonly Queue<ModalEvent> _modalQueue = new();
@@ -37,7 +38,9 @@ public class LdSession : Session
     private Entity _player = new(new GridPosition(), new Invisible());
     private bool _skipClear;
     private bool _skipDrawingMain;
+    private int _totalCrystalCount;
     private World _world = new(Constants.GameRoomSize, new WorldTemplate());
+    private bool _stopAllInput;
 
     public LdSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -122,8 +125,8 @@ public class LdSession : Session
         var buttonsAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Button").ToList();
         if (data.Mover.HasTag("PressesButtons") && buttonsAtDestination.Count > 0)
         {
-            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState!.Value.ForegroundColor,
-                ResourceAlias.Color("button")));
+            var buttonColor = buttonsAtDestination.First().Appearance!.TileState!.Value.ForegroundColor;
+            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState!.Value.ForegroundColor, buttonColor));
         }
     }
 
@@ -133,6 +136,11 @@ public class LdSession : Session
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
+        if (_stopAllInput)
+        {
+            return;
+        }
+        
         var frameInput = new FrameInput();
 
         if (FrameInput.PrimaryActionTapped(input))
@@ -333,19 +341,22 @@ public class LdSession : Session
 
     private void ExecuteReset()
     {
+        _hasResetButNotEnteredSanctuary = true;
+
         foreach (var item in GetHeldItems())
         {
             var humanReadableItemName = Inventory.GetHumanReadableName(item);
             var templateName = item.State.GetString("template_name");
             if (templateName != null && !_preservedItems.Contains(templateName))
             {
-                DisplayDynamicDialogueMessage($"{humanReadableItemName} was lost.\n\nTake it back to The Sanctuary\nto preserve it");
+                DisplayDynamicDialogueMessage(
+                    $"{humanReadableItemName} was lost.\n\nTake it back to The Sanctuary\nto preserve it");
             }
         }
 
         _inventory.ClearItems();
 
-        var entitiesToPreserve = new List<Entity>();
+        var entitiesToPreserve = new HashSet<Entity>();
         var oldRooms = new List<Room>();
 
         foreach (var entity in _world.AllActiveEntities())
@@ -354,54 +365,56 @@ public class LdSession : Session
             {
                 var room = _world.GetRoomAt(entity.Position);
                 oldRooms.Add(room);
-                entitiesToPreserve.AddRange(room.AllActiveEntities());
+                foreach (var entityInRoom in room.AllActiveEntities())
+                {
+                    entitiesToPreserve.Add(entityInRoom);
+                }
             }
         }
 
-        // make sure we're not preserving the player
-        entitiesToPreserve.Remove(_player);
+        // ensure the player is on the preserve list
+        entitiesToPreserve.Add(_player);
+
+        // destroy everything
+        foreach (var entity in _world.AllEntitiesIncludingInactive())
+        {
+            _world.Destroy(entity);
+        }
 
         if (_mostRecentlyLoadedWorld != null)
         {
-            LoadWorld(_mostRecentlyLoadedWorld);
-            var newWorld = _world;
+            _world.PopulateFromTemplate(_mostRecentlyLoadedWorld);
 
-            // preserve the NEW player from the NEW world
-            entitiesToPreserve.Add(_player);
+            // setup player to be in the right spot
+            var playerSpawn = _mostRecentlyLoadedWorld.GetPlayerEntity()?.Position ?? new GridPosition(0, 0);
+            _player.Position = playerSpawn;
 
-            // remove them so we don't accidentally double-add them
-            _world.Destroy(_player);
-
-            // wipe the rooms in the new world
+            // wipe the existing rooms
             foreach (var room in oldRooms)
             {
-                var newRoom = newWorld.GetRoomAt(room.TopLeft);
+                var newRoom = _world.GetRoomAt(room.TopLeft);
                 foreach (var entity in newRoom.AllEntitiesIncludingInactive())
                 {
-                    newWorld.Destroy(entity);
+                    _world.Destroy(entity);
                 }
             }
 
+            // restore all saved entities
             foreach (var entityToRestore in entitiesToPreserve)
             {
-                entityToRestore.ClearBehaviors();
-                
-                var isTrigger = !entityToRestore.State.HasKey("template_name");
-                if (isTrigger)
-                {
-                    newWorld.SetupTriggerEntityBehaviors(entityToRestore);
-                }
-                else
-                {
-                    newWorld.SetupNormalEntityBehaviors(entityToRestore);
-                }
-                newWorld.AddEntity(entityToRestore);
+                entityToRestore.UnStart();
+                _world.AddEntity(entityToRestore);
             }
         }
 
         foreach (var entity in _world.AllActiveEntitiesCached())
         {
             entity.SelfTriggerBehavior(BehaviorTrigger.OnReset);
+        }
+
+        foreach (var entity in _world.CurrentRoom.AllActiveEntities())
+        {
+            entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
         }
     }
 
@@ -434,6 +447,7 @@ public class LdSession : Session
         _player = _world.AddEntity(new Entity(playerSpawn, ResourceAlias.EntityTemplate("player")));
 
         _world.Rules.AddRule(new CameraFollowsEntity(_world, _player));
+        _world.RequestClaimCrystal += OnClaimCrystal;
         _world.EnteredSanctuary += OnEnterSanctuary;
         _world.MoveCompleted += OnMoveCompleted;
         _world.RequestLoad += TransitionWorld;
@@ -445,6 +459,32 @@ public class LdSession : Session
         _world.AttemptedVictory += OnAttemptVictory;
         _world.RequestSpawnFromStorage += SpawnFromStorage;
 
+        _totalCrystalCount = 0;
+        foreach (var entity in _world.AllActiveEntities())
+        {
+            if (entity.HasTag("Crystal"))
+            {
+                _totalCrystalCount++;
+                if (_foundCrystals.Contains(entity.State.GetIntOrFallback("unique_id", 0)))
+                {
+                    _world.Destroy(entity);
+                }
+            }
+        }
+
+        EnterCurrentRoom();
+    }
+
+    private void OnClaimCrystal(Entity crystal)
+    {
+        var uniqueId = crystal.State.GetIntOrFallback("unique_id", 0);
+        _world.Destroy(crystal);
+        _foundCrystals.Add(uniqueId);
+        DisplayDynamicDialogueMessage($"Found a Crystal {_foundCrystals.Count}/{_totalCrystalCount}");
+    }
+
+    private void EnterCurrentRoom()
+    {
         foreach (var entity in _world.CurrentRoom.AllActiveEntities())
         {
             entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
@@ -455,14 +495,56 @@ public class LdSession : Session
     {
         if (ResourceAlias.HasEntityTemplate(itemName) && _preservedItems.Contains(itemName))
         {
+            foreach (var entity in _world.GetActiveEntitiesAt(position))
+            {
+                if (entity.HasTag("Item"))
+                {
+                    // skip! the item is already there!
+                    return;
+                }
+            }
+
             var template = ResourceAlias.EntityTemplate(itemName);
-            _world.AddEntity(new Entity(position, template));
+            _world.AddEntity(_world.CreateEntityFromTemplate(template, position, []));
         }
     }
 
     private void OnAttemptVictory()
     {
-        DisplayDynamicDialogueMessage("You have (X/X) coins.");
+        if (_foundCrystals.Count < _totalCrystalCount)
+        {
+            DisplayDynamicDialogueMessage($"You have ({_foundCrystals.Count}/{_totalCrystalCount}) Crystals.");
+        }
+        else
+        {
+            _transitionTween
+                .Add(new DynamicTween(() =>
+                {
+                    var tween = new SequenceTween();
+                    var wipeTransition = new WipeTransition(_screen, TileState.Empty);
+                    _currentTransition = wipeTransition;
+                    tween.Add(wipeTransition.FadeIn());
+                    return tween;
+                }))
+                .Add(new CallbackTween(() => { DisplayScriptedDialogueMessage("ending"); }))
+                .Add(new WaitUntilTween(()=>_modalQueue.Count == 0))
+                .Add(new DynamicTween(() =>
+                {
+                    var tween = new SequenceTween();
+                    var wipeTransition = new LsdTransition(_screen);
+                    _currentTransition = wipeTransition;
+                    tween.Add(wipeTransition.FadeIn());
+                    return tween;
+                }))
+                .Add(new CallbackTween(() => { DisplayScriptedDialogueMessage("credits"); }))
+                .Add(new WaitUntilTween(()=>_modalQueue.Count == 0))
+                .Add(new CallbackTween(() =>
+                {
+                    DisplayDynamicDialogueMessage("notexplosive.net");
+                    _stopAllInput = true;
+                }))
+                ;
+        }
     }
 
     private void OnEnterSanctuary()
@@ -476,7 +558,7 @@ public class LdSession : Session
             {
                 continue;
             }
-            
+
             if (!_preservedItems.Contains(templateName))
             {
                 DisplayDynamicDialogueMessage(

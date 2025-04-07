@@ -2,8 +2,11 @@
 #
 {c:blood}
 The only way to leave this place
-is to collect all 10 Crystals...
+is to collect all those Crystals...
 #
 {c:blood}And then hope that whatever is in
 that Vault will free you from the
 Curse of the Catacombs.
+#
+{c:blood}Good luck. You'll need it.
+{i:Entities:25}{i:Entities:25}{i:Entities:25}

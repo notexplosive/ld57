@@ -30,6 +30,10 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         {
             HotReloadCache.EditorOpenFileName ??= levelName;
         }
+        else
+        {
+            levelName = "default";
+        }
         
         _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
@@ -44,22 +48,19 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             _gameSession.LoadWorld(_editorSession.WorldTemplate, position);
             _session = _gameSession;
         };
-
-        if (targetMode == "play")
-        {
-            LoadGame();
-        }
-        else if (targetMode == "editor")
-        {
-            _session = _editorSession;
-        }
-        else if (Client.Debug.IsPassiveOrActive)
+        
+        if (targetMode == "edit")
         {
             _session = _editorSession;
         }
         else
         {
             LoadGame();
+            var template = JsonConvert.DeserializeObject<WorldTemplate>(Client.Debug.RepoFileSystem.GetDirectory("Resource/Worlds").ReadFile(levelName+".json"));
+            if (template != null)
+            {
+                _gameSession.LoadWorld(template);
+            }
         }
     }
 
