@@ -367,7 +367,10 @@ public class LdSession : Session
                 oldRooms.Add(room);
                 foreach (var entityInRoom in room.AllActiveEntities())
                 {
-                    entitiesToPreserve.Add(entityInRoom);
+                    if (!entity.HasTag("DoNotPreserve"))
+                    {
+                        entitiesToPreserve.Add(entityInRoom);
+                    }
                 }
             }
         }

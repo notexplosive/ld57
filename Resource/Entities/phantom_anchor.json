@@ -3,5 +3,7 @@
     "sprite_sheet": "Entities",
     "frame": 14,
     "color": "phantom",
-    "tags": []
+    "tags": [
+        "DoNotPreserve"
+    ]
 }
