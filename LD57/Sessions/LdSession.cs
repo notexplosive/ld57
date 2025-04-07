@@ -197,7 +197,7 @@ public class LdSession : Session
             {
                 if (_pendingActionButton != ActionButton.None)
                 {
-                    _inventory.AnimateUse(_pendingActionButton, _world, _cutsceneTween);
+                    _inventory.AnimateUse(_pendingActionButton, _world, _player, _cutsceneTween);
                 }
                 else
                 {
@@ -267,9 +267,7 @@ public class LdSession : Session
         _world.Destroy(item);
         if (_inventory.HasSomethingInSlot(slot))
         {
-            var existingItem = _inventory.RemoveFromSlot(slot);
-            existingItem.Position = _player.Position;
-            _world.AddEntity(existingItem);
+            var existingItem = _inventory.RemoveFromSlot(slot, _world, _player);
             DisplayDynamicDialogueMessage($"You dropped\n{Inventory.GetItemName(existingItem)}");
         }
         

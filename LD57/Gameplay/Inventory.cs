@@ -10,24 +10,24 @@ public class Inventory
     private readonly Dictionary<ActionButton, Entity> _itemEntities = new();
     public bool IsPlayingItemAnimation { get; private set; }
 
-    public void AnimateUse(ActionButton slot, World world, SequenceTween tween)
+    public void AnimateUse(ActionButton slot, World world, Entity user, SequenceTween tween)
     {
         if (HasSomethingInSlot(slot))
         {
             tween
                 .Add(new CallbackTween(() => { IsPlayingItemAnimation = true; }))
-                .Add(GetItemBehavior(slot).PlayAnimation(world))
+                .Add(GetBehaviorInSlot(slot).PlayAnimation(world, user))
                 .Add(new CallbackTween(() => { IsPlayingItemAnimation = false; }))
                 ;
         }
     }
 
-    public void InstantUse(ActionButton slot, World world)
+    public void InstantUse(ActionButton slot, World world, Entity user)
     {
-        GetItemBehavior(slot).Execute(world);
+        GetBehaviorInSlot(slot).Execute(world, user);
     }
 
-    private ItemBehavior GetItemBehavior(ActionButton slot)
+    private ItemBehavior GetBehaviorInSlot(ActionButton slot)
     {
         if (_itemBehaviors.TryGetValue(slot, out var result))
         {
@@ -37,9 +37,9 @@ public class Inventory
         return new EmptyItemBehavior();
     }
 
-    public void PaintWorldOverlay(ActionButton button,AsciiScreen screen, World world, Entity player, float dt)
+    public void PaintWorldOverlay(ActionButton button,AsciiScreen screen, World world, Entity user, float dt)
     {
-        GetItemBehavior(button).PaintInWorld(screen, world, player, dt);
+        GetBehaviorInSlot(button).PaintInWorld(screen, world, user, dt);
     }
 
     public void Equip(ActionButton slot, Entity entity)
@@ -91,13 +91,17 @@ public class Inventory
         return _itemEntities.GetValueOrDefault(slot);
     }
 
-    public Entity RemoveFromSlot(ActionButton slot)
+    public Entity RemoveFromSlot(ActionButton slot, World world, Entity player)
     {
         var entity = _itemEntities[slot];
 
+        entity.Position = player.Position;
+        world.AddEntity(entity);
+        
+        GetBehaviorInSlot(slot).OnRemove(world, player);
+        
         _itemEntities.Remove(slot);
         _itemBehaviors.Remove(slot);
-
         return entity;
     }
 
@@ -120,7 +124,7 @@ public class Inventory
         screen.PutString(bottomHudTopLeft + new GridPosition(2, 0), "Z[ ]");
         if (HasSomethingInSlot(ActionButton.Primary))
         {
-            var itemBehavior = GetItemBehavior(ActionButton.Primary);
+            var itemBehavior = GetBehaviorInSlot(ActionButton.Primary);
             screen.PutTile(bottomHudTopLeft + new GridPosition(4, 0), itemBehavior.DefaultHudTile,
                 itemBehavior.GetTweenableGlyph());
         }
@@ -128,7 +132,7 @@ public class Inventory
         screen.PutString(bottomHudTopLeft + new GridPosition(7, 0), "X[ ]");
         if (HasSomethingInSlot(ActionButton.Secondary))
         {
-            var itemBehavior = GetItemBehavior(ActionButton.Secondary);
+            var itemBehavior = GetBehaviorInSlot(ActionButton.Secondary);
             screen.PutTile(bottomHudTopLeft + new GridPosition(9, 0), itemBehavior.DefaultHudTile,
                 itemBehavior.GetTweenableGlyph());
         }

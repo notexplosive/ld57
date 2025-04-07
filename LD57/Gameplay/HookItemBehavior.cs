@@ -1,6 +1,7 @@
 ﻿using System;
 using ExplogineMonoGame.Data;
 using ExTween;
+using LD57.CartridgeManagement;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -11,13 +12,15 @@ public class HookItemBehavior : ItemBehavior
     private readonly TweenableGlyph _iconTweenableGlyph = new();
     private Direction _cachedMoveDirection = Direction.None;
 
-    public override void Execute(World world)
+    public override void Execute(World world, Entity user)
     {
     }
 
-    public override SequenceTween PlayAnimation(World world)
+    public override SequenceTween PlayAnimation(World world, Entity user)
     {
-        return new SequenceTween();
+        return new SequenceTween()
+                .Add(ExecuteCallbackTween(world, user))
+            ;
     }
 
     public override void PaintInWorld(AsciiScreen screen, World world, Entity player, float dt)
@@ -49,5 +52,10 @@ public class HookItemBehavior : ItemBehavior
     public override TweenableGlyph? GetTweenableGlyph()
     {
         return _iconTweenableGlyph;
+    }
+
+    public override void OnRemove(World world, Entity player)
+    {
+        
     }
 }

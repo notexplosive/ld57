@@ -6,15 +6,15 @@ namespace LD57.Gameplay;
 
 public class EmptyItemBehavior : ItemBehavior
 {
-    public override void Execute(World world)
+    public override void Execute(World world, Entity user)
     {
         Client.Debug.Log("Do nothing");
     }
 
-    public override SequenceTween PlayAnimation(World world)
+    public override SequenceTween PlayAnimation(World world, Entity user)
     {
         return new SequenceTween()
-                .Add(ExecuteCallbackTween(world))
+                .Add(ExecuteCallbackTween(world, user))
             ;
     }
 
@@ -25,5 +25,10 @@ public class EmptyItemBehavior : ItemBehavior
     public override TweenableGlyph? GetTweenableGlyph()
     {
         return null;
+    }
+
+    public override void OnRemove(World world, Entity player)
+    {
+        
     }
 }

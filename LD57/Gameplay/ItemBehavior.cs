@@ -7,17 +7,17 @@ public abstract class ItemBehavior
 {
     public TileState DefaultHudTile { get; private set; } = TileState.StringCharacter("?");
 
-    public abstract void Execute(World world);
+    public abstract void Execute(World world, Entity user);
 
-    public CallbackTween ExecuteCallbackTween(World world)
+    public CallbackTween ExecuteCallbackTween(World world, Entity user)
     {
-        return new CallbackTween(() => { Execute(world); });
+        return new CallbackTween(() => { Execute(world, user); });
     }
 
     /// <summary>
     ///     This is assumed to call ExecuteCallbackTween() at some point
     /// </summary>
-    public abstract SequenceTween PlayAnimation(World world);
+    public abstract SequenceTween PlayAnimation(World world, Entity user);
 
     public abstract void PaintInWorld(AsciiScreen screen, World world, Entity player, float dt);
 
@@ -27,4 +27,6 @@ public abstract class ItemBehavior
     }
 
     public abstract TweenableGlyph? GetTweenableGlyph();
+
+    public abstract void OnRemove(World world, Entity player);
 }
