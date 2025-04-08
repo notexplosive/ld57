@@ -4,6 +4,7 @@
     "frame": 19,
     "color": "wood",
     "tags": [
-        "HookAnchor"
+        "Swappable",
+        "Capturable"
     ]
 }

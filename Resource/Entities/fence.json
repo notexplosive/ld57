@@ -7,6 +7,6 @@
         "Solid",
         "Capturable",
         "HookAnchor",
-        "Swappable"
+        "AllowSwapPassThrough"
     ]
 }
