@@ -1,4 +1,6 @@
 local explogine = lib "explogine"
 local info = require "info"
 
-explogine.upload(info, args[1])
+print("MAKE SURE THIS UPLOADS TO POST JAM BUILD")
+print("Update crater!!")
+-- explogine.upload(info, args[1])
