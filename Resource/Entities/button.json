@@ -5,6 +5,7 @@
     "color": "button",
     "tags": [
         "Button",
-        "Signal"
+        "Signal",
+        "AllowDropOn"
     ]
 }

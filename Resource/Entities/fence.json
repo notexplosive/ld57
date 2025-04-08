@@ -5,7 +5,6 @@
     "color": "wood",
     "tags": [
         "Solid",
-        "Capturable",
         "HookAnchor",
         "AllowSwapPassThrough"
     ]

@@ -194,7 +194,7 @@ public class RuleComputer
             Direction.None);
 
         var status = EvaluateMove(data);
-        return status.WasSuccessful;
+        return status.WasSuccessful && !status.CausedPush;
     }
 }
 

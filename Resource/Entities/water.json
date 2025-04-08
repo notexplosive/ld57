@@ -4,6 +4,7 @@
     "frame": 15,
     "color": "water",
     "tags": [
-        "Water"
+        "Water",
+        "AllowDropOn"
     ]
 }

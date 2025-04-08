@@ -1,0 +1,15 @@
+{
+    "sort_priority": 1,
+    "sprite_sheet": "Entities",
+    "frame": 1,
+    "color": "blood",
+    "tags": [
+        "Capturable",
+        "Solid",
+        "PressesButtons",
+        "Swappable"
+    ],
+    "state": {
+        "move_sound": "clank"
+    }
+}
