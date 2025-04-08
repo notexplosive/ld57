@@ -2,5 +2,4 @@ local explogine = lib "explogine"
 local info = require "info"
 
 
-print("make sure crater is updated!!")
--- explogine.upload(info, args[1], info.channelSuffix)
+explogine.upload(info, args[1], info.channelSuffix)
