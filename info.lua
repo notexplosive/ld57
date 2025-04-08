@@ -5,7 +5,7 @@ local info = {
     itchUrl = "LD57",
     iconPath = "LD57/Icon.bmp",
     buildDirectory = buildDirectory,
-    channelSuffix = "jam",
+    channelSuffix = "post-jam",
 
     platformToProject =
     {
