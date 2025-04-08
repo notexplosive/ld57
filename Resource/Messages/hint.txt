@@ -1,9 +1,7 @@
-{c:green_text}A word of advice...
-#
-{c:green_text}The Catacombs do not play fair, 
+{c:blue_text}The Catacombs do not play fair, 
 and neither should you.
 #
-{c:green_text}It's not cheating if you
-solved the puzzle.
+{c:blue_text}Think outside the box!
 #
-{c:green_text}Think outside the box!
+{c:blue_text}If you get stuck, you
+can try another puzzle.

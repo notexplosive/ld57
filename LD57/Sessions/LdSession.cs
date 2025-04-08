@@ -407,6 +407,8 @@ public class LdSession : Session
                 entityToRestore.UnStart();
                 _world.AddEntity(entityToRestore);
             }
+            
+            RemoveCollectedCrystals();
         }
 
         foreach (var entity in _world.AllActiveEntitiesCached())
@@ -461,6 +463,13 @@ public class LdSession : Session
         _world.AttemptedVictory += OnAttemptVictory;
         _world.RequestSpawnFromStorage += SpawnFromStorage;
 
+        RemoveCollectedCrystals();
+
+        EnterCurrentRoom();
+    }
+
+    private void RemoveCollectedCrystals()
+    {
         _totalCrystalCount = 0;
         foreach (var entity in _world.AllActiveEntities())
         {
@@ -473,8 +482,6 @@ public class LdSession : Session
                 }
             }
         }
-
-        EnterCurrentRoom();
     }
 
     private void OnClaimCrystal(Entity crystal)
@@ -499,11 +506,8 @@ public class LdSession : Session
         {
             foreach (var entity in _world.GetActiveEntitiesAt(position))
             {
-                if (entity.HasTag("Item"))
-                {
-                    // skip! the item is already there!
-                    return;
-                }
+                // get rid of anything that happens to be there
+                _world.Destroy(entity);
             }
 
             var template = ResourceAlias.EntityTemplate(itemName);

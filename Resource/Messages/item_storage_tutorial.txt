@@ -1,4 +1,5 @@
 {c:blue_text}Magical Items you've collected
 will be preserved here.
 #
-{c:blue_text}Each podium will store an item.
+{c:blue_text}Read the plaques to learn
+what they do.
