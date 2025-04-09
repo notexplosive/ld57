@@ -1,0 +1,7 @@
+Move      : WASD | {i:Entities:21}{i:Entities:22}{i:Entities:23}{i:Entities:24}
+          :      |  
+Primary   : Z    | Space
+          :      |
+Secondary : X    | Shift
+          :      |
+Reset     : R    | ESC

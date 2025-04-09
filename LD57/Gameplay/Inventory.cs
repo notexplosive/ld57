@@ -8,7 +8,13 @@ public class Inventory
 {
     private readonly Dictionary<ActionButton, ItemBehavior> _itemBehaviors = new();
     private readonly Dictionary<ActionButton, Entity> _itemEntities = new();
+    private bool _canReset;
     public bool IsPlayingItemAnimation { get; private set; }
+
+    public void EnableReset()
+    {
+        _canReset = true;
+    }
 
     public void AnimateUse(ActionButton slot, World world, Entity user, SequenceTween tween)
     {
@@ -141,6 +147,12 @@ public class Inventory
             var itemBehavior = GetBehaviorInSlot(ActionButton.Secondary);
             screen.PutTile(bottomHudTopLeft + new GridPosition(9, 0), itemBehavior.DefaultHudTile,
                 itemBehavior.GetTweenableGlyph());
+        }
+
+        if (_canReset)
+        {
+            screen.PutString(bottomHudTopLeft + new GridPosition(12, 0), "R[ ]");
+            screen.PutTile(bottomHudTopLeft + new GridPosition(14, 0), TileState.Sprite(ResourceAlias.Entities, 27));
         }
 
         screen.PutString(bottomHudTopLeft + new GridPosition(1, 1), currentZoneName ?? "???");

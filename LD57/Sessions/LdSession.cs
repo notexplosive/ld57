@@ -60,12 +60,26 @@ public class LdSession : Session
 
         var mainMenuPrompt = new Prompt(Constants.Title, Orientation.Vertical, [
             new PromptOption("Play", () => { FadeOutTransition(); }),
+            new PromptOption("Fullscreen", () =>
+            {
+                RuntimeWindow.SetFullscreen(!RuntimeWindow.IsFullscreen);
+                OpenMainMenu();
+            }),
+            new PromptOption("Controls", () =>
+            {
+                DisplayScriptedDialogueMessage("controls");
+                OpenMainMenu();
+            }),
             new PromptOption("Credits", () =>
             {
                 DisplayScriptedDialogueMessage("credits");
                 OpenMainMenu();
             }),
-            new PromptOption("Level Editor", () => { RequestLevelEditor?.Invoke(); })
+            new PromptOption("Level Editor", () =>
+            {
+                RequestLevelEditor?.Invoke();
+                _currentTransition = null;
+            })
         ]);
 
         DisplayPrompt(mainMenuPrompt);
@@ -555,6 +569,8 @@ public class LdSession : Session
 
     private void OnEnterSanctuary()
     {
+        _inventory.EnableReset();
+        
         foreach (var item in GetHeldItems())
         {
             var humanReadableName = Inventory.GetHumanReadableName(item);
