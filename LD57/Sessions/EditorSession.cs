@@ -182,9 +182,9 @@ public class EditorSession : Session
                     }
                 }
                 
-                if (metadataEntities.Count > 0 &&  metadataEntities.First().ExtraState.TryGetValue("command", out var status))
+                if (metadataEntities.Count > 0 &&  metadataEntities.First().ExtraState.TryGetValue(Constants.CommandKey, out var status))
                 {
-                    return "command: " + status;
+                    return $"{Constants.CommandKey}: " + status;
                 }
             }
         }
@@ -415,7 +415,7 @@ public class EditorSession : Session
                     var defaultText = "";
                     if (foundMetaEntity != null)
                     {
-                        defaultText = foundMetaEntity.ExtraState.GetValueOrDefault("command") ?? defaultText;
+                        defaultText = foundMetaEntity.ExtraState.GetValueOrDefault(Constants.CommandKey) ?? defaultText;
                     }
 
                     var isUsingSelection = _selectionRectangle.HasValue &&
@@ -431,7 +431,7 @@ public class EditorSession : Session
                                 }
                                 else
                                 {
-                                    foundMetaEntity.ExtraState["command"] = text;
+                                    foundMetaEntity.ExtraState[Constants.CommandKey] = text;
                                 }
                             }
                             else
@@ -735,7 +735,7 @@ public class EditorSession : Session
         {
             foreach (var placedEntity in WorldTemplate.PlacedEntities)
             {
-                if (placedEntity.ExtraState.ContainsKey("command"))
+                if (placedEntity.ExtraState.ContainsKey(Constants.CommandKey))
                 {
                     _screen.PutTile(placedEntity.Position - _cameraPosition,
                         TileState.StringCharacter("!", Color.OrangeRed));

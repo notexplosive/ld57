@@ -286,7 +286,7 @@ public class World
 
     public void SetupTriggerEntityBehaviors(Entity entity)
     {
-        var splitCommand = entity.State.GetString("command")?.Trim().Split() ?? [];
+        var splitCommand = entity.State.GetString(Constants.CommandKey)?.Trim().Split() ?? [];
         if (splitCommand.Length == 1)
         {
             var commandName = splitCommand[0];

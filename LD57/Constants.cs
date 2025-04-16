@@ -8,6 +8,8 @@ namespace LD57;
 
 public static class Constants
 {
+    public const string CommandKey = "command";
+    
     public static GridPosition GameRoomSize => CreateGameScreen().RoomSize - new GridPosition(0, 3);
     public static string Title => "Explorem Ipsum: Catacombs of Time";
 

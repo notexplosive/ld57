@@ -95,7 +95,7 @@ public class WorldTemplate
             TemplateName = string.Empty,
             ExtraState = new Dictionary<string, string>
             {
-                {"command", command}
+                {Constants.CommandKey, command}
             }
         });
     }

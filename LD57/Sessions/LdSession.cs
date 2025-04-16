@@ -377,7 +377,7 @@ public class LdSession : Session
 
         foreach (var entity in _world.AllActiveEntities())
         {
-            if (entity.State.GetString("command") == "preserve")
+            if (entity.State.GetString(Constants.CommandKey) == "preserve")
             {
                 var room = _world.GetRoomAt(entity.Position);
                 oldRooms.Add(room);
