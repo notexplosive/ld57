@@ -24,6 +24,12 @@ public class World
         PopulateFromTemplate(worldTemplate);
     }
 
+    public bool IsEditMode { get; }
+    public Room CurrentRoom { get; private set; }
+    public RuleComputer Rules { get; }
+
+    public GridPosition CameraPosition { get; set; }
+
     public void PopulateFromTemplate(WorldTemplate worldTemplate)
     {
         foreach (var placedEntity in worldTemplate.PlacedEntities)
@@ -46,12 +52,6 @@ public class World
 
         CurrentRoom.RecalculateLiveEntities();
     }
-
-    public bool IsEditMode { get; }
-    public Room CurrentRoom { get; private set; }
-    public RuleComputer Rules { get; }
-
-    public GridPosition CameraPosition { get; set; }
 
     private Entity CreateEntityFromPlacement(PlacedEntity placedEntity)
     {
@@ -82,7 +82,8 @@ public class World
         {
             if (!IsEditMode)
             {
-                entity.TweenableGlyph.SetAnimation(Animations.CrystalShimmer(ResourceAlias.Color("blood"),ResourceAlias.Color("white"),ResourceAlias.Color("blue_text")));
+                entity.TweenableGlyph.SetAnimation(Animations.CrystalShimmer(ResourceAlias.Color("blood"),
+                    ResourceAlias.Color("white"), ResourceAlias.Color("blue_text")));
             }
         }
 
@@ -96,7 +97,7 @@ public class World
                 }
             });
         }
-        
+
         if (entity.HasTag("Item"))
         {
             var humanReadableName = Inventory.GetHumanReadableName(entity);
@@ -116,10 +117,10 @@ public class World
                 }
             });
         }
-        
+
         if (entity.HasTag("BecomeWaterOnSteppedOff"))
         {
-            entity.AddBehavior(BehaviorTrigger.OnSteppedOff, (entityPayload) =>
+            entity.AddBehavior(BehaviorTrigger.OnSteppedOff, entityPayload =>
             {
                 if (entityPayload.Entity?.HasTag("Solid") == true)
                 {
@@ -172,7 +173,7 @@ public class World
             if (entity.HasTag("Bridge"))
             {
                 entity.AddBehavior(BehaviorTrigger.OnSignalChange, () => { SetIsOpenBasedOnSignal(entity, channel); });
-                
+
                 entity.AddBehavior(BehaviorTrigger.OnStateChanged, payload =>
                 {
                     if (payload.Key == "is_open")
@@ -198,10 +199,7 @@ public class World
 
             if (entity.HasTag("Door"))
             {
-                entity.AddBehavior(BehaviorTrigger.OnSignalChange, () =>
-                {
-                    SetIsOpenBasedOnSignal(entity, channel);
-                });
+                entity.AddBehavior(BehaviorTrigger.OnSignalChange, () => { SetIsOpenBasedOnSignal(entity, channel); });
 
                 entity.AddBehavior(BehaviorTrigger.OnStateChanged, payload =>
                 {
@@ -273,6 +271,7 @@ public class World
     public event Action<string>? RequestShowDynamicMessage;
     public event Action<Entity>? RequestClaimCrystal;
     public event Action<Prompt>? RequestShowPrompt;
+    public event Action<AmbientPlayMode, string, SoundEffectSettings>? RequestAmbientSound;
     public event Action<string, GridPosition>? RequestSpawnFromStorage;
     public event Action<ActionButton, Entity>? RequestEquipItem;
 
@@ -286,77 +285,86 @@ public class World
 
     public void SetupTriggerEntityBehaviors(Entity entity)
     {
-        var splitCommand = entity.State.GetString(Constants.CommandKey)?.Trim().Split() ?? [];
-        if (splitCommand.Length == 1)
-        {
-            var commandName = splitCommand[0];
-            if (commandName == "preserve")
-            {
-                entity.AddBehavior(BehaviorTrigger.OnEnter, () =>
-                {
-                    EnteredSanctuary?.Invoke();
-                });
-            }
+        var parsedCommand = new ParsedCommand(entity.State.GetString(Constants.CommandKey));
 
-            if (commandName == "vault")
-            {
-                entity.AddBehavior(BehaviorTrigger.OnTouch, (payload) =>
-                {
-                    if (payload.Entity?.HasTag("Player") == true)
-                    {
-                        AttemptedVictory?.Invoke();
-                    }
-                });
-            }
+        if (parsedCommand.CommandName == "preserve")
+        {
+            entity.AddBehavior(BehaviorTrigger.OnEnter, () => { EnteredSanctuary?.Invoke(); });
         }
-        else if (splitCommand.Length >= 2)
+
+        if (parsedCommand.CommandName == "vault")
         {
-            var commandName = splitCommand[0];
-            var remainingArgs = splitCommand.ToList();
-            remainingArgs.RemoveAt(0);
-            var arg = string.Join(" ", remainingArgs);
-
-            if (commandName == "load")
+            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
             {
-                entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+                if (payload.Entity?.HasTag("Player") == true)
                 {
-                    if (payload.Entity?.HasTag("Player") == true)
-                    {
-                        RequestLoad?.Invoke(arg);
-                    }
-                });
-            }
-
-            if (commandName == "zone")
+                    AttemptedVictory?.Invoke();
+                }
+            });
+        }
+        
+        if (parsedCommand.CommandName == "load")
+        {
+            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
             {
-                entity.AddBehavior(BehaviorTrigger.OnEnter, () => { RequestZoneNameChange?.Invoke(arg); });
-            }
-
-            if (commandName == "show")
-            {
-                entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+                if (payload.Entity?.HasTag("Player") == true)
                 {
-                    if (payload.Entity?.HasTag("Player") == true)
-                    {
-                        RequestShowScriptedMessage?.Invoke(arg);
-                    }
-                });
-            }
-            
-            if (commandName == "store")
+                    RequestLoad?.Invoke(parsedCommand.ArgAsString(0));
+                }
+            });
+        }
+
+        if (parsedCommand.CommandName == "zone")
+        {
+            entity.AddBehavior(BehaviorTrigger.OnEnter, () => { RequestZoneNameChange?.Invoke(parsedCommand.ArgAsString(0)); });
+        }
+
+        if (parsedCommand.CommandName == "show")
+        {
+            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
             {
-                entity.AddBehavior(BehaviorTrigger.OnReset, () => { RequestSpawnFromStorage?.Invoke(arg, entity.Position); });
-            }
+                if (payload.Entity?.HasTag("Player") == true)
+                {
+                    RequestShowScriptedMessage?.Invoke(parsedCommand.ArgAsString(0));
+                }
+            });
+        }
+
+        if (parsedCommand.CommandName == "store")
+        {
+            entity.AddBehavior(BehaviorTrigger.OnReset,
+                () => { RequestSpawnFromStorage?.Invoke(parsedCommand.ArgAsString(0), entity.Position); });
+        }
+
+        if (parsedCommand.CommandName == "ambient")
+        {
+            entity.AddBehavior(BehaviorTrigger.OnEnter,
+                () =>
+                {
+                    RequestAmbientSound?.Invoke(AmbientPlayMode.Play, parsedCommand.ArgAsString(0), new SoundEffectSettings {Volume = parsedCommand.ArgAsFloat(1, 1)});
+                });
+            entity.AddBehavior(BehaviorTrigger.OnExit,
+                () => { RequestAmbientSound?.Invoke(AmbientPlayMode.Stop, parsedCommand.ArgAsString(0), new SoundEffectSettings()); });
         }
     }
 
-    public void SetCurrentRoom(Room room)
+    public void SetCurrentRoom(Room newRoom)
     {
-        CurrentRoom = room;
-        CameraPosition = room.TopLeft;
-        foreach (var entity in room.AllActiveEntities())
+        var previousRoom = CurrentRoom;
+        CurrentRoom = newRoom;
+        CameraPosition = newRoom.TopLeft;
+
+        if (previousRoom.TopLeft != newRoom.TopLeft)
         {
-            entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
+            foreach (var entity in previousRoom.AllActiveEntities())
+            {
+                entity.SelfTriggerBehavior(BehaviorTrigger.OnExit);
+            }
+
+            foreach (var entity in newRoom.AllActiveEntities())
+            {
+                entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
+            }
         }
     }
 
@@ -369,7 +377,7 @@ public class World
     {
         return AllActiveEntities().ToList();
     }
-    
+
     public IEnumerable<Entity> AllActiveEntities()
     {
         foreach (var entity in _entities)

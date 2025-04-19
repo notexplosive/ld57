@@ -2,7 +2,7 @@
   "entities": [
     {
       "extra_state": {
-        "command": "ambient bird2 0.25"
+        "command": "ambient bird2 0.1"
       },
       "template_name": "",
       "position": {
@@ -595,13 +595,523 @@
       }
     },
     {
-      "extra_state": {
-        "command": "ambient bird2 0.5"
-      },
-      "template_name": "",
+      "extra_state": {},
+      "template_name": "fence",
       "position": {
-        "x": -9,
+        "x": 17,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence",
+      "position": {
+        "x": 18,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence",
+      "position": {
+        "x": 19,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence",
+      "position": {
+        "x": 20,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 21,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 21,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 21,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_red",
+      "position": {
+        "x": 21,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "red_brick",
+      "position": {
+        "x": 21,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 5,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 5,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 5,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 7,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 7,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 7,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 5,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 5,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 5,
         "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 7,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 7,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 7,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 8,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 9,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 10,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 11,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 12,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 13,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 14,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 15,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 16,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 17,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 18,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 19,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 20,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 21,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 22,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 23,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 24,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 25,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": -5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": -4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": -3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": -2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": -1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 0
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 1
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 6,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": -2,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": -1,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 0,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 1,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 2,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 3,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_rock_path",
+      "position": {
+        "x": 4,
+        "y": 4
       }
     }
   ]

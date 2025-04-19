@@ -40,6 +40,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
         _gameSession.RequestLevelEditor += () =>
         {
+            _gameSession.StopAllAmbientSounds();
             _session = _editorSession;
         };
         
@@ -71,28 +72,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
-        if (Client.Debug.IsPassiveOrActive)
-        {
-            if (input.Keyboard.GetButton(Keys.F4).WasPressed)
-            {
-                ToggleSession();
-            }
-        }
-
         _session.UpdateInput(input, hitTestStack);
-    }
-
-    private void ToggleSession()
-    {
-        if (_session == _editorSession)
-        {
-            _gameSession.LoadWorld(_editorSession.WorldTemplate);
-            _session = _gameSession;
-        }
-        else
-        {
-            _session = _editorSession;
-        }
     }
 
     public override void Update(float dt)

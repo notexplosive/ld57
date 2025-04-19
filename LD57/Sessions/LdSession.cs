@@ -5,16 +5,20 @@ using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExTween;
+using LD57.CartridgeManagement;
 using LD57.Gameplay;
 using LD57.Rendering;
 using LD57.Rules;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 
 namespace LD57.Sessions;
 
 public class LdSession : Session
 {
+    private readonly AmbientSoundPlayer _ambientSoundPlayer = new();
     private readonly SequenceTween _cutsceneTween = new();
     private readonly DialogueBox _dialogueBox;
     private readonly HashSet<int> _foundCrystals = new();
@@ -38,9 +42,9 @@ public class LdSession : Session
     private Entity _player = new(new GridPosition(), new Invisible());
     private bool _skipClear;
     private bool _skipDrawingMain;
+    private bool _stopAllInput;
     private int _totalCrystalCount;
     private World _world = new(Constants.GameRoomSize, new WorldTemplate());
-    private bool _stopAllInput;
 
     public LdSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
@@ -85,12 +89,12 @@ public class LdSession : Session
         DisplayPrompt(mainMenuPrompt);
     }
 
-    private void CrossFadeTransition(ITransition transition, Action action, string sound,  SoundEffectSettings settings)
+    private void CrossFadeTransition(ITransition transition, Action action, string sound, SoundEffectSettings settings)
     {
         _currentTransition = transition;
 
         _transitionTween.SkipToEnd();
-        
+
         _transitionTween
             .Add(ResourceAlias.CallbackPlaySound(sound, settings))
             .Add(_currentTransition.FadeIn())
@@ -118,7 +122,8 @@ public class LdSession : Session
 
     private void OnMoveCompleted(MoveData data, MoveStatus status)
     {
-        ResourceAlias.PlaySound("concrete_footstep", new SoundEffectSettings{Pitch = Client.Random.Dirty.NextFloat(-0.25f, 0.25f), Volume = 0.15f});
+        ResourceAlias.PlaySound("concrete_footstep",
+            new SoundEffectSettings {Pitch = Client.Random.Dirty.NextFloat(-0.25f, 0.25f), Volume = 0.15f});
         var entitiesAtDestination = _world.GetActiveEntitiesAt(data.Destination).ToList();
         var glyph = data.Mover.TweenableGlyph;
         if (!status.WasSuccessful)
@@ -152,11 +157,19 @@ public class LdSession : Session
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
+        if (Client.Debug.IsPassiveOrActive)
+        {
+            if (input.Keyboard.GetButton(Keys.F4).WasPressed)
+            {
+                RequestLevelEditor?.Invoke();
+            }
+        }
+        
         if (_stopAllInput)
         {
             return;
         }
-        
+
         var frameInput = new FrameInput();
 
         if (FrameInput.PrimaryActionTapped(input))
@@ -352,7 +365,8 @@ public class LdSession : Session
 
     private void AnimateReset()
     {
-        CrossFadeTransition(new LsdTransition(_screen), () => { ExecuteReset(); }, "ohm_over_10", new SoundEffectSettings());
+        CrossFadeTransition(new LsdTransition(_screen), () => { ExecuteReset(); }, "ohm_over_10",
+            new SoundEffectSettings());
     }
 
     private void ExecuteReset()
@@ -421,7 +435,7 @@ public class LdSession : Session
                 entityToRestore.UnStart();
                 _world.AddEntity(entityToRestore);
             }
-            
+
             RemoveCollectedCrystals();
         }
 
@@ -476,6 +490,7 @@ public class LdSession : Session
         _world.RequestEquipItem += EquipItem;
         _world.AttemptedVictory += OnAttemptVictory;
         _world.RequestSpawnFromStorage += SpawnFromStorage;
+        _world.RequestAmbientSound += _ambientSoundPlayer.HandleAmbientSoundRequest;
 
         RemoveCollectedCrystals();
 
@@ -547,7 +562,7 @@ public class LdSession : Session
                     return tween;
                 }))
                 .Add(new CallbackTween(() => { DisplayScriptedDialogueMessage("ending"); }))
-                .Add(new WaitUntilTween(()=>_modalQueue.Count == 0))
+                .Add(new WaitUntilTween(() => _modalQueue.Count == 0))
                 .Add(new DynamicTween(() =>
                 {
                     var tween = new SequenceTween();
@@ -557,7 +572,7 @@ public class LdSession : Session
                     return tween;
                 }))
                 .Add(new CallbackTween(() => { DisplayScriptedDialogueMessage("credits"); }))
-                .Add(new WaitUntilTween(()=>_modalQueue.Count == 0))
+                .Add(new WaitUntilTween(() => _modalQueue.Count == 0))
                 .Add(new CallbackTween(() =>
                 {
                     DisplayDynamicDialogueMessage("notexplosive.net");
@@ -570,7 +585,7 @@ public class LdSession : Session
     private void OnEnterSanctuary()
     {
         _inventory.EnableReset();
-        
+
         foreach (var item in GetHeldItems())
         {
             var humanReadableName = Inventory.GetHumanReadableName(item);
@@ -673,7 +688,13 @@ public class LdSession : Session
         var worldTemplate = JsonConvert.DeserializeObject<WorldTemplate>(worldData);
         if (worldTemplate != null)
         {
-            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () => { LoadWorld(worldTemplate); }, "speaker_crackle1", new SoundEffectSettings{Pitch = -1});
+            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () => { LoadWorld(worldTemplate); },
+                "speaker_crackle1", new SoundEffectSettings {Pitch = -1});
         }
+    }
+
+    public void StopAllAmbientSounds()
+    {
+        _ambientSoundPlayer.StopAll();
     }
 }

@@ -198,6 +198,20 @@ public class EditorSession : Session
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
+        if (Client.Debug.IsPassiveOrActive)
+        {
+            if (input.Keyboard.GetButton(Keys.F5).WasPressed)
+            {
+                var player = WorldTemplate.GetPlayerEntity();
+                var position = new GridPosition();
+                if (player != null)
+                {
+                    position = player.Position;
+                }
+                RequestPlay?.Invoke(position);
+            }
+        }
+        
         HotReloadCache.EditorOpenFileName = _fileName;
         HotReloadCache.EditorCameraPosition = _cameraPosition;
 
