@@ -2020,14 +2020,6 @@
       "extra_state": {},
       "template_name": "floor_grass_3",
       "position": {
-        "x": 66,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_grass_3",
-      "position": {
         "x": 67,
         "y": 12
       }
@@ -2341,30 +2333,6 @@
       "template_name": "blue_brick",
       "position": {
         "x": 80,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 80,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 80,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "blue_brick",
-      "position": {
-        "x": 80,
         "y": 6
       }
     },
@@ -2477,14 +2445,6 @@
       "template_name": "fence",
       "position": {
         "x": 59,
-        "y": 15
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "fence",
-      "position": {
-        "x": 63,
         "y": 15
       }
     },
@@ -3268,46 +3228,6 @@
       "extra_state": {},
       "template_name": "tree",
       "position": {
-        "x": 76,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 77,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 77,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 78,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 78,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
         "x": 80,
         "y": 7
       }
@@ -3477,22 +3397,6 @@
       "template_name": "tree",
       "position": {
         "x": 81,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 81,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 81,
         "y": 5
       }
     },
@@ -3502,30 +3406,6 @@
       "position": {
         "x": 81,
         "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 79,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 79,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 79,
-        "y": 5
       }
     },
     {
@@ -6108,22 +5988,6 @@
       "extra_state": {},
       "template_name": "water",
       "position": {
-        "x": 69,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 69,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
         "x": 73,
         "y": 8
       }
@@ -6156,48 +6020,8 @@
       "extra_state": {},
       "template_name": "water",
       "position": {
-        "x": 70,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 69,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 70,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 71,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
         "x": 72,
         "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 73,
-        "y": 7
       }
     },
     {
@@ -6230,30 +6054,6 @@
       "position": {
         "x": 72,
         "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 73,
-        "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 73,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 74,
-        "y": 5
       }
     },
     {
@@ -7300,30 +7100,6 @@
       "extra_state": {},
       "template_name": "floor_grass_2",
       "position": {
-        "x": 61,
-        "y": 15
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 62,
-        "y": 15
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_grass_2",
-      "position": {
-        "x": 62,
-        "y": 16
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "floor_grass_2",
-      "position": {
         "x": 63,
         "y": 16
       }
@@ -8276,23 +8052,7 @@
       "extra_state": {},
       "template_name": "tree",
       "position": {
-        "x": 61,
-        "y": 17
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
         "x": 63,
-        "y": 17
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 62,
         "y": 17
       }
     },
@@ -8669,22 +8429,6 @@
       "template_name": "tree",
       "position": {
         "x": 60,
-        "y": 18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 61,
-        "y": 18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "tree",
-      "position": {
-        "x": 62,
         "y": 18
       }
     },
@@ -15560,6 +15304,640 @@
       "position": {
         "x": 73,
         "y": -30
+      }
+    },
+    {
+      "extra_state": {
+        "command": "ambient ambient_water 0.15"
+      },
+      "template_name": "",
+      "position": {
+        "x": 13,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {
+        "command": "ambient ambient_water 0.5"
+      },
+      "template_name": "",
+      "position": {
+        "x": 49,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 69,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 69,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 68,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 67,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 66,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 65,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 68,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 67,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 66,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 62,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 65,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 64,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 64,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 63,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 62,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 62,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 62,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 62,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 61,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 61,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 63,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 63,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 62,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 61,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 61,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 61,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 73,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 74,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 75,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 75,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 76,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 76,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 77,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 77,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 78,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 79,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 84,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 80,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 78,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 81,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 79,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 80,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 81,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 82,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 82,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 83,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 84,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 85,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 73,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 73,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 74,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 75,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 75,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 76,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 77,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 78,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 79,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 80,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 71,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 70,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 70,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 70,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 69,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 68,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 67,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 66,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 67,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 66,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 70,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 68,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 68,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 67,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "floor_grass_3",
+      "position": {
+        "x": 74,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {
+        "command": "ambient ambient_water 0.25"
+      },
+      "template_name": "",
+      "position": {
+        "x": 63,
+        "y": -4
+      }
+    },
+    {
+      "extra_state": {
+        "command": "ambient ambient_night 2"
+      },
+      "template_name": "",
+      "position": {
+        "x": 15,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {
+        "command": "ambient ambient_night 0.5"
+      },
+      "template_name": "",
+      "position": {
+        "x": 49,
+        "y": -26
       }
     }
   ]

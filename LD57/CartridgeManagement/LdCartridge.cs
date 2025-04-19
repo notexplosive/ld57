@@ -60,8 +60,10 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             var template = JsonConvert.DeserializeObject<WorldTemplate>(Client.Debug.RepoFileSystem.GetDirectory("Resource/Worlds").ReadFile(levelName+".json"));
             if (template != null)
             {
-                _gameSession.LoadWorld(template);
+                _gameSession.StartingTemplate = template;
             }
+            
+            _gameSession.OpenMainMenu();
         }
     }
 

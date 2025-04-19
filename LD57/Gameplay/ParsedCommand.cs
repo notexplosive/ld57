@@ -42,4 +42,9 @@ public class ParsedCommand
 
         return fallback;
     }
+
+    public string AllArgsJoined(string joiner)
+    {
+        return string.Join(joiner,_remainingArgs);
+    }
 }

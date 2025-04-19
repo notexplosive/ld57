@@ -156,11 +156,21 @@ public class World
                     var isPressed = EntitiesInSameRoom(entity.Position)
                         .Where(a => a.Position == entity.Position).Any(a => a.HasTag("PressesButtons"));
 
+                    var isInitialized = entity.State.HasKey("is_pressed");
                     var wasPressed = entity.State.GetBool("is_pressed");
                     entity.State.Set("is_pressed", isPressed);
 
-                    if (wasPressed != isPressed)
+                    if (isInitialized && wasPressed != isPressed)
                     {
+                        if (isPressed)
+                        {
+                            ResourceAlias.PlaySound("press_button", new SoundEffectSettings());
+                        }
+                        else
+                        {
+                            ResourceAlias.PlaySound("press_button", new SoundEffectSettings{Pitch = 0.5f});
+                        }
+
                         foreach (var otherEntities in EntitiesInSameRoom(entity.Position)
                                      .Where(a => a.State.GetIntOrFallback("channel", 0) == channel))
                         {
@@ -316,7 +326,7 @@ public class World
 
         if (parsedCommand.CommandName == "zone")
         {
-            entity.AddBehavior(BehaviorTrigger.OnEnter, () => { RequestZoneNameChange?.Invoke(parsedCommand.ArgAsString(0)); });
+            entity.AddBehavior(BehaviorTrigger.OnEnter, () => { RequestZoneNameChange?.Invoke(parsedCommand.AllArgsJoined(" ")); });
         }
 
         if (parsedCommand.CommandName == "show")

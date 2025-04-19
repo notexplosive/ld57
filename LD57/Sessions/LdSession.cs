@@ -54,16 +54,21 @@ public class LdSession : Session
         _dialogueBox = new DialogueBox(Constants.GameRoomSize);
         _promptBox = new PromptBox(Constants.GameRoomSize);
         LoadWorld(new WorldTemplate());
-        OpenMainMenu();
     }
 
-    private void OpenMainMenu()
+    public WorldTemplate StartingTemplate { get; set; } = new();
+
+    public void OpenMainMenu()
     {
         // _skipDrawingMain = true;
         _currentTransition = new LsdTransition(_screen);
 
         var mainMenuPrompt = new Prompt(Constants.Title, Orientation.Vertical, [
-            new PromptOption("Play", () => { FadeOutTransition(); }),
+            new PromptOption("Play", () =>
+            {
+                LoadWorld(StartingTemplate);
+                FadeOutTransition();
+            }),
             new PromptOption("Fullscreen", () =>
             {
                 RuntimeWindow.SetFullscreen(!RuntimeWindow.IsFullscreen);
@@ -89,14 +94,13 @@ public class LdSession : Session
         DisplayPrompt(mainMenuPrompt);
     }
 
-    private void CrossFadeTransition(ITransition transition, Action action, string sound, SoundEffectSettings settings)
+    private void CrossFadeTransition(ITransition transition, Action action)
     {
         _currentTransition = transition;
 
         _transitionTween.SkipToEnd();
 
         _transitionTween
-            .Add(ResourceAlias.CallbackPlaySound(sound, settings))
             .Add(_currentTransition.FadeIn())
             .Add(new CallbackTween(action))
             .Add(new WaitUntilTween(() => _modalQueue.Count == 0))
@@ -365,8 +369,7 @@ public class LdSession : Session
 
     private void AnimateReset()
     {
-        CrossFadeTransition(new LsdTransition(_screen), () => { ExecuteReset(); }, "ohm_over_10",
-            new SoundEffectSettings());
+        CrossFadeTransition(new LsdTransition(_screen), () => { ExecuteReset(); });
     }
 
     private void ExecuteReset()
@@ -458,6 +461,7 @@ public class LdSession : Session
 
     public void LoadWorld(WorldTemplate worldTemplate, GridPosition? playerSpawnPoint = null)
     {
+        StopAllAmbientSounds();
         _mostRecentlyLoadedWorld = worldTemplate;
         var playerSpawn = new GridPosition(0, 0);
         if (playerSpawnPoint.HasValue)
@@ -519,6 +523,7 @@ public class LdSession : Session
         _world.Destroy(crystal);
         _foundCrystals.Add(uniqueId);
         DisplayDynamicDialogueMessage($"Found a Crystal {_foundCrystals.Count}/{_totalCrystalCount}");
+        ResourceAlias.PlaySound("pickup_crystal", new SoundEffectSettings());
     }
 
     private void EnterCurrentRoom()
@@ -688,8 +693,7 @@ public class LdSession : Session
         var worldTemplate = JsonConvert.DeserializeObject<WorldTemplate>(worldData);
         if (worldTemplate != null)
         {
-            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () => { LoadWorld(worldTemplate); },
-                "speaker_crackle1", new SoundEffectSettings {Pitch = -1});
+            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () => { LoadWorld(worldTemplate); });
         }
     }
 

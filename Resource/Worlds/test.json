@@ -2,7 +2,7 @@
   "entities": [
     {
       "extra_state": {
-        "command": "ambient bird2 0.25"
+        "command": "ambient ambient_water 0.5"
       },
       "template_name": "",
       "position": {
@@ -595,13 +595,93 @@
       }
     },
     {
+      "extra_state": {},
+      "template_name": "campfire",
+      "position": {
+        "x": 11,
+        "y": 4
+      }
+    },
+    {
       "extra_state": {
-        "command": "ambient bird2 0.5"
+        "command": "ambient ambient_night"
       },
       "template_name": "",
       "position": {
-        "x": -9,
+        "x": -6,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {
+        "command": "ambient ambient_water 0.25"
+      },
+      "template_name": "",
+      "position": {
+        "x": -4,
         "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "button",
+      "position": {
+        "x": 10,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "button",
+      "position": {
+        "x": 10,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "crate",
+      "position": {
+        "x": 7,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "crate",
+      "position": {
+        "x": 8,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {
+        "unique_id": "1328941101"
+      },
+      "template_name": "crystal",
+      "position": {
+        "x": 15,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {
+        "unique_id": "1328941121"
+      },
+      "template_name": "crystal",
+      "position": {
+        "x": 16,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {
+        "command": "ambient speaker_crackle 0.5"
+      },
+      "template_name": "",
+      "position": {
+        "x": 5,
+        "y": -4
       }
     }
   ]

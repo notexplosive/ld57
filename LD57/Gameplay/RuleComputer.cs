@@ -166,11 +166,14 @@ public class RuleComputer
     {
         moveData.Mover.MostRecentMoveDirection = moveData.Direction;
 
-        // var moveSound= moveData.Mover.State.GetString("move_sound");
-        // if (moveSound != null)
-        // {
-        //     ResourceAlias.PlaySound(moveSound, new SoundEffectSettings());
-        // }
+        if (moveData.Direction != Direction.None && status.WasSuccessful)
+        {
+            var moveSound = moveData.Mover.State.GetString("move_sound");
+            if (moveSound != null)
+            {
+                ResourceAlias.PlaySound(moveSound, new SoundEffectSettings());
+            }
+        }
 
         _world.OnMoveCompleted(moveData, status);
 
