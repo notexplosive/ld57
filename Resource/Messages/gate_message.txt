@@ -1,0 +1,19 @@
+{c:blood}If you're reading this, 
+I'm gone.
+#
+{c:blood}Only one person can reside
+in The Catacombs at a time.
+#
+{c:blood}When one person enters, time
+freezes from the moment they entered.
+#
+{c:blood}The pocket of time I live in
+was destroyed the moment you entered.
+#
+{c:blood}I guess that makes this message
+my tombstone.
+#
+{c:blood}To whoever came in after me:
+Find the Crystals and end this cycle!
+#
+{c:blood}{i:Entities:25}{i:Entities:25} Magenta "Maggie" Ipsum {i:Entities:25}{i:Entities:25}
