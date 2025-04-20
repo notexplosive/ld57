@@ -96,6 +96,11 @@ public class RuleComputer
                 }
             }
 
+            if (tags.Check([Is("Player")], [Is("BlocksPlayer")]))
+            {
+                status.Fail();
+            }
+
             if (tags.Check(
                     [IsNotAnyOf("FloatsInWater", "FillsWater")],
                     [Is("Water")]))

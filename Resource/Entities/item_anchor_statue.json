@@ -1,0 +1,9 @@
+{
+    "sort_priority": 5,
+    "sprite_sheet": "Entities",
+    "frame": 14,
+    "color": "blue_brick",
+    "tags": [
+        "Solid"
+    ]
+}
