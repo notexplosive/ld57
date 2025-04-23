@@ -278,7 +278,6 @@ public class World
     public event Action<string>? RequestLoad;
     public event Action<string>? RequestZoneNameChange;
     public event Action<string>? RequestShowScriptedMessage;
-    public event Action<string>? RequestShowDynamicMessage;
     public event Action<Entity>? RequestClaimCrystal;
     public event Action<Prompt>? RequestShowPrompt;
     public event Action<AmbientPlayMode, string, SoundEffectSettings>? RequestAmbientSound;

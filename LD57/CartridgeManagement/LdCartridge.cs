@@ -17,7 +17,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 {
     private EditorSession _editorSession = null!;
     private LdSession _gameSession = null!;
-    private ISession _session = null!;
+    private ISession? _session;
 
     public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.PointClamp);
 
@@ -74,17 +74,17 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
-        _session.UpdateInput(input, hitTestStack);
+        _session?.UpdateInput(input, hitTestStack);
     }
 
     public override void Update(float dt)
     {
-        _session.Update(dt);
+        _session?.Update(dt);
     }
 
     public override void Draw(Painter painter)
     {
-        _session.Draw(painter);
+        _session?.Draw(painter);
     }
 
     public override void AddCommandLineParameters(CommandLineParametersWriter parameters)
@@ -95,7 +95,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     public override void OnHotReload()
     {
-        _session.OnHotReload();
+        _session?.OnHotReload();
     }
 
     public override IEnumerable<ILoadEvent> LoadEvents(Painter painter)

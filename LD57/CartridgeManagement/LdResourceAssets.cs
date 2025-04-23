@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using ExplogineCore;
 using ExplogineCore.Aseprite;
 using ExplogineCore.Data;
@@ -24,18 +25,7 @@ public class LdResourceAssets
     private readonly Dictionary<string, Canvas> _dynamicTextures = new();
     private readonly Dictionary<string, Color?> _namedColors = new();
 
-    public static LdResourceAssets Instance
-    {
-        get
-        {
-            if (instanceImpl == null)
-            {
-                instanceImpl = new LdResourceAssets();
-            }
-
-            return instanceImpl;
-        }
-    }
+    public static LdResourceAssets Instance => instanceImpl ??= new LdResourceAssets();
 
     public Dictionary<string, SpriteSheet> Sheets { get; } = new();
     public Dictionary<string, SoundEffectInstance> SoundInstances { get; set; } = new();
@@ -44,6 +34,7 @@ public class LdResourceAssets
     public Dictionary<string, FontSystem> FontSystems { get; } = new();
     public Dictionary<string, EntityTemplate> EntityTemplates { get; } = new();
     public Dictionary<string, MessageContent> Messages { get; } = new();
+
     public IEnumerable<Color> AllKnownColors
     {
         get
@@ -63,7 +54,7 @@ public class LdResourceAssets
     public IEnumerable<ILoadEvent> LoadEvents(Painter painter)
     {
         var resourceFiles = Client.Debug.RepoFileSystem.GetDirectory("Resource");
-
+        
         yield return new VoidLoadEvent("sprite-atlas", "Sprite Atlas", () =>
         {
             var texturePath = Path.Join(resourceFiles.GetCurrentDirectory(), "atlas.png");
@@ -106,13 +97,13 @@ public class LdResourceAssets
             }
         });
 
-        yield return new VoidLoadEvent("Sound", () =>
+        foreach (var path in resourceFiles.GetFilesAt(".", "ogg"))
         {
-            foreach (var path in resourceFiles.GetFilesAt(".", "ogg"))
+            yield return new VoidLoadEvent($"Sound_{path}", path, () =>
             {
                 AddSound(resourceFiles, path);
-            }
-        });
+            });
+        }
 
         yield return new VoidLoadEvent("Fonts", () =>
         {
@@ -168,7 +159,7 @@ public class LdResourceAssets
         Sheets[key] = spriteSheet;
     }
 
-    public void AddSound(IFileSystem resourceFiles, string path)
+    private void AddSound(IFileSystem resourceFiles, string path)
     {
         var vorbis = ReadOgg.ReadVorbis(Path.Join(resourceFiles.GetCurrentDirectory(), path));
         var soundEffect = ReadOgg.ReadSoundEffect(vorbis);

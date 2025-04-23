@@ -40,8 +40,6 @@ public class LdSession : Session
     private ActionButton _pendingActionButton;
     private Direction _pendingDirection = Direction.None;
     private Entity _player = new(new GridPosition(), new Invisible());
-    private bool _skipClear;
-    private bool _skipDrawingMain;
     private bool _stopAllInput;
     private int _totalCrystalCount;
     private World _world = new(Constants.GameRoomSize, new WorldTemplate());
@@ -234,23 +232,15 @@ public class LdSession : Session
             _itemTween.Clear();
         }
 
-        if (!_skipClear)
-        {
-            _screen.Clear(TileState.Empty);
-        }
+        _screen.Clear(TileState.Empty);
 
-        if (!_skipDrawingMain)
-        {
-            _world.PaintToScreen(_screen, dt);
-            _inventory.PaintWorldOverlay(ActionButton.Primary, _screen, _world, _player, dt);
-            _inventory.PaintWorldOverlay(ActionButton.Secondary, _screen, _world, _player, dt);
+        _world.PaintToScreen(_screen, dt);
+        _inventory.PaintWorldOverlay(ActionButton.Primary, _screen, _world, _player, dt);
+        _inventory.PaintWorldOverlay(ActionButton.Secondary, _screen, _world, _player, dt);
 
-            _titleCard.PaintToScreen(_screen);
+        _titleCard.PaintToScreen(_screen);
 
-            // UI
-
-            _inventory.DrawHud(_screen, _currentZoneName, dt);
-        }
+        _inventory.DrawHud(_screen, _currentZoneName, dt);
 
         _currentTransition?.PaintToScreen(dt);
 
@@ -489,7 +479,6 @@ public class LdSession : Session
         _world.RequestLoad += TransitionWorld;
         _world.RequestZoneNameChange += DisplayZoneName;
         _world.RequestShowScriptedMessage += DisplayScriptedDialogueMessage;
-        _world.RequestShowDynamicMessage += DisplayDynamicDialogueMessage;
         _world.RequestShowPrompt += DisplayPrompt;
         _world.RequestEquipItem += EquipItem;
         _world.AttemptedVictory += OnAttemptVictory;
