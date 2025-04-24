@@ -12,9 +12,8 @@ namespace LD57.CartridgeManagement;
 public class AsciiLoadingCartridge : Cartridge
 {
     private readonly Loader _loader;
-    private bool _doneLoading;
     private readonly AsciiScreen _screen;
-    private int _startingDelayFrames = 5;
+    private int _startingDelayFrames = 10;
     private List<string> _statuses = new();
     private readonly int _heightLimit;
 
@@ -92,7 +91,7 @@ public class AsciiLoadingCartridge : Cartridge
 
     public override bool ShouldLoadNextCartridge()
     {
-        return _loader.IsDone();
+        return _loader.IsFullyDone();
     }
 
     public override void Unload()

@@ -24,6 +24,7 @@ public class LdResourceAssets
 
     private readonly Dictionary<string, Canvas> _dynamicTextures = new();
     private readonly Dictionary<string, Color?> _namedColors = new();
+    private object _soundLock = new();
 
     public static LdResourceAssets Instance => instanceImpl ??= new LdResourceAssets();
 
@@ -99,9 +100,12 @@ public class LdResourceAssets
 
         foreach (var path in resourceFiles.GetFilesAt(".", "ogg"))
         {
-            yield return new VoidLoadEvent($"Sound_{path}", path, () =>
+            yield return new ThreadedVoidLoadEvent($"Sound_{path}", path, () =>
             {
-                AddSound(resourceFiles, path);
+                lock (_soundLock)
+                {
+                    AddSound(resourceFiles, path);
+                }
             });
         }
 
