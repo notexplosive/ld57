@@ -102,10 +102,7 @@ public class LdResourceAssets
         {
             yield return new ThreadedVoidLoadEvent($"Sound_{path}", path, () =>
             {
-                lock (_soundLock)
-                {
-                    AddSound(resourceFiles, path);
-                }
+                AddSound(resourceFiles, path);
             });
         }
 
@@ -168,8 +165,13 @@ public class LdResourceAssets
         var vorbis = ReadOgg.ReadVorbis(Path.Join(resourceFiles.GetCurrentDirectory(), path));
         var soundEffect = ReadOgg.ReadSoundEffect(vorbis);
         var key = path.RemoveFileExtension();
-        SoundInstances[key] = soundEffect.CreateInstance();
-        SoundEffects[key] = soundEffect;
+        var instance = soundEffect.CreateInstance();
+
+        lock (_soundLock)
+        {
+            SoundInstances[key] = instance;
+            SoundEffects[key] = soundEffect;
+        }
     }
 
     private void AddFont(IFileSystem resourceFiles, string path)

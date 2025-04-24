@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ExplogineCore;
+using System.Linq;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Cartridges;
 using ExplogineMonoGame.Data;
@@ -11,29 +11,32 @@ namespace LD57.CartridgeManagement;
 
 public class AsciiLoadingCartridge : Cartridge
 {
+    private const string LoadingGlyphs = "/-\\|";
+    private readonly int _heightLimit;
     private readonly Loader _loader;
     private readonly AsciiScreen _screen;
     private int _startingDelayFrames = 10;
-    private List<string> _statuses = new();
-    private readonly int _heightLimit;
+    private readonly List<string> _statuses = new();
 
     public AsciiLoadingCartridge(IRuntime runtime, Loader loader) : base(runtime)
     {
         _loader = loader;
-        
+
         _loader.BeforeLoadItem += BeforeLoadItem;
         _loader.AfterLoadItem += AfterLoadItem;
 
         _loader.ForceLoadVoid("Colors");
         _loader.ForceLoadVoid("Fonts");
         _loader.ForceLoadVoid("sprite-atlas");
-        
+
         _screen = Constants.CreateGameScreen();
 
         _heightLimit = _screen.Height;
-        
+
         _statuses.Add("Loading...");
     }
+
+    public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.PointClamp);
 
     private void BeforeLoadItem()
     {
@@ -44,12 +47,11 @@ public class AsciiLoadingCartridge : Cartridge
             _statuses.RemoveAt(0);
         }
     }
-    
+
     private void AfterLoadItem()
     {
     }
 
-    public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.PointClamp);
     public override void Draw(Painter painter)
     {
         painter.Clear(ResourceAlias.Color("background"));
@@ -63,10 +65,14 @@ public class AsciiLoadingCartridge : Cartridge
         var lineNumber = 0;
         foreach (var status in _statuses)
         {
-            _screen.PutString(new GridPosition(0,lineNumber), status);
+            _screen.PutString(new GridPosition(0, lineNumber), status);
             lineNumber++;
         }
-        
+
+        var index = (int) (Client.TotalElapsedTime * 10f % LoadingGlyphs.Length);
+        _screen.PutTile(new GridPosition(_statuses.Last().Length, lineNumber - 1),
+            TileState.StringCharacter(LoadingGlyphs[index].ToString()));
+
         LoadNextChunk();
     }
 
@@ -96,6 +102,5 @@ public class AsciiLoadingCartridge : Cartridge
 
     public override void Unload()
     {
-        
     }
 }

@@ -12,5 +12,6 @@ var config = new WindowConfigWritable
 };
 
 Client.SetLoadingCartridgeFactory((runtime, loader) => new AsciiLoadingCartridge(runtime, loader));
+Client.SetIntroCartridgeFactory(runtime => new AsciiIntroCartridge(runtime));
 
 Bootstrap.Run(args, new WindowConfig(config), runtime => new HotReloadCartridge(runtime, new LdCartridge(runtime)));
