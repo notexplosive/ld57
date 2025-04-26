@@ -63,10 +63,16 @@ public class AsciiLoadingCartridge : Cartridge
         _screen.Clear(TileState.Empty);
 
         var lineNumber = 0;
+        string? mostRecentStatus = null;
         foreach (var status in _statuses)
         {
-            _screen.PutString(new GridPosition(0, lineNumber), status);
-            lineNumber++;
+            if (status != mostRecentStatus)
+            {
+                _screen.PutString(new GridPosition(0, lineNumber), status);
+                lineNumber++;
+            }
+
+            mostRecentStatus = status;
         }
 
         var index = (int) (Client.TotalElapsedTime * 10f % LoadingGlyphs.Length);

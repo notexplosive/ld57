@@ -97,4 +97,14 @@ public static class Constants
     {
         return new Rectangle(selectionRectangle.Location, selectionRectangle.Size + new Point(1)).Contains(position.ToPoint());
     }
+
+    public static int RoundToInt(float x)
+    {
+        return (int) Math.Round(x);
+    }
+
+    public static GridPosition RoundToGridPosition(this Vector2 vector2)
+    {
+        return new GridPosition(RoundToInt(vector2.X), RoundToInt(vector2.Y));
+    }
 }

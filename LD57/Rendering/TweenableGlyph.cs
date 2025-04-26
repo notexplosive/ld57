@@ -6,7 +6,7 @@ namespace LD57.Rendering;
 
 public class TweenableGlyph
 {
-    public bool ShouldOverrideColor { get; private set; }
+    public bool ShouldOverrideColor { get; set; }
 
     public MultiplexTween RootTween { get; } = new();
     public TweenableVector2 PixelOffset { get; } = new();

@@ -1,4 +1,4 @@
-Move      : WASD | {i:Entities:21}{i:Entities:22}{i:Entities:23}{i:Entities:24}
+Move      : {i:Entities:21}{i:Entities:22}{i:Entities:23}{i:Entities:24} | WASD
           :      |  
 Primary   : Z    | Space
           :      |

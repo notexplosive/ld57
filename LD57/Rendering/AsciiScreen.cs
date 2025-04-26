@@ -12,7 +12,7 @@ namespace LD57.Rendering;
 
 public class AsciiScreen
 {
-    private readonly DynamicSpriteFont _font = ResourceAlias.GameFont.GetFont(40);
+    private readonly Lazy<DynamicSpriteFont> _font = new Lazy<DynamicSpriteFont>(()=>ResourceAlias.GameFont.GetFont(40));
     private readonly Dictionary<GridPosition, TileState> _tiles = new();
     private readonly Dictionary<GridPosition, TweenableGlyph> _tweenableGlyphs = new();
 
@@ -30,6 +30,7 @@ public class AsciiScreen
     public int Height { get; }
 
     public GridPosition RoomSize => new(Width - 1, Height - 1);
+    public GridPosition CenterPosition => RoomSize / 2;
 
     public void Draw(Painter painter, Vector2 offset)
     {
@@ -72,10 +73,10 @@ public class AsciiScreen
                     var text = tileState.Character;
                     if (!string.IsNullOrEmpty(text))
                     {
-                        var measuredSize = _font.MeasureString(text);
-                        var origin = new Vector2(measuredSize.X / 2f, _font.LineHeight * 4 / 6f);
+                        var measuredSize = _font.Value.MeasureString(text);
+                        var origin = new Vector2(measuredSize.X / 2f, _font.Value.LineHeight * 4 / 6f);
                         // painter.DrawRectangle(measuredSize.ToRectangleF().Moved(rectangle.Center).Moved(-origin), new DrawSettings{Color = Color.White.WithMultipliedOpacity(0.5f)});
-                        painter.SpriteBatch.DrawString(_font, text, rectangle.Center + pixelOffset, color, rotation,
+                        painter.SpriteBatch.DrawString(_font.Value, text, rectangle.Center + pixelOffset, color, rotation,
                             origin,
                             Vector2.One * scale);
                     }

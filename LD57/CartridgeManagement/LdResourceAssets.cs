@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using ExplogineCore;
 using ExplogineCore.Aseprite;
 using ExplogineCore.Data;
@@ -24,7 +23,7 @@ public class LdResourceAssets
 
     private readonly Dictionary<string, Canvas> _dynamicTextures = new();
     private readonly Dictionary<string, Color?> _namedColors = new();
-    private object _soundLock = new();
+    private readonly object _soundLock = new();
 
     public static LdResourceAssets Instance => instanceImpl ??= new LdResourceAssets();
 
@@ -55,7 +54,7 @@ public class LdResourceAssets
     public IEnumerable<ILoadEvent> LoadEvents(Painter painter)
     {
         var resourceFiles = Client.Debug.RepoFileSystem.GetDirectory("Resource");
-        
+
         yield return new VoidLoadEvent("sprite-atlas", "Sprite Atlas", () =>
         {
             var texturePath = Path.Join(resourceFiles.GetCurrentDirectory(), "atlas.png");
@@ -98,13 +97,13 @@ public class LdResourceAssets
             }
         });
 
-        foreach (var path in resourceFiles.GetFilesAt(".", "ogg"))
+        yield return new ThreadedVoidLoadEvent("Sounds", "Sounds", () =>
         {
-            yield return new ThreadedVoidLoadEvent($"Sound_{path}", path, () =>
+            foreach (var path in resourceFiles.GetFilesAt(".", "ogg"))
             {
                 AddSound(resourceFiles, path);
-            });
-        }
+            }
+        });
 
         yield return new VoidLoadEvent("Fonts", () =>
         {
