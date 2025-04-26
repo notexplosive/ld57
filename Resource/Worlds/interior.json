@@ -7704,12 +7704,28 @@
     },
     {
       "extra_state": {
-        "command": "ambient ambient_water 0.25"
+        "command": "ambient ambient_night 0.15"
       },
       "template_name": "",
       "position": {
-        "x": 23,
-        "y": -7
+        "x": 19,
+        "y": -26
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 14,
+        "y": -48
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "blue_brick",
+      "position": {
+        "x": 14,
+        "y": -47
       }
     }
   ]

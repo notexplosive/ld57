@@ -512,6 +512,12 @@ public class LdSession : Session
         _world.Destroy(crystal);
         _foundCrystals.Add(uniqueId);
         DisplayDynamicDialogueMessage($"Found a Crystal {_foundCrystals.Count}/{_totalCrystalCount}");
+
+        if (_foundCrystals.Count == 1)
+        {
+            DisplayDynamicDialogueMessage($"If you Reset,\nyour crystals are preserved.");
+        }
+        
         ResourceAlias.PlaySound("pickup_crystal", new SoundEffectSettings());
     }
 
