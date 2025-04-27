@@ -90,9 +90,3 @@
 #begin engine/pointfree.ttf
 /copy:engine/pointfree.ttf
 
-#begin ld57/crt-shader.fx
-/importer:EffectImporter
-/processor:EffectProcessor
-/processorParam:DebugMode=Auto
-/build:ld57/crt-shader.fx
-
