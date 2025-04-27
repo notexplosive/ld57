@@ -1,9 +1,0 @@
-{
-    "sort_priority": 9,
-    "sprite_sheet": "Floors",
-    "frame": 2,
-    "color": "grass",
-    "tags": [
-        "Capturable"
-    ]
-}

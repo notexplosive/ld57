@@ -1,9 +1,0 @@
-{
-    "sort_priority": 2,
-    "sprite_sheet": "Entities",
-    "frame": 20,
-    "color": "wood",
-    "tags": [
-        "Solid"
-    ]
-}
