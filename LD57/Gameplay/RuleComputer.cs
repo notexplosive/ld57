@@ -10,6 +10,12 @@ namespace LD57.Gameplay;
 
 public class RuleComputer
 {
+    public enum AggregateCondition
+    {
+        Any,
+        All
+    }
+
     private readonly List<IGameRule> _rules = new();
     private readonly World _world;
 
@@ -63,15 +69,15 @@ public class RuleComputer
         var mover = data.Mover;
 
         var sources = _world.GetActiveEntitiesAt(data.Source).ToList();
-        
+
         var targets = _world.GetActiveEntitiesAt(data.Destination).ToList();
         targets.Remove(data.Mover);
 
         foreach (var target in targets)
         {
             var tags = new TagComparer(mover, target);
-            
-            if(tags.Check([], [Is("ForceMove")]))
+
+            if (tags.Check([], [Is("ForceMove")]))
             {
                 var forcedDirection = Direction.FromName(target.State.GetString("direction"));
                 if (forcedDirection != data.Direction)
@@ -79,7 +85,7 @@ public class RuleComputer
                     status.Fail();
                 }
             }
-            
+
             if (tags.Check(
                     [Is("Solid")],
                     [Is("Solid")]))
@@ -107,28 +113,6 @@ public class RuleComputer
             {
                 status.Fail();
             }
-
-            if (tags.Check(
-                    [Is("FillsWater"), Is("FloatsInWater")],
-                    [Is("Water")]))
-            {
-                status.AddAction(() =>
-                {
-                    _world.Destroy(target);
-                    mover.SetActive(false);
-                });
-            }
-
-            if (tags.Check(
-                    [Is("FillsWater"), IsNot("FloatsInWater")],
-                    [Is("Water")]))
-            {
-                status.AddAction(() =>
-                {
-                    _world.Destroy(target);
-                    _world.Destroy(mover);
-                });
-            }
         }
 
         return status;
@@ -149,12 +133,12 @@ public class RuleComputer
         return new ManyTagOwnership(tags, AggregateCondition.All, true);
     }
 
-    public ICondition Is(string tag)
+    private ICondition Is(string tag)
     {
         return new SingleTagOwnership(tag, true);
     }
 
-    public ICondition IsNot(string tag)
+    private ICondition IsNot(string tag)
     {
         return new SingleTagOwnership(tag, false);
     }
@@ -196,37 +180,81 @@ public class RuleComputer
         var status = EvaluateMove(data);
         return status.WasSuccessful && !status.CausedPush;
     }
-}
 
-public readonly record struct StateValueBoolean(string Key, bool Value, bool Fallback) : ICondition
-{
-    public bool Check(Entity entity)
+    private readonly record struct StateValueBoolean(string Key, bool Value, bool Fallback) : ICondition
     {
-        return entity.State.GetBoolOrFallback(Key, Fallback) == Value;
-    }
-}
-
-public interface ICondition
-{
-    bool Check(Entity entity);
-}
-
-public enum AggregateCondition
-{
-    Any,
-    All
-}
-
-public readonly record struct ManyTagOwnership(IEnumerable<string> Tags, AggregateCondition Condition, bool ShouldHave)
-    : ICondition
-{
-    public bool Check(Entity entity)
-    {
-        if (Condition == AggregateCondition.All)
+        public bool Check(Entity entity)
         {
-            foreach (var tag in Tags)
+            return entity.State.GetBoolOrFallback(Key, Fallback) == Value;
+        }
+    }
+
+    private interface ICondition
+    {
+        bool Check(Entity entity);
+    }
+
+    private readonly record struct ManyTagOwnership(
+        IEnumerable<string> Tags,
+        AggregateCondition Condition,
+        bool ShouldHave)
+        : ICondition
+    {
+        public bool Check(Entity entity)
+        {
+            if (Condition == AggregateCondition.All)
             {
-                if (entity.HasTag(tag) != ShouldHave)
+                foreach (var tag in Tags)
+                {
+                    if (entity.HasTag(tag) != ShouldHave)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            if (Condition == AggregateCondition.Any)
+            {
+                foreach (var tag in Tags)
+                {
+                    if (entity.HasTag(tag) == ShouldHave)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            throw new Exception($"Unknown Aggregation Condition {Condition}");
+        }
+    }
+
+    private readonly record struct SingleTagOwnership(string Tag, bool ShouldHave) : ICondition
+    {
+        public bool Check(Entity entity)
+        {
+            return entity.HasTag(Tag) == ShouldHave;
+        }
+    }
+
+    private readonly record struct TagComparer(Entity Mover, Entity Target)
+    {
+        public bool Check(ICondition[] mover, ICondition[] target)
+        {
+            foreach (var tag in mover)
+            {
+                if (!tag.Check(Mover))
+                {
+                    return false;
+                }
+            }
+
+            foreach (var tag in target)
+            {
+                if (!tag.Check(Target))
                 {
                     return false;
                 }
@@ -234,52 +262,5 @@ public readonly record struct ManyTagOwnership(IEnumerable<string> Tags, Aggrega
 
             return true;
         }
-
-        if (Condition == AggregateCondition.Any)
-        {
-            foreach (var tag in Tags)
-            {
-                if (entity.HasTag(tag) == ShouldHave)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        throw new Exception($"Unknown Aggregation Condition {Condition}");
-    }
-}
-
-public readonly record struct SingleTagOwnership(string Tag, bool ShouldHave) : ICondition
-{
-    public bool Check(Entity entity)
-    {
-        return entity.HasTag(Tag) == ShouldHave;
-    }
-}
-
-public readonly record struct TagComparer(Entity Mover, Entity Target)
-{
-    public bool Check(ICondition[] mover, ICondition[] target)
-    {
-        foreach (var tag in mover)
-        {
-            if (!tag.Check(Mover))
-            {
-                return false;
-            }
-        }
-
-        foreach (var tag in target)
-        {
-            if (!tag.Check(Target))
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

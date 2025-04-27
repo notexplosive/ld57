@@ -23,6 +23,94 @@
         "x": 18,
         "y": 6
       }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 20,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 20,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 20,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 20,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "player",
+      "position": {
+        "x": 16,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "crate",
+      "position": {
+        "x": 18,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 21,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 21,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 21,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 21,
+        "y": 12
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "crate",
+      "position": {
+        "x": 19,
+        "y": 11
+      }
     }
   ]
 }

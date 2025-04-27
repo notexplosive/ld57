@@ -78,6 +78,8 @@ public class World
             {
                 entity.TweenableGlyph.SetAnimation(Animations.WaterSway(Client.Random.Dirty.NextFloat() * 100));
             }
+            
+            entity.AddBehavior(new Water());
         }
 
         // if (entity.HasTag("Crystal"))
