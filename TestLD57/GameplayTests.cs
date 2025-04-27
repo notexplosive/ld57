@@ -17,15 +17,8 @@ public class GameplayTests
     [Fact]
     public void BasicPush()
     {
-        var pusher = _world.AddEntity(new Entity(new GridPosition(0, 0), new Invisible()))
-                .AddTag("Pusher")
-                .AddTag("Solid")
-            ;
-
-        var pushable = _world.AddEntity(new Entity(new GridPosition(1, 0), new Invisible()))
-                .AddTag("Pushable")
-                .AddTag("Solid")
-            ;
+        var pusher = CreateEntity(new GridPosition(0, 0), ["Pusher", "Solid"]);
+        var pushable = CreateEntity(new GridPosition(1, 0), ["Pushable", "Solid"]);
 
         _world.Rules.AttemptMoveInDirection(pusher, Direction.Right);
 
@@ -97,20 +90,9 @@ public class GameplayTests
     [Fact]
     public void ChainPush_NothingMoves()
     {
-        var pusher = _world.AddEntity(new Entity(new GridPosition(0, 0), new Invisible()))
-                .AddTag("Pusher")
-                .AddTag("Solid")
-            ;
-
-        var pushable = _world.AddEntity(new Entity(new GridPosition(1, 0), new Invisible()))
-                .AddTag("Pushable")
-                .AddTag("Solid")
-            ;
-
-        var pushable2 = _world.AddEntity(new Entity(new GridPosition(2, 0), new Invisible()))
-                .AddTag("Pushable")
-                .AddTag("Solid")
-            ;
+        var pusher = CreateEntity(new GridPosition(0, 0), ["Pusher", "Solid"]);
+        var pushable = CreateEntity(new GridPosition(1, 0), ["Pushable", "Solid"]);
+        var pushable2 = CreateEntity(new GridPosition(2, 0), ["Pushable", "Solid"]);
 
         _world.Rules.AttemptMoveInDirection(pusher, Direction.Right);
 
@@ -123,21 +105,9 @@ public class GameplayTests
     [Fact]
     public void ChainPush_AllMove()
     {
-        var pusher = _world.AddEntity(new Entity(new GridPosition(0, 0), new Invisible()))
-                .AddTag("Pusher")
-                .AddTag("Solid")
-            ;
-
-        var pushable = _world.AddEntity(new Entity(new GridPosition(1, 0), new Invisible()))
-                .AddTag("Pushable")
-                .AddTag("Pusher")
-                .AddTag("Solid")
-            ;
-
-        var pushable2 = _world.AddEntity(new Entity(new GridPosition(2, 0), new Invisible()))
-                .AddTag("Pushable")
-                .AddTag("Solid")
-            ;
+        var pusher = CreateEntity(new GridPosition(0, 0), ["Pusher", "Solid"]);
+        var pushable = CreateEntity(new GridPosition(1, 0), ["Pushable", "Pusher", "Solid"]);
+        var pushable2 = CreateEntity(new GridPosition(2, 0), ["Pushable", "Solid"]);
 
         MoveEntity(pusher, Direction.Right);
 
@@ -389,7 +359,7 @@ public class GameplayTests
         var user = CreateEntity(new GridPosition(0, 0), [], []);
         user.MostRecentMoveDirection = Direction.Right;
         var thingToGrab = CreateEntity(new GridPosition(1, 0), ["Capturable", "FillsWater"], []);
-        var water = CreateEntity(new GridPosition(5, 5), ["Water"], []);
+        var water = CreateEntity(new GridPosition(5, 5), ["Water", "AllowDropOn"], []);
 
         UseItem(user, item);
 
@@ -433,7 +403,7 @@ public class GameplayTests
         WarpEntity(user, blocker.Position - new GridPosition(1,0));
         
         UseItem(user, item);
-
+        
         Assert.True(_world.IsDestroyed(thingToGrab));
     }
     
@@ -444,7 +414,7 @@ public class GameplayTests
         var user = CreateEntity(new GridPosition(0, 0), [], []);
         user.MostRecentMoveDirection = Direction.Right;
         var thingToGrab = CreateEntity(new GridPosition(1, 0), ["Capturable", "ClearOnDrop"], []);
-        var blocker = CreateEntity(new GridPosition(5, 5), ["Solid"], []);
+        var blocker = CreateEntity(new GridPosition(5, 5), ["Solid", "AllowDropOn"], []);
 
         UseItem(user, item);
         

@@ -4,6 +4,8 @@ using System.Linq;
 using ExplogineCore.Data;
 using ExplogineMonoGame;
 using LD57.CartridgeManagement;
+using LD57.Gameplay.Behaviors;
+using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 
 namespace LD57.Gameplay;
@@ -62,13 +64,13 @@ public class World
     public Entity CreateEntityFromTemplate(EntityTemplate entityTemplate, GridPosition position,
         Dictionary<string, string> extraState)
     {
-        var entity = new Entity(position, entityTemplate);
+        var entity = new Entity(this, position, entityTemplate);
         entity.State.AddFromDictionary(extraState);
         SetupNormalEntityBehaviors(entity);
         return entity;
     }
 
-    public void SetupNormalEntityBehaviors(Entity entity)
+    private void SetupNormalEntityBehaviors(Entity entity)
     {
         if (entity.HasTag("Water"))
         {
@@ -78,185 +80,81 @@ public class World
             }
         }
 
-        if (entity.HasTag("Crystal"))
-        {
-            if (!IsEditMode)
-            {
-                entity.TweenableGlyph.SetAnimation(Animations.CrystalShimmer(ResourceAlias.Color("blood"),
-                    ResourceAlias.Color("white"), ResourceAlias.Color("blue_text")));
-            }
-        }
+        // if (entity.HasTag("Crystal"))
+        // {
+        //     if (!IsEditMode)
+        //     {
+        //         entity.TweenableGlyph.SetAnimation(Animations.CrystalShimmer(ResourceAlias.Color("blood"),
+        //             ResourceAlias.Color("white"), ResourceAlias.Color("blue_text")));
+        //     }
+        // }
 
-        if (entity.HasTag("Crystal"))
-        {
-            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
-            {
-                if (payload.Entity != null && payload.Entity.HasTag("Player"))
-                {
-                    RequestClaimCrystal?.Invoke(entity);
-                }
-            });
-        }
+        // if (entity.HasTag("Crystal"))
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+        //     {
+        //         if (payload.Entity != null && payload.Entity.HasTag("Player"))
+        //         {
+        //             RequestClaimCrystal?.Invoke(entity);
+        //         }
+        //     });
+        // }
 
-        if (entity.HasTag("Item"))
-        {
-            var humanReadableName = Inventory.GetHumanReadableName(entity);
+        // if (entity.HasTag("Item"))
+        // {
+        //     var humanReadableName = Inventory.GetHumanReadableName(entity);
+        //
+        //     entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+        //     {
+        //         if (payload.Entity != null && payload.Entity.HasTag("Player"))
+        //         {
+        //             // RequestShowDynamicMessage?.Invoke($"You find \n{humanReadableName}");
+        //             RequestShowPrompt?.Invoke(new Prompt($"Equip {humanReadableName}?", Orientation.Vertical, [
+        //                 new PromptOption("Equip to [Z]",
+        //                     () => { RequestEquipItem?.Invoke(ActionButton.Primary, entity); }),
+        //                 new PromptOption("Equip to [X]",
+        //                     () => { RequestEquipItem?.Invoke(ActionButton.Secondary, entity); }),
+        //                 new PromptOption("Leave it", () => { })
+        //             ]));
+        //         }
+        //     });
+        // }
 
-            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
-            {
-                if (payload.Entity != null && payload.Entity.HasTag("Player"))
-                {
-                    // RequestShowDynamicMessage?.Invoke($"You find \n{humanReadableName}");
-                    RequestShowPrompt?.Invoke(new Prompt($"Equip {humanReadableName}?", Orientation.Vertical, [
-                        new PromptOption("Equip to [Z]",
-                            () => { RequestEquipItem?.Invoke(ActionButton.Primary, entity); }),
-                        new PromptOption("Equip to [X]",
-                            () => { RequestEquipItem?.Invoke(ActionButton.Secondary, entity); }),
-                        new PromptOption("Leave it", () => { })
-                    ]));
-                }
-            });
-        }
-
-        if (entity.HasTag("BecomeWaterOnSteppedOff"))
-        {
-            entity.AddBehavior(BehaviorTrigger.OnSteppedOff, entityPayload =>
-            {
-                if (entityPayload.Entity?.HasTag("Solid") == true)
-                {
-                    Destroy(entity);
-                    AddEntity(CreateEntityFromTemplate(ResourceAlias.EntityTemplate("water"), entity.Position, []));
-                }
-            });
-        }
+        // if (entity.HasTag("BecomeWaterOnSteppedOff"))
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnSteppedOff, entityPayload =>
+        //     {
+        //         if (entityPayload.Entity?.HasTag("Solid") == true)
+        //         {
+        //             Destroy(entity);
+        //             AddEntity(CreateEntityFromTemplate(ResourceAlias.EntityTemplate("water"), entity.Position, []));
+        //         }
+        //     });
+        // }
 
         if (entity.HasTag("Signal"))
         {
-            var channel = entity.State.GetIntOrFallback("channel", 0);
-
-            entity.AddBehavior(BehaviorTrigger.OnWorldStart, () =>
-            {
-                var signalColor = ResourceAlias.Color("signal_" + channel);
-                if (entity.Appearance != null && entity.Appearance.TileState.HasValue)
-                {
-                    entity.Appearance.TileState =
-                        entity.Appearance.TileState.Value with {ForegroundColor = signalColor};
-                }
-            });
+            entity.AddBehavior(new SignalColor());
 
             if (entity.HasTag("Button"))
             {
-                entity.AddBehavior(BehaviorTrigger.OnEntityMoved, entityPayload =>
-                {
-                    if (entityPayload.Entity == null)
-                    {
-                        return;
-                    }
-
-                    var isPressed = EntitiesInSameRoom(entity.Position)
-                        .Where(a => a.Position == entity.Position).Any(a => a.HasTag("PressesButtons"));
-
-                    var isInitialized = entity.State.HasKey("is_pressed");
-                    var wasPressed = entity.State.GetBool("is_pressed");
-                    entity.State.Set("is_pressed", isPressed);
-
-                    if (isInitialized && wasPressed != isPressed)
-                    {
-                        if (isPressed)
-                        {
-                            ResourceAlias.PlaySound("press_button", new SoundEffectSettings());
-                        }
-                        else
-                        {
-                            ResourceAlias.PlaySound("press_button", new SoundEffectSettings{Pitch = 0.5f});
-                        }
-
-                        foreach (var otherEntities in EntitiesInSameRoom(entity.Position)
-                                     .Where(a => a.State.GetIntOrFallback("channel", 0) == channel))
-                        {
-                            otherEntities.SelfTriggerBehavior(BehaviorTrigger.OnSignalChange);
-                        }
-                    }
-                });
+                entity.AddBehavior(new Button());
             }
 
             if (entity.HasTag("Bridge"))
             {
-                entity.AddBehavior(BehaviorTrigger.OnSignalChange, () => { SetIsOpenBasedOnSignal(entity, channel); });
-
-                entity.AddBehavior(BehaviorTrigger.OnStateChanged, payload =>
-                {
-                    if (payload.Key == "is_open")
-                    {
-                        var isOpen = entity.State.GetBool("is_open") == true;
-                        var sheet = entity.State.GetString("sheet") ?? "Entities";
-
-                        if (entity.Appearance?.TileState.HasValue == true)
-                        {
-                            var openFrame = entity.State.GetInt("open_frame") ?? 0;
-                            var closedFrame = entity.State.GetInt("closed_frame") ?? 0;
-
-                            var frame = isOpen ? openFrame : closedFrame;
-
-                            entity.Appearance.TileState = entity.Appearance.TileState.Value with
-                            {
-                                Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]
-                            };
-                        }
-                    }
-                });
+                
             }
 
             if (entity.HasTag("Door"))
             {
-                entity.AddBehavior(BehaviorTrigger.OnSignalChange, () => { SetIsOpenBasedOnSignal(entity, channel); });
-
-                entity.AddBehavior(BehaviorTrigger.OnStateChanged, payload =>
-                {
-                    if (payload.Key == "is_open")
-                    {
-                        var isOpen = entity.State.GetBool("is_open") == true;
-                        var sheet = entity.State.GetString("sheet") ?? "Entities";
-
-                        if (entity.Appearance?.TileState.HasValue == true)
-                        {
-                            var openFrame = entity.State.GetInt("open_frame") ?? 0;
-                            var closedFrame = entity.State.GetInt("closed_frame") ?? 0;
-
-                            var frame = isOpen ? openFrame : closedFrame;
-
-                            entity.Appearance.TileState = entity.Appearance.TileState.Value with
-                            {
-                                Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]
-                            };
-                        }
-                    }
-                });
+                entity.AddBehavior(new SetStateBasedOnSignal("is_open", "is_inverted"));
+                entity.AddBehavior(new Door("is_open"));
             }
         }
     }
 
-    private void SetIsOpenBasedOnSignal(Entity entity, int channel)
-    {
-        var buttons = EntitiesInSameRoom(entity.Position)
-            .Where(a => a.HasTag("Button") && a.State.GetIntOrFallback("channel", 0) == channel).ToList();
-
-        var shouldOpen = false;
-
-        if (buttons.Count > 0)
-        {
-            shouldOpen = buttons.All(a => a.State.GetBool("is_pressed") == true);
-        }
-
-        if (entity.State.GetBoolOrFallback("is_inverted", false))
-        {
-            shouldOpen = !shouldOpen;
-        }
-
-        entity.State.Set("is_open", shouldOpen);
-    }
-
-    private IEnumerable<Entity> EntitiesInSameRoom(GridPosition position)
+    public IEnumerable<Entity> EntitiesInSameRoom(GridPosition position)
     {
         return CalculateEntitiesInRoom(GetRoomCornersAt(position), true);
     }
@@ -286,7 +184,7 @@ public class World
 
     private Entity CreateTriggerEntityFromPlacement(PlacedEntity placedEntity)
     {
-        var entity = new Entity(placedEntity.Position, new Invisible());
+        var entity = new Entity(this, placedEntity.Position, new Invisible());
         entity.State.AddFromDictionary(placedEntity.ExtraState);
         SetupTriggerEntityBehaviors(entity);
         return entity;
@@ -294,67 +192,67 @@ public class World
 
     public void SetupTriggerEntityBehaviors(Entity entity)
     {
-        var parsedCommand = new ParsedCommand(entity.State.GetString(Constants.CommandKey));
+        // var parsedCommand = new ParsedCommand(entity.State.GetString(Constants.CommandKey));
 
-        if (parsedCommand.CommandName == "preserve")
-        {
-            entity.AddBehavior(BehaviorTrigger.OnEnter, () => { EnteredSanctuary?.Invoke(); });
-        }
-
-        if (parsedCommand.CommandName == "vault")
-        {
-            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
-            {
-                if (payload.Entity?.HasTag("Player") == true)
-                {
-                    AttemptedVictory?.Invoke();
-                }
-            });
-        }
-        
-        if (parsedCommand.CommandName == "load")
-        {
-            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
-            {
-                if (payload.Entity?.HasTag("Player") == true)
-                {
-                    RequestLoad?.Invoke(parsedCommand.ArgAsString(0));
-                }
-            });
-        }
-
-        if (parsedCommand.CommandName == "zone")
-        {
-            entity.AddBehavior(BehaviorTrigger.OnEnter, () => { RequestZoneNameChange?.Invoke(parsedCommand.AllArgsJoined(" ")); });
-        }
-
-        if (parsedCommand.CommandName == "show")
-        {
-            entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
-            {
-                if (payload.Entity?.HasTag("Player") == true)
-                {
-                    RequestShowScriptedMessage?.Invoke(parsedCommand.ArgAsString(0));
-                }
-            });
-        }
-
-        if (parsedCommand.CommandName == "store")
-        {
-            entity.AddBehavior(BehaviorTrigger.OnReset,
-                () => { RequestSpawnFromStorage?.Invoke(parsedCommand.ArgAsString(0), entity.Position); });
-        }
-
-        if (parsedCommand.CommandName == "ambient")
-        {
-            entity.AddBehavior(BehaviorTrigger.OnEnter,
-                () =>
-                {
-                    RequestAmbientSound?.Invoke(AmbientPlayMode.Play, parsedCommand.ArgAsString(0), new SoundEffectSettings {Volume = parsedCommand.ArgAsFloat(1, 1)});
-                });
-            entity.AddBehavior(BehaviorTrigger.OnExit,
-                () => { RequestAmbientSound?.Invoke(AmbientPlayMode.Stop, parsedCommand.ArgAsString(0), new SoundEffectSettings()); });
-        }
+        // if (parsedCommand.CommandName == "preserve")
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnEnter, () => { EnteredSanctuary?.Invoke(); });
+        // }
+        //
+        // if (parsedCommand.CommandName == "vault")
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+        //     {
+        //         if (payload.Entity?.HasTag("Player") == true)
+        //         {
+        //             AttemptedVictory?.Invoke();
+        //         }
+        //     });
+        // }
+        //
+        // if (parsedCommand.CommandName == "load")
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+        //     {
+        //         if (payload.Entity?.HasTag("Player") == true)
+        //         {
+        //             RequestLoad?.Invoke(parsedCommand.ArgAsString(0));
+        //         }
+        //     });
+        // }
+        //
+        // if (parsedCommand.CommandName == "zone")
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnEnter, () => { RequestZoneNameChange?.Invoke(parsedCommand.AllArgsJoined(" ")); });
+        // }
+        //
+        // if (parsedCommand.CommandName == "show")
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnTouch, payload =>
+        //     {
+        //         if (payload.Entity?.HasTag("Player") == true)
+        //         {
+        //             RequestShowScriptedMessage?.Invoke(parsedCommand.ArgAsString(0));
+        //         }
+        //     });
+        // }
+        //
+        // if (parsedCommand.CommandName == "store")
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnReset,
+        //         () => { RequestSpawnFromStorage?.Invoke(parsedCommand.ArgAsString(0), entity.Position); });
+        // }
+        //
+        // if (parsedCommand.CommandName == "ambient")
+        // {
+        //     entity.AddBehavior(BehaviorTrigger.OnEnter,
+        //         () =>
+        //         {
+        //             RequestAmbientSound?.Invoke(AmbientPlayMode.Play, parsedCommand.ArgAsString(0), new SoundEffectSettings {Volume = parsedCommand.ArgAsFloat(1, 1)});
+        //         });
+        //     entity.AddBehavior(BehaviorTrigger.OnExit,
+        //         () => { RequestAmbientSound?.Invoke(AmbientPlayMode.Stop, parsedCommand.ArgAsString(0), new SoundEffectSettings()); });
+        // }
     }
 
     public void SetCurrentRoom(Room newRoom)
@@ -367,12 +265,12 @@ public class World
         {
             foreach (var entity in previousRoom.AllActiveEntities())
             {
-                entity.SelfTriggerBehavior(BehaviorTrigger.OnExit);
+                entity.TriggerBehavior(ExitTrigger.Instance);
             }
 
             foreach (var entity in newRoom.AllActiveEntities())
             {
-                entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
+                entity.TriggerBehavior(EnterTrigger.Instance);
             }
         }
     }
@@ -400,6 +298,11 @@ public class World
 
     private void AddEntityFast(Entity entity)
     {
+        if (entity.World != this)
+        {
+            throw new Exception("Entity is not from this world, panic!");
+        }
+        
         _entities.Add(entity);
         entity.Start(this);
     }
@@ -483,18 +386,15 @@ public class World
             if (entity.Position == moveData.Destination)
             {
                 // even if the move failed, we still count that as a "touch"
-                entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnTouch,
-                    new BehaviorTriggerWithEntity.Payload(moveData.Mover));
+                entity.TriggerBehavior(new TouchTrigger(moveData.Mover));
             }
 
             if (status.WasSuccessful && entity.Position == moveData.Source)
             {
-                entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnSteppedOff,
-                    new BehaviorTriggerWithEntity.Payload(moveData.Mover));
+                entity.TriggerBehavior(new SteppedOffTrigger(moveData.Mover));
             }
 
-            entity.SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnEntityMoved,
-                new BehaviorTriggerWithEntity.Payload(moveData.Mover));
+            entity.TriggerBehavior(new EntityMovedTrigger(moveData.Mover));
         }
 
         MoveCompleted?.Invoke(moveData, status);

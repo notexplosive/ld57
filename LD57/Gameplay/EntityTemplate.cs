@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using LD57.CartridgeManagement;
 using Newtonsoft.Json;
 
 namespace LD57.Gameplay;
@@ -26,4 +27,13 @@ public class EntityTemplate
     public Dictionary<string, string> State { get; set; } = new();
 
     public string TemplateName { get; set; } = string.Empty;
+
+    public IEntityAppearance CreateAppearance()
+    {
+        return SpriteSheetName != null
+            ? new EntityAppearance(LdResourceAssets.Instance.Sheets[SpriteSheetName],
+                Frame,
+                ResourceAlias.Color(Color))
+            : new Invisible();
+    }
 }

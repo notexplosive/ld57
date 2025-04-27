@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using ExplogineMonoGame.Data;
-using LD57.CartridgeManagement;
+using LD57.Gameplay.Behaviors;
+using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 
 namespace LD57.Gameplay;
 
 public class Entity
 {
-    private readonly List<EntityBehavior> _behaviors = new();
+    private readonly List<IEntityBehavior> _behaviors = new();
     private readonly int _rawSortPriority;
     private readonly HashSet<string> _tags = new();
     private bool _hasStarted;
 
-    public Entity(GridPosition position, IEntityAppearance appearance)
+    public Entity(World world, GridPosition position, IEntityAppearance appearance)
     {
+        World = world;
         Position = position;
         Appearance = appearance;
         State.Updated += OnStateUpdated;
     }
 
-    public Entity(GridPosition position, EntityTemplate template)
-        : this(position, template.SpriteSheetName != null
-            ? new EntityAppearance(LdResourceAssets.Instance.Sheets[template.SpriteSheetName],
-                template.Frame,
-                ResourceAlias.Color(template.Color))
-            : new Invisible())
+    public Entity(World world, GridPosition position, EntityTemplate template)
+        : this(world, position, template.CreateAppearance())
     {
         State.SetString("template_name", template.TemplateName);
         State.AddFromDictionary(template.State);
@@ -38,6 +34,8 @@ public class Entity
 
         _rawSortPriority = template.SortPriority;
     }
+
+    public World World { get; }
 
     public IEntityAppearance? Appearance { get; }
 
@@ -58,11 +56,11 @@ public class Entity
     {
         if (!_hasStarted)
         {
-            SelfTriggerBehavior(BehaviorTrigger.OnWorldStart);
+            TriggerBehavior(WorldStartTrigger.Instance);
         }
 
-        SelfTriggerBehavior(BehaviorTrigger.OnSignalChange);
-        
+        TriggerBehavior(new SignalChangeTrigger());
+
         if (!world.IsEditMode)
         {
             world.Rules.WarpToPosition(this, Position);
@@ -73,8 +71,7 @@ public class Entity
 
     private void OnStateUpdated(string key, string value)
     {
-        SelfTriggerBehaviorWithPayload(BehaviorTrigger.OnStateChanged,
-            new BehaviorTriggerWithKeyValuePair.Payload(key, value));
+        TriggerBehavior(new StateChangeTrigger(key));
     }
 
     public Entity AddTag(string tag)
@@ -93,59 +90,26 @@ public class Entity
         IsActive = value;
     }
 
-    private void AddBehavior(EntityBehavior entityBehavior)
+    public void AddBehavior(IEntityBehavior entityBehavior)
     {
+        _behaviors.Add(entityBehavior);
+
         if (_hasStarted)
         {
             // if this is an OnWorldStart trigger, and we've already started, just fire it immediately
-            if (entityBehavior.Trigger == BehaviorTrigger.OnWorldStart)
-            {
-                entityBehavior.DoActionEmptyPayload();
-            }
-        }
-
-        _behaviors.Add(entityBehavior);
-    }
-
-    public void AddBehavior(BehaviorTriggerBasic basicTrigger, Action result)
-    {
-        AddBehavior(new EntityBehavior(basicTrigger, _ => { result(); }));
-    }
-
-    public void AddBehavior<TPayload>(IBehaviorTrigger<TPayload> behaviorTriggerWithString, Action<TPayload> result)
-        where TPayload : IBehaviorTriggerPayload
-    {
-        AddBehavior(new EntityBehavior(behaviorTriggerWithString, payload =>
-        {
-            if (payload is TPayload realPayload)
-            {
-                result(realPayload);
-            }
-            else
-            {
-                result(behaviorTriggerWithString.CreateEmptyPayload());
-            }
-        }));
-    }
-
-    public void SelfTriggerBehavior(BehaviorTriggerBasic trigger)
-    {
-        foreach (var behavior in _behaviors.Where(behavior => behavior.Trigger == trigger))
-        {
-            behavior.DoActionEmptyPayload();
+            entityBehavior.OnTrigger(this, WorldStartTrigger.Instance);
         }
     }
 
-    public void SelfTriggerBehaviorWithPayload<TPayload>(IBehaviorTrigger<TPayload> trigger, TPayload payload)
-        where TPayload : IBehaviorTriggerPayload
+    public void TriggerBehavior(IBehaviorTrigger trigger)
     {
-        foreach (var behavior in _behaviors.Where(behavior => behavior.Trigger == trigger))
+        foreach (var behavior in _behaviors)
         {
-            behavior.DoAction(payload);
+            behavior.OnTrigger(this, trigger);
         }
     }
 
-    public void ClearBehaviors()
+    public void RemoveAllBehaviors()
     {
         _behaviors.Clear();
     }

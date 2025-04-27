@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -46,7 +47,7 @@ public class Room
     {
         foreach (var entity in _entitiesInRoom)
         {
-            entity.SelfTriggerBehavior(BehaviorTrigger.OnTurn);
+            entity.TriggerBehavior(TurnTrigger.Instance);
         }
     }
 

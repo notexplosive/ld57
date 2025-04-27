@@ -1,0 +1,28 @@
+{
+  "entities": [
+    {
+      "extra_state": {},
+      "template_name": "button",
+      "position": {
+        "x": 14,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "crate",
+      "position": {
+        "x": 14,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "door",
+      "position": {
+        "x": 18,
+        "y": 6
+      }
+    }
+  ]
+}

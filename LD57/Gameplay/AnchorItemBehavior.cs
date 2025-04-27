@@ -18,7 +18,7 @@ public class AnchorItemBehavior : ItemBehavior
     {
         if (_anchorEntity == null || world.IsDestroyed(_anchorEntity))
         {
-            _anchorEntity = world.AddEntity(new Entity(user.Position, PhantomTemplate()));
+            _anchorEntity = world.AddEntity(new Entity(world, user.Position, PhantomTemplate()));
         }
         else
         {

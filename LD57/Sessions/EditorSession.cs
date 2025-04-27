@@ -130,9 +130,11 @@ public class EditorSession : Session
         var selectedTemplate = new EditorSelector();
         var i = 0;
         int j = 0;
+        
+        var tempWorld = new World(new GridPosition(1,1), new WorldTemplate(), true);
         foreach (var template in LdResourceAssets.Instance.EntityTemplates.Values)
         {
-            var tempEntity = new Entity(new GridPosition(0, 0), template);
+            var tempEntity = new Entity(tempWorld, new GridPosition(0, 0), template);
             tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1 + j),
                 tempEntity.TileState ?? TileState.Empty,
                 selectedTemplate, () => { _selectedTemplate = template; }));
@@ -630,7 +632,7 @@ public class EditorSession : Session
         var player = WorldTemplate.GetPlayerEntity();
         if (player != null)
         {
-            world.AddEntity(new Entity(player.Position, ResourceAlias.EntityTemplate("player")));
+            world.AddEntity(new Entity(world, player.Position, ResourceAlias.EntityTemplate("player")));
         }
 
         world.SetCurrentRoom(new Room(world, _cameraPosition, _cameraPosition + _screen.RoomSize));

@@ -69,7 +69,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
             return false;
         }
 
-        var isEmptyAtTarget = world.GetActiveEntitiesAt(targetPosition).All(a => a.Appearance?.TileState.HasValue != true || a.HasTag("AllowDropOn"));
+        var isEmptyAtTarget = world.GetActiveEntitiesAt(targetPosition).All(a => a.HasTag("AllowDropOn"));
         return isEmptyAtTarget;
     }
 

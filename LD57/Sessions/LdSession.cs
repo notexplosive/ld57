@@ -7,6 +7,7 @@ using ExplogineMonoGame.Data;
 using ExTween;
 using LD57.CartridgeManagement;
 using LD57.Gameplay;
+using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 using LD57.Rules;
 using Microsoft.Xna.Framework;
@@ -39,7 +40,7 @@ public class LdSession : Session
     private int _numberOfTimesEnteredSanctuary;
     private ActionButton _pendingActionButton;
     private Direction _pendingDirection = Direction.None;
-    private Entity _player = new(new GridPosition(), new Invisible());
+    private Entity _player;
     private bool _stopAllInput;
     private int _totalCrystalCount;
     private World _world = new(Constants.GameRoomSize, new WorldTemplate());
@@ -47,6 +48,7 @@ public class LdSession : Session
     public LdSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
     {
+        _player = new Entity(_world, new GridPosition(), new Invisible());
         _screen = Constants.CreateGameScreen();
         _titleCard = new TitleCard(Constants.GameRoomSize);
         _dialogueBox = new DialogueBox(Constants.GameRoomSize);
@@ -434,12 +436,12 @@ public class LdSession : Session
 
         foreach (var entity in _world.AllActiveEntitiesCached())
         {
-            entity.SelfTriggerBehavior(BehaviorTrigger.OnReset);
+            entity.TriggerBehavior(ResetTrigger.Instance);
         }
 
         foreach (var entity in _world.CurrentRoom.AllActiveEntities())
         {
-            entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
+            entity.TriggerBehavior(EnterTrigger.Instance);
         }
     }
 
@@ -470,7 +472,7 @@ public class LdSession : Session
         }
 
         _world = new World(Constants.GameRoomSize, worldTemplate);
-        _player = _world.AddEntity(new Entity(playerSpawn, ResourceAlias.EntityTemplate("player")));
+        _player = _world.AddEntity(new Entity(_world, playerSpawn, ResourceAlias.EntityTemplate("player")));
 
         _world.Rules.AddRule(new CameraFollowsEntity(_world, _player));
         _world.RequestClaimCrystal += OnClaimCrystal;
@@ -525,7 +527,7 @@ public class LdSession : Session
     {
         foreach (var entity in _world.CurrentRoom.AllActiveEntities())
         {
-            entity.SelfTriggerBehavior(BehaviorTrigger.OnEnter);
+            entity.TriggerBehavior(EnterTrigger.Instance);
         }
     }
 
