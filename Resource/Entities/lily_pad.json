@@ -5,8 +5,11 @@
     "color": "grass",
     "tags": [
         "Capturable",
-        "BecomeWaterOnSteppedOff",
+        "TransformWhenSteppedOff",
         "Swappable",
         "FloatsInWater"
-    ]
+    ],
+    "state": {
+        "transform_to_template": "water"
+    }
 }

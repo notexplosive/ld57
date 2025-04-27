@@ -32,7 +32,6 @@ public class RuleComputer
             mover.Position + new GridPosition(direction.ToPoint()),
             direction);
         var status = EvaluateMove(data);
-        status.ExecuteActions();
 
         if (status.WasSuccessful)
         {
@@ -51,7 +50,6 @@ public class RuleComputer
             newPosition,
             mover.MostRecentMoveDirection);
         var status = EvaluateMove(data);
-        status.ExecuteActions();
 
         if (status.WasSuccessful)
         {
@@ -67,51 +65,54 @@ public class RuleComputer
     {
         var status = new MoveStatus();
         var mover = data.Mover;
-
-        var sources = _world.GetActiveEntitiesAt(data.Source).ToList();
-
-        var targets = _world.GetActiveEntitiesAt(data.Destination).ToList();
-        targets.Remove(data.Mover);
-
-        foreach (var target in targets)
+        
+        while (status.ShouldEvaluate)
         {
-            var tags = new TagComparer(mover, target);
-
-            if (tags.Check([], [Is("ForceMove")]))
+            status.StartEvaluation();
+            
+            var targets = _world.GetActiveEntitiesAt(data.Destination).ToList();
+            targets.Remove(data.Mover);
+            
+            foreach (var target in targets)
             {
-                var forcedDirection = Direction.FromName(target.State.GetString("direction"));
-                if (forcedDirection != data.Direction)
+                var tags = new TagComparer(mover, target);
+
+                if (tags.Check([], [Is("ForceMove")]))
                 {
-                    status.Fail();
+                    var forcedDirection = Direction.FromName(target.State.GetString("direction"));
+                    if (forcedDirection != data.Direction)
+                    {
+                        status.Fail();
+                    }
                 }
-            }
 
-            if (tags.Check(
-                    [Is("Solid")],
-                    [Is("Solid")]))
-            {
                 if (tags.Check(
-                        [Is("Pusher")],
-                        [Is("Pushable")]))
+                        [Is("Solid")],
+                        [Is("Solid")]))
                 {
-                    status.DependOnMove(_world.Rules.AttemptMoveInDirection(target, data.Direction));
+                    if (tags.Check(
+                            [Is("Pusher")],
+                            [Is("Pushable")]))
+                    {
+                        status.DependOnMove(_world.Rules.AttemptMoveInDirection(target, data.Direction));
+                    }
+                    else
+                    {
+                        status.Fail();
+                    }
                 }
-                else
+
+                if (tags.Check([Is("Player")], [Is("BlocksPlayer")]))
                 {
                     status.Fail();
                 }
-            }
 
-            if (tags.Check([Is("Player")], [Is("BlocksPlayer")]))
-            {
-                status.Fail();
-            }
-
-            if (tags.Check(
-                    [IsNotAnyOf("FloatsInWater", "FillsWater")],
-                    [Is("Water")]))
-            {
-                status.Fail();
+                if (tags.Check(
+                        [IsNotAnyOf("FloatsInWater", "FillsWater")],
+                        [Is("Water")]))
+                {
+                    status.Fail();
+                }
             }
         }
 

@@ -122,17 +122,10 @@ public class World
         //     });
         // }
 
-        // if (entity.HasTag("BecomeWaterOnSteppedOff"))
-        // {
-        //     entity.AddBehavior(BehaviorTrigger.OnSteppedOff, entityPayload =>
-        //     {
-        //         if (entityPayload.Entity?.HasTag("Solid") == true)
-        //         {
-        //             Destroy(entity);
-        //             AddEntity(CreateEntityFromTemplate(ResourceAlias.EntityTemplate("water"), entity.Position, []));
-        //         }
-        //     });
-        // }
+        if (entity.HasTag("TransformWhenSteppedOff"))
+        {
+            entity.AddBehavior(new TransformWhenSteppedOff());
+        }
 
         if (entity.HasTag("Signal"))
         {

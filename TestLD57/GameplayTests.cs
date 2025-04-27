@@ -1,4 +1,5 @@
 using ExplogineMonoGame.Data;
+using LD57.CartridgeManagement;
 using LD57.Gameplay;
 using LD57.Rendering;
 
@@ -423,6 +424,27 @@ public class GameplayTests
         UseItem(user, item);
 
         AssertPassable(blocker.Position, ["Solid"], true);
+    }
+
+    [Fact]
+    public void PushPushCrateOverLilyPad_ShouldMoveCrateButHaltPlayer()
+    {
+        // weird hack
+        LdResourceAssets.Instance.EntityTemplates.Add("water", new EntityTemplate()
+        {
+            Tags = ["Water"]
+        });
+        
+        var player = CreateEntity(new GridPosition(0,0), ["Solid","Pusher"], []);
+        var crate = CreateEntity(new GridPosition(1, 0), ["Solid", "Pushable"]);
+        CreateEntity(new GridPosition(2, 0), ["TransformWhenSteppedOff"],
+            [new StateKeyValue("transform_to_template", "water")]);
+        
+        MoveEntity(player, Direction.Right);
+        MoveEntity(player, Direction.Right);
+
+        Assert.Equivalent(player.Position, new GridPosition(1, 0));
+        Assert.Equivalent(crate.Position, new GridPosition(3, 0));
     }
 
     private void UseItem(Entity user, ItemBehavior item)

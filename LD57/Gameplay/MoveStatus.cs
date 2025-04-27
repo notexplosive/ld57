@@ -5,11 +5,16 @@ namespace LD57.Gameplay;
 
 public record struct MoveStatus()
 {
-    private readonly List<Action> _actions = new();
-
+    private int _evaluationCount;
+    public bool ShouldEvaluate { get; private set; } = true;
     public bool WasSuccessful { get; private set; } = true;
     public bool CausedPush { get; private set; } = false;
 
+    public void StartEvaluation()
+    {
+        ShouldEvaluate = false;
+    }
+    
     public void Fail()
     {
         WasSuccessful = false;
@@ -22,20 +27,15 @@ public record struct MoveStatus()
         {
             Fail();
         }
-    }
-
-    public void AddAction(Action action)
-    {
-        _actions.Add(action);
-    }
-
-    public void ExecuteActions()
-    {
-        foreach (var action in _actions)
+        else
         {
-            action();
+            ShouldEvaluate = true;
+            
+            _evaluationCount++;
+            if (_evaluationCount > 100)
+            {
+                throw new Exception("Evaluation looped too many times");
+            }
         }
-
-        _actions.Clear();
     }
 }
