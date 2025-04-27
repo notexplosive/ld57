@@ -166,13 +166,13 @@ public class LdSession : Session
                 RequestLevelEditor?.Invoke();
             }
         }
+
+        FrameInput.UpdateInput(input);
         
         if (_stopAllInput)
         {
             return;
         }
-
-        var frameInput = new FrameInput();
 
         if (FrameInput.PrimaryActionTapped(input))
         {
@@ -184,14 +184,14 @@ public class LdSession : Session
             _pendingActionButton = ActionButton.Secondary;
         }
 
-        if (frameInput.AnyDirectionTapped(input))
+        if (FrameInput.AnyDirectionTapped())
         {
             _inputTimer = 0;
         }
 
         if (_pendingDirection == Direction.None)
         {
-            _pendingDirection = frameInput.HeldDirection(input);
+            _pendingDirection = FrameInput.HeldDirection(input);
         }
 
         if (FrameInput.CancelPressed(input))
@@ -571,7 +571,11 @@ public class LdSession : Session
                     tween.Add(wipeTransition.FadeIn());
                     return tween;
                 }))
-                .Add(new CallbackTween(() => { DisplayScriptedDialogueMessage("credits"); }))
+                .Add(new CallbackTween(() =>
+                {
+                    DisplayScriptedDialogueMessage("credits");
+                    StopAllAmbientSounds();
+                }))
                 .Add(new WaitUntilTween(() => _modalQueue.Count == 0))
                 .Add(new CallbackTween(() =>
                 {

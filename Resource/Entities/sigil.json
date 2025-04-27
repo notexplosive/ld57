@@ -5,7 +5,6 @@
     "color": "blood",
     "tags": [
         "Capturable",
-        "ClearOnDrop",
         "Swappable"
     ]
 }

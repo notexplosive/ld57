@@ -3,7 +3,5 @@
     "sprite_sheet": "Floors",
     "frame": 8,
     "color": "blue_brick",
-    "tags": [
-        "Capturable"
-    ]
+    "tags": []
 }

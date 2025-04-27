@@ -1,7 +1,7 @@
-Move      : {i:Entities:21}{i:Entities:22}{i:Entities:23}{i:Entities:24} | WASD
-          :      |  
-Primary   : Z    | Space
-          :      |
-Secondary : X    | Shift
-          :      |
-Reset     : R    | ESC
+Move      : {i:Entities:21}{i:Entities:22}{i:Entities:23}{i:Entities:24} | WASD  | {i:Buttons:6} | {i:Buttons:7} |
+          :      |       |   |   |
+Primary   : Z    | Space | {c:signal_0}{i:Buttons:0}{c:white} | {c:treasure}{i:Buttons:3}{c:white} |
+          :      |       |   |   |
+Secondary : X    | Shift | {c:signal_2}{i:Buttons:2}{c:white} | {c:signal_1}{i:Buttons:1}{c:white} |
+          :      |       |   |   |
+Reset     : R    | ESC   | {i:Buttons:4} | {i:Buttons:5} |
