@@ -108,7 +108,7 @@ public class RuleComputer
                 }
 
                 if (tags.Check(
-                        [IsNotAnyOf("FloatsInWater", "FillsWater")],
+                        [IsNotAnyOf("CanMoveOnWater", "FillsWater")],
                         [Is("Water")]))
                 {
                     status.Fail();

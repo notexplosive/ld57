@@ -7,13 +7,13 @@ public class AddTagsWhenState : IEntityBehavior
 {
     private readonly string _stateKey;
     private readonly string[] _tags;
-    private readonly bool _shouldBeTruthy;
+    private readonly bool _targetValue;
 
-    public AddTagsWhenState(string stateKey, string[] tags, bool shouldBeTruthy)
+    public AddTagsWhenState(string stateKey, bool targetValue, string[] tags)
     {
         _stateKey = stateKey;
         _tags = tags;
-        _shouldBeTruthy = shouldBeTruthy;
+        _targetValue = targetValue;
     }
 
     public void OnTrigger(Entity self, IBehaviorTrigger trigger)
@@ -28,7 +28,7 @@ public class AddTagsWhenState : IEntityBehavior
             return;
         }
 
-        var isCorrectTruthiness = self.State.GetBoolOrFallback(_stateKey, false) == _shouldBeTruthy;
+        var isCorrectTruthiness = self.State.GetBoolOrFallback(_stateKey, false) == _targetValue;
 
         foreach (var tag in _tags)
         {

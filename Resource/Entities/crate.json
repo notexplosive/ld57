@@ -8,7 +8,8 @@
         "Capturable",
         "Solid",
         "PressesButtons",
-        "FloatsInWater",
+        "CanMoveOnWater",
+        "DeactivateInWater",
         "FillsWater",
         "PulledByHook",
         "Swappable"

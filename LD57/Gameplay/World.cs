@@ -78,7 +78,7 @@ public class World
             {
                 entity.TweenableGlyph.SetAnimation(Animations.WaterSway(Client.Random.Dirty.NextFloat() * 100));
             }
-            
+
             entity.AddBehavior(new Water());
         }
 
@@ -138,13 +138,15 @@ public class World
 
             if (entity.HasTag("Bridge"))
             {
+                entity.AddBehavior(new SetStateBasedOnSignal("is_surfaced", "is_inverted"));
+                entity.AddBehavior(new SwapOutEntityWhenState("is_surfaced", false, "water"));
             }
 
             if (entity.HasTag("Door"))
             {
                 entity.AddBehavior(new SetStateBasedOnSignal("is_open", "is_inverted"));
                 entity.AddBehavior(new ChangeTileFrameBasedOnState("is_open", "open_frame", "closed_frame"));
-                entity.AddBehavior(new AddTagsWhenState("is_open", ["Solid"], false));
+                entity.AddBehavior(new AddTagsWhenState("is_open", false, ["Solid"]));
             }
         }
     }

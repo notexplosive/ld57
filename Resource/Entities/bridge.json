@@ -8,8 +8,8 @@
         "Signal"
     ],
     "state": {
-        "open_frame": 5,
-        "closed_frame": 7,
+        "surfaced_frame": 5,
+        "submerged_frame": 7,
         "sheet": "Floors"
     }
 }

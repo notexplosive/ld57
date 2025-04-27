@@ -31,7 +31,7 @@ public class GameplayTests
     public void PushIntoWater_Float()
     {
         var pusher = CreateEntity(new GridPosition(0, 0), ["Pusher", "Solid"]);
-        var pushable = CreateEntity(new GridPosition(1, 0), ["Pushable", "Solid", "FillsWater", "FloatsInWater"]);
+        var pushable = CreateEntity(new GridPosition(1, 0), ["Pushable", "Solid", "FillsWater", "CanMoveOnWater", "DeactivateInWater"]);
         var water = CreateEntity(new GridPosition(2, 0), ["Water"]);
 
         _world.Rules.AttemptMoveInDirection(pusher, Direction.Right);
@@ -47,7 +47,7 @@ public class GameplayTests
     public void PushIntoWater_DoesNotFloat()
     {
         var pusher = CreateEntity(new GridPosition(0, 0), ["Pusher", "Solid"]);
-        var pushable = CreateEntity(new GridPosition(1, 0), ["Pushable", "Solid", "FillsWater"]);
+        var pushable = CreateEntity(new GridPosition(1, 0), ["Pushable", "Solid", "FillsWater", "DestroyInWater"]);
         var water = CreateEntity(new GridPosition(2, 0), ["Water"]);
 
         _world.Rules.AttemptMoveInDirection(pusher, Direction.Right);

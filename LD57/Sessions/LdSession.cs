@@ -142,7 +142,7 @@ public class LdSession : Session
         }
 
         var waterAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Water").ToList();
-        if (waterAtDestination.Count > 0 && data.Mover.HasTag("FloatsInWater"))
+        if (waterAtDestination.Count > 0 && data.Mover.HasTag("CanMoveOnWater"))
         {
             glyph.SetAnimation(Animations.FloatOnWater());
         }
@@ -150,7 +150,7 @@ public class LdSession : Session
         var buttonsAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Button").ToList();
         if (data.Mover.HasTag("PressesButtons") && buttonsAtDestination.Count > 0)
         {
-            var buttonColor = buttonsAtDestination.First().Appearance!.TileState!.Value.ForegroundColor;
+            var buttonColor = buttonsAtDestination.First().Appearance.TileState!.Value.ForegroundColor;
             glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState!.Value.ForegroundColor, buttonColor));
         }
     }

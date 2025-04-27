@@ -6,8 +6,7 @@
     "tags": [
         "Capturable",
         "TransformWhenSteppedOff",
-        "Swappable",
-        "FloatsInWater"
+        "Swappable"
     ],
     "state": {
         "transform_to_template": "water"

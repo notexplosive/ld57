@@ -32,11 +32,6 @@ public class ChangeTileFrameBasedOnState : IEntityBehavior
         var isOpen = self.State.GetBool(_openKey) == true;
         var sheet = self.State.GetString("sheet") ?? "Entities";
 
-        if (self.Appearance == null)
-        {
-            return;
-        }
-        
         if (!self.Appearance.TileState.HasValue)
         {
             return;

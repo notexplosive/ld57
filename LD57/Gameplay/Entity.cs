@@ -37,7 +37,7 @@ public class Entity
 
     public World World { get; }
 
-    public IEntityAppearance? Appearance { get; }
+    public IEntityAppearance Appearance { get; }
 
     public bool IsActive { get; private set; } = true;
 
@@ -47,7 +47,7 @@ public class Entity
 
     public TweenableGlyph TweenableGlyph { get; } = new();
 
-    public TileState? TileState => Appearance?.TileState;
+    public TileState? TileState => Appearance.TileState;
 
     public GridPosition Position { get; set; }
     public Direction MostRecentMoveDirection { get; set; } = Direction.None;
