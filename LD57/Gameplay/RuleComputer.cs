@@ -109,14 +109,6 @@ public class RuleComputer
             }
 
             if (tags.Check(
-                    [Is("Solid")],
-                    [Is("Door"), StateBool("is_open", false)]
-                ))
-            {
-                status.Fail();
-            }
-
-            if (tags.Check(
                     [Is("FillsWater"), Is("FloatsInWater")],
                     [Is("Water")]))
             {

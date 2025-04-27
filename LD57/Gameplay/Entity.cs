@@ -79,6 +79,11 @@ public class Entity
         _tags.Add(tag);
         return this;
     }
+    
+    public void RemoveTag(string tag)
+    {
+        _tags.Remove(tag);
+    }
 
     public bool HasTag(string tag)
     {

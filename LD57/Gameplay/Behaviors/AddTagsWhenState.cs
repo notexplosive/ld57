@@ -1,0 +1,45 @@
+﻿using System.Collections.Generic;
+using LD57.Gameplay.Triggers;
+
+namespace LD57.Gameplay.Behaviors;
+
+public class AddTagsWhenState : IEntityBehavior
+{
+    private readonly string _stateKey;
+    private readonly string[] _tags;
+    private readonly bool _shouldBeTruthy;
+
+    public AddTagsWhenState(string stateKey, string[] tags, bool shouldBeTruthy)
+    {
+        _stateKey = stateKey;
+        _tags = tags;
+        _shouldBeTruthy = shouldBeTruthy;
+    }
+
+    public void OnTrigger(Entity self, IBehaviorTrigger trigger)
+    {
+        if (trigger is not StateChangeTrigger stateChangeTrigger)
+        {
+            return;
+        }
+
+        if (stateChangeTrigger.Key != _stateKey)
+        {
+            return;
+        }
+
+        var isCorrectTruthiness = self.State.GetBoolOrFallback(_stateKey, false) == _shouldBeTruthy;
+
+        foreach (var tag in _tags)
+        {
+            if (isCorrectTruthiness)
+            {
+                self.AddTag(tag);
+            }
+            else
+            {
+                self.RemoveTag(tag);
+            }
+        }
+    }
+}

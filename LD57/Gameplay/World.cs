@@ -143,13 +143,13 @@ public class World
 
             if (entity.HasTag("Bridge"))
             {
-                
             }
 
             if (entity.HasTag("Door"))
             {
                 entity.AddBehavior(new SetStateBasedOnSignal("is_open", "is_inverted"));
-                entity.AddBehavior(new Door("is_open"));
+                entity.AddBehavior(new ChangeTileFrameBasedOnState("is_open", "open_frame", "closed_frame"));
+                entity.AddBehavior(new AddTagsWhenState("is_open", ["Solid"], false));
             }
         }
     }
@@ -302,7 +302,7 @@ public class World
         {
             throw new Exception("Entity is not from this world, panic!");
         }
-        
+
         _entities.Add(entity);
         entity.Start(this);
     }

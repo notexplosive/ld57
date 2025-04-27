@@ -21,21 +21,23 @@ public class Button : IEntityBehavior
             var wasPressed = self.State.GetBool("is_pressed");
             self.State.Set("is_pressed", isPressed);
 
-            if (isInitialized && wasPressed != isPressed)
+            if (!isInitialized || wasPressed == isPressed)
             {
-                if (isPressed)
-                {
-                    ResourceAlias.PlaySound("press_button", new SoundEffectSettings());
-                }
-                else
-                {
-                    ResourceAlias.PlaySound("press_button", new SoundEffectSettings{Pitch = 0.5f});
-                }
+                return;
+            }
 
-                foreach (var otherEntities in entitiesInSameRoom.Where(other => other.GetChannel() == channel))
-                {
-                    otherEntities.TriggerBehavior(new SignalChangeTrigger());
-                }
+            if (isPressed)
+            {
+                ResourceAlias.PlaySound("press_button", new SoundEffectSettings());
+            }
+            else
+            {
+                ResourceAlias.PlaySound("press_button", new SoundEffectSettings{Pitch = 0.5f});
+            }
+
+            foreach (var otherEntities in entitiesInSameRoom.Where(other => other.GetChannel() == channel))
+            {
+                otherEntities.TriggerBehavior(new SignalChangeTrigger());
             }
         }
     }

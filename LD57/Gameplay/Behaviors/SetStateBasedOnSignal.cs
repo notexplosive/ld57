@@ -18,17 +18,19 @@ public class SetStateBasedOnSignal : IEntityBehavior
     public void OnTrigger(Entity self, IBehaviorTrigger trigger)
     {
         var channel = self.GetChannel();
-        
-        if (trigger is SignalChangeTrigger)
+
+        if (trigger is not SignalChangeTrigger)
         {
-            var shouldOpen = self.AllButtonsPressedForChannel(channel);
-
-            if (self.State.GetBoolOrFallback(_invertedKey, false))
-            {
-                shouldOpen = !shouldOpen;
-            }
-
-            self.State.Set(_keyName, shouldOpen);
+            return;
         }
+
+        var shouldOpen = self.AllButtonsPressedForChannel(channel);
+
+        if (self.State.GetBoolOrFallback(_invertedKey, false))
+        {
+            shouldOpen = !shouldOpen;
+        }
+
+        self.State.Set(_keyName, shouldOpen);
     }
 }
