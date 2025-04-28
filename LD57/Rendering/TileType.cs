@@ -2,7 +2,8 @@
 
 public enum TileType
 {
-    Empty,
+    Skip,
     Character,
-    Sprite
+    Sprite,
+    Invisible
 }

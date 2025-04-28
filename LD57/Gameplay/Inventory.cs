@@ -52,10 +52,7 @@ public class Inventory
     {
         _itemEntities[slot] = entity;
         var itemBehavior = CreateBehavior(slot, GetBehaviorName(_itemEntities[slot]));
-        if (entity.TileState.HasValue)
-        {
-            itemBehavior.SetUiTile(entity.TileState.Value);
-        }
+        itemBehavior.SetUiTile(entity.TileState);
 
         _itemBehaviors[slot] = itemBehavior;
     }

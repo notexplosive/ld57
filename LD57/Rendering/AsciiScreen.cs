@@ -21,7 +21,7 @@ public class AsciiScreen
         Width = width;
         Height = height;
         TileSize = tileSize;
-        Clear(TileState.Empty);
+        Clear(TileState.TransparentEmpty);
     }
 
     public float TileSize { get; }
@@ -44,18 +44,19 @@ public class AsciiScreen
                 var gridPosition = new GridPosition(x, y);
                 var tileState = _tiles[gridPosition];
                 var tweenableGlyph = _tweenableGlyphs.GetValueOrDefault(gridPosition) ?? new TweenableGlyph();
-                var originalBackgroundColor = tileState.BackgroundColor;
                 var tweenBackgroundColor = tweenableGlyph.BackgroundColor.Value;
 
+                var backgroundRectangle = rectangle.ScaledFromCenter(tileState.BackgroundIntensity);
+                
                 if (tweenBackgroundColor != Color.Transparent)
                 {
-                    painter.DrawRectangle(rectangle,
+                    painter.DrawRectangle(backgroundRectangle,
                         new DrawSettings {Depth = Depth.Back, Color = tweenBackgroundColor});
                 }
-                else if (originalBackgroundColor.HasValue)
+                else if (tileState.HasBackground)
                 {
-                    painter.DrawRectangle(rectangle,
-                        new DrawSettings {Depth = Depth.Back, Color = originalBackgroundColor.Value});
+                    painter.DrawRectangle(backgroundRectangle,
+                        new DrawSettings {Depth = Depth.Back, Color = tileState.BackgroundColor});
                 }
 
                 var color = tileState.ForegroundColor;
@@ -192,7 +193,7 @@ public class AsciiScreen
         {
             for (var y = 1; y < height; y++)
             {
-                PutTile(topLeft + new GridPosition(x, y), TileState.Empty);
+                PutTile(topLeft + new GridPosition(x, y), TileState.TransparentEmpty);
             }
         }
     }
@@ -230,9 +231,9 @@ public class AsciiScreen
         return null;
     }
 
-    public TileState GetTile(GridPosition hoveredTilePosition)
+    public TileState GetTile(GridPosition position)
     {
-        return _tiles.GetValueOrDefault(hoveredTilePosition);
+        return _tiles.GetValueOrDefault(position);
     }
 
     public IEnumerable<GridPosition> AllTiles()

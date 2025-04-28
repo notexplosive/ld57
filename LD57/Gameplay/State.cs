@@ -118,4 +118,22 @@ public class State
     {
         return _table.ContainsKey(key);
     }
+
+    public float GetFloatOrFallback(string key, float fallback)
+    {
+        return GetFloat(key) ?? fallback;
+    }
+
+    private float? GetFloat(string key)
+    {
+        return GetAsTOrDefault(key, value =>
+        {
+            if (float.TryParse(value, out var result))
+            {
+                return result;
+            }
+
+            return new float?();
+        });
+    }
 }

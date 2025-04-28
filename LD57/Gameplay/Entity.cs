@@ -9,9 +9,9 @@ namespace LD57.Gameplay;
 public class Entity
 {
     private readonly List<IEntityBehavior> _behaviors = new();
-    private readonly int _rawSortPriority;
     private readonly HashSet<string> _tags = new();
     private bool _hasStarted;
+    private int? _overrideSortPriority;
 
     public Entity(World world, GridPosition position, IEntityAppearance appearance)
     {
@@ -31,8 +31,6 @@ public class Entity
         {
             _tags.Add(tag);
         }
-
-        _rawSortPriority = template.SortPriority;
     }
 
     public World World { get; }
@@ -43,11 +41,24 @@ public class Entity
 
     public State State { get; } = new();
 
-    public int SortPriority => _rawSortPriority * 2 + (IsActive ? 0 : 1);
+    public int SortPriority
+    {
+        get
+        {
+            var appearanceSortPriority = Appearance.RawSortPriority;
+
+            if (_overrideSortPriority.HasValue)
+            {
+                appearanceSortPriority = _overrideSortPriority.Value;
+            }
+            
+            return appearanceSortPriority * 2 + (IsActive ? 0 : 1);
+        }
+    }
 
     public TweenableGlyph TweenableGlyph { get; } = new();
 
-    public TileState? TileState => Appearance.TileState;
+    public TileState TileState => Appearance.TileState;
 
     public GridPosition Position { get; set; }
     public Direction MostRecentMoveDirection { get; set; } = Direction.None;
@@ -122,5 +133,15 @@ public class Entity
     public void UnStart()
     {
         _hasStarted = false;
+    }
+
+    public void SetOverrideSortPriority(int i)
+    {
+        _overrideSortPriority = i * 2;
+    }
+
+    public void ClearOverridenSortPriority()
+    {
+        _overrideSortPriority = null;
     }
 }

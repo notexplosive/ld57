@@ -150,8 +150,8 @@ public class LdSession : Session
         var buttonsAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Button").ToList();
         if (data.Mover.HasTag("PressesButtons") && buttonsAtDestination.Count > 0)
         {
-            var buttonColor = buttonsAtDestination.First().Appearance.TileState!.Value.ForegroundColor;
-            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState!.Value.ForegroundColor, buttonColor));
+            var buttonColor = buttonsAtDestination.First().Appearance.TileState.ForegroundColor;
+            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState.ForegroundColor, Color.Black));
         }
     }
 
@@ -234,7 +234,7 @@ public class LdSession : Session
             _itemTween.Clear();
         }
 
-        _screen.Clear(TileState.Empty);
+        _screen.Clear(TileState.TransparentEmpty);
 
         _world.PaintToScreen(_screen, dt);
         _inventory.PaintWorldOverlay(ActionButton.Primary, _screen, _world, _player, dt);
@@ -558,7 +558,7 @@ public class LdSession : Session
                 .Add(new DynamicTween(() =>
                 {
                     var tween = new SequenceTween();
-                    var wipeTransition = new WipeTransition(_screen, TileState.Empty);
+                    var wipeTransition = new WipeTransition(_screen, TileState.TransparentEmpty);
                     _currentTransition = wipeTransition;
                     tween.Add(wipeTransition.FadeIn());
                     return tween;
@@ -694,7 +694,7 @@ public class LdSession : Session
         var worldTemplate = JsonConvert.DeserializeObject<WorldTemplate>(worldData);
         if (worldTemplate != null)
         {
-            CrossFadeTransition(new WipeTransition(_screen, TileState.Empty), () => { LoadWorld(worldTemplate); });
+            CrossFadeTransition(new WipeTransition(_screen, TileState.TransparentEmpty), () => { LoadWorld(worldTemplate); });
         }
     }
 

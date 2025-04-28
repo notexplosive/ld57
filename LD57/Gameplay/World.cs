@@ -426,10 +426,8 @@ public class World
         foreach (var entity in allDrawnEntities)
         {
             var renderedPosition = entity.Position - CameraPosition;
-            if (entity.TileState.HasValue)
-            {
-                screen.PutTile(renderedPosition, entity.TileState.Value, entity.TweenableGlyph);
-            }
+            var newTile = TileState.CombineLayers(entity.TileState, screen.GetTile(renderedPosition));
+            screen.PutTile(renderedPosition, newTile, entity.TweenableGlyph);
         }
     }
 

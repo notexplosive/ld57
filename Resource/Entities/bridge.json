@@ -1,5 +1,5 @@
 {
-    "sort_priority": 8,
+    "sort_priority": 5,
     "sprite_sheet": "Floors",
     "frame": 5,
     "color": "white",
@@ -10,6 +10,7 @@
     "state": {
         "surfaced_frame": 5,
         "submerged_frame": 7,
-        "sheet": "Floors"
+        "sheet": "Floors",
+        "underwater_intensity": 0.25
     }
 }

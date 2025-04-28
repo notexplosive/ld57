@@ -47,18 +47,21 @@ public class SwapOutEntityWhenState : IEntityBehavior
 
         if (isCorrectTruthiness)
         {
-            self.Appearance.TileState = null;
+            // todo: this should move to a different behavior
+            self.Appearance.TileState = TileState.BackgroundOnly(_savedTileState.Value.ForegroundColor, self.State.GetFloatOrFallback("underwater_intensity", 0.25f));
+            self.SetOverrideSortPriority(50);
             
             if (createdEntityIsDestroyed)
             {
                 self.World.AddEntity(_createdEntity);
             }
-
         }
         else
         {
-            self.Appearance.TileState = _savedTileState;
+            self.Appearance.TileState = _savedTileState.Value;
             self.World.Destroy(_createdEntity);
+            self.ClearOverridenSortPriority();
         }
     }
 }
+

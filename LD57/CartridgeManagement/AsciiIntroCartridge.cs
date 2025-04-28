@@ -84,7 +84,7 @@ public class AsciiIntroCartridge : Cartridge
     public override void Update(float dt)
     {
         _elapsedTime += dt;
-        _screen.Clear(TileState.Empty);
+        _screen.Clear(TileState.TransparentEmpty);
 
         foreach (var glyph in _glyphs)
         {

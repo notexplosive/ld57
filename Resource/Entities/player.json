@@ -1,5 +1,5 @@
 {
-    "sort_priority": 0,
+    "sort_priority": 1,
     "sprite_sheet": "Entities",
     "frame": 0,
     "color": "player",

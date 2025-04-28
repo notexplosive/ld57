@@ -127,7 +127,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
                 .Add(new CallbackTween(() =>
                 {
                     _savedDefaultHudTile = DefaultHudTile;
-                    DefaultHudTile = entityToCapture.TileState ?? _savedDefaultHudTile;
+                    DefaultHudTile = entityToCapture.TileState;
                 }))
                 .Add(ExecuteCallbackTween(world, user))
             ;
@@ -203,7 +203,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
             var rejectionTile = TileState.StringCharacter("X", Color.White);
             if (_capturedEntity != null)
             {
-                rejectionTile = _capturedEntity.TileState ?? rejectionTile;
+                rejectionTile = _capturedEntity.TileState;
             }
 
             screen.PutTile(TargetPosition(user) - world.CameraPosition, rejectionTile, _rejectionTweenable);

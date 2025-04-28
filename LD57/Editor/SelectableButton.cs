@@ -33,6 +33,7 @@ public class SelectableButton : ISubElement
             renderedTileState = renderedTileState with
             {
                 BackgroundColor = Color.White,
+                BackgroundIntensity = 1f,
                 ForegroundColor = Color.Blue
             };
         }
@@ -47,7 +48,7 @@ public class SelectableButton : ISubElement
 
     public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
     {
-        var newTile = screen.GetTile(hoveredTilePosition) with {BackgroundColor = Color.LightBlue};
+        var newTile = screen.GetTile(hoveredTilePosition) with {BackgroundColor = Color.LightBlue, BackgroundIntensity = 1f};
         screen.PutTile(hoveredTilePosition, newTile);
     }
 

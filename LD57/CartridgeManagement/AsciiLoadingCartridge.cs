@@ -60,7 +60,7 @@ public class AsciiLoadingCartridge : Cartridge
 
     public override void Update(float dt)
     {
-        _screen.Clear(TileState.Empty);
+        _screen.Clear(TileState.TransparentEmpty);
 
         var lineNumber = 0;
         string? mostRecentStatus = null;

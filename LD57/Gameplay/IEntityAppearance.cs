@@ -4,5 +4,6 @@ namespace LD57.Gameplay;
 
 public interface IEntityAppearance
 {
-    TileState? TileState { get; set; }
+    TileState TileState { get; set; }
+    public int RawSortPriority { get; }
 }

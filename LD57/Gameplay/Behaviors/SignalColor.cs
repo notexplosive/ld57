@@ -14,10 +14,7 @@ public class SignalColor : IEntityBehavior
         }
 
         var signalColor = ResourceAlias.Color("signal_" + channel);
-        if (self.Appearance.TileState.HasValue)
-        {
-            self.Appearance.TileState =
-                self.Appearance.TileState.Value with {ForegroundColor = signalColor};
-        }
+        self.Appearance.TileState =
+            self.Appearance.TileState with {ForegroundColor = signalColor};
     }
 }

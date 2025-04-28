@@ -8,7 +8,7 @@ public class EmptyItemBehavior : ItemBehavior
 {
     public EmptyItemBehavior()
     {
-        DefaultHudTile = TileState.Empty;
+        DefaultHudTile = TileState.TransparentEmpty;
     }
     
     public override void Execute(World world, Entity user)

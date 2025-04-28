@@ -210,7 +210,7 @@ public class HookItemBehavior : ItemBehavior
                 var hookHeadTile = TileState.Sprite(ResourceAlias.Entities, 5, ResourceAlias.Color("hook"));
                 if (_currentPulledThing != null)
                 {
-                    var tile = _currentPulledThing.TileState ?? hookBodyTile;
+                    var tile = _currentPulledThing.TileState;
                     screen.PutTile(chainHeadPosition, tile, _currentPulledThing.TweenableGlyph);
                 }
                 else
@@ -221,7 +221,7 @@ public class HookItemBehavior : ItemBehavior
 
             if (_showDummyUser)
             {
-                screen.PutTile(userPosition, user.TileState!.Value, user.TweenableGlyph);
+                screen.PutTile(userPosition, user.TileState, user.TweenableGlyph);
             }
         }
 

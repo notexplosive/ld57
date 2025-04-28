@@ -32,17 +32,12 @@ public class ChangeTileFrameBasedOnState : IEntityBehavior
         var isOpen = self.State.GetBool(_openKey) == true;
         var sheet = self.State.GetString("sheet") ?? "Entities";
 
-        if (!self.Appearance.TileState.HasValue)
-        {
-            return;
-        }
-
         var openFrame = self.State.GetInt(_openFrameKey) ?? 0;
         var closedFrame = self.State.GetInt(_closedFrameKey) ?? 0;
 
         var frame = isOpen ? openFrame : closedFrame;
 
-        self.Appearance.TileState = self.Appearance.TileState.Value with
+        self.Appearance.TileState = self.Appearance.TileState with
         {
             Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]
         };

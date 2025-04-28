@@ -10,7 +10,7 @@ public class EntityTemplate
 {
     [JsonProperty("sprite_sheet")]
     public string? SpriteSheetName { get; set; }
-    
+
     [JsonProperty("frame")]
     public int Frame { get; set; }
 
@@ -19,7 +19,7 @@ public class EntityTemplate
 
     [JsonProperty("tags")]
     public List<string> Tags { get; set; } = new();
-    
+
     [JsonProperty("sort_priority")]
     public int SortPriority { get; set; }
 
@@ -30,10 +30,9 @@ public class EntityTemplate
 
     public IEntityAppearance CreateAppearance()
     {
+        var sortPriority = SortPriority;
         return SpriteSheetName != null
-            ? new EntityAppearance(LdResourceAssets.Instance.Sheets[SpriteSheetName],
-                Frame,
-                ResourceAlias.Color(Color))
+            ? new EntityAppearance(LdResourceAssets.Instance.Sheets[SpriteSheetName], Frame, ResourceAlias.Color(Color), sortPriority)
             : new Invisible();
     }
 }

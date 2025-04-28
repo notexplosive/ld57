@@ -136,7 +136,7 @@ public class EditorSession : Session
         {
             var tempEntity = new Entity(tempWorld, new GridPosition(0, 0), template);
             tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1 + j),
-                tempEntity.TileState ?? TileState.Empty,
+                tempEntity.TileState,
                 selectedTemplate, () => { _selectedTemplate = template; }));
             
             i++;
@@ -625,7 +625,7 @@ public class EditorSession : Session
 
     public override void Update(float dt)
     {
-        _screen.Clear(TileState.Empty);
+        _screen.Clear(TileState.TransparentEmpty);
 
         var world = new World(Constants.GameRoomSize, WorldTemplate, true);
 
@@ -649,7 +649,7 @@ public class EditorSession : Session
             {
                 if (_editorTool == EditorTool.Brush || _editorTool == EditorTool.Connect)
                 {
-                    var tile = originalTile with {BackgroundColor = Color.LightBlue};
+                    var tile = originalTile with {BackgroundColor = Color.LightBlue, BackgroundIntensity = 0.75f};
                     _screen.PutTile(_hoveredTilePosition.Value, tile);
                 }
 
@@ -716,7 +716,7 @@ public class EditorSession : Session
                     color = Color.Orange;
                 }
 
-                _screen.PutTile(position, previousTileState with {BackgroundColor = color});
+                _screen.PutTile(position, previousTileState with {BackgroundColor = color, BackgroundIntensity = 1f});
             }
         }
 
@@ -730,7 +730,7 @@ public class EditorSession : Session
             {
                 var previousTileState = _screen.GetTile(position);
                 _screen.PutTile(position,
-                    previousTileState with {BackgroundColor = Color.Goldenrod, ForegroundColor = Color.DarkGoldenrod});
+                    previousTileState with {BackgroundColor = Color.Goldenrod, ForegroundColor = Color.DarkGoldenrod, BackgroundIntensity = 1f});
             }
         }
 
@@ -743,7 +743,7 @@ public class EditorSession : Session
             {
                 var previousTileState = _screen.GetTile(position);
                 _screen.PutTile(position,
-                    previousTileState with {BackgroundColor = Color.LimeGreen, ForegroundColor = Color.Green});
+                    previousTileState with {BackgroundColor = Color.LimeGreen, ForegroundColor = Color.Green, BackgroundIntensity = 1f});
             }
         }
 
