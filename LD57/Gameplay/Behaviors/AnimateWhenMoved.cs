@@ -9,7 +9,7 @@ public class AnimateWhenMoved : IEntityBehavior
     {
         if (trigger is EntityMovedTrigger entityMovedTrigger && entityMovedTrigger.Mover == self)
         {
-            self.TweenableGlyph.SetAnimation(Animations.MakeMoveNudge(entityMovedTrigger.Data.Direction, Constants.TileSize / 4f));
+            self.TweenableGlyph.AddAnimation(Animations.MakeMoveNudge(entityMovedTrigger.Data.Direction, Constants.TileSize / 4f));
         }
     }
 }

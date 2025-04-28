@@ -140,7 +140,7 @@ public class LdSession : Session
         if (data.Mover.HasTag("PressesButtons") && buttonsAtDestination.Count > 0)
         {
             var buttonColor = buttonsAtDestination.First().Appearance.TileState.ForegroundColor;
-            glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState.ForegroundColor, Color.Black));
+            // glyph.AddAnimation(Animations.PulseColorLoop(data.Mover.TileState.ForegroundColor, Color.Black));
         }
     }
 

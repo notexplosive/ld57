@@ -7,9 +7,9 @@ public class Water : IEntityBehavior
 {
     public void OnTrigger(Entity self, IBehaviorTrigger trigger)
     {
-        if (trigger is EntityMovedTrigger movedTrigger)
+        if (trigger is TouchTrigger touchTrigger)
         {
-            var mover = movedTrigger.Mover;
+            var mover = touchTrigger.TouchingEntity;
 
             if (mover.Position == self.Position)
             {
