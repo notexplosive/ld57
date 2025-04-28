@@ -5,7 +5,8 @@
     "color": "white",
     "tags": [
         "Bridge",
-        "Signal"
+        "Signal",
+        "RaisesFromWater"
     ],
     "state": {
         "surfaced_frame": 5,

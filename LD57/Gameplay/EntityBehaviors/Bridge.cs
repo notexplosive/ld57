@@ -1,7 +1,7 @@
 ﻿using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 
-namespace LD57.Gameplay.Behaviors;
+namespace LD57.Gameplay.EntityBehaviors;
 
 public class Bridge : IEntityBehavior
 {
@@ -30,8 +30,7 @@ public class Bridge : IEntityBehavior
             return;
         }
 
-        var isCorrectTruthiness = self.State.GetBoolOrFallback(_stateKey, false) == _targetValue;
-
+        
         if (_createdEntity == null)
         {
             // This creates the entity but does not add it to the world
@@ -43,9 +42,10 @@ public class Bridge : IEntityBehavior
             _savedTileState = self.Appearance.TileState;
         }
         
+        var shouldBeSubmerged = self.State.GetBoolOrFallback(_stateKey, false) == _targetValue;
         var createdEntityIsDestroyed = _createdEntity.World.IsDestroyed(_createdEntity);
 
-        if (isCorrectTruthiness)
+        if (shouldBeSubmerged)
         {
             // todo: this should move to a different behavior
             self.Appearance.TileState = TileState.BackgroundOnly(_savedTileState.Value.ForegroundColor, self.State.GetFloatOrFallback("underwater_intensity", 0.25f));
@@ -62,6 +62,9 @@ public class Bridge : IEntityBehavior
             self.World.Destroy(_createdEntity);
             self.ClearOverridenSortPriority();
         }
+        
+        self.State.Set("is_risen", !shouldBeSubmerged);
+        self.World.Rules.DoUpdateAtPosition(self.Position);
     }
 }
 

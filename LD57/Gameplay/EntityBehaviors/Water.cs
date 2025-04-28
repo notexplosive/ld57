@@ -1,7 +1,7 @@
 ﻿using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 
-namespace LD57.Gameplay.Behaviors;
+namespace LD57.Gameplay.EntityBehaviors;
 
 public class Water : IEntityBehavior
 {

@@ -958,38 +958,6 @@
       "extra_state": {},
       "template_name": "water",
       "position": {
-        "x": 13,
-        "y": 13
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 13,
-        "y": 14
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 14,
-        "y": 13
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 14,
-        "y": 14
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
         "x": 15,
         "y": 13
       }
@@ -2440,6 +2408,54 @@
       "position": {
         "x": 24,
         "y": 20
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "crate",
+      "position": {
+        "x": 11,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge",
+      "position": {
+        "x": 13,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge",
+      "position": {
+        "x": 13,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge",
+      "position": {
+        "x": 14,
+        "y": 13
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge",
+      "position": {
+        "x": 14,
+        "y": 14
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "button",
+      "position": {
+        "x": 14,
+        "y": 12
       }
     }
   ]

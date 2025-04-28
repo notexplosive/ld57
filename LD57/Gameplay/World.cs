@@ -4,7 +4,7 @@ using System.Linq;
 using ExplogineCore.Data;
 using ExplogineMonoGame;
 using LD57.CartridgeManagement;
-using LD57.Gameplay.Behaviors;
+using LD57.Gameplay.EntityBehaviors;
 using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 
@@ -79,7 +79,7 @@ public class World
                 entity.TweenableGlyph.SetAnimation(Animations.WaterSway(Client.Random.Dirty.NextFloat() * 100));
             }
 
-            entity.AddBehavior(new Water());
+            // entity.AddBehavior(new Water());
         }
 
         if (entity.HasTag("Pushable"))
@@ -279,7 +279,13 @@ public class World
 
     public IEnumerable<Entity> AllEntitiesIncludingInactive()
     {
-        return _entities;
+        foreach (var entity in _entities)
+        {
+            if (!_entitiesToRemove.Contains(entity))
+            {
+                yield return entity;
+            }
+        }
     }
 
     public IEnumerable<Entity> AllActiveEntitiesCached()
@@ -289,7 +295,7 @@ public class World
 
     public IEnumerable<Entity> AllActiveEntities()
     {
-        foreach (var entity in _entities)
+        foreach (var entity in AllEntitiesIncludingInactive())
         {
             if (entity.IsActive)
             {
@@ -374,14 +380,18 @@ public class World
         var entities = new List<Entity>();
         var roomCornersAtSource = GetRoomCornersAt(moveData.Source);
         var roomCornersAtDestination = GetRoomCornersAt(moveData.Destination);
-
+        
         entities.AddRange(CalculateEntitiesInRoom(roomCornersAtSource, true));
 
-        if (roomCornersAtSource != roomCornersAtDestination && status.WasSuccessful)
+        if (roomCornersAtSource != roomCornersAtDestination)
         {
-            // If the move spanned multiple rooms AND the move was successful, update both rooms
-            entities.AddRange(CalculateEntitiesInRoom(roomCornersAtDestination, true));
+            if (status.WasSuccessful)
+            {
+                // If the move spanned multiple rooms AND the move was successful, update both rooms
+                entities.AddRange(CalculateEntitiesInRoom(roomCornersAtDestination, true));
+            }
         }
+
 
         foreach (var entity in entities)
         {
@@ -394,6 +404,12 @@ public class World
         }
 
         MoveCompleted?.Invoke(moveData, status);
+        
+        Rules.DoUpdateAtPosition(moveData.Source);
+        if (moveData.Source != moveData.Destination)
+        {
+            Rules.DoUpdateAtPosition(moveData.Destination);
+        }
     }
 
     public void Destroy(Entity entity)
@@ -430,9 +446,9 @@ public class World
         }
     }
 
-    public bool IsDestroyed(Entity water)
+    public bool IsDestroyed(Entity entity)
     {
-        return _entitiesToRemove.Contains(water) || !_entities.Contains(water);
+        return _entitiesToRemove.Contains(entity) || !_entities.Contains(entity);
     }
 
     public void ClearAllEntities()

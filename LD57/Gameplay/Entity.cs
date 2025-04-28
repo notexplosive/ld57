@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using ExplogineMonoGame.Data;
-using LD57.Gameplay.Behaviors;
+using LD57.Gameplay.EntityBehaviors;
 using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 

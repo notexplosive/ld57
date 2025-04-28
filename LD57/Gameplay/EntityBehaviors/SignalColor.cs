@@ -1,6 +1,6 @@
 ﻿using LD57.Gameplay.Triggers;
 
-namespace LD57.Gameplay.Behaviors;
+namespace LD57.Gameplay.EntityBehaviors;
 
 public class SignalColor : IEntityBehavior
 {

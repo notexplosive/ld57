@@ -103,6 +103,17 @@ public static class Animations
                 ;
         };
     }
+    
+    public static AnimationFactory BounceUpFromWater()
+    {
+        return (glyph, tween) =>
+        {
+            tween
+                .Add(glyph.Scale.CallbackSetTo(1.2f))
+                .Add(glyph.Scale.TweenTo(1f, 0.15f, Ease.QuadSlowFast))
+                ;
+        };
+    }
 
     public static AnimationFactory WaterSway(float randomFloat)
     {

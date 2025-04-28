@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using LD57.Rendering;
 
-namespace LD57.Gameplay.Behaviors;
+namespace LD57.Gameplay.EntityBehaviors;
 
 public static class BehaviorUtilities
 {

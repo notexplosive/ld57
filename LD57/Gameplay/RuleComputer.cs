@@ -41,6 +41,22 @@ public class RuleComputer
         OnMoveCompleted(data, status);
         return status;
     }
+    
+    public void DoUpdateAtPosition(GridPosition position)
+    {
+        var allEntitiesAtPosition = _world.AllEntitiesIncludingInactive().Where(entity => entity.Position == position).ToList();
+        
+        foreach (var entityA in allEntitiesAtPosition)
+        {
+            foreach (var entityB in allEntitiesAtPosition)
+            {
+                if (entityA != entityB)
+                {
+                    EvaluateUpdate(entityA, entityB);
+                }
+            }
+        }
+    }
 
     public void WarpToPosition(Entity mover, GridPosition newPosition)
     {
@@ -118,8 +134,45 @@ public class RuleComputer
 
         return status;
     }
+    
+    private void EvaluateUpdate(Entity entityA, Entity entityB)
+    {
+        var tags = new TagComparer(entityA, entityB);
 
-    private ICondition StateBool(string key, bool value)
+        if (tags.Check([Is("Water")], [Is("FillsWater")]))
+        {
+            _world.Destroy(entityA);
+        }
+        
+        if (tags.Check([Is("Water")], [Is("DestroyInWater")]))
+        {
+            _world.Destroy(entityB);
+        }
+        
+        if (tags.Check([Is("Water")], [Is("DeactivateInWater")]))
+        {
+            entityB.SetActive(false);
+            entityB.TweenableGlyph.SetAnimation(Animations.FloatOnWater());
+        }
+
+        if (tags.Check([Is("RaisesFromWater"), StateIsBool("is_risen", true)],[Is("DeactivateInWater"), IsInactive()]))
+        {
+            entityB.SetActive(true);
+            entityB.TweenableGlyph.SetAnimation(Animations.BounceUpFromWater());
+        }
+    }
+
+    private ICondition IsInactive()
+    {
+        return new IsActiveBoolean(false);
+    }
+    
+    private ICondition IsActive()
+    {
+        return new IsActiveBoolean(true);
+    }
+
+    private ICondition StateIsBool(string key, bool value)
     {
         return new StateValueBoolean(key, value, false);
     }
@@ -187,6 +240,14 @@ public class RuleComputer
         public bool Check(Entity entity)
         {
             return entity.State.GetBoolOrFallback(Key, Fallback) == Value;
+        }
+    }
+
+    private readonly record struct IsActiveBoolean(bool ExpectedValue) : ICondition
+    {
+        public bool Check(Entity entity)
+        {
+            return entity.IsActive == ExpectedValue;
         }
     }
 
