@@ -37,9 +37,12 @@ public class ChangeTileFrameBasedOnState : IEntityBehavior
 
         var frame = isOpen ? openFrame : closedFrame;
 
-        self.Appearance.TileState = self.Appearance.TileState with
+        if (Client.Headless == false)
         {
-            Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]
-        };
+            self.Appearance.TileState = self.Appearance.TileState with
+            {
+                Frame = frame, SpriteSheet = LdResourceAssets.Instance.Sheets[sheet]
+            };
+        }
     }
 }

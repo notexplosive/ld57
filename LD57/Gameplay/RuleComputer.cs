@@ -110,7 +110,10 @@ public class RuleComputer
                             [Is("Pusher")],
                             [Is("Pushable")]))
                     {
-                        status.DependOnMove(_world.Rules.AttemptMoveInDirection(target, data.Direction));
+                        if (data.Direction != Direction.None)
+                        {
+                            status.DependOnMove(_world.Rules.AttemptMoveInDirection(target, data.Direction));
+                        }
                     }
                     else
                     {
@@ -155,7 +158,7 @@ public class RuleComputer
             entityB.TweenableGlyph.SetAnimation(Animations.FloatOnWater());
         }
 
-        if (tags.Check([Is("RaisesFromWater"), StateIsBool("is_risen", true)],[Is("DeactivateInWater"), IsInactive()]))
+        if (tags.Check([Is("ProvidesBuoyancy"), StateIsBool("is_risen", true)],[Is("DeactivateInWater"), IsInactive()]))
         {
             entityB.SetActive(true);
             entityB.TweenableGlyph.SetAnimation(Animations.BounceUpFromWater());

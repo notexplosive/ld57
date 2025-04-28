@@ -12,6 +12,7 @@
         "surfaced_frame": 5,
         "submerged_frame": 7,
         "sheet": "Floors",
-        "underwater_intensity": 0.25
+        "underwater_intensity": 0.25,
+        "is_inverted": true
     }
 }

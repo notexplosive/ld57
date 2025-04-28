@@ -13,6 +13,10 @@ public class GameplayTests
     {
         _world = new World(new GridPosition(10, 10), new WorldTemplate());
         _world.MoveCompleted += (data, status) => { _world.UpdateEntityList(); };
+
+        // kinda weird hack, some tests depend on their being a template called "water"
+        LdResourceAssets.Instance.EntityTemplates.TryAdd("water",
+            new EntityTemplate {TemplateName = "water", Tags = ["Water"]});
     }
 
     [Fact]
@@ -31,7 +35,8 @@ public class GameplayTests
     public void PushIntoWater_Float()
     {
         var pusher = CreateEntity(new GridPosition(0, 0), ["Pusher", "Solid"]);
-        var pushable = CreateEntity(new GridPosition(1, 0), ["Pushable", "Solid", "FillsWater", "CanMoveOnWater", "DeactivateInWater"]);
+        var pushable = CreateEntity(new GridPosition(1, 0),
+            ["Pushable", "Solid", "FillsWater", "CanMoveOnWater", "DeactivateInWater"]);
         var water = CreateEntity(new GridPosition(2, 0), ["Water"]);
 
         _world.Rules.AttemptMoveInDirection(pusher, Direction.Right);
@@ -158,7 +163,7 @@ public class GameplayTests
     [Fact]
     public void Door_OneButton()
     {
-        var walker = CreateEntity(new GridPosition(0, 0), ["PressesButtons"]);
+        var walker = CreateEntity(new GridPosition(0, 0), ["PushesButtons"]);
         var button = CreateEntity(new GridPosition(1, 0), ["Button", "Signal"]);
         var door = CreateEntity(new GridPosition(5, 5), ["Door", "Signal"]);
 
@@ -170,10 +175,10 @@ public class GameplayTests
     [Fact]
     public void Door_TwoButtons()
     {
-        var walker1 = CreateEntity(new GridPosition(0, 0), ["PressesButtons"]);
+        var walker1 = CreateEntity(new GridPosition(0, 0), ["PushesButtons"]);
         var button = CreateEntity(new GridPosition(1, 0), ["Button", "Signal"]);
         var button2 = CreateEntity(new GridPosition(1, 1), ["Button", "Signal"]);
-        var walker2 = CreateEntity(new GridPosition(0, 1), ["PressesButtons"]);
+        var walker2 = CreateEntity(new GridPosition(0, 1), ["PushesButtons"]);
         var door = CreateEntity(new GridPosition(5, 5), ["Door", "Signal"]);
 
         AssertPassable(door.Position, ["Solid"], false);
@@ -186,7 +191,7 @@ public class GameplayTests
     [Fact]
     public void Door_AlreadyPressed()
     {
-        var presser = CreateEntity(new GridPosition(0, 0), ["PressesButtons"]);
+        var presser = CreateEntity(new GridPosition(0, 0), ["PushesButtons"]);
         var button = CreateEntity(new GridPosition(0, 0), ["Button", "Signal"]);
         var door = CreateEntity(new GridPosition(5, 5), ["Door", "Signal"]);
 
@@ -196,7 +201,7 @@ public class GameplayTests
     [Fact]
     public void Door_Inverted()
     {
-        var presser = CreateEntity(new GridPosition(0, 0), ["PressesButtons"]);
+        var presser = CreateEntity(new GridPosition(0, 0), ["PushesButtons"]);
         var button = CreateEntity(new GridPosition(0, 0), ["Button", "Signal"]);
         var door = CreateEntity(new GridPosition(5, 5), ["Door", "Signal"], [new StateKeyValue("inverted", "true")]);
 
@@ -223,7 +228,7 @@ public class GameplayTests
         var closed =
             CreateEntity(position, ["Door", "Signal"], [new StateKeyValue("channel", "1")]);
         var presser =
-            CreateEntity(new GridPosition(0, 0), ["PressesButtons"]);
+            CreateEntity(new GridPosition(0, 0), ["PushesButtons"]);
         var buttonInFirstRoom =
             CreateEntity(new GridPosition(0, 0), ["Button", "Signal"], [new StateKeyValue("channel", "0")]);
 
@@ -234,7 +239,7 @@ public class GameplayTests
     public void Door_OpenThenChangeRoom()
     {
         var presser =
-            CreateEntity(new GridPosition(0, 0), ["PressesButtons"]);
+            CreateEntity(new GridPosition(0, 0), ["PushesButtons"]);
 
         var buttonInFirstRoom =
             CreateEntity(new GridPosition(1, 0), ["Button", "Signal"], [new StateKeyValue("channel", "0")]);
@@ -287,7 +292,7 @@ public class GameplayTests
     [Fact]
     public void Door_Airlock()
     {
-        var solidPresser = CreateEntity(new GridPosition(0, 0), ["PressesButtons", "Solid"]);
+        var solidPresser = CreateEntity(new GridPosition(0, 0), ["PushesButtons", "Solid"]);
         var button = CreateEntity(new GridPosition(1, 0), ["Button", "Signal"]);
         var door = CreateEntity(new GridPosition(2, 0), ["Door", "Signal"]);
 
@@ -368,13 +373,13 @@ public class GameplayTests
         MoveEntity(user, Direction.Right);
 
         UseItem(user, item);
-        
+
         _world.UpdateEntityList();
 
         Assert.True(_world.IsDestroyed(water));
         AssertPassable(new GridPosition(5, 5), ["Solid"], true);
     }
-    
+
     [Fact]
     public void Item_Capture_CantCapture()
     {
@@ -400,14 +405,14 @@ public class GameplayTests
         var blocker = CreateEntity(new GridPosition(5, 5), ["Solid"], []);
 
         UseItem(user, item);
-        
-        WarpEntity(user, blocker.Position - new GridPosition(1,0));
-        
+
+        WarpEntity(user, blocker.Position - new GridPosition(1, 0));
+
         UseItem(user, item);
-        
+
         Assert.True(_world.IsDestroyed(thingToGrab));
     }
-    
+
     [Fact]
     public void Item_Capture_OverridesTile()
     {
@@ -418,9 +423,9 @@ public class GameplayTests
         var blocker = CreateEntity(new GridPosition(5, 5), ["Solid", "AllowDropOn"], []);
 
         UseItem(user, item);
-        
-        WarpEntity(user, blocker.Position - new GridPosition(1,0));
-        
+
+        WarpEntity(user, blocker.Position - new GridPosition(1, 0));
+
         UseItem(user, item);
 
         AssertPassable(blocker.Position, ["Solid"], true);
@@ -429,22 +434,109 @@ public class GameplayTests
     [Fact]
     public void PushPushCrateOverLilyPad_ShouldMoveCrateButHaltPlayer()
     {
-        // weird hack
-        LdResourceAssets.Instance.EntityTemplates.Add("water", new EntityTemplate()
-        {
-            Tags = ["Water"]
-        });
-        
-        var player = CreateEntity(new GridPosition(0,0), ["Solid","Pusher"], []);
+        var player = CreateEntity(new GridPosition(0, 0), ["Solid", "Pusher"], []);
         var crate = CreateEntity(new GridPosition(1, 0), ["Solid", "Pushable"]);
         CreateEntity(new GridPosition(2, 0), ["TransformWhenSteppedOff"],
             [new StateKeyValue("transform_to_template", "water")]);
-        
+
         MoveEntity(player, Direction.Right);
         MoveEntity(player, Direction.Right);
 
         Assert.Equivalent(player.Position, new GridPosition(1, 0));
         Assert.Equivalent(crate.Position, new GridPosition(3, 0));
+    }
+
+    [Fact]
+    public void Bridge_Inactive_CantWalkAcross()
+    {
+        var bridgePosition = new GridPosition(2, 0);
+        CreateEntity(new GridPosition(1, 0), ["Signal", "Button"]);
+        CreateEntity(bridgePosition, ["Signal", "Bridge", "ProvidesBuoyancy"]);
+
+        AssertPassable(bridgePosition, ["Solid"], false);
+    }
+
+    [Fact]
+    public void Bridge_Inactive_CanWalkAcross()
+    {
+        var bridgePosition = new GridPosition(2, 0);
+        var crate = CreateEntity(new GridPosition(0, 0),
+            ["Solid", "CanMoveOnWater", "DeactivateInWater", "PushesButtons"]);
+        CreateEntity(new GridPosition(1, 0), ["Signal", "Button"]);
+        CreateEntity(bridgePosition, ["Signal", "Bridge", "ProvidesBuoyancy"]);
+
+        MoveEntity(crate, Direction.Right);
+
+        AssertPassable(bridgePosition, ["Solid"], true);
+    }
+
+    [Fact]
+    public void Bridge_Inactive_Inverted_CanWalkAcross()
+    {
+        var bridgePosition = new GridPosition(2, 0);
+        CreateEntity(new GridPosition(1, 0), ["Signal", "Button"]);
+        CreateEntity(bridgePosition, ["Signal", "Bridge", "ProvidesBuoyancy"], [new StateKeyValue("is_inverted", "true")]);
+
+        AssertPassable(bridgePosition, ["Solid"], true);
+    }
+
+    [Fact]
+    public void Bridge_Inactive_Inverted_CantWalkAcross()
+    {
+        var bridgePosition = new GridPosition(2, 0);
+        var crate = CreateEntity(new GridPosition(0, 0),
+            ["Solid", "CanMoveOnWater", "DeactivateInWater", "PushesButtons"]);
+        CreateEntity(new GridPosition(1, 0), ["Signal", "Button"]);
+        CreateEntity(bridgePosition, ["Signal", "Bridge", "ProvidesBuoyancy"], [new StateKeyValue("is_inverted", "true")]);
+
+        MoveEntity(crate, Direction.Right);
+
+        AssertPassable(bridgePosition, ["Solid"], false);
+    }
+
+    [Fact]
+    public void Bridge_Submerge()
+    {
+        var bridgePosition = new GridPosition(2, 0);
+        var subject = CreateEntity(new GridPosition(10, 10),
+            ["Solid", "CanMoveOnWater", "DeactivateInWater", "PushesButtons"]);
+        var buttonPusher = CreateEntity(new GridPosition(0, 0), ["PushesButtons"]);
+        CreateEntity(new GridPosition(1, 0), ["Signal", "Button"]);
+        CreateEntity(bridgePosition, ["Signal", "Bridge", "ProvidesBuoyancy"]);
+
+        // put crate on bridge
+        WarpEntity(subject, bridgePosition);
+
+        Assert.False(subject.IsActive);
+
+        // press the button
+        MoveEntity(buttonPusher, Direction.Right);
+
+        Assert.True(subject.IsActive);
+    }
+
+    [Fact]
+    public void Bridge_Surface()
+    {
+        var bridgePosition = new GridPosition(2, 0);
+        var subject = CreateEntity(new GridPosition(10, 10),
+            ["Solid", "CanMoveOnWater", "DeactivateInWater", "PushesButtons"]);
+        var buttonPusher = CreateEntity(new GridPosition(0, 0), ["PushesButtons"]);
+        CreateEntity(new GridPosition(1, 0), ["Signal", "Button"]);
+        CreateEntity(bridgePosition, ["Signal", "Bridge", "ProvidesBuoyancy"]);
+
+        // press the button
+        MoveEntity(buttonPusher, Direction.Right);
+
+        // put crate on water where the bridge was
+        WarpEntity(subject, bridgePosition);
+
+        Assert.True(subject.IsActive);
+
+        // release button
+        MoveEntity(buttonPusher, Direction.Left);
+
+        Assert.False(subject.IsActive);
     }
 
     private void UseItem(Entity user, ItemBehavior item)

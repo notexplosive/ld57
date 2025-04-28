@@ -18,7 +18,7 @@ public class Button : IEntityBehavior
 
         var entitiesInSameRoom = self.World.EntitiesInSameRoom(self.Position).ToList();
         var isPressed = entitiesInSameRoom
-            .Where(a => a.Position == self.Position).Any(a => a.HasTag("PressesButtons"));
+            .Where(a => a.Position == self.Position).Any(a => a.HasTag("PushesButtons"));
 
         var isInitialized = self.State.HasKey("is_pressed");
         var wasPressed = self.State.GetBool("is_pressed");

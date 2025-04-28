@@ -7,7 +7,7 @@
         "Pushable",
         "Capturable",
         "Solid",
-        "PressesButtons",
+        "PushesButtons",
         "CanMoveOnWater",
         "DeactivateInWater",
         "FillsWater",
