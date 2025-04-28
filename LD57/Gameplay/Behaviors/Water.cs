@@ -7,27 +7,29 @@ public class Water : IEntityBehavior
 {
     public void OnTrigger(Entity self, IBehaviorTrigger trigger)
     {
-        if (trigger is TouchTrigger touchTrigger)
+        if (trigger is EntityMovedTrigger moveTrigger)
         {
-            var mover = touchTrigger.TouchingEntity;
+            var mover = moveTrigger.Data.Mover;
 
-            if (mover.Position == self.Position)
+            if (mover.Position != self.Position)
             {
-                if (mover.HasTag("FillsWater"))
-                {
-                    self.World.Destroy(self);
-                }
+                return;
+            }
 
-                if (mover.HasTag("DestroyInWater"))
-                {
-                    self.World.Destroy(mover);
-                }
+            if (mover.HasTag("FillsWater"))
+            {
+                self.World.Destroy(self);
+            }
 
-                if (mover.HasTag("DeactivateInWater"))
-                {
-                    mover.SetActive(false);
-                    mover.TweenableGlyph.SetAnimation(Animations.FloatOnWater());
-                }
+            if (mover.HasTag("DestroyInWater"))
+            {
+                self.World.Destroy(mover);
+            }
+
+            if (mover.HasTag("DeactivateInWater"))
+            {
+                mover.SetActive(false);
+                mover.TweenableGlyph.SetAnimation(Animations.FloatOnWater());
             }
         }
     }

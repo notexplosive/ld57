@@ -1,3 +1,3 @@
 ﻿namespace LD57.Gameplay.Triggers;
 
-public record EntityMovedTrigger(Entity Mover, MoveData Data) : IBehaviorTrigger;
+public record EntityMovedTrigger(MoveData Data) : IBehaviorTrigger;

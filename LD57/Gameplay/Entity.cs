@@ -31,7 +31,11 @@ public class Entity
         {
             _tags.Add(tag);
         }
+
+        Name = template.TemplateName;
     }
+
+    public string Name { get; } = "Nameless Entity";
 
     public World World { get; }
 
@@ -51,7 +55,7 @@ public class Entity
             {
                 appearanceSortPriority = _overrideSortPriority.Value;
             }
-            
+
             return appearanceSortPriority * 2 + (IsActive ? 0 : 1);
         }
     }
@@ -90,7 +94,7 @@ public class Entity
         _tags.Add(tag);
         return this;
     }
-    
+
     public void RemoveTag(string tag)
     {
         _tags.Remove(tag);
@@ -101,9 +105,9 @@ public class Entity
         return _tags.Contains(tag);
     }
 
-    public void SetActive(bool value)
+    public void SetActive(bool shouldBeActive)
     {
-        IsActive = value;
+        IsActive = shouldBeActive;
     }
 
     public void AddBehavior(IEntityBehavior entityBehavior)
@@ -143,5 +147,10 @@ public class Entity
     public void ClearOverridenSortPriority()
     {
         _overrideSortPriority = null;
+    }
+
+    public override string ToString()
+    {
+        return $"{Name} @ {Position}";
     }
 }

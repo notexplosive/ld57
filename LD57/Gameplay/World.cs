@@ -144,7 +144,7 @@ public class World
             if (entity.HasTag("Bridge"))
             {
                 entity.AddBehavior(new SetStateBasedOnSignal("is_surfaced", "is_inverted"));
-                entity.AddBehavior(new SwapOutEntityWhenState("is_surfaced", false, "water"));
+                entity.AddBehavior(new Bridge("is_surfaced", false, "water"));
             }
 
             if (entity.HasTag("Door"))
@@ -385,18 +385,12 @@ public class World
 
         foreach (var entity in entities)
         {
-            if (entity.Position == moveData.Destination)
-            {
-                // even if the move failed, we still count that as a "touch"
-                entity.TriggerBehavior(new TouchTrigger(moveData.Mover));
-            }
-
             if (status.WasSuccessful && entity.Position == moveData.Source)
             {
                 entity.TriggerBehavior(new SteppedOffTrigger(moveData.Mover));
             }
 
-            entity.TriggerBehavior(new EntityMovedTrigger(moveData.Mover, moveData));
+            entity.TriggerBehavior(new EntityMovedTrigger(moveData));
         }
 
         MoveCompleted?.Invoke(moveData, status);

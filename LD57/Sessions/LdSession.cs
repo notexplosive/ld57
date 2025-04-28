@@ -428,10 +428,7 @@ public class LdSession : Session
             entity.TriggerBehavior(ResetTrigger.Instance);
         }
 
-        foreach (var entity in _world.CurrentRoom.AllActiveEntities())
-        {
-            entity.TriggerBehavior(EnterTrigger.Instance);
-        }
+        EnterCurrentRoom();
     }
 
     public override void Draw(Painter painter)

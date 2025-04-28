@@ -3,7 +3,7 @@ using LD57.Rendering;
 
 namespace LD57.Gameplay.Behaviors;
 
-public class SwapOutEntityWhenState : IEntityBehavior
+public class Bridge : IEntityBehavior
 {
     private readonly string _stateKey;
     private readonly bool _targetValue;
@@ -11,7 +11,7 @@ public class SwapOutEntityWhenState : IEntityBehavior
     private Entity? _createdEntity;
     private TileState? _savedTileState;
 
-    public SwapOutEntityWhenState(string stateKey, bool targetValue, string templateName)
+    public Bridge(string stateKey, bool targetValue, string templateName)
     {
         _stateKey = stateKey;
         _targetValue = targetValue;
