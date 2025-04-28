@@ -1,3 +1,5 @@
-﻿namespace LD57.Gameplay.Triggers;
+﻿using LD57.Rendering;
 
-public record EntityMovedTrigger(Entity Mover) : IBehaviorTrigger;
+namespace LD57.Gameplay.Triggers;
+
+public record EntityMovedTrigger(Entity Mover, MoveData Data) : IBehaviorTrigger;

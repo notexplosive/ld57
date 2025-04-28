@@ -136,17 +136,6 @@ public class LdSession : Session
             return;
         }
 
-        if (data.Mover.HasTag("Pushable"))
-        {
-            glyph.SetAnimation(Animations.MakeMoveNudge(data.Direction, _screen.TileSize / 4));
-        }
-
-        var waterAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Water").ToList();
-        if (waterAtDestination.Count > 0 && data.Mover.HasTag("CanMoveOnWater"))
-        {
-            glyph.SetAnimation(Animations.FloatOnWater());
-        }
-
         var buttonsAtDestination = _world.FilterToEntitiesWithTag(entitiesAtDestination, "Button").ToList();
         if (data.Mover.HasTag("PressesButtons") && buttonsAtDestination.Count > 0)
         {

@@ -1,4 +1,5 @@
 ﻿using LD57.Gameplay.Triggers;
+using LD57.Rendering;
 
 namespace LD57.Gameplay.Behaviors;
 
@@ -25,6 +26,7 @@ public class Water : IEntityBehavior
                 if (mover.HasTag("DeactivateInWater"))
                 {
                     mover.SetActive(false);
+                    mover.TweenableGlyph.SetAnimation(Animations.FloatOnWater());
                 }
             }
         }

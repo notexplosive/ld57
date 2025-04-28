@@ -15,8 +15,10 @@ public static class Constants
 
     public static AsciiScreen CreateGameScreen()
     {
-        return new AsciiScreen(40, 22, 48);
+        return new AsciiScreen(40, 22, TileSize);
     }
+
+    public static int TileSize => 48;
 
     public static Rectangle CreateRectangle(GridPosition topLeft, GridPosition bottomRight, bool isInclusive = true)
     {

@@ -82,6 +82,11 @@ public class World
             entity.AddBehavior(new Water());
         }
 
+        if (entity.HasTag("Pushable"))
+        {
+            entity.AddBehavior(new AnimateWhenMoved());
+        }
+
         // if (entity.HasTag("Crystal"))
         // {
         //     if (!IsEditMode)
@@ -391,7 +396,7 @@ public class World
                 entity.TriggerBehavior(new SteppedOffTrigger(moveData.Mover));
             }
 
-            entity.TriggerBehavior(new EntityMovedTrigger(moveData.Mover));
+            entity.TriggerBehavior(new EntityMovedTrigger(moveData.Mover, moveData));
         }
 
         MoveCompleted?.Invoke(moveData, status);
