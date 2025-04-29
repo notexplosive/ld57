@@ -42,20 +42,20 @@ public class EditorSession : Session
 
         WorldTemplate = new WorldTemplate();
 
-        if (HotReloadCache.EditorOpenFileName != null)
+        if (HotReloadCache.LevelEditorOpenFileName != null)
         {
             var data = Client.Debug.RepoFileSystem.ReadFile(
-                $"Resource/Worlds/{HotReloadCache.EditorOpenFileName}.json");
+                $"Resource/Worlds/{HotReloadCache.LevelEditorOpenFileName}.json");
             var template = JsonConvert.DeserializeObject<WorldTemplate>(data);
             if (template != null)
             {
-                SetTemplate(HotReloadCache.EditorOpenFileName, template);
+                SetTemplate(HotReloadCache.LevelEditorOpenFileName, template);
             }
         }
 
-        if (HotReloadCache.EditorCameraPosition.HasValue)
+        if (HotReloadCache.LevelEditorCameraPosition.HasValue)
         {
-            _cameraPosition = HotReloadCache.EditorCameraPosition.Value;
+            _cameraPosition = HotReloadCache.LevelEditorCameraPosition.Value;
         }
     }
 
@@ -214,8 +214,8 @@ public class EditorSession : Session
             }
         }
         
-        HotReloadCache.EditorOpenFileName = _fileName;
-        HotReloadCache.EditorCameraPosition = _cameraPosition;
+        HotReloadCache.LevelEditorOpenFileName = _fileName;
+        HotReloadCache.LevelEditorCameraPosition = _cameraPosition;
 
         if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
         {

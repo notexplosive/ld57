@@ -28,7 +28,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         
         if (!string.IsNullOrEmpty(levelName))
         {
-            HotReloadCache.EditorOpenFileName ??= levelName;
+            HotReloadCache.LevelEditorOpenFileName ??= levelName;
         }
         else
         {
