@@ -2,7 +2,7 @@ using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using LD57.CartridgeManagement;
 
-namespace LD57.Sessions;
+namespace LD57.Core;
 
 public abstract class Session : ISession
 {

@@ -5,17 +5,15 @@ using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExTween;
-using LD57.CartridgeManagement;
-using LD57.Gameplay;
+using LD57.Core;
 using LD57.Gameplay.Triggers;
 using LD57.Rendering;
 using LD57.Rules;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 
-namespace LD57.Sessions;
+namespace LD57.Gameplay;
 
 public class LdSession : Session
 {

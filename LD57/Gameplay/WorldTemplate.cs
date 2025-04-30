@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using LD57.Rendering;
-using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
 namespace LD57.Gameplay;
@@ -13,16 +12,12 @@ public class WorldTemplate
     [JsonProperty("entities")]
     public List<PlacedEntity> PlacedEntities = new();
 
-    public void FillRectangle(Rectangle rectangle, EntityTemplate template)
+    public void FillRectangle(GridPositionCorners rectangle, EntityTemplate template)
     {
-        for (var x = rectangle.X; x < rectangle.X + rectangle.Width + 1; x++)
+        foreach (var position in rectangle.AllPositions(true))
         {
-            for (var y = rectangle.Y; y < rectangle.Y + rectangle.Height + 1; y++)
-            {
-                var position = new GridPosition(x, y);
-                RemoveEntitiesAtExceptMetadata(position);
-                PlaceEntity(position, template);
-            }
+            RemoveEntitiesAtExceptMetadata(position);
+            PlaceEntity(position, template);
         }
     }
 
@@ -37,7 +32,7 @@ public class WorldTemplate
 
         if (template.Tags.Contains("Unique"))
         {
-            extraState.Add("unique_id", ((int)DateTimeOffset.Now.ToUnixTimeMilliseconds()).ToString());
+            extraState.Add("unique_id", ((int) DateTimeOffset.Now.ToUnixTimeMilliseconds()).ToString());
         }
 
         PlacedEntities.Add(new PlacedEntity
@@ -69,15 +64,11 @@ public class WorldTemplate
         }
     }
 
-    public void EraseRectangle(Rectangle rectangle)
+    public void EraseRectangle(GridPositionCorners rectangle)
     {
-        for (var x = rectangle.X; x < rectangle.X + rectangle.Width + 1; x++)
+        foreach (var position in rectangle.AllPositions(true))
         {
-            for (var y = rectangle.Y; y < rectangle.Y + rectangle.Height + 1; y++)
-            {
-                var position = new GridPosition(x, y);
-                RemoveEntitiesAtExceptMetadata(position);
-            }
+            RemoveEntitiesAtExceptMetadata(position);
         }
     }
 

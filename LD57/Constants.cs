@@ -109,4 +109,9 @@ public static class Constants
     {
         return new GridPosition(RoundToInt(vector2.X), RoundToInt(vector2.Y));
     }
+    
+    public static GridPositionCorners ToGridPositionCorners(this RectangleF rectangleF)
+    {
+        return new GridPositionCorners(rectangleF.TopLeft.RoundToGridPosition(), rectangleF.BottomRight.RoundToGridPosition());
+    }
 }
