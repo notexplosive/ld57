@@ -1,4 +1,4 @@
-Originally Made in 72 for 
+Originally Made in 72 hours for 
 {c:ludum}Ludum {c:dare}Dare {c:white}57
 #
 The level editor was also
