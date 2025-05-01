@@ -18,7 +18,7 @@ public class PlayTool : IEditorTool
 
     public TileState GetTileStateInWorldOnHover(TileState original)
     {
-        return original;
+        return TileState.Sprite(ResourceAlias.Entities, 0);
     }
 
     public string Status()

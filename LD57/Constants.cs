@@ -33,12 +33,6 @@ public static class Constants
             (bottomRight - topLeft + extra).ToPoint());
     }
 
-    public static IEnumerable<GridPosition> AllPositionsInRectangle(Rectangle rectangle)
-    {
-        return AllPositionsInRectangle(new GridPosition(rectangle.Location),
-            new GridPosition(rectangle.Location + rectangle.Size));
-    }
-
     public static IEnumerable<GridPosition> AllPositionsInRectangle(GridPosition a, GridPosition b)
     {
         var minX = Math.Min(a.X, b.X);

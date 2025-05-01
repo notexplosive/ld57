@@ -23,17 +23,14 @@ public class SelectionTool : IEditorTool
 
     public string Status()
     {
-        if (!CanMove())
+        if (CanMove())
         {
-            if (_editorSession.SelectionRectangle.HasValue)
-            {
-                return "[F]ill";
-            }
+            return $"Drag to move";
         }
-        else
 
+        if (!_editorSession.WorldSelection.IsEmpty)
         {
-            return "Drag to move";
+            return $"[F]ill; {_editorSession.WorldSelection.Status()}";
         }
 
         return "Selection";
@@ -41,41 +38,29 @@ public class SelectionTool : IEditorTool
 
     public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
     {
-        if (!CanMove())
+        if (inputKeyboard.GetButton(Keys.Escape).WasPressed && !IsMoving())
         {
-            if (_editorSession.SelectionRectangle != null)
-            {
-                if (_editorSession.SelectedTemplate != null)
-                {
-                    if (inputKeyboard.GetButton(Keys.F).WasPressed)
-                    {
-                        _editorSession.WorldTemplate.FillRectangle(_editorSession.SelectionRectangle.Value,
-                            _editorSession.SelectedTemplate);
-                    }
-                }
+            _editorSession.WorldSelection.Clear();
+        }
 
-                if (inputKeyboard.GetButton(Keys.Delete).WasPressed)
-                {
-                    _editorSession.WorldTemplate.EraseRectangle(_editorSession.SelectionRectangle.Value);
-                }
+        if (CanMove())
+        {
+            TranslateMoveBuffer();
+            return;
+        }
+
+        if (_editorSession.SelectedTemplate != null)
+        {
+            if (inputKeyboard.GetButton(Keys.F).WasPressed)
+            {
+                _editorSession.WorldTemplate.FillAllPositions(_editorSession.WorldSelection.AllPositions(),
+                    _editorSession.SelectedTemplate);
             }
         }
-        else
 
+        if (inputKeyboard.GetButton(Keys.Delete).WasPressed)
         {
-            if (_editorSession.MoveStart != null && _editorSession.HoveredWorldPosition.HasValue &&
-                _editorSession.SelectionRectangle != null)
-            {
-                var offset = _editorSession.HoveredWorldPosition.Value - _editorSession.MoveStart.Value;
-                _editorSession.SelectionRectangle = _editorSession.SelectionRectangle.Value.Moved(offset);
-
-                foreach (var item in _editorSession.MoveBuffer)
-                {
-                    item.Position += offset;
-                }
-
-                _editorSession.MoveStart = _editorSession.HoveredWorldPosition.Value;
-            }
+            _editorSession.WorldTemplate.EraseAtPositions(_editorSession.WorldSelection.AllPositions());
         }
     }
 
@@ -83,14 +68,23 @@ public class SelectionTool : IEditorTool
     {
         if (mouseButton == MouseButton.Left)
         {
-            if (!CanMove())
+            if (CanMove())
             {
-                _editorSession.SelectionAnchor = position;
+                _editorSession.MoveStart = position;
+                RemoveAllEntitiesAtSelection();
             }
             else
             {
-                _editorSession.MoveStart = position;
+                _editorSession.SelectionAnchor = position;
             }
+        }
+    }
+
+    private void RemoveAllEntitiesAtSelection()
+    {
+        foreach (var position in _editorSession.WorldSelection.AllPositions())
+        {
+            _editorSession.WorldTemplate.RemoveEntitiesAt(position);
         }
     }
 
@@ -100,28 +94,71 @@ public class SelectionTool : IEditorTool
         {
             if (position.HasValue)
             {
-                _editorSession.CreateSelection(position.Value);
+                CreateSelection(position.Value);
             }
+
+            return;
         }
-        else
+        
+        foreach (var item in _editorSession.WorldSelection.AllPositions())
         {
-            foreach (var item in _editorSession.MoveBuffer)
-            {
-                _editorSession.WorldTemplate.RemoveEntitiesAt(item.Position);
-            }
-
-            foreach (var item in _editorSession.MoveBuffer)
-            {
-                _editorSession.WorldTemplate.AddExactEntity(item);
-            }
-
-            _editorSession.MoveStart = null;
+            _editorSession.WorldTemplate.RemoveEntitiesAt(item);
         }
+
+        foreach (var item in _editorSession.WorldSelection.AllEntitiesWithCurrentPlacement())
+        {
+            _editorSession.WorldTemplate.AddExactEntity(item);
+        }
+
+        _editorSession.WorldSelection.RegenerateAtNewPosition(_editorSession);
+        _editorSession.MoveStart = null;
+    }
+
+    private void TranslateMoveBuffer()
+    {
+        if (_editorSession.MoveStart == null)
+        {
+            return;
+        }
+
+        if (!_editorSession.HoveredWorldPosition.HasValue)
+        {
+            return;
+        }
+
+        if (_editorSession.WorldSelection.IsEmpty)
+        {
+            return;
+        }
+
+        var offset = _editorSession.HoveredWorldPosition.Value - _editorSession.MoveStart.Value;
+        _editorSession.WorldSelection.Offset = offset;
     }
 
     private bool CanMove()
     {
-        // todo!
-        return false;
+        var isSelectionHovered = _editorSession.HoveredWorldPosition.HasValue &&
+                                 _editorSession.WorldSelection.Contains(
+                                     _editorSession.HoveredWorldPosition.Value);
+
+        return isSelectionHovered || IsMoving();
+    }
+
+    private bool IsMoving()
+    {
+        return _editorSession.MoveStart.HasValue;
+    }
+
+    public void CreateSelection(GridPosition releasedPosition)
+    {
+        if (!_editorSession.SelectionAnchor.HasValue)
+        {
+            return;
+        }
+
+        _editorSession.WorldSelection.Clear();
+        _editorSession.WorldSelection.AddRectangle(_editorSession,
+            new GridPositionCorners(releasedPosition, _editorSession.SelectionAnchor.Value));
+        _editorSession.SelectionAnchor = null;
     }
 }

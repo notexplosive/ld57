@@ -49,7 +49,7 @@ public class TriggerTool : IEditorTool
                 defaultText = foundMetaEntity.ExtraState.GetValueOrDefault(Constants.CommandKey) ?? defaultText;
             }
 
-            var isUsingSelection = _editorSession.SelectionRectangle.HasValue && _editorSession.SelectionRectangle.Value.Contains(position,true);
+            var isUsingSelection = _editorSession.WorldSelection.Contains(position);
             _editorSession.RequestText("Enter Command", defaultText,
                 text =>
                 {
@@ -68,9 +68,9 @@ public class TriggerTool : IEditorTool
                     {
                         if (!string.IsNullOrEmpty(text))
                         {
-                            if (isUsingSelection && _editorSession.SelectionRectangle.HasValue)
+                            if (isUsingSelection)
                             {
-                                foreach (var cell in _editorSession.SelectionRectangle.Value.AllPositions(true))
+                                foreach (var cell in _editorSession.WorldSelection.AllPositions())
                                 {
                                     _editorSession.WorldTemplate.AddMetaEntity(cell, text);
                                 }

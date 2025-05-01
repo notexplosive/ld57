@@ -12,7 +12,7 @@ namespace LD57.Rendering;
 
 public class AsciiScreen
 {
-    private readonly Lazy<DynamicSpriteFont> _font = new Lazy<DynamicSpriteFont>(()=>ResourceAlias.GameFont.GetFont(40));
+    private readonly Lazy<DynamicSpriteFont> _font;
     private readonly Dictionary<GridPosition, TileState> _tiles = new();
     private readonly Dictionary<GridPosition, TweenableGlyph> _tweenableGlyphs = new();
 
@@ -22,6 +22,7 @@ public class AsciiScreen
         Height = height;
         TileSize = tileSize;
         Clear(TileState.TransparentEmpty);
+        _font = new Lazy<DynamicSpriteFont>(() => ResourceAlias.GameFont.GetFont(tileSize * 0.8f));
     }
 
     public float TileSize { get; }

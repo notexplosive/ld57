@@ -16,8 +16,7 @@ public class WorldTemplate
     {
         foreach (var position in rectangle.AllPositions(true))
         {
-            RemoveEntitiesAtExceptMetadata(position);
-            PlaceEntity(position, template);
+            PlaceTemplateAt(template, position);
         }
     }
 
@@ -115,5 +114,32 @@ public class WorldTemplate
     public void AddExactEntity(PlacedEntity item)
     {
         PlacedEntities.Add(item);
+    }
+
+    public void FillAllPositions(IEnumerable<GridPosition> positions, EntityTemplate template)
+    {
+        foreach (var position in positions)
+        {
+            PlaceTemplateAt(template, position);
+        }
+    }
+
+    public void EraseAtPositions(IEnumerable<GridPosition> allPositions)
+    {
+        foreach (var position in allPositions)
+        {
+            EraseAt(position);
+        }
+    }
+
+    private void EraseAt(GridPosition position)
+    {
+        RemoveEntitiesAtExceptMetadata(position);
+    }
+
+    private void PlaceTemplateAt(EntityTemplate template, GridPosition position)
+    {
+        RemoveEntitiesAtExceptMetadata(position);
+        PlaceEntity(position, template);
     }
 }

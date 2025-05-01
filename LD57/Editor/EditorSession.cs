@@ -20,7 +20,7 @@ public class EditorSession : Session
 {
     private readonly List<IEditorTool> _editorTools = new();
     private readonly List<UiElement> _uiElements = new();
-    private GridPosition _cameraPosition;
+    public GridPosition CameraPosition { get; private set; }
     private UiElement? _currentPopup;
     private GridPosition? _hoveredScreenPosition;
     private AsciiScreen _screen;
@@ -37,7 +37,7 @@ public class EditorSession : Session
         _editorTools.Add(new PlayTool(this));
 
         _screen = RebuildScreenWithWidth(50);
-        _cameraPosition = DefaultCameraPosition();
+        CameraPosition = DefaultCameraPosition();
 
         WorldTemplate = new WorldTemplate();
 
@@ -54,19 +54,18 @@ public class EditorSession : Session
 
         if (HotReloadCache.LevelEditorCameraPosition.HasValue)
         {
-            _cameraPosition = HotReloadCache.LevelEditorCameraPosition.Value;
+            CameraPosition = HotReloadCache.LevelEditorCameraPosition.Value;
         }
     }
 
     public GridPosition? SelectionAnchor { get; set; }
 
-    public List<PlacedEntity> MoveBuffer { get; } = new();
+    public WorldSelection WorldSelection { get; } = new();
 
     public GridPosition? MoveStart { get; set; }
 
     public string? FileName { get; private set; }
     public bool IsDraggingSecondary { get; private set; }
-    public GridPositionCorners? SelectionRectangle { get; set; }
 
     public bool IsDraggingPrimary { get; private set; }
 
@@ -86,7 +85,7 @@ public class EditorSession : Session
                 }
             }
 
-            return _cameraPosition + _hoveredScreenPosition;
+            return CameraPosition + _hoveredScreenPosition;
         }
     }
 
@@ -196,7 +195,7 @@ public class EditorSession : Session
         }
 
         HotReloadCache.LevelEditorOpenFileName = FileName;
-        HotReloadCache.LevelEditorCameraPosition = _cameraPosition;
+        HotReloadCache.LevelEditorCameraPosition = CameraPosition;
 
         if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
         {
@@ -291,22 +290,22 @@ public class EditorSession : Session
 
         if (input.Keyboard.GetButton(Keys.A).WasPressed)
         {
-            _cameraPosition += new GridPosition(-_screen.Width / 4, 0);
+            CameraPosition += new GridPosition(-_screen.Width / 4, 0);
         }
 
         if (input.Keyboard.GetButton(Keys.D).WasPressed)
         {
-            _cameraPosition += new GridPosition(_screen.Width / 4, 0);
+            CameraPosition += new GridPosition(_screen.Width / 4, 0);
         }
 
         if (input.Keyboard.GetButton(Keys.W).WasPressed)
         {
-            _cameraPosition += new GridPosition(0, -_screen.Height / 4);
+            CameraPosition += new GridPosition(0, -_screen.Height / 4);
         }
 
         if (input.Keyboard.GetButton(Keys.S).WasPressed)
         {
-            _cameraPosition += new GridPosition(0, _screen.Height / 4);
+            CameraPosition += new GridPosition(0, _screen.Height / 4);
         }
 
         CurrentTool?.UpdateInput(input.Keyboard);
@@ -338,7 +337,7 @@ public class EditorSession : Session
     {
         FileName = newFileName;
         WorldTemplate = newWorld;
-        _cameraPosition = DefaultCameraPosition();
+        CameraPosition = DefaultCameraPosition();
     }
 
     public event Action<GridPosition>? RequestPlay;
@@ -390,30 +389,6 @@ public class EditorSession : Session
         CurrentTool?.FinishMousePressInWorld(position, mouseButton);
     }
 
-    private void ClearSelection()
-    {
-        SelectionRectangle = null;
-        _editorTools.Clear();
-    }
-
-    public void CreateSelection(GridPosition position)
-    {
-        if (!SelectionAnchor.HasValue)
-        {
-            return;
-        }
-
-        SelectionRectangle = new GridPositionCorners(position, SelectionAnchor.Value);
-        MoveBuffer.Clear();
-        foreach (var grabbedPosition in Constants.AllPositionsInRectangle(SelectionRectangle.Value.TopLeft,
-                     SelectionRectangle.Value.BottomRight))
-        {
-            MoveBuffer.AddRange(WorldTemplate.AllEntitiesAt(grabbedPosition));
-        }
-
-        SelectionAnchor = null;
-    }
-
     public override void Update(float dt)
     {
         _screen.Clear(TileState.TransparentEmpty);
@@ -426,8 +401,8 @@ public class EditorSession : Session
             world.AddEntity(new Entity(world, player.Position, ResourceAlias.EntityTemplate("player")));
         }
 
-        world.SetCurrentRoom(new Room(world, _cameraPosition, _cameraPosition + _screen.RoomSize));
-        world.CameraPosition = _cameraPosition;
+        world.SetCurrentRoom(new Room(world, CameraPosition, CameraPosition + _screen.RoomSize));
+        world.CameraPosition = CameraPosition;
 
         world.PaintToScreen(_screen, dt);
 
@@ -457,8 +432,8 @@ public class EditorSession : Session
         if (HoveredWorldPosition.HasValue)
         {
             var hoveredRoom = world.GetRoomAt(HoveredWorldPosition.Value);
-            var hoveredRoomTopLeft = hoveredRoom.TopLeft - _cameraPosition;
-            var hoveredRoomBottomRight = hoveredRoom.BottomRight - _cameraPosition;
+            var hoveredRoomTopLeft = hoveredRoom.TopLeft - CameraPosition;
+            var hoveredRoomBottomRight = hoveredRoom.BottomRight - CameraPosition;
 
             var width = hoveredRoomBottomRight.X - hoveredRoomTopLeft.X;
             var height = hoveredRoomBottomRight.Y - hoveredRoomTopLeft.Y;
@@ -499,27 +474,16 @@ public class EditorSession : Session
             }
         }
 
-        if (SelectionRectangle.HasValue)
+        foreach (var worldPosition in WorldSelection.AllPositions())
         {
-            var topLeft = SelectionRectangle.Value.TopLeft - _cameraPosition;
-            var bottomRight = SelectionRectangle.Value.BottomRight - _cameraPosition;
-
-            foreach (var position in Constants.AllPositionsInRectangle(topLeft, bottomRight))
-            {
-                var previousTileState = _screen.GetTile(position);
-                _screen.PutTile(position,
-                    previousTileState with
-                    {
-                        BackgroundColor = Color.Goldenrod, ForegroundColor = Color.DarkGoldenrod,
-                        BackgroundIntensity = 1f
-                    });
-            }
+            var screenPosition = worldPosition - CameraPosition;
+            _screen.PutTile(screenPosition, WorldSelection.GetTileState(worldPosition - WorldSelection.Offset));
         }
 
         if (SelectionAnchor.HasValue && HoveredWorldPosition.HasValue && IsDraggingPrimary)
         {
-            var topLeft = SelectionAnchor.Value - _cameraPosition;
-            var bottomRight = HoveredWorldPosition.Value - _cameraPosition;
+            var topLeft = SelectionAnchor.Value - CameraPosition;
+            var bottomRight = HoveredWorldPosition.Value - CameraPosition;
 
             foreach (var position in Constants.AllPositionsInRectangle(topLeft, bottomRight))
             {
@@ -538,7 +502,7 @@ public class EditorSession : Session
             {
                 if (placedEntity.ExtraState.ContainsKey(Constants.CommandKey))
                 {
-                    _screen.PutTile(placedEntity.Position - _cameraPosition,
+                    _screen.PutTile(placedEntity.Position - CameraPosition,
                         TileState.StringCharacter("!", Color.OrangeRed));
                 }
 

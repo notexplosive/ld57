@@ -27,7 +27,8 @@ public class TextInputElement : ISubElement
 
     public bool Contains(GridPosition position)
     {
-        return Constants.CreateRectangle(position, position + new GridPosition(0, _textBuffer.Length)).Contains(position.ToPoint());
+        return new GridPositionCorners(_gridPosition, _gridPosition + new GridPosition(0, _textBuffer.Length))
+            .Contains(position, true);
     }
 
     public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
