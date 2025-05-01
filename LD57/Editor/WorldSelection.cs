@@ -8,12 +8,12 @@ namespace LD57.Editor;
 
 public class WorldSelection
 {
-    private readonly List<PlacedEntity> _placedEntitiesFromWorld = new();
-    private readonly List<GridPosition> _startingPositions = new();
+    private readonly HashSet<PlacedEntity> _placedEntitiesFromWorld = new();
+    private readonly HashSet<GridPosition> _startingPositions = new();
 
     public GridPosition Offset { get; set; }
 
-    public bool IsEmpty { get; private set; }
+    public bool IsEmpty => _startingPositions.Count == 0 && _placedEntitiesFromWorld.Count == 0;
 
     public IEnumerable<GridPosition> AllPositions()
     {
@@ -28,13 +28,22 @@ public class WorldSelection
         Offset = new GridPosition();
         _placedEntitiesFromWorld.Clear();
         _startingPositions.Clear();
-        IsEmpty = true;
     }
 
-    public void AddEntities(IEnumerable<PlacedEntity> entities)
+    private void AddEntities(IEnumerable<PlacedEntity> entities)
     {
-        IsEmpty = false;
-        _placedEntitiesFromWorld.AddRange(entities);
+        foreach (var entity in entities)
+        {
+            _placedEntitiesFromWorld.Add(entity);
+        }
+    }
+    
+    private void RemoveEntities(IEnumerable<PlacedEntity> entities)
+    {
+        foreach (var entity in entities)
+        {
+            _placedEntitiesFromWorld.Remove(entity);
+        }
     }
 
     public string Status()
@@ -55,12 +64,15 @@ public class WorldSelection
         return AllPositions().Contains(gridPosition);
     }
 
-    public void AddRectangle(EditorSession editorSession, GridPositionCorners rectangle)
+    public void RemovePositions(EditorSession editorSession, IEnumerable<GridPosition> positions)
     {
-        AddPositions(editorSession, rectangle.AllPositions(true));
+        foreach (var position in positions)
+        {
+            RemovePosition(editorSession, position);
+        }
     }
 
-    private void AddPositions(EditorSession editorSession, IEnumerable<GridPosition> positions)
+    public void AddPositions(EditorSession editorSession, IEnumerable<GridPosition> positions)
     {
         foreach (var position in positions)
         {
@@ -73,6 +85,14 @@ public class WorldSelection
         editorSession.WorldSelection.AddEntities(editorSession.WorldTemplate.AllEntitiesAt(position));
         _startingPositions.Add(position);
     }
+    
+    private void RemovePosition(EditorSession editorSession, GridPosition position)
+    {
+        editorSession.WorldSelection.RemoveEntities(editorSession.WorldTemplate.AllEntitiesAt(position));
+        _startingPositions.Remove(position);
+    }
+
+    
 
     public void RegenerateAtNewPosition(EditorSession editorSession)
     {

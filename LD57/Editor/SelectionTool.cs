@@ -1,6 +1,9 @@
-﻿using ExplogineMonoGame;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
 using LD57.Rendering;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace LD57.Editor;
@@ -8,6 +11,9 @@ namespace LD57.Editor;
 public class SelectionTool : IEditorTool
 {
     private readonly EditorSession _editorSession;
+    private bool _isAltDown;
+    private bool _isCtrlDown;
+    private bool _isShiftDown;
 
     public SelectionTool(EditorSession editorSession)
     {
@@ -23,44 +29,46 @@ public class SelectionTool : IEditorTool
 
     public string Status()
     {
-        if (CanMove())
-        {
-            return $"Drag to move";
-        }
-
         if (!_editorSession.WorldSelection.IsEmpty)
         {
-            return $"[F]ill; {_editorSession.WorldSelection.Status()}";
+            return $"[F]ill; {_editorSession.WorldSelection.Status()}; [SHIFT]+ [CTRL]- [ALT]*";
         }
 
-        return "Selection";
+        return "[ALT]*";
     }
 
     public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
     {
+        _isShiftDown = inputKeyboard.Modifiers.ShiftInclusive;
+        _isCtrlDown = inputKeyboard.Modifiers.ControlInclusive;
+        _isAltDown = inputKeyboard.Modifiers.AltInclusive;
+
         if (inputKeyboard.GetButton(Keys.Escape).WasPressed && !IsMoving())
         {
             _editorSession.WorldSelection.Clear();
-        }
-
-        if (CanMove())
-        {
-            TranslateMoveBuffer();
-            return;
         }
 
         if (_editorSession.SelectedTemplate != null)
         {
             if (inputKeyboard.GetButton(Keys.F).WasPressed)
             {
-                _editorSession.WorldTemplate.FillAllPositions(_editorSession.WorldSelection.AllPositions(),
-                    _editorSession.SelectedTemplate);
+                var previousPositions = _editorSession.WorldSelection.AllPositions().ToList();
+                _editorSession.WorldTemplate.FillAllPositions(previousPositions, _editorSession.SelectedTemplate);
+                _editorSession.WorldSelection.Clear();
+                CreateOrEditSelection(previousPositions);
             }
+        }
+        
+        if (CanMove() && _editorSession.IsDraggingPrimary)
+        {
+            TranslateMoveBuffer();
+            return;
         }
 
         if (inputKeyboard.GetButton(Keys.Delete).WasPressed)
         {
             _editorSession.WorldTemplate.EraseAtPositions(_editorSession.WorldSelection.AllPositions());
+            _editorSession.WorldSelection.Clear();
         }
     }
 
@@ -80,38 +88,127 @@ public class SelectionTool : IEditorTool
         }
     }
 
+    public void FinishMousePressInWorld(GridPosition? position, MouseButton mouseButton)
+    {
+        if (mouseButton == MouseButton.Left)
+        {
+            if (CanMove())
+            {
+                foreach (var item in _editorSession.WorldSelection.AllPositions())
+                {
+                    _editorSession.WorldTemplate.RemoveEntitiesAt(item);
+                }
+
+                foreach (var item in _editorSession.WorldSelection.AllEntitiesWithCurrentPlacement())
+                {
+                    _editorSession.WorldTemplate.AddExactEntity(item);
+                }
+
+                _editorSession.WorldSelection.RegenerateAtNewPosition(_editorSession);
+                _editorSession.MoveStart = null;
+                return;
+            }
+
+            if (position.HasValue)
+            {
+                if (_editorSession.SelectionAnchor.HasValue)
+                {
+                    CreateOrEditSelection(PendingSelectedPositions());
+                    _editorSession.SelectionAnchor = null;
+                }
+            }
+        }
+    }
+
+    public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
+    {
+        if (_editorSession.IsDraggingPrimary)
+        {
+            var backgroundColor = Color.LimeGreen;
+            var foregroundColor = Color.Green;
+
+            if (_isShiftDown)
+            {
+                backgroundColor = Color.Yellow;
+                foregroundColor = Color.Orange;
+            }
+
+            if (_isCtrlDown)
+            {
+                backgroundColor = Color.OrangeRed;
+                foregroundColor = Color.Red;
+            }
+
+            var pendingRectangle = PendingSelectionRectangle();
+            if (pendingRectangle.HasValue && _isAltDown)
+            {
+                // FIRST do a pass on the rectangle, in case we're in ALT mode
+                foreach (var worldPosition in pendingRectangle.Value.AllPositions(true))
+                {
+                    var screenPosition = worldPosition - cameraPosition;
+                    var previousTileState = screen.GetTile(screenPosition);
+                    screen.PutTile(screenPosition,
+                        previousTileState with
+                        {
+                            BackgroundColor = Color.White,
+                            BackgroundIntensity = 1f
+                        });
+                }
+            }
+
+            // SECOND highlight all the actual selected parts
+            foreach (var worldPosition in PendingSelectedPositions())
+            {
+                var screenPosition = worldPosition - cameraPosition;
+                var previousTileState = screen.GetTile(screenPosition);
+                screen.PutTile(screenPosition,
+                    previousTileState with
+                    {
+                        BackgroundColor = backgroundColor, ForegroundColor = foregroundColor, BackgroundIntensity = 1f
+                    });
+            }
+        }
+    }
+
+    private GridPositionCorners? PendingSelectionRectangle()
+    {
+        if (!_editorSession.SelectionAnchor.HasValue || !_editorSession.HoveredWorldPosition.HasValue)
+        {
+            return null;
+        }
+        var topLeft = _editorSession.SelectionAnchor.Value;
+        var bottomRight = _editorSession.HoveredWorldPosition.Value;
+        return new GridPositionCorners(topLeft, bottomRight);
+    }
+    
+    private IEnumerable<GridPosition> PendingSelectedPositions()
+    {
+        var rect = PendingSelectionRectangle();
+        if (rect.HasValue)
+        {
+            foreach (var position in rect.Value.AllPositions(true))
+            {
+                if (_isAltDown)
+                {
+                    if (_editorSession.WorldTemplate.HasEntityAt(position))
+                    {
+                        yield return position;
+                    }
+                }
+                else
+                {
+                    yield return position;
+                }
+            }
+        }
+    }
+
     private void RemoveAllEntitiesAtSelection()
     {
         foreach (var position in _editorSession.WorldSelection.AllPositions())
         {
             _editorSession.WorldTemplate.RemoveEntitiesAt(position);
         }
-    }
-
-    public void FinishMousePressInWorld(GridPosition? position, MouseButton mouseButton)
-    {
-        if (!CanMove())
-        {
-            if (position.HasValue)
-            {
-                CreateSelection(position.Value);
-            }
-
-            return;
-        }
-        
-        foreach (var item in _editorSession.WorldSelection.AllPositions())
-        {
-            _editorSession.WorldTemplate.RemoveEntitiesAt(item);
-        }
-
-        foreach (var item in _editorSession.WorldSelection.AllEntitiesWithCurrentPlacement())
-        {
-            _editorSession.WorldTemplate.AddExactEntity(item);
-        }
-
-        _editorSession.WorldSelection.RegenerateAtNewPosition(_editorSession);
-        _editorSession.MoveStart = null;
     }
 
     private void TranslateMoveBuffer()
@@ -141,7 +238,9 @@ public class SelectionTool : IEditorTool
                                  _editorSession.WorldSelection.Contains(
                                      _editorSession.HoveredWorldPosition.Value);
 
-        return isSelectionHovered || IsMoving();
+        var isMakingSelection = _editorSession.SelectionAnchor != null;
+
+        return !isMakingSelection && (isSelectionHovered || IsMoving());
     }
 
     private bool IsMoving()
@@ -149,16 +248,19 @@ public class SelectionTool : IEditorTool
         return _editorSession.MoveStart.HasValue;
     }
 
-    public void CreateSelection(GridPosition releasedPosition)
+    private void CreateOrEditSelection(IEnumerable<GridPosition> positions)
     {
-        if (!_editorSession.SelectionAnchor.HasValue)
+        if (_isCtrlDown)
         {
+            _editorSession.WorldSelection.RemovePositions(_editorSession, positions);
             return;
         }
 
-        _editorSession.WorldSelection.Clear();
-        _editorSession.WorldSelection.AddRectangle(_editorSession,
-            new GridPositionCorners(releasedPosition, _editorSession.SelectionAnchor.Value));
-        _editorSession.SelectionAnchor = null;
+        if (!_isShiftDown)
+        {
+            _editorSession.WorldSelection.Clear();
+        }
+
+        _editorSession.WorldSelection.AddPositions(_editorSession, positions);
     }
 }

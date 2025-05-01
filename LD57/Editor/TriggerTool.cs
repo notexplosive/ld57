@@ -89,6 +89,11 @@ public class TriggerTool : IEditorTool
     {
     }
 
+    public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
+    {
+        
+    }
+
     public TileState GetTileStateInWorldOnHover(TileState original)
     {
         return TileState.StringCharacter("!");

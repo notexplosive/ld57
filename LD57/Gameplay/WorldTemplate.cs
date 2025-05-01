@@ -142,4 +142,9 @@ public class WorldTemplate
         RemoveEntitiesAtExceptMetadata(position);
         PlaceEntity(position, template);
     }
+
+    public bool HasEntityAt(GridPosition position)
+    {
+        return PlacedEntities.Any(a => a.Position == position);
+    }
 }

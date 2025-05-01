@@ -54,4 +54,9 @@ public class BrushTool : IEditorTool
     {
         // do nothing
     }
+
+    public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
+    {
+        
+    }
 }

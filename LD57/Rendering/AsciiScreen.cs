@@ -241,4 +241,9 @@ public class AsciiScreen
     {
         return Constants.AllPositionsInRectangle(new GridPosition(0, 0), RoomSize);
     }
+
+    public bool ContainsPosition(GridPosition screenPosition)
+    {
+        return screenPosition.X >= 0 && screenPosition.Y >= 0 && screenPosition.X < Width && screenPosition.Y < Height;
+    }
 }

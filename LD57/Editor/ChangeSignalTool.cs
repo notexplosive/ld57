@@ -44,6 +44,11 @@ public class ChangeSignalTool : IEditorTool
     {
     }
 
+    public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
+    {
+        
+    }
+
     public TileState GetTileStateInWorldOnHover(TileState original)
     {
         // todo: this should show the color of the signal we'd change to
