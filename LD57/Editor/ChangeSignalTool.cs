@@ -22,6 +22,16 @@ public class ChangeSignalTool : IEditorTool
 
     public string Status()
     {
+        if (_editorSession.HoveredWorldPosition.HasValue)
+        {
+            var entity = GetSignalEntitiesAt(_editorSession.HoveredWorldPosition.Value).FirstOrDefault();
+
+            if (entity != null)
+            {
+                return "[LMB]+ [RMB]-";
+            }
+        }
+
         return "Change Signal Color";
     }
 
