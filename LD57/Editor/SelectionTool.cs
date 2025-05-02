@@ -14,6 +14,7 @@ public class SelectionTool : IEditorTool
     private bool _isAltDown;
     private bool _isCtrlDown;
     private bool _isShiftDown;
+    private GridPosition? _selectionAnchor;
 
     public SelectionTool(EditorSession editorSession)
     {
@@ -104,7 +105,7 @@ public class SelectionTool : IEditorTool
             }
             else
             {
-                _editorSession.SelectionAnchor = position;
+                _selectionAnchor = position;
             }
         }
     }
@@ -132,10 +133,10 @@ public class SelectionTool : IEditorTool
 
             if (position.HasValue)
             {
-                if (_editorSession.SelectionAnchor.HasValue)
+                if (_selectionAnchor.HasValue)
                 {
                     CreateOrEditSelection(PendingSelectedPositions());
-                    _editorSession.SelectionAnchor = null;
+                    _selectionAnchor = null;
                 }
             }
         }
@@ -193,11 +194,11 @@ public class SelectionTool : IEditorTool
 
     private GridPositionCorners? PendingSelectionRectangle()
     {
-        if (!_editorSession.SelectionAnchor.HasValue || !_editorSession.HoveredWorldPosition.HasValue)
+        if (!_selectionAnchor.HasValue || !_editorSession.HoveredWorldPosition.HasValue)
         {
             return null;
         }
-        var topLeft = _editorSession.SelectionAnchor.Value;
+        var topLeft = _selectionAnchor.Value;
         var bottomRight = _editorSession.HoveredWorldPosition.Value;
         return new GridPositionCorners(topLeft, bottomRight);
     }
@@ -259,7 +260,7 @@ public class SelectionTool : IEditorTool
                                  _editorSession.WorldSelection.Contains(
                                      _editorSession.HoveredWorldPosition.Value);
 
-        var isMakingSelection = _editorSession.SelectionAnchor != null;
+        var isMakingSelection = _selectionAnchor != null;
 
         return !isMakingSelection && (isSelectionHovered || IsMoving());
     }

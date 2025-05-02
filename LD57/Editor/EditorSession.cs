@@ -58,8 +58,6 @@ public class EditorSession : Session
         }
     }
 
-    public GridPosition? SelectionAnchor { get; set; }
-
     public WorldSelection WorldSelection { get; } = new();
 
     public GridPosition? MoveStart { get; set; }
