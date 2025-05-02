@@ -29,9 +29,26 @@ public class SelectionTool : IEditorTool
 
     public string Status()
     {
+        var altModeMessage = "";
+        if (_isAltDown)
+        {
+            altModeMessage = "[ALT] just entities ";
+        }
+
+        if (_isCtrlDown)
+        {
+            return $"[CTRL] Remove {altModeMessage}from Selection";
+        }
+        
+        if (_isShiftDown)
+        {
+            return $"[SHIFT] Append {altModeMessage}to Selection";
+        }
+
+        
         if (!_editorSession.WorldSelection.IsEmpty)
         {
-            return $"[F]ill; {_editorSession.WorldSelection.Status()}; [SHIFT]+ [CTRL]- [ALT]*";
+            return $"{_editorSession.WorldSelection.Status()} [ESC] [F] [SHIFT] [CTRL] [ALT]";
         }
 
         return "[ALT]*";
@@ -79,7 +96,11 @@ public class SelectionTool : IEditorTool
             if (CanMove())
             {
                 _editorSession.MoveStart = position;
-                RemoveAllEntitiesAtSelection();
+
+                if (!_isCtrlDown)
+                {
+                    RemoveAllEntitiesAtSelection();
+                }
             }
             else
             {
