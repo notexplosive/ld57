@@ -104,7 +104,7 @@ public class WorldSelection
     public TileState GetTileState(GridPosition internalPosition)
     {
         var entities = _placedEntitiesFromWorld.Where(a => a.Position == internalPosition);
-        var topTemplate = entities.Select(entity => ResourceAlias.EntityTemplate(entity.TemplateName))
+        var topTemplate = entities.Select(entity => ResourceAlias.EntityTemplate(entity.TemplateName) ?? new EntityTemplate())
             .OrderBy(a => a.SortPriority).FirstOrDefault();
 
         if (topTemplate == null)

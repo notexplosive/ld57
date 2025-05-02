@@ -38,7 +38,7 @@ public class UiElement
         _subElement.Add(new DynamicText(relativeGridPosition, getString));
     }
 
-    public void AddSelectable(SelectableButton selectableButton)
+    public void AddSelectable<T>(SelectableButton<T> selectableButton) where T : class
     {
         _subElement.Add(selectableButton);
     }

@@ -1,4 +1,6 @@
-﻿using ExplogineMonoGame;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
 using LD57.CartridgeManagement;
 using LD57.Gameplay;
@@ -46,44 +48,76 @@ public class ChangeSignalTool : IEditorTool
 
     public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
     {
-        
     }
 
     public TileState GetTileStateInWorldOnHover(TileState original)
     {
-        // todo: this should show the color of the signal we'd change to
-        return original with {BackgroundColor = Color.LightBlue, BackgroundIntensity = 0.75f};
+        if (!_editorSession.HoveredWorldPosition.HasValue)
+        {
+            return original;
+        }
+
+        var entity = GetSignalEntitiesAt(_editorSession.HoveredWorldPosition.Value).FirstOrDefault();
+
+        if (entity == null)
+        {
+            return original;
+        }
+
+        var channelValue = GetChannelValue(entity);
+
+        var color = GetColorForSignalIfExists(channelValue);
+        if (!color.HasValue)
+        {
+            return original;
+        }
+
+        return original.WithBackground(color.Value) with {ForegroundColor = Color.White};
     }
-    
+
     private void IncrementSignalAt(GridPosition position, int delta)
+    {
+        foreach (var entity in GetSignalEntitiesAt(position))
+        {
+            SetChannelValue(entity, GetChannelValue(entity) + delta);
+        }
+    }
+
+    private int GetChannelValue(PlacedEntity entity)
+    {
+        if (entity.ExtraState.TryGetValue("channel", out var result))
+        {
+            if (int.TryParse(result, out var parseResult))
+            {
+                return parseResult;
+            }
+        }
+
+        return 0;
+    }
+
+    private IEnumerable<PlacedEntity> GetSignalEntitiesAt(GridPosition position)
     {
         foreach (var entity in _editorSession.WorldTemplate.AllEntitiesAt(position))
         {
             var templateName = entity.TemplateName;
             if (string.IsNullOrEmpty(templateName))
             {
-                return;
+                yield break;
             }
 
-            var template = ResourceAlias.EntityTemplate(templateName);
+            var template = ResourceAlias.EntityTemplate(templateName) ?? new EntityTemplate();
             if (template.Tags.Contains("Signal"))
             {
-                if (entity.ExtraState.TryGetValue("channel", out var result))
-                {
-                    var newValue = int.Parse(result) + delta;
-                    SetChannelValue(entity, newValue);
-                }
-                else
-                {
-                    SetChannelValue(entity, 0 + delta);
-                }
+                yield return entity;
             }
         }
     }
 
     private static void SetChannelValue(PlacedEntity entity, int newValue)
     {
-        if (!LdResourceAssets.Instance.HasNamedColor($"signal_{newValue}"))
+        var color = GetColorForSignalIfExists(newValue);
+        if (!color.HasValue)
         {
             return;
         }
@@ -91,4 +125,14 @@ public class ChangeSignalTool : IEditorTool
         entity.ExtraState["channel"] = newValue.ToString();
     }
 
+    private static Color? GetColorForSignalIfExists(int newValue)
+    {
+        var key = $"signal_{newValue}";
+        if (LdResourceAssets.Instance.HasNamedColor(key))
+        {
+            return LdResourceAssets.Instance.GetNamedColor(key);
+        }
+
+        return null;
+    }
 }

@@ -58,7 +58,8 @@ public class World
     private Entity CreateEntityFromPlacement(PlacedEntity placedEntity)
     {
         var entityTemplate = ResourceAlias.EntityTemplate(placedEntity.TemplateName);
-        return CreateEntityFromTemplate(entityTemplate, placedEntity.Position, placedEntity.ExtraState);
+        return CreateEntityFromTemplate(entityTemplate ?? new EntityTemplate(), placedEntity.Position,
+            placedEntity.ExtraState);
     }
 
     public Entity CreateEntityFromTemplate(EntityTemplate entityTemplate, GridPosition position,
@@ -380,7 +381,7 @@ public class World
         var entities = new List<Entity>();
         var roomCornersAtSource = GetRoomCornersAt(moveData.Source);
         var roomCornersAtDestination = GetRoomCornersAt(moveData.Destination);
-        
+
         entities.AddRange(CalculateEntitiesInRoom(roomCornersAtSource, true));
 
         if (roomCornersAtSource != roomCornersAtDestination)
@@ -391,7 +392,6 @@ public class World
                 entities.AddRange(CalculateEntitiesInRoom(roomCornersAtDestination, true));
             }
         }
-
 
         foreach (var entity in entities)
         {
@@ -404,7 +404,7 @@ public class World
         }
 
         MoveCompleted?.Invoke(moveData, status);
-        
+
         Rules.DoUpdateAtPosition(moveData.Source);
         if (moveData.Source != moveData.Destination)
         {

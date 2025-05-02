@@ -13,4 +13,5 @@ public interface IEditorTool
     void StartMousePressInWorld(GridPosition position, MouseButton mouseButton);
     void FinishMousePressInWorld(GridPosition? position, MouseButton mouseButton);
     void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition);
+    
 }

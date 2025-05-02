@@ -1,22 +1,20 @@
 ﻿namespace LD57.Editor;
 
-public class EditorSelector
+public interface IEditorSelector
 {
-    private SelectableButton? _selected;
+}
 
-    public SelectableButton? Selected
+public class EditorSelector<T> : IEditorSelector where T : class
+{
+    public T? Selected { get; set; }
+
+    public bool IsSelected(T? selectableContent)
     {
-        get
+        if (selectableContent == null || Selected == null)
         {
-            return _selected;
+            return false;
         }
-        set
-        {
-            _selected = value;
-            if (value != null)
-            {
-                value.OnSelect();
-            }
-        }
+        
+        return selectableContent == Selected;
     }
 }

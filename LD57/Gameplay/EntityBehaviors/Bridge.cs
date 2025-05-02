@@ -15,7 +15,7 @@ public class Bridge : IEntityBehavior
     {
         _stateKey = stateKey;
         _targetValue = targetValue;
-        _template = ResourceAlias.EntityTemplate(templateName);
+        _template = ResourceAlias.EntityTemplate(templateName) ?? new EntityTemplate();
     }
 
     public void OnTrigger(Entity self, IBehaviorTrigger trigger)

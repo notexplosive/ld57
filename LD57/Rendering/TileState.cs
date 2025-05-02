@@ -69,6 +69,10 @@ public readonly record struct TileState(
     public static TileState BackgroundOnly(Color backgroundColor, float intensity)
     {
         return new TileState(TileType.Invisible, Color.White, Color.White) { BackgroundColor = backgroundColor, BackgroundIntensity = intensity };
+    }
 
+    public TileState WithBackground(Color color, float intensity = 1)
+    {
+        return this with {BackgroundColor = color, BackgroundIntensity = intensity};
     }
 }

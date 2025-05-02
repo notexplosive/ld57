@@ -44,16 +44,9 @@ public static class ResourceAlias
         return LdResourceAssets.MissingColor;
     }
 
-    public static EntityTemplate EntityTemplate(string name)
+    public static EntityTemplate? EntityTemplate(string name)
     {
-        var result = LdResourceAssets.Instance.EntityTemplates.GetValueOrDefault(name);
-
-        if (result == null)
-        {
-            throw new Exception($"Could not find template {name}");
-        }
-
-        return result;
+        return LdResourceAssets.Instance.EntityTemplates.GetValueOrDefault(name);
     }
 
     public static MessageContent Messages(string messageName)

@@ -441,287 +441,11 @@
       }
     },
     {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 6,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 6,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 7,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 7,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 4,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 4,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 5,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 5,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 6,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 6,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 7,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 7,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 8,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 8,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 9,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 9,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 6,
-        "y": 11
-      }
-    },
-    {
-      "extra_state": {
-        "channel": "1"
-      },
-      "template_name": "bridge",
-      "position": {
-        "x": 7,
-        "y": 11
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 8,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 8,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 9,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 9,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 4,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 4,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 5,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 5,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 4,
-        "y": 11
-      }
-    },
-    {
       "extra_state": {},
       "template_name": "water",
       "position": {
         "x": 4,
         "y": 12
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 5,
-        "y": 11
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 8,
-        "y": 11
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 9,
-        "y": 11
       }
     },
     {
@@ -875,14 +599,6 @@
       "template_name": "water",
       "position": {
         "x": 5,
-        "y": 18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 5,
         "y": 19
       }
     },
@@ -899,14 +615,6 @@
       "template_name": "water",
       "position": {
         "x": 6,
-        "y": 18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 6,
         "y": 19
       }
     },
@@ -923,14 +631,6 @@
       "template_name": "water",
       "position": {
         "x": 7,
-        "y": 18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 7,
         "y": 19
       }
     },
@@ -947,39 +647,7 @@
       "template_name": "water",
       "position": {
         "x": 8,
-        "y": 18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 8,
-        "y": 19
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 8,
         "y": 20
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 9,
-        "y": 18
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 9,
-        "y": 19
       }
     },
     {
@@ -995,23 +663,7 @@
       "template_name": "water",
       "position": {
         "x": 10,
-        "y": 19
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 10,
         "y": 20
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 11,
-        "y": 19
       }
     },
     {
@@ -1027,14 +679,6 @@
       "template_name": "water",
       "position": {
         "x": 12,
-        "y": 19
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 12,
         "y": 20
       }
     },
@@ -1043,23 +687,7 @@
       "template_name": "water",
       "position": {
         "x": 13,
-        "y": 19
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 13,
         "y": 20
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "water",
-      "position": {
-        "x": 14,
-        "y": 19
       }
     },
     {
@@ -1220,102 +848,6 @@
       "position": {
         "x": 8,
         "y": 2
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 23,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 23,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 23,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 24,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 24,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 24,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 25,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 25,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 25,
-        "y": 5
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 26,
-        "y": 3
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 26,
-        "y": 4
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "bridge_inverted",
-      "position": {
-        "x": 26,
-        "y": 5
       }
     },
     {
@@ -2268,6 +1800,912 @@
       "position": {
         "x": 28,
         "y": 7
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "door",
+      "position": {
+        "x": 23,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "door",
+      "position": {
+        "x": 25,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge",
+      "position": {
+        "x": 20,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 6,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 7,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 5,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 5,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 6,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 7,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 5,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 6,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 7,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 5,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 6,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "2"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 7,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 8,
+        "y": 19
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 9,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 9,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 9,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 9,
+        "y": 19
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 10,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 10,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 10,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 10,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 10,
+        "y": 19
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 11,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 11,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 11,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 11,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 11,
+        "y": 19
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 12,
+        "y": 19
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 13,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 13,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 13,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 13,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 14,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 14,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 14,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 14,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 15,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 15,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 17,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 19,
+        "y": 15
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 17,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 18,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 19,
+        "y": 16
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 17,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 18,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 19,
+        "y": 17
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 17,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "3"
+      },
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 19,
+        "y": 18
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 23,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 23,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 23,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 24,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 24,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 24,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 25,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 25,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 25,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 26,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 26,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 26,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {
+        "command": "test"
+      },
+      "template_name": "",
+      "position": {
+        "x": 11,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 4,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 4,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 4,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 4,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 4,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 5,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 5,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 5,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 5,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 5,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 6,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 6,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 6,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 6,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 7,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 7,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 7,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 7,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 7,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 8,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 8,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 8,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 8,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 8,
+        "y": 11
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 9,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 9,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 9,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {
+        "channel": "1"
+      },
+      "template_name": "bridge",
+      "position": {
+        "x": 9,
+        "y": 10
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "water",
+      "position": {
+        "x": 9,
+        "y": 11
       }
     }
   ]

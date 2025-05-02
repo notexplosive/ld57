@@ -19,12 +19,13 @@ namespace LD57.Editor;
 public class EditorSession : Session
 {
     private readonly List<IEditorTool> _editorTools = new();
+    private readonly EditorSelector<EntityTemplate> _templateSelector = new();
+    private readonly EditorSelector<IEditorTool> _toolSelector = new();
     private readonly List<UiElement> _uiElements = new();
     private GridPosition _cameraPosition;
     private UiElement? _currentPopup;
     private GridPosition? _hoveredScreenPosition;
     private AsciiScreen _screen;
-    private int _selectedToolIndex;
     private bool _shouldClosePopup;
 
     public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
@@ -59,16 +60,10 @@ public class EditorSession : Session
     }
 
     public WorldSelection WorldSelection { get; } = new();
-
     public GridPosition? MoveStart { get; set; }
-
     public string? FileName { get; private set; }
     public bool IsDraggingSecondary { get; private set; }
-
     public bool IsDraggingPrimary { get; private set; }
-
-    public EntityTemplate? SelectedTemplate { get; private set; }
-
     public WorldTemplate WorldTemplate { get; private set; }
 
     public GridPosition? HoveredWorldPosition
@@ -87,7 +82,8 @@ public class EditorSession : Session
         }
     }
 
-    private IEditorTool? CurrentTool => _editorTools.ElementAtOrDefault(_selectedToolIndex);
+    private IEditorTool? CurrentTool => _toolSelector.Selected;
+    public EntityTemplate? SelectedTemplate => _templateSelector.Selected;
 
     private static GridPosition DefaultCameraPosition()
     {
@@ -112,15 +108,11 @@ public class EditorSession : Session
 
         var leftToolbar = new UiElement(new GridPosition(0, 0), new GridPosition(2, _editorTools.Count + 1));
 
-        var selectedTool = new EditorSelector();
-
         var toolIndex = 0;
         foreach (var tool in _editorTools)
         {
-            var capturedToolIndex = toolIndex;
-            leftToolbar.AddSelectable(new SelectableButton(new GridPosition(1, 1 + toolIndex),
-                tool.TileStateInToolbar,
-                selectedTool, () => { _selectedToolIndex = capturedToolIndex; }));
+            leftToolbar.AddSelectable(new SelectableButton<IEditorTool>(new GridPosition(1, 1 + toolIndex),
+                tool.TileStateInToolbar, _toolSelector, tool));
             toolIndex++;
         }
 
@@ -141,7 +133,6 @@ public class EditorSession : Session
         _uiElements.Add(statusBar);
 
         var tilePalette = new UiElement(new GridPosition(3, 0), new GridPosition(screen.Width - 1, 3));
-        var selectedTemplate = new EditorSelector();
         var i = 0;
         var j = 0;
 
@@ -149,9 +140,9 @@ public class EditorSession : Session
         foreach (var template in LdResourceAssets.Instance.EntityTemplates.Values)
         {
             var tempEntity = new Entity(tempWorld, new GridPosition(0, 0), template);
-            tilePalette.AddSelectable(new SelectableButton(new GridPosition(1 + i, 1 + j),
-                tempEntity.TileState,
-                selectedTemplate, () => { SelectedTemplate = template; }));
+            tilePalette.AddSelectable(new SelectableButton<EntityTemplate>(
+                new GridPosition(1 + i, 1 + j), tempEntity.TileState,
+                _templateSelector, template));
 
             i++;
             if (i > tilePalette.Width - 3)
@@ -309,6 +300,37 @@ public class EditorSession : Session
         CurrentTool?.UpdateInput(input.Keyboard);
 
         _hoveredScreenPosition = _screen.GetHoveredTile(input, hitTestStack, Vector2.Zero);
+
+        if (!IsDraggingPrimary && !IsDraggingSecondary)
+        {
+            var scrollVector = new Vector2(0, input.Mouse.ScrollDelta());
+            if (scrollVector.Y != 0)
+            {
+                var scrollDelta = (int) scrollVector.Normalized().Y;
+                var delta = -scrollDelta;
+
+                if (input.Keyboard.Modifiers.Control)
+                {
+                    if (CurrentTool != null)
+                    {
+                        var currentIndex = _editorTools.IndexOf(CurrentTool);
+                        var newIndex = Math.Clamp(currentIndex + delta, 0, _editorTools.Count - 1);
+                        _toolSelector.Selected = _editorTools[newIndex];
+                    }
+                }
+                
+                if (input.Keyboard.Modifiers.Shift)
+                {
+                    if (SelectedTemplate != null)
+                    {
+                        var allTemplates = LdResourceAssets.Instance.EntityTemplates.Values.ToList();
+                        var currentIndex = allTemplates.IndexOf(SelectedTemplate);
+                        var newIndex = Math.Clamp(currentIndex + delta, 0, allTemplates.Count - 1);
+                        _templateSelector.Selected = allTemplates[newIndex];
+                    }
+                }
+            }
+        }
     }
 
     private void Open()
@@ -396,7 +418,8 @@ public class EditorSession : Session
         var player = WorldTemplate.GetPlayerEntity();
         if (player != null)
         {
-            world.AddEntity(new Entity(world, player.Position, ResourceAlias.EntityTemplate("player")));
+            world.AddEntity(new Entity(world, player.Position,
+                ResourceAlias.EntityTemplate("player") ?? new EntityTemplate()));
         }
 
         world.SetCurrentRoom(new Room(world, _cameraPosition, _cameraPosition + _screen.RoomSize));

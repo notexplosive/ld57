@@ -30,14 +30,7 @@ public class AnchorItemBehavior : ItemBehavior
 
     private static EntityTemplate PhantomTemplate()
     {
-        if (ResourceAlias.HasEntityTemplate("phantom_anchor"))
-        {
-            return ResourceAlias.EntityTemplate("phantom_anchor");
-        }
-        else
-        {
-            return new EntityTemplate();
-        }
+        return ResourceAlias.EntityTemplate("phantom_anchor") ?? new EntityTemplate();
     }
 
     public override SequenceTween PlayAnimation(World world, Entity user)

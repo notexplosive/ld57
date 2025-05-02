@@ -20,8 +20,7 @@ public class BrushTool : IEditorTool
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 0);
     public TileState GetTileStateInWorldOnHover(TileState original)
     {
-        // todo: this should show the tile we're about to place
-        return original with {BackgroundColor = Color.LightBlue, BackgroundIntensity = 0.75f};
+        return _editorSession.SelectedTemplate?.CreateAppearance().TileState ?? TileState.TransparentEmpty;
     }
 
     public string Status()

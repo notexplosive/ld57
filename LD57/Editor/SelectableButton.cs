@@ -5,30 +5,30 @@ using Microsoft.Xna.Framework;
 
 namespace LD57.Editor;
 
-public class SelectableButton : ISubElement
+public class SelectableButton<T> : ISubElement where T : class
 {
     private readonly GridPosition _gridPosition;
-    private readonly Action _onSelect;
-    private readonly EditorSelector _selector;
+    private readonly EditorSelector<T> _selector;
+    private readonly T _selectableContent;
     private readonly TileState _tileState;
 
-    public SelectableButton(GridPosition gridPosition, TileState tileState, EditorSelector selector, Action onSelect)
+    public SelectableButton(GridPosition gridPosition, TileState tileState, EditorSelector<T> selector, T selectableContent)
     {
         _gridPosition = gridPosition;
         _tileState = tileState;
         _selector = selector;
-        _onSelect = onSelect;
+        _selectableContent = selectableContent;
 
         if (_selector.Selected == null)
         {
-            _selector.Selected = this;
+            _selector.Selected = selectableContent;
         }
     }
 
     public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
     {
         var renderedTileState = _tileState;
-        if (_selector.Selected == this)
+        if (_selector.IsSelected(_selectableContent))
         {
             renderedTileState = renderedTileState with
             {
@@ -69,11 +69,6 @@ public class SelectableButton : ISubElement
 
     public void Select()
     {
-        _selector.Selected = this;
-    }
-
-    public void OnSelect()
-    {
-        _onSelect();
+        _selector.Selected = _selectableContent;
     }
 }

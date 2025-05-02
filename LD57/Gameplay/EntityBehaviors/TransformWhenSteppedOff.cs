@@ -26,6 +26,8 @@ public class TransformWhenSteppedOff : IEntityBehavior
         }
 
         self.World.Destroy(self);
-        self.World.AddEntity(self.World.CreateEntityFromTemplate(ResourceAlias.EntityTemplate(template), self.Position, []));
+        self.World.AddEntity(
+            self.World.CreateEntityFromTemplate(ResourceAlias.EntityTemplate(template) ?? new EntityTemplate(),
+                self.Position, []));
     }
 }

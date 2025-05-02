@@ -157,7 +157,7 @@ public class LdSession : Session
         }
 
         FrameInput.UpdateInput(input);
-        
+
         if (_stopAllInput)
         {
             return;
@@ -456,7 +456,8 @@ public class LdSession : Session
         }
 
         _world = new World(Constants.GameRoomSize, worldTemplate);
-        _player = _world.AddEntity(new Entity(_world, playerSpawn, ResourceAlias.EntityTemplate("player")));
+        _player = _world.AddEntity(new Entity(_world, playerSpawn,
+            ResourceAlias.EntityTemplate("player") ?? new EntityTemplate()));
 
         _world.Rules.AddRule(new CameraFollowsEntity(_world, _player));
         _world.RequestClaimCrystal += OnClaimCrystal;
@@ -501,9 +502,9 @@ public class LdSession : Session
 
         if (_foundCrystals.Count == 1)
         {
-            DisplayDynamicDialogueMessage($"If you Reset,\nyour crystals are preserved.");
+            DisplayDynamicDialogueMessage("If you Reset,\nyour crystals are preserved.");
         }
-        
+
         ResourceAlias.PlaySound("pickup_crystal", new SoundEffectSettings());
     }
 
@@ -526,7 +527,7 @@ public class LdSession : Session
             }
 
             var template = ResourceAlias.EntityTemplate(itemName);
-            _world.AddEntity(_world.CreateEntityFromTemplate(template, position, []));
+            _world.AddEntity(_world.CreateEntityFromTemplate(template ?? new EntityTemplate(), position, []));
         }
     }
 
@@ -678,7 +679,8 @@ public class LdSession : Session
         var worldTemplate = JsonConvert.DeserializeObject<WorldTemplate>(worldData);
         if (worldTemplate != null)
         {
-            CrossFadeTransition(new WipeTransition(_screen, TileState.TransparentEmpty), () => { LoadWorld(worldTemplate); });
+            CrossFadeTransition(new WipeTransition(_screen, TileState.TransparentEmpty),
+                () => { LoadWorld(worldTemplate); });
         }
     }
 
