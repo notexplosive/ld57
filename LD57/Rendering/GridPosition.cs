@@ -5,8 +5,6 @@ namespace LD57.Rendering;
 
 public readonly record struct GridPosition
 {
-    public static readonly GridPosition Zero = new();
-
     public GridPosition(Point point) : this(point.X, point.Y)
     {
     }
@@ -32,12 +30,12 @@ public readonly record struct GridPosition
     {
         return new GridPosition(a.X - b.X, a.Y - b.Y);
     }
-
+    
     public static GridPosition operator *(GridPosition a, int scalar)
     {
         return new GridPosition(a.X * scalar, a.Y * scalar);
     }
-
+    
     public static GridPosition operator /(GridPosition a, int scalar)
     {
         return new GridPosition(a.X / scalar, a.Y / scalar);
