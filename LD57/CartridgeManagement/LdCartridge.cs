@@ -24,15 +24,15 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
     public override void OnCartridgeStarted()
     {
         var targetMode = Client.Args.GetValue<string>("mode");
-        var levelName = Client.Args.GetValue<string>("level");
+        var worldName = Client.Args.GetValue<string>("level");
         
-        if (!string.IsNullOrEmpty(levelName))
+        if (!string.IsNullOrEmpty(worldName))
         {
-            HotReloadCache.LevelEditorOpenFileName ??= levelName;
+            HotReloadCache.LevelEditorOpenFileName ??= worldName;
         }
         else
         {
-            levelName = "default";
+            worldName = "default";
         }
         
         _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
@@ -57,7 +57,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         else
         {
             LoadGame();
-            var template = JsonConvert.DeserializeObject<WorldTemplate>(Client.Debug.RepoFileSystem.GetDirectory("Resource/Worlds").ReadFile(levelName+".json"));
+            var template = Constants.AttemptLoadWorldTemplateFromWorldDirectory(worldName);
             if (template != null)
             {
                 _gameSession.StartingTemplate = template;

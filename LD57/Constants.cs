@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
+using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace LD57;
 
@@ -107,5 +110,17 @@ public static class Constants
     public static GridPositionCorners ToGridPositionCorners(this RectangleF rectangleF)
     {
         return new GridPositionCorners(rectangleF.TopLeft.RoundToGridPosition(), rectangleF.BottomRight.RoundToGridPosition());
+    }
+
+    public static WorldTemplate? AttemptLoadWorldTemplateFromWorldDirectory(string worldNameWithoutExtension)
+    {
+        var worldData = Client.Debug.RepoFileSystem.GetDirectory("Resource/Worlds").ReadFile(worldNameWithoutExtension + ".json");
+        return JsonConvert.DeserializeObject<WorldTemplate>(worldData);
+    }
+
+    public static WorldTemplate? AttemptLoadWorldTemplateFromFullPath(string fullPath)
+    {
+        var json = Client.Debug.RepoFileSystem.ReadFile(fullPath);
+        return JsonConvert.DeserializeObject<WorldTemplate>(json);
     }
 }

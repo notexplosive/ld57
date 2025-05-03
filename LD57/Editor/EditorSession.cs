@@ -44,9 +44,7 @@ public class EditorSession : Session
 
         if (HotReloadCache.LevelEditorOpenFileName != null)
         {
-            var data = Client.Debug.RepoFileSystem.ReadFile(
-                $"Resource/Worlds/{HotReloadCache.LevelEditorOpenFileName}.json");
-            var template = JsonConvert.DeserializeObject<WorldTemplate>(data);
+            var template = Constants.AttemptLoadWorldTemplateFromWorldDirectory(HotReloadCache.LevelEditorOpenFileName);
             if (template != null)
             {
                 SetTemplate(HotReloadCache.LevelEditorOpenFileName, template);
@@ -340,15 +338,11 @@ public class EditorSession : Session
         if (!string.IsNullOrEmpty(fullPath))
         {
             var fileName = new FileInfo(fullPath).Name;
-
-            var json = Client.Debug.RepoFileSystem.ReadFile(fullPath);
-            var newWorld = JsonConvert.DeserializeObject<WorldTemplate>(json);
-
-            if (newWorld != null)
+            var worldTemplate = Constants.AttemptLoadWorldTemplateFromFullPath(fullPath);
+            if (worldTemplate != null)
             {
-                Client.Debug.RepoFileSystem.WriteToFile($"Resource/Worlds/{fileName}", json);
                 var newFileName = fileName.RemoveFileExtension();
-                SetTemplate(newFileName, newWorld);
+                SetTemplate(newFileName, worldTemplate);
             }
         }
     }

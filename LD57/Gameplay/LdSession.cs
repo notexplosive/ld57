@@ -675,8 +675,7 @@ public class LdSession : Session
 
     private void TransitionWorld(string worldName)
     {
-        var worldData = Client.Debug.RepoFileSystem.GetDirectory("Resource/Worlds").ReadFile(worldName + ".json");
-        var worldTemplate = JsonConvert.DeserializeObject<WorldTemplate>(worldData);
+        var worldTemplate = Constants.AttemptLoadWorldTemplateFromWorldDirectory(worldName);
         if (worldTemplate != null)
         {
             CrossFadeTransition(new WipeTransition(_screen, TileState.TransparentEmpty),

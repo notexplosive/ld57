@@ -181,38 +181,6 @@
       "template_name": "overhang",
       "position": {
         "x": 15,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 15,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 15,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 15,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 15,
         "y": 11
       }
     },
@@ -230,38 +198,6 @@
       "position": {
         "x": 16,
         "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 16,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 16,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 16,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 16,
-        "y": 10
       }
     },
     {
@@ -293,38 +229,6 @@
       "template_name": "overhang",
       "position": {
         "x": 17,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 17,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 17,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 17,
-        "y": 10
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 17,
         "y": 11
       }
     },
@@ -342,38 +246,6 @@
       "position": {
         "x": 18,
         "y": 6
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 18,
-        "y": 7
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 18,
-        "y": 8
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 18,
-        "y": 9
-      }
-    },
-    {
-      "extra_state": {},
-      "template_name": "overhang",
-      "position": {
-        "x": 18,
-        "y": 10
       }
     },
     {
