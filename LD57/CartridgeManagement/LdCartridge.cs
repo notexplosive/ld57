@@ -15,7 +15,8 @@ namespace LD57.CartridgeManagement;
 
 public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 {
-    private EditorSession _editorSession = null!;
+    private WorldEditorSession _worldEditorSession = null!;
+    private CanvasEditorSession _canvasEditorSession = null!;
     private LdSession _gameSession = null!;
     private ISession? _session;
 
@@ -35,24 +36,29 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             levelName = "default";
         }
         
-        _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
+        _canvasEditorSession = new CanvasEditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
+        _worldEditorSession = new WorldEditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
         _gameSession.RequestLevelEditor += () =>
         {
             _gameSession.StopAllAmbientSounds();
-            _session = _editorSession;
+            _session = _worldEditorSession;
         };
         
-        _editorSession.RequestPlay += (position) =>
+        _worldEditorSession.RequestPlay += (position) =>
         {
-            _gameSession.LoadWorld(_editorSession.WorldTemplate, position);
+            _gameSession.LoadWorld(_worldEditorSession.Content, position);
             _session = _gameSession;
         };
-        
-        if (targetMode == "edit")
+
+        if (targetMode == "draw")
         {
-            _session = _editorSession;
+            _session = _canvasEditorSession;
+        }
+        else if (targetMode == "edit")
+        {
+            _session = _worldEditorSession;
         }
         else
         {
