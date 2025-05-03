@@ -509,14 +509,6 @@ public class EditorSession : Session
                     _screen.PutTile(placedEntity.Position - _cameraPosition,
                         TileState.StringCharacter("!", Color.OrangeRed));
                 }
-
-                if (placedEntity.ExtraState.ContainsKey("channel"))
-                {
-                    /*
-                    _screen.PutTile(placedEntity.Position - _cameraPosition,
-                        TileState.Sprite(ResourceAlias.Tools, 4, ResourceAlias.Color("signal_"+ placedEntity.ExtraData["channel"])));
-                        */
-                }
             }
         }
 
