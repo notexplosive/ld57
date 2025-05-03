@@ -18,11 +18,7 @@ public class SelectableButton<T> : ISubElement where T : class
         _tileState = tileState;
         _selector = selector;
         _selectableContent = selectableContent;
-
-        if (_selector.Selected == null)
-        {
-            _selector.Selected = selectableContent;
-        }
+        _selector.Selected ??= selectableContent;
     }
 
     public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
@@ -33,8 +29,8 @@ public class SelectableButton<T> : ISubElement where T : class
             renderedTileState = renderedTileState with
             {
                 BackgroundColor = Color.White,
+                ForegroundColor = Color.Black,
                 BackgroundIntensity = 1f,
-                ForegroundColor = Color.Blue
             };
         }
 

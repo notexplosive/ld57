@@ -20,6 +20,10 @@ public class BrushTool : IEditorTool
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 0);
     public TileState GetTileStateInWorldOnHover(TileState original)
     {
+        if (_editorSession.IsDraggingSecondary)
+        {
+            return TileState.TransparentEmpty;
+        }
         return _editorSession.SelectedTemplate?.CreateAppearance().TileState ?? TileState.TransparentEmpty;
     }
 
