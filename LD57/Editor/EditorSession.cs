@@ -37,7 +37,7 @@ public class EditorSession : Session
         _editorTools.Add(new TriggerTool(this));
         _editorTools.Add(new PlayTool(this));
 
-        _screen = RebuildScreenWithWidth(50);
+        _screen = RebuildScreenWithWidth(46);
         _cameraPosition = DefaultCameraPosition();
 
         WorldTemplate = new WorldTemplate();
