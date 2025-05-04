@@ -2707,6 +2707,38 @@
         "x": 9,
         "y": 11
       }
+    },
+    {
+      "extra_state": {},
+      "template_name": "arrow_down",
+      "position": {
+        "x": 12,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "arrow_down",
+      "position": {
+        "x": 13,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "arrow_down",
+      "position": {
+        "x": 14,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "arrow_down",
+      "position": {
+        "x": 15,
+        "y": 6
+      }
     }
   ]
 }

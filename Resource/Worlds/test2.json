@@ -487,6 +487,94 @@
         "x": 22,
         "y": 12
       }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 15,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 16,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 17,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 18,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 19,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 20,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 21,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 22,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 23,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 23,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "bridge_inverted",
+      "position": {
+        "x": 24,
+        "y": 6
+      }
     }
   ]
 }
