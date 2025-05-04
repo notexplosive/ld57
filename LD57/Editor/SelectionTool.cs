@@ -77,10 +77,10 @@ public class SelectionTool : IEditorTool
         {
             if (inputKeyboard.GetButton(Keys.F).WasPressed)
             {
-                var previousPositions = _surface.Selection.AllPositions().ToList();
-                _surface.WorldTemplate.FillAllPositions(previousPositions, entityTemplate);
+                var positions = _surface.Selection.AllPositions().ToList();
+                _surface.WorldTemplate.FillAllPositions(positions, entityTemplate);
                 _surface.Selection.Clear();
-                CreateOrEditSelection(previousPositions);
+                CreateOrEditSelection(positions);
             }
         }
         
