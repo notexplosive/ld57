@@ -32,17 +32,24 @@ public class BrushTool : IEditorTool
 
     public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
     {
-        if (_editorSession.HoveredWorldPosition.HasValue && _editorSession.SelectedTemplate != null)
+        if (!_editorSession.HoveredWorldPosition.HasValue)
         {
-            if (_editorSession.IsDraggingPrimary)
-            {
-                _editorSession.Surface.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, _editorSession.SelectedTemplate);
-            }
+            return;
+        }
 
-            if (_editorSession.IsDraggingSecondary)
-            {
-                _editorSession.Surface.WorldTemplate.RemoveEntitiesAtExceptMetadata(_editorSession.HoveredWorldPosition.Value);
-            }
+        if (_editorSession.SelectedTemplate == null)
+        {
+            return;
+        }
+
+        if (_editorSession.IsDraggingPrimary)
+        {
+            _editorSession.Surface.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, _editorSession.SelectedTemplate);
+        }
+
+        if (_editorSession.IsDraggingSecondary)
+        {
+            _editorSession.Surface.WorldTemplate.RemoveEntitiesAtExceptMetadata(_editorSession.HoveredWorldPosition.Value);
         }
     }
 

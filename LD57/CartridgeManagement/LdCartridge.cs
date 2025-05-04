@@ -36,6 +36,13 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         }
         
         _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
+        _editorSession.EditorTools.Add(new BrushTool(_editorSession));
+        _editorSession.EditorTools.Add(new SelectionTool(_editorSession));
+        _editorSession.EditorTools.Add(new ChangeSignalTool(_editorSession));
+        _editorSession.EditorTools.Add(new TriggerTool(_editorSession));
+        _editorSession.EditorTools.Add(new PlayTool(_editorSession));
+        _editorSession.RebuildScreen();
+        
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
         _gameSession.RequestLevelEditor += () =>

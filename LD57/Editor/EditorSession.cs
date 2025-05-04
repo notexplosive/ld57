@@ -15,7 +15,7 @@ namespace LD57.Editor;
 
 public class EditorSession : Session
 {
-    private readonly List<IEditorTool> _editorTools = new();
+    public List<IEditorTool> EditorTools { get; } = new();
     private readonly EditorSelector<EntityTemplate> _templateSelector = new();
     private readonly EditorSelector<IEditorTool> _toolSelector = new();
     private readonly List<UiElement> _uiElements = new();
@@ -28,12 +28,6 @@ public class EditorSession : Session
     public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
         runtimeFileSystem)
     {
-        _editorTools.Add(new BrushTool(this));
-        _editorTools.Add(new SelectionTool(this));
-        _editorTools.Add(new ChangeSignalTool(this));
-        _editorTools.Add(new TriggerTool(this));
-        _editorTools.Add(new PlayTool(this));
-
         _screen = RebuildScreenWithWidth(46);
         Surface = new WorldEditorSurface(this);
         _cameraPosition = DefaultCameraPosition();
@@ -48,6 +42,11 @@ public class EditorSession : Session
         {
             _cameraPosition = HotReloadCache.LevelEditorCameraPosition.Value;
         }
+    }
+
+    public void RebuildScreen()
+    {
+        _screen = RebuildScreenWithWidth(_screen.Width);
     }
 
     public WorldEditorSurface Surface { get; }
@@ -95,10 +94,10 @@ public class EditorSession : Session
 
         var bottomLeftCorner = new GridPosition(0, screen.Height - 3);
 
-        var leftToolbar = new UiElement(new GridPosition(0, 0), new GridPosition(2, _editorTools.Count + 1));
+        var leftToolbar = new UiElement(new GridPosition(0, 0), new GridPosition(2, EditorTools.Count + 1));
 
         var toolIndex = 0;
-        foreach (var tool in _editorTools)
+        foreach (var tool in EditorTools)
         {
             leftToolbar.AddSelectable(new SelectableButton<IEditorTool>(new GridPosition(1, 1 + toolIndex),
                 tool.TileStateInToolbar, _toolSelector, tool));
@@ -289,9 +288,9 @@ public class EditorSession : Session
                 {
                     if (CurrentTool != null)
                     {
-                        var currentIndex = _editorTools.IndexOf(CurrentTool);
-                        var newIndex = Math.Clamp(currentIndex + delta, 0, _editorTools.Count - 1);
-                        _toolSelector.Selected = _editorTools[newIndex];
+                        var currentIndex = EditorTools.IndexOf(CurrentTool);
+                        var newIndex = Math.Clamp(currentIndex + delta, 0, EditorTools.Count - 1);
+                        _toolSelector.Selected = EditorTools[newIndex];
                     }
                 }
 
