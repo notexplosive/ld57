@@ -19,6 +19,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 {
     private EditorSession _editorSession = null!;
     private LdSession _gameSession = null!;
+    private EditorSession _drawSession = null!;
     private ISession? _session;
 
     public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.PointClamp);
@@ -37,16 +38,57 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             worldName = "default";
         }
 
+        _editorSession = BuildEditorSession(Runtime);
+        _drawSession = BuildEditorSession(Runtime);
+        _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
+
+        _gameSession.RequestLevelEditor += () =>
+        {
+            _gameSession.StopAllAmbientSounds();
+            _session = _editorSession;
+        };
+
+        _editorSession.RequestPlay += position =>
+        {
+            _gameSession.LoadWorld(_editorSession.Surface.WorldTemplate, position);
+            _session = _gameSession;
+        };
+
+        if (targetMode == "edit")
+        {
+            _session = _editorSession;
+        }
+        else if (targetMode == "draw")
+        {
+            _session = _drawSession;
+        }
+        else
+        {
+            LoadGame();
+            var template = Constants.AttemptLoadWorldTemplateFromWorldDirectory(worldName);
+            if (template != null)
+            {
+                _gameSession.StartingTemplate = template;
+            }
+
+            _gameSession.OpenMainMenu();
+        }
+    }
+
+    private static EditorSession BuildEditorSession(IRuntime runtime)
+    {
         EditorSelector<EntityTemplate> templateSelector = new();
         var worldEditorSurface = new WorldEditorSurface();
-        
-        _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, worldEditorSurface);
-        _editorSession.EditorTools.Add(new BrushTool(_editorSession, worldEditorSurface, () => templateSelector.Selected));
-        _editorSession.EditorTools.Add(new SelectionTool(_editorSession, worldEditorSurface, () => templateSelector.Selected));
-        _editorSession.EditorTools.Add(new ChangeSignalTool(_editorSession));
-        _editorSession.EditorTools.Add(new TriggerTool(_editorSession));
-        _editorSession.EditorTools.Add(new PlayTool(_editorSession));
-        _editorSession.ExtraUi.Add(screen =>
+
+        var editorSession = new EditorSession((runtime.Window as RealWindow)!, runtime.FileSystem, worldEditorSurface);
+        editorSession.EditorTools.Add(new BrushTool(editorSession, worldEditorSurface,
+            () => templateSelector.Selected));
+        editorSession.EditorTools.Add(new SelectionTool(editorSession, worldEditorSurface,
+            () => templateSelector.Selected));
+        editorSession.EditorTools.Add(new ChangeSignalTool(editorSession));
+        editorSession.EditorTools.Add(new TriggerTool(editorSession));
+        editorSession.EditorTools.Add(new PlayTool(editorSession));
+        editorSession.ExtraUi.Add(screen =>
         {
             var tilePalette = new UiElement(new GridPosition(3, 0), new GridPosition(screen.Width - 1, 3));
             var i = 0;
@@ -70,7 +112,8 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
             return tilePalette;
         });
-        _editorSession.ExtraKeyBinds.Add((input, delta) =>
+
+        editorSession.ExtraKeyBinds.Add((input, delta) =>
         {
             if (input.Keyboard.Modifiers.Shift)
             {
@@ -84,37 +127,9 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             }
         });
 
-        _editorSession.RebuildScreen();
+        editorSession.RebuildScreen();
 
-        _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
-
-        _gameSession.RequestLevelEditor += () =>
-        {
-            _gameSession.StopAllAmbientSounds();
-            _session = _editorSession;
-        };
-
-        _editorSession.RequestPlay += position =>
-        {
-            _gameSession.LoadWorld(_editorSession.Surface.WorldTemplate, position);
-            _session = _gameSession;
-        };
-
-        if (targetMode == "edit")
-        {
-            _session = _editorSession;
-        }
-        else
-        {
-            LoadGame();
-            var template = Constants.AttemptLoadWorldTemplateFromWorldDirectory(worldName);
-            if (template != null)
-            {
-                _gameSession.StartingTemplate = template;
-            }
-
-            _gameSession.OpenMainMenu();
-        }
+        return editorSession;
     }
 
     private void LoadGame()
