@@ -20,11 +20,13 @@ public class EditorSession : Session
     private AsciiScreen _screen;
     private bool _shouldClosePopup;
 
-    public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem) : base(runtimeWindow,
+    public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, WorldEditorSurface surface) : base(runtimeWindow,
         runtimeFileSystem)
     {
         _screen = RebuildScreenWithWidth(46);
-        Surface = new WorldEditorSurface(this);
+        Surface = surface;
+        Surface.RequestResetCamera += ResetCameraPosition;
+        Surface.RequestPlayAt += RequestPlayAt;
         _cameraPosition = DefaultCameraPosition();
 
         var cachedFileName = HotReloadCache.LevelEditorOpenFileName;
@@ -371,7 +373,7 @@ public class EditorSession : Session
             }
         }
 
-        Surface.PaintOverlayBelowTool(_screen, _cameraPosition);
+        Surface.PaintOverlayBelowTool(_screen, _cameraPosition, HoveredWorldPosition);
 
         CurrentTool?.PaintToScreen(_screen, _cameraPosition);
 
@@ -448,7 +450,7 @@ public class EditorSession : Session
         RequestPlay?.Invoke(position);
     }
 
-    public void ResetCameraPosition()
+    private void ResetCameraPosition()
     {
         _cameraPosition = DefaultCameraPosition();
     }

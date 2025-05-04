@@ -12,14 +12,7 @@ namespace LD57.Editor;
 
 public class WorldEditorSurface
 {
-    private readonly EditorSession _editorSession;
-
-    public WorldEditorSurface(EditorSession editorSession)
-    {
-        _editorSession = editorSession;
-    }
-
-    public WorldSelection WorldSelection { get; } = new();
+    public WorldSelection Selection { get; } = new();
 
     public string? FileName { get; set; }
 
@@ -38,7 +31,7 @@ public class WorldEditorSurface
                     position = player.Position;
                 }
 
-                _editorSession.RequestPlayAt(position);
+                RequestPlayAt?.Invoke(position);
             }
         }
     }
@@ -60,14 +53,14 @@ public class WorldEditorSurface
         world.PaintToScreen(screen, dt);
     }
 
-    public void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition, GridPosition? hoveredPosition)
     {
         // create empty room so we don't have to 
         var world = new World(Constants.GameRoomSize, new WorldTemplate());
 
-        if (_editorSession.HoveredWorldPosition.HasValue)
+        if (hoveredPosition.HasValue)
         {
-            var hoveredRoom = world.GetRoomAt(_editorSession.HoveredWorldPosition.Value);
+            var hoveredRoom = world.GetRoomAt(hoveredPosition.Value);
             var hoveredRoomTopLeft = hoveredRoom.TopLeft - cameraPosition;
             var hoveredRoomBottomRight = hoveredRoom.BottomRight - cameraPosition;
 
@@ -109,14 +102,13 @@ public class WorldEditorSurface
                 screen.PutTile(position, previousTileState with {BackgroundColor = color, BackgroundIntensity = 1f});
             }
         }
-        
-        
-        foreach (var worldPosition in WorldSelection.AllPositions())
+
+        foreach (var worldPosition in Selection.AllPositions())
         {
             var screenPosition = worldPosition - cameraPosition;
             if (screen.ContainsPosition(screenPosition))
             {
-                screen.PutTile(screenPosition, WorldSelection.GetTileState(worldPosition - WorldSelection.Offset));
+                screen.PutTile(screenPosition, Selection.GetTileState(worldPosition - Selection.Offset));
             }
         }
     }
@@ -173,6 +165,9 @@ public class WorldEditorSurface
     {
         FileName = newFileName;
         WorldTemplate = newWorld;
-        _editorSession.ResetCameraPosition();
+        RequestResetCamera?.Invoke();
     }
+
+    public event Action? RequestResetCamera;
+    public event Action<GridPosition>? RequestPlayAt;
 }

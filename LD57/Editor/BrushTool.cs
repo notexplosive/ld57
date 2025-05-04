@@ -9,11 +9,13 @@ namespace LD57.Editor;
 public class BrushTool : IEditorTool
 {
     private readonly EditorSession _editorSession;
+    private readonly WorldEditorSurface _surface;
     private readonly Func<EntityTemplate?> _getTemplate;
 
-    public BrushTool(EditorSession editorSession, Func<EntityTemplate?> getTemplate)
+    public BrushTool(EditorSession editorSession, WorldEditorSurface surface, Func<EntityTemplate?> getTemplate)
     {
         _editorSession = editorSession;
+        _surface = surface;
         _getTemplate = getTemplate;
     }
 
@@ -50,12 +52,12 @@ public class BrushTool : IEditorTool
 
         if (_editorSession.IsDraggingPrimary)
         {
-            _editorSession.Surface.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, template);
+            _surface.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, template);
         }
 
         if (_editorSession.IsDraggingSecondary)
         {
-            _editorSession.Surface.WorldTemplate.RemoveEntitiesAtExceptMetadata(_editorSession.HoveredWorldPosition.Value);
+            _surface.WorldTemplate.RemoveEntitiesAtExceptMetadata(_editorSession.HoveredWorldPosition.Value);
         }
     }
 

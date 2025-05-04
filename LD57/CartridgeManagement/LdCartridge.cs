@@ -38,9 +38,11 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         }
 
         EditorSelector<EntityTemplate> templateSelector = new();
-        _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
-        _editorSession.EditorTools.Add(new BrushTool(_editorSession, () => templateSelector.Selected));
-        _editorSession.EditorTools.Add(new SelectionTool(_editorSession, () => templateSelector.Selected));
+        var worldEditorSurface = new WorldEditorSurface();
+        
+        _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, worldEditorSurface);
+        _editorSession.EditorTools.Add(new BrushTool(_editorSession, worldEditorSurface, () => templateSelector.Selected));
+        _editorSession.EditorTools.Add(new SelectionTool(_editorSession, worldEditorSurface, () => templateSelector.Selected));
         _editorSession.EditorTools.Add(new ChangeSignalTool(_editorSession));
         _editorSession.EditorTools.Add(new TriggerTool(_editorSession));
         _editorSession.EditorTools.Add(new PlayTool(_editorSession));

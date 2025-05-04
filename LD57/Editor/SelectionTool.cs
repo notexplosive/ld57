@@ -13,15 +13,17 @@ namespace LD57.Editor;
 public class SelectionTool : IEditorTool
 {
     private readonly EditorSession _editorSession;
+    private readonly WorldEditorSurface _surface;
     private readonly Func<EntityTemplate?> _getTemplate;
     private bool _isAltDown;
     private bool _isCtrlDown;
     private bool _isShiftDown;
     private GridPosition? _selectionAnchor;
 
-    public SelectionTool(EditorSession editorSession, Func<EntityTemplate?> getTemplate)
+    public SelectionTool(EditorSession editorSession, WorldEditorSurface surface, Func<EntityTemplate?> getTemplate)
     {
         _editorSession = editorSession;
+        _surface = surface;
         _getTemplate = getTemplate;
     }
 
@@ -51,9 +53,9 @@ public class SelectionTool : IEditorTool
         }
 
         
-        if (!_editorSession.Surface.WorldSelection.IsEmpty)
+        if (!_surface.Selection.IsEmpty)
         {
-            return $"{_editorSession.Surface.WorldSelection.Status()} [ESC] [F] [SHIFT] [CTRL] [ALT]";
+            return $"{_surface.Selection.Status()} [ESC] [F] [SHIFT] [CTRL] [ALT]";
         }
 
         return "[ALT]*";
@@ -67,7 +69,7 @@ public class SelectionTool : IEditorTool
 
         if (inputKeyboard.GetButton(Keys.Escape).WasPressed && !IsMoving())
         {
-            _editorSession.Surface.WorldSelection.Clear();
+            _surface.Selection.Clear();
         }
 
         var entityTemplate = _getTemplate();
@@ -75,9 +77,9 @@ public class SelectionTool : IEditorTool
         {
             if (inputKeyboard.GetButton(Keys.F).WasPressed)
             {
-                var previousPositions = _editorSession.Surface.WorldSelection.AllPositions().ToList();
-                _editorSession.Surface.WorldTemplate.FillAllPositions(previousPositions, entityTemplate);
-                _editorSession.Surface.WorldSelection.Clear();
+                var previousPositions = _surface.Selection.AllPositions().ToList();
+                _surface.WorldTemplate.FillAllPositions(previousPositions, entityTemplate);
+                _surface.Selection.Clear();
                 CreateOrEditSelection(previousPositions);
             }
         }
@@ -90,8 +92,8 @@ public class SelectionTool : IEditorTool
 
         if (inputKeyboard.GetButton(Keys.Delete).WasPressed)
         {
-            _editorSession.Surface.WorldTemplate.EraseAtPositions(_editorSession.Surface.WorldSelection.AllPositions());
-            _editorSession.Surface.WorldSelection.Clear();
+            _surface.WorldTemplate.EraseAtPositions(_surface.Selection.AllPositions());
+            _surface.Selection.Clear();
         }
     }
 
@@ -121,17 +123,17 @@ public class SelectionTool : IEditorTool
         {
             if (CanMove())
             {
-                foreach (var item in _editorSession.Surface.WorldSelection.AllPositions())
+                foreach (var item in _surface.Selection.AllPositions())
                 {
-                    _editorSession.Surface.WorldTemplate.RemoveEntitiesAt(item);
+                    _surface.WorldTemplate.RemoveEntitiesAt(item);
                 }
 
-                foreach (var item in _editorSession.Surface.WorldSelection.AllEntitiesWithCurrentPlacement())
+                foreach (var item in _surface.Selection.AllEntitiesWithCurrentPlacement())
                 {
-                    _editorSession.Surface.WorldTemplate.AddExactEntity(item);
+                    _surface.WorldTemplate.AddExactEntity(item);
                 }
 
-                _editorSession.Surface.WorldSelection.RegenerateAtNewPosition(_editorSession);
+                _surface.Selection.RegenerateAtNewPosition(_editorSession);
                 _editorSession.MoveStart = null;
                 return;
             }
@@ -217,7 +219,7 @@ public class SelectionTool : IEditorTool
             {
                 if (_isAltDown)
                 {
-                    if (_editorSession.Surface.WorldTemplate.HasEntityAt(position))
+                    if (_surface.WorldTemplate.HasEntityAt(position))
                     {
                         yield return position;
                     }
@@ -232,9 +234,9 @@ public class SelectionTool : IEditorTool
 
     private void RemoveAllEntitiesAtSelection()
     {
-        foreach (var position in _editorSession.Surface.WorldSelection.AllPositions())
+        foreach (var position in _surface.Selection.AllPositions())
         {
-            _editorSession.Surface.WorldTemplate.RemoveEntitiesAt(position);
+            _surface.WorldTemplate.RemoveEntitiesAt(position);
         }
     }
 
@@ -250,19 +252,19 @@ public class SelectionTool : IEditorTool
             return;
         }
 
-        if (_editorSession.Surface.WorldSelection.IsEmpty)
+        if (_surface.Selection.IsEmpty)
         {
             return;
         }
 
         var offset = _editorSession.HoveredWorldPosition.Value - _editorSession.MoveStart.Value;
-        _editorSession.Surface.WorldSelection.Offset = offset;
+        _surface.Selection.Offset = offset;
     }
 
     private bool CanMove()
     {
         var isSelectionHovered = _editorSession.HoveredWorldPosition.HasValue &&
-                                 _editorSession.Surface.WorldSelection.Contains(
+                                 _surface.Selection.Contains(
                                      _editorSession.HoveredWorldPosition.Value);
 
         var isMakingSelection = _selectionAnchor != null;
@@ -279,15 +281,15 @@ public class SelectionTool : IEditorTool
     {
         if (_isCtrlDown)
         {
-            _editorSession.Surface.WorldSelection.RemovePositions(_editorSession, positions);
+            _surface.Selection.RemovePositions(_editorSession, positions);
             return;
         }
 
         if (!_isShiftDown)
         {
-            _editorSession.Surface.WorldSelection.Clear();
+            _surface.Selection.Clear();
         }
 
-        _editorSession.Surface.WorldSelection.AddPositions(_editorSession, positions);
+        _surface.Selection.AddPositions(_editorSession, positions);
     }
 }
