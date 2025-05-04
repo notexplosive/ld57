@@ -51,7 +51,6 @@ public class EditorSession : Session
     }
 
     public WorldEditorSurface Surface { get; }
-    public WorldSelection WorldSelection { get; } = new();
     public GridPosition? MoveStart { get; set; }
     public bool IsDraggingSecondary { get; private set; }
     public bool IsDraggingPrimary { get; private set; }
@@ -398,20 +397,11 @@ public class EditorSession : Session
             }
         }
 
-        Surface.PaintWorldOverlayToScreen(_screen, _cameraPosition);
-
-        foreach (var worldPosition in WorldSelection.AllPositions())
-        {
-            var screenPosition = worldPosition - _cameraPosition;
-            if (_screen.ContainsPosition(screenPosition))
-            {
-                _screen.PutTile(screenPosition, WorldSelection.GetTileState(worldPosition - WorldSelection.Offset));
-            }
-        }
+        Surface.PaintOverlayBelowTool(_screen, _cameraPosition);
 
         CurrentTool?.PaintToScreen(_screen, _cameraPosition);
 
-        Surface.DrawWorldOverlay(_screen, _cameraPosition);
+        Surface.PaintOverlayAboveTool(_screen, _cameraPosition);
 
         foreach (var uiElement in _uiElements)
         {

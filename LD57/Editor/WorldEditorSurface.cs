@@ -19,6 +19,8 @@ public class WorldEditorSurface
         _editorSession = editorSession;
     }
 
+    public WorldSelection WorldSelection { get; } = new();
+
     public string? FileName { get; set; }
 
     public WorldTemplate WorldTemplate { get; private set; } = new();
@@ -58,7 +60,7 @@ public class WorldEditorSurface
         world.PaintToScreen(screen, dt);
     }
 
-    public void PaintWorldOverlayToScreen(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition)
     {
         // create empty room so we don't have to 
         var world = new World(Constants.GameRoomSize, new WorldTemplate());
@@ -107,9 +109,19 @@ public class WorldEditorSurface
                 screen.PutTile(position, previousTileState with {BackgroundColor = color, BackgroundIntensity = 1f});
             }
         }
+        
+        
+        foreach (var worldPosition in WorldSelection.AllPositions())
+        {
+            var screenPosition = worldPosition - cameraPosition;
+            if (screen.ContainsPosition(screenPosition))
+            {
+                screen.PutTile(screenPosition, WorldSelection.GetTileState(worldPosition - WorldSelection.Offset));
+            }
+        }
     }
 
-    public void DrawWorldOverlay(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintOverlayAboveTool(AsciiScreen screen, GridPosition cameraPosition)
     {
         if (MathF.Sin(Client.TotalElapsedTime * 10) > 0)
         {

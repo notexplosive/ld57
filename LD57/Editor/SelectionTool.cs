@@ -47,9 +47,9 @@ public class SelectionTool : IEditorTool
         }
 
         
-        if (!_editorSession.WorldSelection.IsEmpty)
+        if (!_editorSession.Surface.WorldSelection.IsEmpty)
         {
-            return $"{_editorSession.WorldSelection.Status()} [ESC] [F] [SHIFT] [CTRL] [ALT]";
+            return $"{_editorSession.Surface.WorldSelection.Status()} [ESC] [F] [SHIFT] [CTRL] [ALT]";
         }
 
         return "[ALT]*";
@@ -63,16 +63,16 @@ public class SelectionTool : IEditorTool
 
         if (inputKeyboard.GetButton(Keys.Escape).WasPressed && !IsMoving())
         {
-            _editorSession.WorldSelection.Clear();
+            _editorSession.Surface.WorldSelection.Clear();
         }
 
         if (_editorSession.SelectedTemplate != null)
         {
             if (inputKeyboard.GetButton(Keys.F).WasPressed)
             {
-                var previousPositions = _editorSession.WorldSelection.AllPositions().ToList();
+                var previousPositions = _editorSession.Surface.WorldSelection.AllPositions().ToList();
                 _editorSession.Surface.WorldTemplate.FillAllPositions(previousPositions, _editorSession.SelectedTemplate);
-                _editorSession.WorldSelection.Clear();
+                _editorSession.Surface.WorldSelection.Clear();
                 CreateOrEditSelection(previousPositions);
             }
         }
@@ -85,8 +85,8 @@ public class SelectionTool : IEditorTool
 
         if (inputKeyboard.GetButton(Keys.Delete).WasPressed)
         {
-            _editorSession.Surface.WorldTemplate.EraseAtPositions(_editorSession.WorldSelection.AllPositions());
-            _editorSession.WorldSelection.Clear();
+            _editorSession.Surface.WorldTemplate.EraseAtPositions(_editorSession.Surface.WorldSelection.AllPositions());
+            _editorSession.Surface.WorldSelection.Clear();
         }
     }
 
@@ -116,17 +116,17 @@ public class SelectionTool : IEditorTool
         {
             if (CanMove())
             {
-                foreach (var item in _editorSession.WorldSelection.AllPositions())
+                foreach (var item in _editorSession.Surface.WorldSelection.AllPositions())
                 {
                     _editorSession.Surface.WorldTemplate.RemoveEntitiesAt(item);
                 }
 
-                foreach (var item in _editorSession.WorldSelection.AllEntitiesWithCurrentPlacement())
+                foreach (var item in _editorSession.Surface.WorldSelection.AllEntitiesWithCurrentPlacement())
                 {
                     _editorSession.Surface.WorldTemplate.AddExactEntity(item);
                 }
 
-                _editorSession.WorldSelection.RegenerateAtNewPosition(_editorSession);
+                _editorSession.Surface.WorldSelection.RegenerateAtNewPosition(_editorSession);
                 _editorSession.MoveStart = null;
                 return;
             }
@@ -227,7 +227,7 @@ public class SelectionTool : IEditorTool
 
     private void RemoveAllEntitiesAtSelection()
     {
-        foreach (var position in _editorSession.WorldSelection.AllPositions())
+        foreach (var position in _editorSession.Surface.WorldSelection.AllPositions())
         {
             _editorSession.Surface.WorldTemplate.RemoveEntitiesAt(position);
         }
@@ -245,19 +245,19 @@ public class SelectionTool : IEditorTool
             return;
         }
 
-        if (_editorSession.WorldSelection.IsEmpty)
+        if (_editorSession.Surface.WorldSelection.IsEmpty)
         {
             return;
         }
 
         var offset = _editorSession.HoveredWorldPosition.Value - _editorSession.MoveStart.Value;
-        _editorSession.WorldSelection.Offset = offset;
+        _editorSession.Surface.WorldSelection.Offset = offset;
     }
 
     private bool CanMove()
     {
         var isSelectionHovered = _editorSession.HoveredWorldPosition.HasValue &&
-                                 _editorSession.WorldSelection.Contains(
+                                 _editorSession.Surface.WorldSelection.Contains(
                                      _editorSession.HoveredWorldPosition.Value);
 
         var isMakingSelection = _selectionAnchor != null;
@@ -274,15 +274,15 @@ public class SelectionTool : IEditorTool
     {
         if (_isCtrlDown)
         {
-            _editorSession.WorldSelection.RemovePositions(_editorSession, positions);
+            _editorSession.Surface.WorldSelection.RemovePositions(_editorSession, positions);
             return;
         }
 
         if (!_isShiftDown)
         {
-            _editorSession.WorldSelection.Clear();
+            _editorSession.Surface.WorldSelection.Clear();
         }
 
-        _editorSession.WorldSelection.AddPositions(_editorSession, positions);
+        _editorSession.Surface.WorldSelection.AddPositions(_editorSession, positions);
     }
 }

@@ -2,7 +2,6 @@
 using System.Linq;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
-using LD57.Gameplay;
 using LD57.Rendering;
 
 namespace LD57.Editor;
@@ -22,7 +21,8 @@ public class TriggerTool : IEditorTool
     {
         if (_editorSession.HoveredWorldPosition.HasValue)
         {
-            var metadataEntities = _editorSession.Surface.WorldTemplate.GetMetadataAt(_editorSession.HoveredWorldPosition.Value).ToList();
+            var metadataEntities = _editorSession.Surface.WorldTemplate
+                .GetMetadataAt(_editorSession.HoveredWorldPosition.Value).ToList();
 
             if (metadataEntities.Count > 0 &&
                 metadataEntities.First().ExtraState.TryGetValue(Constants.CommandKey, out var status))
@@ -49,7 +49,7 @@ public class TriggerTool : IEditorTool
                 defaultText = foundMetaEntity.ExtraState.GetValueOrDefault(Constants.CommandKey) ?? defaultText;
             }
 
-            var isUsingSelection = _editorSession.WorldSelection.Contains(position);
+            var isUsingSelection = _editorSession.Surface.WorldSelection.Contains(position);
             _editorSession.RequestText("Enter Command", defaultText,
                 text =>
                 {
@@ -70,7 +70,7 @@ public class TriggerTool : IEditorTool
                         {
                             if (isUsingSelection)
                             {
-                                foreach (var cell in _editorSession.WorldSelection.AllPositions())
+                                foreach (var cell in _editorSession.Surface.WorldSelection.AllPositions())
                                 {
                                     _editorSession.Surface.WorldTemplate.AddMetaEntity(cell, text);
                                 }
@@ -91,7 +91,6 @@ public class TriggerTool : IEditorTool
 
     public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
     {
-        
     }
 
     public TileState GetTileStateInWorldOnHover(TileState original)
