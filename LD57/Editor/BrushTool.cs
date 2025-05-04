@@ -1,5 +1,7 @@
-﻿using ExplogineMonoGame;
+﻿using System;
+using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
+using LD57.Gameplay;
 using LD57.Rendering;
 
 namespace LD57.Editor;
@@ -7,10 +9,12 @@ namespace LD57.Editor;
 public class BrushTool : IEditorTool
 {
     private readonly EditorSession _editorSession;
+    private readonly Func<EntityTemplate?> _getTemplate;
 
-    public BrushTool(EditorSession editorSession)
+    public BrushTool(EditorSession editorSession, Func<EntityTemplate?> getTemplate)
     {
         _editorSession = editorSession;
+        _getTemplate = getTemplate;
     }
 
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 0);
@@ -22,7 +26,7 @@ public class BrushTool : IEditorTool
             return TileState.TransparentEmpty;
         }
 
-        return _editorSession.SelectedTemplate?.CreateAppearance().TileState ?? TileState.TransparentEmpty;
+        return _getTemplate()?.CreateAppearance().TileState ?? TileState.TransparentEmpty;
     }
 
     public string Status()
@@ -37,14 +41,16 @@ public class BrushTool : IEditorTool
             return;
         }
 
-        if (_editorSession.SelectedTemplate == null)
+        var template = _getTemplate();
+
+        if (template == null)
         {
             return;
         }
 
         if (_editorSession.IsDraggingPrimary)
         {
-            _editorSession.Surface.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, _editorSession.SelectedTemplate);
+            _editorSession.Surface.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, template);
         }
 
         if (_editorSession.IsDraggingSecondary)

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
+using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -11,14 +13,16 @@ namespace LD57.Editor;
 public class SelectionTool : IEditorTool
 {
     private readonly EditorSession _editorSession;
+    private readonly Func<EntityTemplate?> _getTemplate;
     private bool _isAltDown;
     private bool _isCtrlDown;
     private bool _isShiftDown;
     private GridPosition? _selectionAnchor;
 
-    public SelectionTool(EditorSession editorSession)
+    public SelectionTool(EditorSession editorSession, Func<EntityTemplate?> getTemplate)
     {
         _editorSession = editorSession;
+        _getTemplate = getTemplate;
     }
 
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 1);
@@ -66,12 +70,13 @@ public class SelectionTool : IEditorTool
             _editorSession.Surface.WorldSelection.Clear();
         }
 
-        if (_editorSession.SelectedTemplate != null)
+        var entityTemplate = _getTemplate();
+        if (entityTemplate != null)
         {
             if (inputKeyboard.GetButton(Keys.F).WasPressed)
             {
                 var previousPositions = _editorSession.Surface.WorldSelection.AllPositions().ToList();
-                _editorSession.Surface.WorldTemplate.FillAllPositions(previousPositions, _editorSession.SelectedTemplate);
+                _editorSession.Surface.WorldTemplate.FillAllPositions(previousPositions, entityTemplate);
                 _editorSession.Surface.WorldSelection.Clear();
                 CreateOrEditSelection(previousPositions);
             }

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExplogineMonoGame.Input;
-using LD57.CartridgeManagement;
 using LD57.Core;
-using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -15,8 +12,6 @@ namespace LD57.Editor;
 
 public class EditorSession : Session
 {
-    public List<IEditorTool> EditorTools { get; } = new();
-    private readonly EditorSelector<EntityTemplate> _templateSelector = new();
     private readonly EditorSelector<IEditorTool> _toolSelector = new();
     private readonly List<UiElement> _uiElements = new();
     private GridPosition _cameraPosition;
@@ -44,10 +39,8 @@ public class EditorSession : Session
         }
     }
 
-    public void RebuildScreen()
-    {
-        _screen = RebuildScreenWithWidth(_screen.Width);
-    }
+    public List<IEditorTool> EditorTools { get; } = new();
+    public List<Func<AsciiScreen, UiElement>> ExtraUi { get; } = new();
 
     public WorldEditorSurface Surface { get; }
     public GridPosition? MoveStart { get; set; }
@@ -71,7 +64,12 @@ public class EditorSession : Session
     }
 
     private IEditorTool? CurrentTool => _toolSelector.Selected;
-    public EntityTemplate? SelectedTemplate => _templateSelector.Selected;
+    public List<Action<ConsumableInput, int>> ExtraKeyBinds { get; } = new();
+
+    public void RebuildScreen()
+    {
+        _screen = RebuildScreenWithWidth(_screen.Width);
+    }
 
     private static GridPosition DefaultCameraPosition()
     {
@@ -120,27 +118,10 @@ public class EditorSession : Session
         statusBar.AddDynamicText(new GridPosition(1, 1), Status);
         _uiElements.Add(statusBar);
 
-        var tilePalette = new UiElement(new GridPosition(3, 0), new GridPosition(screen.Width - 1, 3));
-        var i = 0;
-        var j = 0;
-
-        var tempWorld = new World(new GridPosition(1, 1), new WorldTemplate(), true);
-        foreach (var template in LdResourceAssets.Instance.EntityTemplates.Values)
+        foreach (var extraUi in ExtraUi)
         {
-            var tempEntity = new Entity(tempWorld, new GridPosition(0, 0), template);
-            tilePalette.AddSelectable(new SelectableButton<EntityTemplate>(
-                new GridPosition(1 + i, 1 + j), tempEntity.TileState,
-                _templateSelector, template));
-
-            i++;
-            if (i > tilePalette.Width - 3)
-            {
-                i = 0;
-                j++;
-            }
+            _uiElements.Add(extraUi(screen));
         }
-
-        _uiElements.Add(tilePalette);
 
         return screen;
     }
@@ -282,27 +263,21 @@ public class EditorSession : Session
             if (scrollVector.Y != 0)
             {
                 var scrollDelta = (int) scrollVector.Normalized().Y;
-                var delta = -scrollDelta;
+                var flippedDelta = -scrollDelta;
 
                 if (input.Keyboard.Modifiers.Control)
                 {
                     if (CurrentTool != null)
                     {
                         var currentIndex = EditorTools.IndexOf(CurrentTool);
-                        var newIndex = Math.Clamp(currentIndex + delta, 0, EditorTools.Count - 1);
+                        var newIndex = Math.Clamp(currentIndex + flippedDelta, 0, EditorTools.Count - 1);
                         _toolSelector.Selected = EditorTools[newIndex];
                     }
                 }
 
-                if (input.Keyboard.Modifiers.Shift)
+                foreach (var extraKeyBindEvent in ExtraKeyBinds)
                 {
-                    if (SelectedTemplate != null)
-                    {
-                        var allTemplates = LdResourceAssets.Instance.EntityTemplates.Values.ToList();
-                        var currentIndex = allTemplates.IndexOf(SelectedTemplate);
-                        var newIndex = Math.Clamp(currentIndex + delta, 0, allTemplates.Count - 1);
-                        _templateSelector.Selected = allTemplates[newIndex];
-                    }
+                    extraKeyBindEvent(input, flippedDelta);
                 }
             }
         }

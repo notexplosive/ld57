@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ExplogineCore;
 using ExplogineMonoGame;
 using ExplogineMonoGame.AssetManagement;
@@ -6,9 +8,9 @@ using ExplogineMonoGame.Cartridges;
 using ExplogineMonoGame.Data;
 using LD57.Editor;
 using LD57.Gameplay;
+using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 
 namespace LD57.CartridgeManagement;
@@ -25,7 +27,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
     {
         var targetMode = Client.Args.GetValue<string>("mode");
         var worldName = Client.Args.GetValue<string>("level");
-        
+
         if (!string.IsNullOrEmpty(worldName))
         {
             HotReloadCache.LevelEditorOpenFileName ??= worldName;
@@ -34,15 +36,54 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         {
             worldName = "default";
         }
-        
+
+        EditorSelector<EntityTemplate> templateSelector = new();
         _editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
-        _editorSession.EditorTools.Add(new BrushTool(_editorSession));
-        _editorSession.EditorTools.Add(new SelectionTool(_editorSession));
+        _editorSession.EditorTools.Add(new BrushTool(_editorSession, () => templateSelector.Selected));
+        _editorSession.EditorTools.Add(new SelectionTool(_editorSession, () => templateSelector.Selected));
         _editorSession.EditorTools.Add(new ChangeSignalTool(_editorSession));
         _editorSession.EditorTools.Add(new TriggerTool(_editorSession));
         _editorSession.EditorTools.Add(new PlayTool(_editorSession));
+        _editorSession.ExtraUi.Add(screen =>
+        {
+            var tilePalette = new UiElement(new GridPosition(3, 0), new GridPosition(screen.Width - 1, 3));
+            var i = 0;
+            var j = 0;
+
+            var tempWorld = new World(new GridPosition(1, 1), new WorldTemplate(), true);
+            foreach (var template in LdResourceAssets.Instance.EntityTemplates.Values)
+            {
+                var tempEntity = new Entity(tempWorld, new GridPosition(0, 0), template);
+                tilePalette.AddSelectable(new SelectableButton<EntityTemplate>(
+                    new GridPosition(1 + i, 1 + j), tempEntity.TileState,
+                    templateSelector, template));
+
+                i++;
+                if (i > tilePalette.Width - 3)
+                {
+                    i = 0;
+                    j++;
+                }
+            }
+
+            return tilePalette;
+        });
+        _editorSession.ExtraKeyBinds.Add((input, delta) =>
+        {
+            if (input.Keyboard.Modifiers.Shift)
+            {
+                if (templateSelector.Selected != null)
+                {
+                    var allTemplates = LdResourceAssets.Instance.EntityTemplates.Values.ToList();
+                    var currentIndex = allTemplates.IndexOf(templateSelector.Selected);
+                    var newIndex = Math.Clamp(currentIndex + delta, 0, allTemplates.Count - 1);
+                    templateSelector.Selected = allTemplates[newIndex];
+                }
+            }
+        });
+
         _editorSession.RebuildScreen();
-        
+
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
         _gameSession.RequestLevelEditor += () =>
@@ -50,13 +91,13 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             _gameSession.StopAllAmbientSounds();
             _session = _editorSession;
         };
-        
-        _editorSession.RequestPlay += (position) =>
+
+        _editorSession.RequestPlay += position =>
         {
             _gameSession.LoadWorld(_editorSession.Surface.WorldTemplate, position);
             _session = _gameSession;
         };
-        
+
         if (targetMode == "edit")
         {
             _session = _editorSession;
@@ -69,7 +110,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             {
                 _gameSession.StartingTemplate = template;
             }
-            
+
             _gameSession.OpenMainMenu();
         }
     }
@@ -155,7 +196,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
                 }
             }
         });
-        
+
         yield return new VoidLoadEvent("Messages", () =>
         {
             var fileSystem = Client.Debug.RepoFileSystem.GetDirectory("Resource/Messages");
