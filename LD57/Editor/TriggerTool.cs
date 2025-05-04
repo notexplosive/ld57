@@ -22,7 +22,7 @@ public class TriggerTool : IEditorTool
     {
         if (_editorSession.HoveredWorldPosition.HasValue)
         {
-            var metadataEntities = _editorSession.WorldTemplate.GetMetadataAt(_editorSession.HoveredWorldPosition.Value).ToList();
+            var metadataEntities = _editorSession.Surface.WorldTemplate.GetMetadataAt(_editorSession.HoveredWorldPosition.Value).ToList();
 
             if (metadataEntities.Count > 0 &&
                 metadataEntities.First().ExtraState.TryGetValue(Constants.CommandKey, out var status))
@@ -42,7 +42,7 @@ public class TriggerTool : IEditorTool
     {
         if (mouseButton == MouseButton.Left)
         {
-            var foundMetaEntity = _editorSession.WorldTemplate.GetMetadataAt(position).FirstOrDefault();
+            var foundMetaEntity = _editorSession.Surface.WorldTemplate.GetMetadataAt(position).FirstOrDefault();
             var defaultText = "";
             if (foundMetaEntity != null)
             {
@@ -57,7 +57,7 @@ public class TriggerTool : IEditorTool
                     {
                         if (string.IsNullOrEmpty(text))
                         {
-                            _editorSession.WorldTemplate.RemoveExactEntity(foundMetaEntity);
+                            _editorSession.Surface.WorldTemplate.RemoveExactEntity(foundMetaEntity);
                         }
                         else
                         {
@@ -72,12 +72,12 @@ public class TriggerTool : IEditorTool
                             {
                                 foreach (var cell in _editorSession.WorldSelection.AllPositions())
                                 {
-                                    _editorSession.WorldTemplate.AddMetaEntity(cell, text);
+                                    _editorSession.Surface.WorldTemplate.AddMetaEntity(cell, text);
                                 }
                             }
                             else
                             {
-                                _editorSession.WorldTemplate.AddMetaEntity(position, text);
+                                _editorSession.Surface.WorldTemplate.AddMetaEntity(position, text);
                             }
                         }
                     }

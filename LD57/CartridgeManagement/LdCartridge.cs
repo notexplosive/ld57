@@ -46,7 +46,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         
         _editorSession.RequestPlay += (position) =>
         {
-            _gameSession.LoadWorld(_editorSession.WorldTemplate, position);
+            _gameSession.LoadWorld(_editorSession.Surface.WorldTemplate, position);
             _session = _gameSession;
         };
         

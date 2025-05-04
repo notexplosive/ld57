@@ -1,10 +1,6 @@
-﻿using ExplogineCore.Data;
-using ExplogineMonoGame;
+﻿using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
-using LD57.Core;
-using LD57.Gameplay;
 using LD57.Rendering;
-using Microsoft.Xna.Framework;
 
 namespace LD57.Editor;
 
@@ -18,12 +14,14 @@ public class BrushTool : IEditorTool
     }
 
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 0);
+
     public TileState GetTileStateInWorldOnHover(TileState original)
     {
         if (_editorSession.IsDraggingSecondary)
         {
             return TileState.TransparentEmpty;
         }
+
         return _editorSession.SelectedTemplate?.CreateAppearance().TileState ?? TileState.TransparentEmpty;
     }
 
@@ -38,12 +36,12 @@ public class BrushTool : IEditorTool
         {
             if (_editorSession.IsDraggingPrimary)
             {
-                _editorSession.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, _editorSession.SelectedTemplate);
+                _editorSession.Surface.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, _editorSession.SelectedTemplate);
             }
 
             if (_editorSession.IsDraggingSecondary)
             {
-                _editorSession.WorldTemplate.RemoveEntitiesAtExceptMetadata(_editorSession.HoveredWorldPosition.Value);
+                _editorSession.Surface.WorldTemplate.RemoveEntitiesAtExceptMetadata(_editorSession.HoveredWorldPosition.Value);
             }
         }
     }
@@ -60,6 +58,5 @@ public class BrushTool : IEditorTool
 
     public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
     {
-        
     }
 }

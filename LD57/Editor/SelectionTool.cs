@@ -71,7 +71,7 @@ public class SelectionTool : IEditorTool
             if (inputKeyboard.GetButton(Keys.F).WasPressed)
             {
                 var previousPositions = _editorSession.WorldSelection.AllPositions().ToList();
-                _editorSession.WorldTemplate.FillAllPositions(previousPositions, _editorSession.SelectedTemplate);
+                _editorSession.Surface.WorldTemplate.FillAllPositions(previousPositions, _editorSession.SelectedTemplate);
                 _editorSession.WorldSelection.Clear();
                 CreateOrEditSelection(previousPositions);
             }
@@ -85,7 +85,7 @@ public class SelectionTool : IEditorTool
 
         if (inputKeyboard.GetButton(Keys.Delete).WasPressed)
         {
-            _editorSession.WorldTemplate.EraseAtPositions(_editorSession.WorldSelection.AllPositions());
+            _editorSession.Surface.WorldTemplate.EraseAtPositions(_editorSession.WorldSelection.AllPositions());
             _editorSession.WorldSelection.Clear();
         }
     }
@@ -118,12 +118,12 @@ public class SelectionTool : IEditorTool
             {
                 foreach (var item in _editorSession.WorldSelection.AllPositions())
                 {
-                    _editorSession.WorldTemplate.RemoveEntitiesAt(item);
+                    _editorSession.Surface.WorldTemplate.RemoveEntitiesAt(item);
                 }
 
                 foreach (var item in _editorSession.WorldSelection.AllEntitiesWithCurrentPlacement())
                 {
-                    _editorSession.WorldTemplate.AddExactEntity(item);
+                    _editorSession.Surface.WorldTemplate.AddExactEntity(item);
                 }
 
                 _editorSession.WorldSelection.RegenerateAtNewPosition(_editorSession);
@@ -212,7 +212,7 @@ public class SelectionTool : IEditorTool
             {
                 if (_isAltDown)
                 {
-                    if (_editorSession.WorldTemplate.HasEntityAt(position))
+                    if (_editorSession.Surface.WorldTemplate.HasEntityAt(position))
                     {
                         yield return position;
                     }
@@ -229,7 +229,7 @@ public class SelectionTool : IEditorTool
     {
         foreach (var position in _editorSession.WorldSelection.AllPositions())
         {
-            _editorSession.WorldTemplate.RemoveEntitiesAt(position);
+            _editorSession.Surface.WorldTemplate.RemoveEntitiesAt(position);
         }
     }
 

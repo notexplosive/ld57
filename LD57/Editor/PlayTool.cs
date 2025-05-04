@@ -38,14 +38,14 @@ public class PlayTool : IEditorTool
     {
         if (mouseButton == MouseButton.Left && position.HasValue)
         {
-            if (_editorSession.FileName != null)
+            if (_editorSession.Surface.FileName != null)
             {
-                _editorSession.Save();
+                _editorSession.SaveFlow();
                 _editorSession.RequestPlayAt(position.Value);
             }
             else
             {
-                _editorSession.Save();
+                _editorSession.SaveFlow();
             }
         }
     }

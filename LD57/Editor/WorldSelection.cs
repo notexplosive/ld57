@@ -82,13 +82,13 @@ public class WorldSelection
 
     private void AddPosition(EditorSession editorSession, GridPosition position)
     {
-        AddEntities(editorSession.WorldTemplate.AllEntitiesAt(position));
+        AddEntities(editorSession.Surface.WorldTemplate.AllEntitiesAt(position));
         _startingPositions.Add(position);
     }
     
     private void RemovePosition(EditorSession editorSession, GridPosition position)
     {
-        RemoveEntities(editorSession.WorldTemplate.AllEntitiesAt(position));
+        RemoveEntities(editorSession.Surface.WorldTemplate.AllEntitiesAt(position));
         _startingPositions.Remove(position);
     }
 

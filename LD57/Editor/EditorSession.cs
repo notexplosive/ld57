@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using ExplogineCore;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExplogineMonoGame.Input;
@@ -12,7 +10,6 @@ using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Newtonsoft.Json;
 
 namespace LD57.Editor;
 
@@ -38,17 +35,13 @@ public class EditorSession : Session
         _editorTools.Add(new PlayTool(this));
 
         _screen = RebuildScreenWithWidth(46);
+        Surface = new WorldEditorSurface(this);
         _cameraPosition = DefaultCameraPosition();
 
-        WorldTemplate = new WorldTemplate();
-
-        if (HotReloadCache.LevelEditorOpenFileName != null)
+        var cachedFileName = HotReloadCache.LevelEditorOpenFileName;
+        if (cachedFileName != null)
         {
-            var template = Constants.AttemptLoadWorldTemplateFromWorldDirectory(HotReloadCache.LevelEditorOpenFileName);
-            if (template != null)
-            {
-                SetTemplate(HotReloadCache.LevelEditorOpenFileName, template);
-            }
+            Surface.Open(cachedFileName, false);
         }
 
         if (HotReloadCache.LevelEditorCameraPosition.HasValue)
@@ -57,12 +50,11 @@ public class EditorSession : Session
         }
     }
 
+    public WorldEditorSurface Surface { get; }
     public WorldSelection WorldSelection { get; } = new();
     public GridPosition? MoveStart { get; set; }
-    public string? FileName { get; private set; }
     public bool IsDraggingSecondary { get; private set; }
     public bool IsDraggingPrimary { get; private set; }
-    public WorldTemplate WorldTemplate { get; private set; }
 
     public GridPosition? HoveredWorldPosition
     {
@@ -166,22 +158,7 @@ public class EditorSession : Session
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
-        if (Client.Debug.IsPassiveOrActive)
-        {
-            if (input.Keyboard.GetButton(Keys.F5).WasPressed)
-            {
-                var player = WorldTemplate.GetPlayerEntity();
-                var position = new GridPosition();
-                if (player != null)
-                {
-                    position = player.Position;
-                }
-
-                RequestPlay?.Invoke(position);
-            }
-        }
-
-        HotReloadCache.LevelEditorOpenFileName = FileName;
+        HotReloadCache.LevelEditorOpenFileName = Surface.FileName;
         HotReloadCache.LevelEditorCameraPosition = _cameraPosition;
 
         if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
@@ -239,12 +216,14 @@ public class EditorSession : Session
             return;
         }
 
+        Surface.HandleKeyBinds(input);
+
         if (input.Keyboard.GetButton(Keys.S).WasPressed)
         {
             if (input.Keyboard.Modifiers.Control)
             {
                 input.Keyboard.Consume(Keys.S);
-                Save();
+                SaveFlow();
             }
 
             if (input.Keyboard.Modifiers.ControlAlt)
@@ -256,13 +235,13 @@ public class EditorSession : Session
 
         if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.O, true).WasPressed)
         {
-            Open();
+            OpenFlow();
         }
 
         if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.N, true).WasPressed)
         {
-            Save();
-            SetTemplate(null, new WorldTemplate());
+            SaveFlow();
+            Surface.Clear();
         }
 
         if (input.Keyboard.GetButton(Keys.OemMinus).WasPressed)
@@ -316,7 +295,7 @@ public class EditorSession : Session
                         _toolSelector.Selected = _editorTools[newIndex];
                     }
                 }
-                
+
                 if (input.Keyboard.Modifiers.Shift)
                 {
                     if (SelectedTemplate != null)
@@ -331,27 +310,14 @@ public class EditorSession : Session
         }
     }
 
-    private void Open()
+    private void OpenFlow()
     {
         var fullPath =
             PlatformFileApi.OpenFileDialogue("Open World", new PlatformFileApi.ExtensionDescription("json", "JSON"));
         if (!string.IsNullOrEmpty(fullPath))
         {
-            var fileName = new FileInfo(fullPath).Name;
-            var worldTemplate = Constants.AttemptLoadWorldTemplateFromFullPath(fullPath);
-            if (worldTemplate != null)
-            {
-                var newFileName = fileName.RemoveFileExtension();
-                SetTemplate(newFileName, worldTemplate);
-            }
+            Surface.Open(fullPath, true);
         }
-    }
-
-    private void SetTemplate(string? newFileName, WorldTemplate newWorld)
-    {
-        FileName = newFileName;
-        WorldTemplate = newWorld;
-        _cameraPosition = DefaultCameraPosition();
     }
 
     public event Action<GridPosition>? RequestPlay;
@@ -407,19 +373,7 @@ public class EditorSession : Session
     {
         _screen.Clear(TileState.TransparentEmpty);
 
-        var world = new World(Constants.GameRoomSize, WorldTemplate, true);
-
-        var player = WorldTemplate.GetPlayerEntity();
-        if (player != null)
-        {
-            world.AddEntity(new Entity(world, player.Position,
-                ResourceAlias.EntityTemplate("player") ?? new EntityTemplate()));
-        }
-
-        world.SetCurrentRoom(new Room(world, _cameraPosition, _cameraPosition + _screen.RoomSize));
-        world.CameraPosition = _cameraPosition;
-
-        world.PaintToScreen(_screen, dt);
+        Surface.PaintWorldToScreen(_screen, _cameraPosition, dt);
 
         if (_hoveredScreenPosition.HasValue)
         {
@@ -444,50 +398,7 @@ public class EditorSession : Session
             }
         }
 
-        if (HoveredWorldPosition.HasValue)
-        {
-            var hoveredRoom = world.GetRoomAt(HoveredWorldPosition.Value);
-            var hoveredRoomTopLeft = hoveredRoom.TopLeft - _cameraPosition;
-            var hoveredRoomBottomRight = hoveredRoom.BottomRight - _cameraPosition;
-
-            var width = hoveredRoomBottomRight.X - hoveredRoomTopLeft.X;
-            var height = hoveredRoomBottomRight.Y - hoveredRoomTopLeft.Y;
-
-            foreach (var position in Constants.TraceRectangle(hoveredRoomTopLeft, hoveredRoomBottomRight))
-            {
-                var color = Color.LightBlue;
-                var previousTileState = _screen.GetTile(position);
-                var increment = 2;
-
-                var normalX = position.X - hoveredRoomTopLeft.X;
-                var normalY = position.Y - hoveredRoomTopLeft.Y;
-
-                if (normalX % increment == 0 && (normalY == 0 || normalY == height))
-                {
-                    color = Color.Lime;
-                }
-
-                if (normalY % increment == 0 && (normalX == 0 || normalX == width))
-                {
-                    color = Color.ForestGreen;
-                }
-
-                var midX = hoveredRoomTopLeft.X + width / 2;
-                if (position.X == midX || position.X == midX + 1)
-                {
-                    color = Color.Orange;
-                }
-
-                var midY = hoveredRoomTopLeft.Y + height / 2;
-
-                if (position.Y == midY || position.Y == midY + 1)
-                {
-                    color = Color.Orange;
-                }
-
-                _screen.PutTile(position, previousTileState with {BackgroundColor = color, BackgroundIntensity = 1f});
-            }
-        }
+        Surface.PaintWorldOverlayToScreen(_screen, _cameraPosition);
 
         foreach (var worldPosition in WorldSelection.AllPositions())
         {
@@ -500,17 +411,7 @@ public class EditorSession : Session
 
         CurrentTool?.PaintToScreen(_screen, _cameraPosition);
 
-        if (MathF.Sin(Client.TotalElapsedTime * 10) > 0)
-        {
-            foreach (var placedEntity in WorldTemplate.PlacedEntities)
-            {
-                if (placedEntity.ExtraState.ContainsKey(Constants.CommandKey))
-                {
-                    _screen.PutTile(placedEntity.Position - _cameraPosition,
-                        TileState.StringCharacter("!", Color.OrangeRed));
-                }
-            }
-        }
+        Surface.DrawWorldOverlay(_screen, _cameraPosition);
 
         foreach (var uiElement in _uiElements)
         {
@@ -547,16 +448,15 @@ public class EditorSession : Session
         _screen.Draw(painter, Vector2.Zero);
     }
 
-    public void Save()
+    public void SaveFlow()
     {
-        if (FileName == null)
+        if (Surface.FileName == null)
         {
             SaveAs();
             return;
         }
 
-        Client.Debug.RepoFileSystem.WriteToFile($"Resource/Worlds/{FileName}.json",
-            JsonConvert.SerializeObject(WorldTemplate, Formatting.Indented));
+        Surface.Save(Surface.FileName);
     }
 
     private void SaveAs()
@@ -564,12 +464,12 @@ public class EditorSession : Session
         var topLeft = new GridPosition(4, 12);
         var saveAsPopup = new UiElement(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 3));
         saveAsPopup.AddStaticText(new GridPosition(1, 1), "Name this World:");
-        var textInput = saveAsPopup.AddTextInput(new GridPosition(1, 2), FileName);
+        var textInput = saveAsPopup.AddTextInput(new GridPosition(1, 2), Surface.FileName);
         _currentPopup = saveAsPopup;
         textInput.Submitted += text =>
         {
-            FileName = text;
-            Save();
+            Surface.FileName = text;
+            SaveFlow();
             CloseCurrentPopup();
         };
     }
@@ -582,5 +482,10 @@ public class EditorSession : Session
     public void RequestPlayAt(GridPosition position)
     {
         RequestPlay?.Invoke(position);
+    }
+
+    public void ResetCameraPosition()
+    {
+        _cameraPosition = DefaultCameraPosition();
     }
 }

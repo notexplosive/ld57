@@ -108,7 +108,7 @@ public class ChangeSignalTool : IEditorTool
 
     private IEnumerable<PlacedEntity> GetSignalEntitiesAt(GridPosition position)
     {
-        foreach (var entity in _editorSession.WorldTemplate.AllEntitiesAt(position))
+        foreach (var entity in _editorSession.Surface.WorldTemplate.AllEntitiesAt(position))
         {
             var templateName = entity.TemplateName;
             if (string.IsNullOrEmpty(templateName))
