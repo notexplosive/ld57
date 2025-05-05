@@ -149,7 +149,7 @@ public class SelectionTool : IEditorTool
         }
     }
 
-    public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
     {
         if (_editorSession.IsDraggingPrimary)
         {

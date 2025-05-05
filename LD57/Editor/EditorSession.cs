@@ -372,7 +372,7 @@ public class EditorSession : Session
 
         Surface.PaintOverlayBelowTool(_screen, _cameraPosition, HoveredWorldPosition);
 
-        CurrentTool?.PaintToScreen(_screen, _cameraPosition);
+        CurrentTool?.PaintToWorld(_screen, _cameraPosition);
 
         Surface.PaintOverlayAboveTool(_screen, _cameraPosition);
 

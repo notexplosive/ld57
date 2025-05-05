@@ -58,7 +58,7 @@ public class ChangeSignalTool : IEditorTool
     {
     }
 
-    public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
     {
     }
 

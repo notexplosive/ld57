@@ -1,35 +1,21 @@
-﻿using System;
-using ExplogineMonoGame;
+﻿using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
-using LD57.Gameplay;
 using LD57.Rendering;
 
 namespace LD57.Editor;
 
-public class BrushTool : IEditorTool
+public abstract class BrushTool : IEditorTool
 {
-    private readonly EditorSession _editorSession;
-    private readonly WorldEditorSurface _surface;
-    private readonly Func<EntityTemplate?> _getTemplate;
+    protected EditorSession EditorSession { get; }
 
-    public BrushTool(EditorSession editorSession, WorldEditorSurface surface, Func<EntityTemplate?> getTemplate)
+    protected BrushTool(EditorSession editorEditorSession)
     {
-        _editorSession = editorSession;
-        _surface = surface;
-        _getTemplate = getTemplate;
+        EditorSession = editorEditorSession;
     }
 
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 0);
 
-    public TileState GetTileStateInWorldOnHover(TileState original)
-    {
-        if (_editorSession.IsDraggingSecondary)
-        {
-            return TileState.TransparentEmpty;
-        }
-
-        return _getTemplate()?.CreateAppearance().TileState ?? TileState.TransparentEmpty;
-    }
+    public abstract TileState GetTileStateInWorldOnHover(TileState original);
 
     public string Status()
     {
@@ -38,28 +24,20 @@ public class BrushTool : IEditorTool
 
     public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
     {
-        if (!_editorSession.HoveredWorldPosition.HasValue)
+        if (EditorSession.IsDraggingPrimary)
         {
-            return;
+            OnPaint();
         }
 
-        var template = _getTemplate();
-
-        if (template == null)
+        if (EditorSession.IsDraggingSecondary)
         {
-            return;
-        }
-
-        if (_editorSession.IsDraggingPrimary)
-        {
-            _surface.WorldTemplate.SetTile(_editorSession.HoveredWorldPosition.Value, template);
-        }
-
-        if (_editorSession.IsDraggingSecondary)
-        {
-            _surface.WorldTemplate.RemoveEntitiesAtExceptMetadata(_editorSession.HoveredWorldPosition.Value);
+            OnErase();
         }
     }
+
+    protected abstract void OnErase();
+
+    protected abstract void OnPaint();
 
     public void StartMousePressInWorld(GridPosition position, MouseButton mouseButton)
     {
@@ -71,7 +49,8 @@ public class BrushTool : IEditorTool
         // do nothing
     }
 
-    public void PaintToScreen(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
     {
+        // do nothing
     }
 }
