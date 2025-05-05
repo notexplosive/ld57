@@ -12,9 +12,9 @@ public interface IEditorSelection
     public bool Contains(GridPosition gridPosition);
     public void RemovePositions(IEnumerable<GridPosition> positions);
     public void AddPositions(IEnumerable<GridPosition> positions);
+    public IEnumerable<GridPosition> AllPositions();
     public void AddPosition(GridPosition position);
     public void RemovePosition(GridPosition position);
-    public IEnumerable<GridPosition> AllPositions();
     public TileState GetTileState(GridPosition internalPosition);
     public void RegenerateAtNewPosition();
 }
