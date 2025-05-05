@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
-using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace LD57.Editor;
 
-public class SelectionTool : IEditorTool
+public abstract class SelectionTool : IEditorTool
 {
-    private readonly EditorSession _editorSession;
-    private readonly WorldEditorSurface _surface;
-    private readonly Func<EntityTemplate?> _getTemplate;
+    protected readonly EditorSession EditorSession;
     private bool _isAltDown;
     private bool _isCtrlDown;
     private bool _isShiftDown;
     private GridPosition? _selectionAnchor;
 
-    public SelectionTool(EditorSession editorSession, WorldEditorSurface surface, Func<EntityTemplate?> getTemplate)
+    protected SelectionTool(EditorSession editorSession)
     {
-        _editorSession = editorSession;
-        _surface = surface;
-        _getTemplate = getTemplate;
+        EditorSession = editorSession;
     }
+
+    protected abstract IEditorSurface Surface { get; }
 
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 1);
 
@@ -40,32 +36,31 @@ public class SelectionTool : IEditorTool
         {
             if (_isCtrlDown)
             {
-                return $"[CTRL] Duplicate selection";
+                return "[CTRL] Duplicate selection";
             }
 
             return "Drag to move [CTRL] duplicate selection";
         }
-        
+
         var altModeMessage = "";
         if (_isAltDown)
         {
             altModeMessage = "[ALT] just entities ";
         }
-        
+
         if (_isCtrlDown)
         {
             return $"[CTRL] Remove {altModeMessage}from Selection";
         }
-        
+
         if (_isShiftDown)
         {
             return $"[SHIFT] Append {altModeMessage}to Selection";
         }
 
-        
-        if (!_surface.Selection.IsEmpty)
+        if (!Surface.Selection.IsEmpty)
         {
-            return $"{_surface.Selection.Status()} [ESC] [F] [SHIFT] [CTRL] [ALT]";
+            return $"{Surface.Selection.Status()} [ESC] [F] [SHIFT] [CTRL] [ALT]";
         }
 
         return "[ALT]*";
@@ -79,22 +74,18 @@ public class SelectionTool : IEditorTool
 
         if (inputKeyboard.GetButton(Keys.Escape).WasPressed && !IsMoving())
         {
-            _surface.Selection.Clear();
+            Surface.Selection.Clear();
         }
 
-        var entityTemplate = _getTemplate();
-        if (entityTemplate != null)
+        if (inputKeyboard.GetButton(Keys.F).WasPressed)
         {
-            if (inputKeyboard.GetButton(Keys.F).WasPressed)
-            {
-                var positions = _surface.Selection.AllPositions().ToList();
-                _surface.WorldTemplate.FillAllPositions(positions, entityTemplate);
-                _surface.Selection.Clear();
-                CreateOrEditSelection(positions);
-            }
+            var positions = Surface.Selection.AllPositions().ToList();
+            FillWithCurrentTemplate(positions);
+            Surface.Selection.Clear();
+            CreateOrEditSelection(positions);
         }
-        
-        if (CanMove() && _editorSession.IsDraggingPrimary)
+
+        if (CanMove() && EditorSession.IsDraggingPrimary)
         {
             TranslateMoveBuffer();
             return;
@@ -102,8 +93,8 @@ public class SelectionTool : IEditorTool
 
         if (inputKeyboard.GetButton(Keys.Delete).WasPressed)
         {
-            _surface.WorldTemplate.EraseAtPositions(_surface.Selection.AllPositions());
-            _surface.Selection.Clear();
+            Surface.EraseAtPositions(Surface.Selection.AllPositions());
+            Surface.Selection.Clear();
         }
     }
 
@@ -113,7 +104,7 @@ public class SelectionTool : IEditorTool
         {
             if (CanMove())
             {
-                _editorSession.MoveStart = position;
+                EditorSession.MoveStart = position;
 
                 if (!_isCtrlDown)
                 {
@@ -133,8 +124,8 @@ public class SelectionTool : IEditorTool
         {
             if (CanMove())
             {
-                _surface.MoveSelection();
-                _editorSession.MoveStart = null;
+                Surface.MoveSelection();
+                EditorSession.MoveStart = null;
                 return;
             }
 
@@ -151,7 +142,7 @@ public class SelectionTool : IEditorTool
 
     public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
     {
-        if (_editorSession.IsDraggingPrimary)
+        if (EditorSession.IsDraggingPrimary)
         {
             var backgroundColor = Color.LimeGreen;
             var foregroundColor = Color.Green;
@@ -199,17 +190,20 @@ public class SelectionTool : IEditorTool
         }
     }
 
+    protected abstract void FillWithCurrentTemplate(List<GridPosition> positions);
+
     private GridPositionCorners? PendingSelectionRectangle()
     {
-        if (!_selectionAnchor.HasValue || !_editorSession.HoveredWorldPosition.HasValue)
+        if (!_selectionAnchor.HasValue || !EditorSession.HoveredWorldPosition.HasValue)
         {
             return null;
         }
+
         var topLeft = _selectionAnchor.Value;
-        var bottomRight = _editorSession.HoveredWorldPosition.Value;
+        var bottomRight = EditorSession.HoveredWorldPosition.Value;
         return new GridPositionCorners(topLeft, bottomRight);
     }
-    
+
     private IEnumerable<GridPosition> PendingSelectedPositions()
     {
         var rect = PendingSelectionRectangle();
@@ -219,7 +213,7 @@ public class SelectionTool : IEditorTool
             {
                 if (_isAltDown)
                 {
-                    if (_surface.WorldTemplate.HasEntityAt(position))
+                    if (Surface.HasEntityAt(position))
                     {
                         yield return position;
                     }
@@ -234,38 +228,38 @@ public class SelectionTool : IEditorTool
 
     private void RemoveAllEntitiesAtSelection()
     {
-        foreach (var position in _surface.Selection.AllPositions())
+        foreach (var position in Surface.Selection.AllPositions())
         {
-            _surface.WorldTemplate.RemoveEntitiesAt(position);
+            Surface.RemoveEntitiesAt(position);
         }
     }
 
     private void TranslateMoveBuffer()
     {
-        if (_editorSession.MoveStart == null)
+        if (EditorSession.MoveStart == null)
         {
             return;
         }
 
-        if (!_editorSession.HoveredWorldPosition.HasValue)
+        if (!EditorSession.HoveredWorldPosition.HasValue)
         {
             return;
         }
 
-        if (_surface.Selection.IsEmpty)
+        if (Surface.Selection.IsEmpty)
         {
             return;
         }
 
-        var offset = _editorSession.HoveredWorldPosition.Value - _editorSession.MoveStart.Value;
-        _surface.Selection.Offset = offset;
+        var offset = EditorSession.HoveredWorldPosition.Value - EditorSession.MoveStart.Value;
+        Surface.Selection.Offset = offset;
     }
 
     private bool CanMove()
     {
-        var isSelectionHovered = _editorSession.HoveredWorldPosition.HasValue &&
-                                 _surface.Selection.Contains(
-                                     _editorSession.HoveredWorldPosition.Value);
+        var isSelectionHovered = EditorSession.HoveredWorldPosition.HasValue &&
+                                 Surface.Selection.Contains(
+                                     EditorSession.HoveredWorldPosition.Value);
 
         var isMakingSelection = _selectionAnchor != null;
 
@@ -274,22 +268,22 @@ public class SelectionTool : IEditorTool
 
     private bool IsMoving()
     {
-        return _editorSession.MoveStart.HasValue;
+        return EditorSession.MoveStart.HasValue;
     }
 
     private void CreateOrEditSelection(IEnumerable<GridPosition> positions)
     {
         if (_isCtrlDown)
         {
-            _surface.Selection.RemovePositions(positions);
+            Surface.Selection.RemovePositions(positions);
             return;
         }
 
         if (!_isShiftDown)
         {
-            _surface.Selection.Clear();
+            Surface.Selection.Clear();
         }
 
-        _surface.Selection.AddPositions(positions);
+        Surface.Selection.AddPositions(positions);
     }
 }

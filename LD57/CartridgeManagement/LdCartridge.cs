@@ -77,7 +77,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         var editorSession = new EditorSession((runtime.Window as RealWindow)!, runtime.FileSystem, worldEditorSurface);
         editorSession.EditorTools.Add(new WorldEditorBrushTool(editorSession, worldEditorSurface,
             () => templateSelector.Selected));
-        editorSession.EditorTools.Add(new SelectionTool(editorSession, worldEditorSurface,
+        editorSession.EditorTools.Add(new WorldSelectionTool(editorSession, worldEditorSurface,
             () => templateSelector.Selected));
         editorSession.EditorTools.Add(new ChangeSignalTool(editorSession, worldEditorSurface));
         editorSession.EditorTools.Add(new TriggerTool(editorSession, worldEditorSurface));

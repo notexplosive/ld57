@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using ExplogineCore;
 using ExplogineMonoGame;
@@ -168,6 +169,16 @@ public class WorldEditorSurface : IEditorSurface
     }
 
     public event Action? RequestResetCamera;
+    public void RemoveEntitiesAt(GridPosition position)
+    {
+        WorldTemplate.RemoveEntitiesAt(position);
+    }
+
+    public bool HasEntityAt(GridPosition position)
+    {
+        return WorldTemplate.HasEntityAt(position);
+    }
+
     public event Action<GridPosition>? RequestedPlayAt;
 
     private void SetTemplate(string? newFileName, WorldTemplate newWorld)
@@ -195,5 +206,10 @@ public class WorldEditorSurface : IEditorSurface
         }
 
         _selection.RegenerateAtNewPosition();
+    }
+
+    public void EraseAtPositions(IEnumerable<GridPosition> positions)
+    {
+        WorldTemplate.EraseAtPositions(positions);
     }
 }
