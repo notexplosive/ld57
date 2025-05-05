@@ -10,7 +10,7 @@ namespace LD57.Editor;
 
 public abstract class SelectionTool : IEditorTool
 {
-    protected readonly EditorSession EditorSession;
+    private readonly EditorSession _editorSession;
     private bool _isAltDown;
     private bool _isCtrlDown;
     private bool _isShiftDown;
@@ -18,7 +18,7 @@ public abstract class SelectionTool : IEditorTool
 
     protected SelectionTool(EditorSession editorSession)
     {
-        EditorSession = editorSession;
+        _editorSession = editorSession;
     }
 
     protected abstract IEditorSurface Surface { get; }
@@ -85,7 +85,7 @@ public abstract class SelectionTool : IEditorTool
             CreateOrEditSelection(positions);
         }
 
-        if (CanMove() && EditorSession.IsDraggingPrimary)
+        if (CanMove() && _editorSession.IsDraggingPrimary)
         {
             TranslateMoveBuffer();
             return;
@@ -104,7 +104,7 @@ public abstract class SelectionTool : IEditorTool
         {
             if (CanMove())
             {
-                EditorSession.MoveStart = position;
+                _editorSession.MoveStart = position;
 
                 if (!_isCtrlDown)
                 {
@@ -125,7 +125,7 @@ public abstract class SelectionTool : IEditorTool
             if (CanMove())
             {
                 Surface.MoveSelection();
-                EditorSession.MoveStart = null;
+                _editorSession.MoveStart = null;
                 return;
             }
 
@@ -142,7 +142,7 @@ public abstract class SelectionTool : IEditorTool
 
     public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
     {
-        if (EditorSession.IsDraggingPrimary)
+        if (_editorSession.IsDraggingPrimary)
         {
             var backgroundColor = Color.LimeGreen;
             var foregroundColor = Color.Green;
@@ -194,13 +194,13 @@ public abstract class SelectionTool : IEditorTool
 
     private GridPositionCorners? PendingSelectionRectangle()
     {
-        if (!_selectionAnchor.HasValue || !EditorSession.HoveredWorldPosition.HasValue)
+        if (!_selectionAnchor.HasValue || !_editorSession.HoveredWorldPosition.HasValue)
         {
             return null;
         }
 
         var topLeft = _selectionAnchor.Value;
-        var bottomRight = EditorSession.HoveredWorldPosition.Value;
+        var bottomRight = _editorSession.HoveredWorldPosition.Value;
         return new GridPositionCorners(topLeft, bottomRight);
     }
 
@@ -236,12 +236,12 @@ public abstract class SelectionTool : IEditorTool
 
     private void TranslateMoveBuffer()
     {
-        if (EditorSession.MoveStart == null)
+        if (_editorSession.MoveStart == null)
         {
             return;
         }
 
-        if (!EditorSession.HoveredWorldPosition.HasValue)
+        if (!_editorSession.HoveredWorldPosition.HasValue)
         {
             return;
         }
@@ -251,15 +251,15 @@ public abstract class SelectionTool : IEditorTool
             return;
         }
 
-        var offset = EditorSession.HoveredWorldPosition.Value - EditorSession.MoveStart.Value;
+        var offset = _editorSession.HoveredWorldPosition.Value - _editorSession.MoveStart.Value;
         Surface.Selection.Offset = offset;
     }
 
     private bool CanMove()
     {
-        var isSelectionHovered = EditorSession.HoveredWorldPosition.HasValue &&
+        var isSelectionHovered = _editorSession.HoveredWorldPosition.HasValue &&
                                  Surface.Selection.Contains(
-                                     EditorSession.HoveredWorldPosition.Value);
+                                     _editorSession.HoveredWorldPosition.Value);
 
         var isMakingSelection = _selectionAnchor != null;
 
@@ -268,7 +268,7 @@ public abstract class SelectionTool : IEditorTool
 
     private bool IsMoving()
     {
-        return EditorSession.MoveStart.HasValue;
+        return _editorSession.MoveStart.HasValue;
     }
 
     private void CreateOrEditSelection(IEnumerable<GridPosition> positions)
