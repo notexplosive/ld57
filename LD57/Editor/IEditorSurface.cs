@@ -16,5 +16,4 @@ public interface IEditorSurface
     void HandleKeyBinds(ConsumableInput input);
 
     public event Action? RequestResetCamera;
-    event Action<GridPosition>? RequestedPlayAt;
 }
