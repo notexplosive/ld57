@@ -5,8 +5,14 @@ using Newtonsoft.Json;
 
 namespace LD57.Gameplay;
 
+public interface IPlacedObject<out TPlaced> where TPlaced : IPlacedObject<TPlaced>
+{
+    public GridPosition Position { get; set; }
+    public TPlaced MovedBy(GridPosition offset);
+}
+
 [Serializable]
-public class PlacedEntity
+public class PlacedEntity : IPlacedObject<PlacedEntity>
 {
     [JsonProperty("extra_state")]
     public Dictionary<string, string> ExtraState = new();

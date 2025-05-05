@@ -36,12 +36,22 @@ public class SelectionTool : IEditorTool
 
     public string Status()
     {
+        if (CanMove())
+        {
+            if (_isCtrlDown)
+            {
+                return $"[CTRL] Duplicate selection";
+            }
+
+            return "Drag to move [CTRL] duplicate selection";
+        }
+        
         var altModeMessage = "";
         if (_isAltDown)
         {
             altModeMessage = "[ALT] just entities ";
         }
-
+        
         if (_isCtrlDown)
         {
             return $"[CTRL] Remove {altModeMessage}from Selection";
@@ -123,17 +133,7 @@ public class SelectionTool : IEditorTool
         {
             if (CanMove())
             {
-                foreach (var item in _surface.Selection.AllPositions())
-                {
-                    _surface.WorldTemplate.RemoveEntitiesAt(item);
-                }
-
-                foreach (var item in _surface.Selection.AllEntitiesWithCurrentPlacement())
-                {
-                    _surface.WorldTemplate.AddExactEntity(item);
-                }
-
-                _surface.Selection.RegenerateAtNewPosition();
+                _surface.MoveSelection();
                 _editorSession.MoveStart = null;
                 return;
             }

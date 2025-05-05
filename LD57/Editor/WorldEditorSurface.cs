@@ -12,13 +12,14 @@ namespace LD57.Editor;
 
 public class WorldEditorSurface : IEditorSurface
 {
+    private readonly WorldSelection _selection;
+
     public WorldEditorSurface()
     {
-        Selection = new WorldSelection(this);
+        _selection = new WorldSelection(this);
     }
 
-    public WorldSelection Selection { get; }
-
+    public IEditorSelection Selection => _selection;
     public WorldTemplate WorldTemplate { get; private set; } = new();
 
     public string? FileName { get; set; }
@@ -108,12 +109,12 @@ public class WorldEditorSurface : IEditorSurface
             }
         }
 
-        foreach (var worldPosition in Selection.AllPositions())
+        foreach (var worldPosition in _selection.AllPositions())
         {
             var screenPosition = worldPosition - cameraPosition;
             if (screen.ContainsPosition(screenPosition))
             {
-                screen.PutTile(screenPosition, Selection.GetTileState(worldPosition - Selection.Offset));
+                screen.PutTile(screenPosition, _selection.GetTileState(worldPosition - _selection.Offset));
             }
         }
     }
@@ -179,5 +180,20 @@ public class WorldEditorSurface : IEditorSurface
     public void RequestPlay(GridPosition position)
     {
         RequestedPlayAt?.Invoke(position);
+    }
+
+    public void MoveSelection()
+    {
+        foreach (var item in _selection.AllPositions())
+        {
+            WorldTemplate.RemoveEntitiesAt(item);
+        }
+
+        foreach (var item in _selection.AllEntitiesWithCurrentPlacement())
+        {
+            WorldTemplate.AddExactEntity(item);
+        }
+
+        _selection.RegenerateAtNewPosition();
     }
 }
