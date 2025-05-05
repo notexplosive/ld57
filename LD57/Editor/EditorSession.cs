@@ -20,13 +20,12 @@ public class EditorSession : Session
     private AsciiScreen _screen;
     private bool _shouldClosePopup;
 
-    public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, WorldEditorSurface surface) : base(runtimeWindow,
+    public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, IEditorSurface surface) : base(runtimeWindow,
         runtimeFileSystem)
     {
         _screen = RebuildScreenWithWidth(46);
         Surface = surface;
         Surface.RequestResetCamera += ResetCameraPosition;
-        Surface.RequestPlayAt += RequestPlayAt;
         _cameraPosition = DefaultCameraPosition();
 
         var cachedFileName = HotReloadCache.LevelEditorOpenFileName;
@@ -44,7 +43,7 @@ public class EditorSession : Session
     public List<IEditorTool> EditorTools { get; } = new();
     public List<Func<AsciiScreen, UiElement>> ExtraUi { get; } = new();
 
-    public WorldEditorSurface Surface { get; }
+    public IEditorSurface Surface { get; }
     public GridPosition? MoveStart { get; set; }
     public bool IsDraggingSecondary { get; private set; }
     public bool IsDraggingPrimary { get; private set; }
@@ -295,8 +294,6 @@ public class EditorSession : Session
         }
     }
 
-    public event Action<GridPosition>? RequestPlay;
-
     private void StartMousePressInWorld(GridPosition position, MouseButton mouseButton)
     {
         if (mouseButton == MouseButton.Left)
@@ -443,11 +440,6 @@ public class EditorSession : Session
     private void CloseCurrentPopup()
     {
         _shouldClosePopup = true;
-    }
-
-    public void RequestPlayAt(GridPosition position)
-    {
-        RequestPlay?.Invoke(position);
     }
 
     private void ResetCameraPosition()

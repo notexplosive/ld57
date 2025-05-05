@@ -9,10 +9,12 @@ namespace LD57.Editor;
 public class TriggerTool : IEditorTool
 {
     private readonly EditorSession _editorSession;
+    private readonly WorldEditorSurface _surface;
 
-    public TriggerTool(EditorSession editorSession)
+    public TriggerTool(EditorSession editorSession, WorldEditorSurface surface)
     {
         _editorSession = editorSession;
+        _surface = surface;
     }
 
     public TileState TileStateInToolbar { get; } = TileState.StringCharacter("!");
@@ -21,7 +23,7 @@ public class TriggerTool : IEditorTool
     {
         if (_editorSession.HoveredWorldPosition.HasValue)
         {
-            var metadataEntities = _editorSession.Surface.WorldTemplate
+            var metadataEntities = _surface.WorldTemplate
                 .GetMetadataAt(_editorSession.HoveredWorldPosition.Value).ToList();
 
             if (metadataEntities.Count > 0 &&
@@ -42,14 +44,14 @@ public class TriggerTool : IEditorTool
     {
         if (mouseButton == MouseButton.Left)
         {
-            var foundMetaEntity = _editorSession.Surface.WorldTemplate.GetMetadataAt(position).FirstOrDefault();
+            var foundMetaEntity = _surface.WorldTemplate.GetMetadataAt(position).FirstOrDefault();
             var defaultText = "";
             if (foundMetaEntity != null)
             {
                 defaultText = foundMetaEntity.ExtraState.GetValueOrDefault(Constants.CommandKey) ?? defaultText;
             }
 
-            var isUsingSelection = _editorSession.Surface.Selection.Contains(position);
+            var isUsingSelection = _surface.Selection.Contains(position);
             _editorSession.RequestText("Enter Command", defaultText,
                 text =>
                 {
@@ -57,7 +59,7 @@ public class TriggerTool : IEditorTool
                     {
                         if (string.IsNullOrEmpty(text))
                         {
-                            _editorSession.Surface.WorldTemplate.RemoveExactEntity(foundMetaEntity);
+                            _surface.WorldTemplate.RemoveExactEntity(foundMetaEntity);
                         }
                         else
                         {
@@ -70,14 +72,14 @@ public class TriggerTool : IEditorTool
                         {
                             if (isUsingSelection)
                             {
-                                foreach (var cell in _editorSession.Surface.Selection.AllPositions())
+                                foreach (var cell in _surface.Selection.AllPositions())
                                 {
-                                    _editorSession.Surface.WorldTemplate.AddMetaEntity(cell, text);
+                                    _surface.WorldTemplate.AddMetaEntity(cell, text);
                                 }
                             }
                             else
                             {
-                                _editorSession.Surface.WorldTemplate.AddMetaEntity(position, text);
+                                _surface.WorldTemplate.AddMetaEntity(position, text);
                             }
                         }
                     }

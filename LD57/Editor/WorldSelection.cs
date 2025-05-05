@@ -8,12 +8,18 @@ namespace LD57.Editor;
 
 public class WorldSelection
 {
+    private readonly WorldEditorSurface _surface;
     private readonly HashSet<PlacedEntity> _placedEntitiesFromWorld = new();
     private readonly HashSet<GridPosition> _startingPositions = new();
 
     public GridPosition Offset { get; set; }
 
     public bool IsEmpty => _startingPositions.Count == 0 && _placedEntitiesFromWorld.Count == 0;
+
+    public WorldSelection(WorldEditorSurface surface)
+    {
+        _surface = surface;
+    }
 
     public IEnumerable<GridPosition> AllPositions()
     {
@@ -64,41 +70,41 @@ public class WorldSelection
         return AllPositions().Contains(gridPosition);
     }
 
-    public void RemovePositions(EditorSession editorSession, IEnumerable<GridPosition> positions)
+    public void RemovePositions(IEnumerable<GridPosition> positions)
     {
         foreach (var position in positions)
         {
-            RemovePosition(editorSession, position);
+            RemovePosition(position);
         }
     }
 
-    public void AddPositions(EditorSession editorSession, IEnumerable<GridPosition> positions)
+    public void AddPositions(IEnumerable<GridPosition> positions)
     {
         foreach (var position in positions)
         {
-            AddPosition(editorSession, position);
+            AddPosition(position);
         }
     }
 
-    private void AddPosition(EditorSession editorSession, GridPosition position)
+    private void AddPosition(GridPosition position)
     {
-        AddEntities(editorSession.Surface.WorldTemplate.AllEntitiesAt(position));
+        AddEntities(_surface.WorldTemplate.AllEntitiesAt(position));
         _startingPositions.Add(position);
     }
     
-    private void RemovePosition(EditorSession editorSession, GridPosition position)
+    private void RemovePosition(GridPosition position)
     {
-        RemoveEntities(editorSession.Surface.WorldTemplate.AllEntitiesAt(position));
+        RemoveEntities(_surface.WorldTemplate.AllEntitiesAt(position));
         _startingPositions.Remove(position);
     }
 
     
 
-    public void RegenerateAtNewPosition(EditorSession editorSession)
+    public void RegenerateAtNewPosition()
     {
         var currentPositions = AllPositions().ToList();
         Clear();
-        AddPositions(editorSession, currentPositions);
+        AddPositions(currentPositions);
     }
 
     public TileState GetTileState(GridPosition internalPosition)

@@ -10,13 +10,18 @@ using Newtonsoft.Json;
 
 namespace LD57.Editor;
 
-public class WorldEditorSurface
+public class WorldEditorSurface : IEditorSurface
 {
-    public WorldSelection Selection { get; } = new();
+    public WorldEditorSurface()
+    {
+        Selection = new WorldSelection(this);
+    }
 
-    public string? FileName { get; set; }
+    public WorldSelection Selection { get; }
 
     public WorldTemplate WorldTemplate { get; private set; } = new();
+
+    public string? FileName { get; set; }
 
     public void HandleKeyBinds(ConsumableInput input)
     {
@@ -31,7 +36,7 @@ public class WorldEditorSurface
                     position = player.Position;
                 }
 
-                RequestPlayAt?.Invoke(position);
+                RequestedPlayAt?.Invoke(position);
             }
         }
     }
@@ -161,6 +166,9 @@ public class WorldEditorSurface
         SetTemplate(null, new WorldTemplate());
     }
 
+    public event Action? RequestResetCamera;
+    public event Action<GridPosition>? RequestedPlayAt;
+
     private void SetTemplate(string? newFileName, WorldTemplate newWorld)
     {
         FileName = newFileName;
@@ -168,6 +176,8 @@ public class WorldEditorSurface
         RequestResetCamera?.Invoke();
     }
 
-    public event Action? RequestResetCamera;
-    public event Action<GridPosition>? RequestPlayAt;
+    public void RequestPlay(GridPosition position)
+    {
+        RequestedPlayAt?.Invoke(position);
+    }
 }

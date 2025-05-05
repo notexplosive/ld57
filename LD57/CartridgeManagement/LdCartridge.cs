@@ -48,12 +48,6 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             _session = _editorSession;
         };
 
-        _editorSession.RequestPlay += position =>
-        {
-            _gameSession.LoadWorld(_editorSession.Surface.WorldTemplate, position);
-            _session = _gameSession;
-        };
-
         if (targetMode == "edit")
         {
             _session = _editorSession;
@@ -64,7 +58,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         }
         else
         {
-            LoadGame();
+            SwitchToGameSession();
             var template = Constants.AttemptLoadWorldTemplateFromWorldDirectory(worldName);
             if (template != null)
             {
@@ -75,7 +69,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         }
     }
 
-    private static EditorSession BuildEditorSession(IRuntime runtime)
+    private EditorSession BuildEditorSession(IRuntime runtime)
     {
         EditorSelector<EntityTemplate> templateSelector = new();
         var worldEditorSurface = new WorldEditorSurface();
@@ -85,9 +79,9 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             () => templateSelector.Selected));
         editorSession.EditorTools.Add(new SelectionTool(editorSession, worldEditorSurface,
             () => templateSelector.Selected));
-        editorSession.EditorTools.Add(new ChangeSignalTool(editorSession));
-        editorSession.EditorTools.Add(new TriggerTool(editorSession));
-        editorSession.EditorTools.Add(new PlayTool(editorSession));
+        editorSession.EditorTools.Add(new ChangeSignalTool(editorSession, worldEditorSurface));
+        editorSession.EditorTools.Add(new TriggerTool(editorSession, worldEditorSurface));
+        editorSession.EditorTools.Add(new PlayTool(editorSession, worldEditorSurface));
         editorSession.ExtraUi.Add(screen =>
         {
             var tilePalette = new UiElement(new GridPosition(3, 0), new GridPosition(screen.Width - 1, 3));
@@ -128,11 +122,18 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         });
 
         editorSession.RebuildScreen();
+        
+        
+        worldEditorSurface.RequestedPlayAt += position =>
+        {
+            _gameSession.LoadWorld(worldEditorSurface.WorldTemplate, position);
+            SwitchToGameSession();
+        };
 
         return editorSession;
     }
 
-    private void LoadGame()
+    private void SwitchToGameSession()
     {
         _session = _gameSession;
     }

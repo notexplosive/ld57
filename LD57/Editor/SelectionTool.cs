@@ -133,7 +133,7 @@ public class SelectionTool : IEditorTool
                     _surface.WorldTemplate.AddExactEntity(item);
                 }
 
-                _surface.Selection.RegenerateAtNewPosition(_editorSession);
+                _surface.Selection.RegenerateAtNewPosition();
                 _editorSession.MoveStart = null;
                 return;
             }
@@ -281,7 +281,7 @@ public class SelectionTool : IEditorTool
     {
         if (_isCtrlDown)
         {
-            _surface.Selection.RemovePositions(_editorSession, positions);
+            _surface.Selection.RemovePositions(positions);
             return;
         }
 
@@ -290,6 +290,6 @@ public class SelectionTool : IEditorTool
             _surface.Selection.Clear();
         }
 
-        _surface.Selection.AddPositions(_editorSession, positions);
+        _surface.Selection.AddPositions(positions);
     }
 }

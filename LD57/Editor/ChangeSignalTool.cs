@@ -12,10 +12,12 @@ namespace LD57.Editor;
 public class ChangeSignalTool : IEditorTool
 {
     private readonly EditorSession _editorSession;
+    private readonly WorldEditorSurface _surface;
 
-    public ChangeSignalTool(EditorSession editorSession)
+    public ChangeSignalTool(EditorSession editorSession, WorldEditorSurface surface)
     {
         _editorSession = editorSession;
+        _surface = surface;
     }
 
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 4);
@@ -108,7 +110,7 @@ public class ChangeSignalTool : IEditorTool
 
     private IEnumerable<PlacedEntity> GetSignalEntitiesAt(GridPosition position)
     {
-        foreach (var entity in _editorSession.Surface.WorldTemplate.AllEntitiesAt(position))
+        foreach (var entity in _surface.WorldTemplate.AllEntitiesAt(position))
         {
             var templateName = entity.TemplateName;
             if (string.IsNullOrEmpty(templateName))

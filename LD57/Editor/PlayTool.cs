@@ -8,10 +8,12 @@ namespace LD57.Editor;
 public class PlayTool : IEditorTool
 {
     private readonly EditorSession _editorSession;
+    private readonly WorldEditorSurface _surface;
 
-    public PlayTool(EditorSession editorSession)
+    public PlayTool(EditorSession editorSession, WorldEditorSurface surface)
     {
         _editorSession = editorSession;
+        _surface = surface;
     }
 
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 6);
@@ -41,7 +43,7 @@ public class PlayTool : IEditorTool
             if (_editorSession.Surface.FileName != null)
             {
                 _editorSession.SaveFlow();
-                _editorSession.RequestPlayAt(position.Value);
+                _surface.RequestPlay(position.Value);
             }
             else
             {
