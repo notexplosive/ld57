@@ -22,7 +22,6 @@ public class WorldEditorSurface : IEditorSurface
 
     public IEditorSelection Selection => _selection;
     public WorldTemplate WorldTemplate { get; private set; } = new();
-
     public string? FileName { get; set; }
 
     public void HandleKeyBinds(ConsumableInput input)
@@ -159,13 +158,13 @@ public class WorldEditorSurface : IEditorSurface
         if (worldTemplate != null)
         {
             var newFileName = fileName.RemoveFileExtension();
-            SetTemplate(newFileName, worldTemplate);
+            SetTemplateAndFileName(newFileName, worldTemplate);
         }
     }
 
     public void Clear()
     {
-        SetTemplate(null, new WorldTemplate());
+        SetTemplateAndFileName(null, new WorldTemplate());
     }
 
     public event Action? RequestResetCamera;
@@ -181,10 +180,10 @@ public class WorldEditorSurface : IEditorSurface
 
     public event Action<GridPosition>? RequestedPlayAt;
 
-    private void SetTemplate(string? newFileName, WorldTemplate newWorld)
+    private void SetTemplateAndFileName(string? fileName, WorldTemplate template)
     {
-        FileName = newFileName;
-        WorldTemplate = newWorld;
+        FileName = fileName;
+        WorldTemplate = template;
         RequestResetCamera?.Invoke();
     }
 

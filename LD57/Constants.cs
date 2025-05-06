@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ExplogineMonoGame;
-using ExplogineMonoGame.Data;
 using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
@@ -92,11 +91,6 @@ public static class Constants
         }
     }
 
-    public static bool ContainsInclusive(Rectangle selectionRectangle, GridPosition position)
-    {
-        return new Rectangle(selectionRectangle.Location, selectionRectangle.Size + new Point(1)).Contains(position.ToPoint());
-    }
-
     public static int RoundToInt(float x)
     {
         return (int) Math.Round(x);
@@ -105,11 +99,6 @@ public static class Constants
     public static GridPosition RoundToGridPosition(this Vector2 vector2)
     {
         return new GridPosition(RoundToInt(vector2.X), RoundToInt(vector2.Y));
-    }
-    
-    public static GridPositionCorners ToGridPositionCorners(this RectangleF rectangleF)
-    {
-        return new GridPositionCorners(rectangleF.TopLeft.RoundToGridPosition(), rectangleF.BottomRight.RoundToGridPosition());
     }
 
     public static WorldTemplate? AttemptLoadWorldTemplateFromWorldDirectory(string worldNameWithoutExtension)
