@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using ExplogineCore;
 using ExplogineMonoGame;
@@ -7,30 +6,27 @@ using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Newtonsoft.Json;
 
 namespace LD57.Editor;
 
-public class WorldEditorSurface : IEditorSurface
+public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, EntityTemplate>
 {
     private readonly WorldSelection _selection;
 
-    public WorldEditorSurface()
+    public WorldEditorSurface() : base("Worlds")
     {
         _selection = new WorldSelection(this);
     }
 
-    public IEditorSelection Selection => _selection;
-    public WorldTemplate WorldTemplate { get; private set; } = new();
-    public string? FileName { get; set; }
+    protected override WorldSelection RealSelection => _selection;
 
-    public void HandleKeyBinds(ConsumableInput input)
+    public override void HandleKeyBinds(ConsumableInput input)
     {
         if (Client.Debug.IsPassiveOrActive)
         {
             if (input.Keyboard.GetButton(Keys.F5).WasPressed)
             {
-                var player = WorldTemplate.GetPlayerEntity();
+                var player = Data.GetPlayerEntity();
                 var position = new GridPosition();
                 if (player != null)
                 {
@@ -42,11 +38,11 @@ public class WorldEditorSurface : IEditorSurface
         }
     }
 
-    public void PaintWorldToScreen(AsciiScreen screen, GridPosition cameraPosition, float dt)
+    public override void PaintWorldToScreen(AsciiScreen screen, GridPosition cameraPosition, float dt)
     {
-        var world = new World(Constants.GameRoomSize, WorldTemplate, true);
+        var world = new World(Constants.GameRoomSize, Data, true);
 
-        var player = WorldTemplate.GetPlayerEntity();
+        var player = Data.GetPlayerEntity();
         if (player != null)
         {
             world.AddEntity(new Entity(world, player.Position,
@@ -59,7 +55,8 @@ public class WorldEditorSurface : IEditorSurface
         world.PaintToScreen(screen, dt);
     }
 
-    public void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition, GridPosition? hoveredPosition)
+    public override void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition,
+        GridPosition? hoveredPosition)
     {
         // create empty room so we don't have to 
         var world = new World(Constants.GameRoomSize, new WorldTemplate());
@@ -114,16 +111,16 @@ public class WorldEditorSurface : IEditorSurface
             var screenPosition = worldPosition - cameraPosition;
             if (screen.ContainsPosition(screenPosition))
             {
-                screen.PutTile(screenPosition, _selection.GetTileState(worldPosition - _selection.Offset));
+                screen.PutTile(screenPosition, _selection.GetTileStateAt(worldPosition - _selection.Offset));
             }
         }
     }
 
-    public void PaintOverlayAboveTool(AsciiScreen screen, GridPosition cameraPosition)
+    public override void PaintOverlayAboveTool(AsciiScreen screen, GridPosition cameraPosition)
     {
         if (MathF.Sin(Client.TotalElapsedTime * 10) > 0)
         {
-            foreach (var placedEntity in WorldTemplate.PlacedEntities)
+            foreach (var placedEntity in Data.Content)
             {
                 if (placedEntity.ExtraState.ContainsKey(Constants.CommandKey))
                 {
@@ -134,13 +131,7 @@ public class WorldEditorSurface : IEditorSurface
         }
     }
 
-    public void Save(string fileName)
-    {
-        Client.Debug.RepoFileSystem.WriteToFile($"Resource/Worlds/{fileName}.json",
-            JsonConvert.SerializeObject(WorldTemplate, Formatting.Indented));
-    }
-
-    public void Open(string path, bool isFullPath)
+    public override void Open(string path, bool isFullPath)
     {
         var fileName = path;
         WorldTemplate? worldTemplate;
@@ -162,53 +153,10 @@ public class WorldEditorSurface : IEditorSurface
         }
     }
 
-    public void Clear()
-    {
-        SetTemplateAndFileName(null, new WorldTemplate());
-    }
-
-    public event Action? RequestResetCamera;
-    public void RemoveEntitiesAt(GridPosition position)
-    {
-        WorldTemplate.RemoveEntitiesAt(position);
-    }
-
-    public bool HasEntityAt(GridPosition position)
-    {
-        return WorldTemplate.HasEntityAt(position);
-    }
-
     public event Action<GridPosition>? RequestedPlayAt;
-
-    private void SetTemplateAndFileName(string? fileName, WorldTemplate template)
-    {
-        FileName = fileName;
-        WorldTemplate = template;
-        RequestResetCamera?.Invoke();
-    }
 
     public void RequestPlay(GridPosition position)
     {
         RequestedPlayAt?.Invoke(position);
-    }
-
-    public void MoveSelection()
-    {
-        foreach (var item in _selection.AllPositions())
-        {
-            WorldTemplate.RemoveEntitiesAt(item);
-        }
-
-        foreach (var item in _selection.AllEntitiesWithCurrentPlacement())
-        {
-            WorldTemplate.AddExactEntity(item);
-        }
-
-        _selection.RegenerateAtNewPosition();
-    }
-
-    public void EraseAtPositions(IEnumerable<GridPosition> positions)
-    {
-        WorldTemplate.EraseAtPositions(positions);
     }
 }

@@ -221,7 +221,7 @@ public class EditorSession : Session
         if (input.Keyboard.Modifiers.Control && input.Keyboard.GetButton(Keys.N, true).WasPressed)
         {
             SaveFlow();
-            Surface.Clear();
+            Surface.ClearEverything();
         }
 
         if (input.Keyboard.GetButton(Keys.OemMinus).WasPressed)

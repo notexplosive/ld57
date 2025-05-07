@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LD57.Editor;
 using LD57.Rendering;
-using Newtonsoft.Json;
 
 namespace LD57.Gameplay;
 
 [Serializable]
-public class WorldTemplate
+public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
 {
-    [JsonProperty("entities")]
-    public List<PlacedEntity> PlacedEntities = new();
-
     public void FillRectangle(GridPositionCorners rectangle, EntityTemplate template)
     {
         foreach (var position in rectangle.AllPositions(true))
         {
-            PlaceTemplateAt(template, position);
+            PlaceInkAt(template, position);
         }
     }
 
@@ -24,7 +21,7 @@ public class WorldTemplate
     {
         if (template.TemplateName == "player")
         {
-            PlacedEntities.RemoveAll(a => a.TemplateName == "player");
+            Content.RemoveAll(a => a.TemplateName == "player");
         }
 
         var extraState = new Dictionary<string, string>();
@@ -34,7 +31,7 @@ public class WorldTemplate
             extraState.Add("unique_id", ((int) DateTimeOffset.Now.ToUnixTimeMilliseconds()).ToString());
         }
 
-        PlacedEntities.Add(new PlacedEntity
+        Content.Add(new PlacedEntity
         {
             Position = position,
             TemplateName = template.TemplateName,
@@ -42,33 +39,9 @@ public class WorldTemplate
         });
     }
 
-    public void RemoveEntitiesAt(GridPosition position)
-    {
-        PlacedEntities.RemoveAll(a => a.Position == position);
-    }
-
     public void RemoveEntitiesAtExceptMetadata(GridPosition position)
     {
-        PlacedEntities.RemoveAll(a => a.TemplateName != string.Empty && a.Position == position);
-    }
-
-    public IEnumerable<PlacedEntity> AllEntitiesAt(GridPosition position)
-    {
-        foreach (var entity in PlacedEntities)
-        {
-            if (entity.Position == position)
-            {
-                yield return entity;
-            }
-        }
-    }
-
-    public void EraseRectangle(GridPositionCorners rectangle)
-    {
-        foreach (var position in rectangle.AllPositions(true))
-        {
-            RemoveEntitiesAtExceptMetadata(position);
-        }
+        Content.RemoveAll(a => a.TemplateName != string.Empty && a.Position == position);
     }
 
     public void SetTile(GridPosition position, EntityTemplate template)
@@ -79,7 +52,7 @@ public class WorldTemplate
 
     public void AddMetaEntity(GridPosition position, string command)
     {
-        PlacedEntities.Add(new PlacedEntity
+        Content.Add(new PlacedEntity
         {
             Position = position,
             TemplateName = string.Empty,
@@ -92,7 +65,7 @@ public class WorldTemplate
 
     public PlacedEntity? GetPlayerEntity()
     {
-        return PlacedEntities.FirstOrDefault(a => a.TemplateName == "player");
+        return Content.FirstOrDefault(a => a.TemplateName == "player");
     }
 
     public IEnumerable<PlacedEntity> GetMetadataAt(GridPosition position)
@@ -106,45 +79,14 @@ public class WorldTemplate
         }
     }
 
-    public void RemoveExactEntity(PlacedEntity entity)
-    {
-        PlacedEntities.Remove(entity);
-    }
-
-    public void AddExactEntity(PlacedEntity item)
-    {
-        PlacedEntities.Add(item);
-    }
-
-    public void FillAllPositions(IEnumerable<GridPosition> positions, EntityTemplate template)
-    {
-        foreach (var position in positions)
-        {
-            PlaceTemplateAt(template, position);
-        }
-    }
-
-    public void EraseAtPositions(IEnumerable<GridPosition> allPositions)
-    {
-        foreach (var position in allPositions)
-        {
-            EraseAt(position);
-        }
-    }
-
-    private void EraseAt(GridPosition position)
+    protected override void EraseAt(GridPosition position)
     {
         RemoveEntitiesAtExceptMetadata(position);
     }
 
-    private void PlaceTemplateAt(EntityTemplate template, GridPosition position)
+    protected override void PlaceInkAt(EntityTemplate template, GridPosition position)
     {
         RemoveEntitiesAtExceptMetadata(position);
         PlaceEntity(position, template);
-    }
-
-    public bool HasEntityAt(GridPosition position)
-    {
-        return PlacedEntities.Any(a => a.Position == position);
     }
 }

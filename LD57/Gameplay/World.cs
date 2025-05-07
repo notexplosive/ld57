@@ -34,7 +34,7 @@ public class World
 
     public void PopulateFromTemplate(WorldTemplate worldTemplate)
     {
-        foreach (var placedEntity in worldTemplate.PlacedEntities)
+        foreach (var placedEntity in worldTemplate.Content)
         {
             if (placedEntity.TemplateName == "player")
             {

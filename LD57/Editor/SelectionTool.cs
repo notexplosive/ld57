@@ -213,7 +213,7 @@ public abstract class SelectionTool : IEditorTool
             {
                 if (_isAltDown)
                 {
-                    if (Surface.HasEntityAt(position))
+                    if (Surface.HasContentAt(position))
                     {
                         yield return position;
                     }

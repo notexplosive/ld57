@@ -32,7 +32,7 @@ public class WorldEditorBrushTool : BrushTool
             return;
         }
         
-        _surface.WorldTemplate.RemoveEntitiesAtExceptMetadata(EditorSession.HoveredWorldPosition.Value);
+        _surface.Data.RemoveEntitiesAtExceptMetadata(EditorSession.HoveredWorldPosition.Value);
     }
 
     protected override void OnPaint()
@@ -49,6 +49,6 @@ public class WorldEditorBrushTool : BrushTool
             return;
         }
         
-        _surface.WorldTemplate.SetTile(EditorSession.HoveredWorldPosition.Value, template);
+        _surface.Data.SetTile(EditorSession.HoveredWorldPosition.Value, template);
     }
 }

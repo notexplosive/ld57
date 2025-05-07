@@ -15,6 +15,6 @@ public interface IEditorSelection
     public IEnumerable<GridPosition> AllPositions();
     public void AddPosition(GridPosition position);
     public void RemovePosition(GridPosition position);
-    public TileState GetTileState(GridPosition internalPosition);
+    public TileState GetTileStateAt(GridPosition internalPosition);
     public void RegenerateAtNewPosition();
 }

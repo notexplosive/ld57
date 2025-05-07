@@ -112,4 +112,10 @@ public static class Constants
         var json = Client.Debug.RepoFileSystem.ReadFile(fullPath);
         return JsonConvert.DeserializeObject<WorldTemplate>(json);
     }
+
+    public static void WriteJsonToResources<T>(T data, string subDirectory, string fileName)
+    {
+        Client.Debug.RepoFileSystem.WriteToFile($"Resource/{subDirectory}/{fileName}.json",
+            JsonConvert.SerializeObject(data, Formatting.Indented));
+    }
 }

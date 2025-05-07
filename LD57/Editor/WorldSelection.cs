@@ -17,10 +17,10 @@ public class WorldSelection : EditorSelection<PlacedEntity>
 
     protected override IEnumerable<PlacedEntity> GetAllObjectsAt(GridPosition position)
     {
-        return _surface.WorldTemplate.AllEntitiesAt(position);
+        return _surface.Data.AllEntitiesAt(position);
     }
 
-    public override TileState GetTileState(GridPosition internalPosition)
+    public override TileState GetTileStateAt(GridPosition internalPosition)
     {
         var entities = PlacedObjects.Where(a => a.Position == internalPosition);
         var topTemplate = entities

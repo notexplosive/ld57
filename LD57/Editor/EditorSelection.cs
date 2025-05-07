@@ -58,7 +58,7 @@ public abstract class EditorSelection<TPlaced> : IEditorSelection
         _startingPositions.Remove(position);
     }
 
-    public abstract TileState GetTileState(GridPosition internalPosition);
+    public abstract TileState GetTileStateAt(GridPosition internalPosition);
 
     public IEnumerable<GridPosition> AllPositions()
     {

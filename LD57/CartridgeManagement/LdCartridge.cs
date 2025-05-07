@@ -39,7 +39,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         }
 
         _editorSession = BuildEditorSession(Runtime);
-        _drawSession = BuildEditorSession(Runtime);
+        _drawSession = BuildDrawSession(Runtime);
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
         _gameSession.RequestLevelEditor += () =>
@@ -67,6 +67,16 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
             _gameSession.OpenMainMenu();
         }
+    }
+
+    private EditorSession BuildDrawSession(IRuntime runtime1)
+    {
+        var canvasSurface = new CanvasEditorSurface();
+        var editorSession = new EditorSession((runtime.Window as RealWindow)!, runtime.FileSystem, canvasSurface);
+        
+        editorSession.RebuildScreen();
+
+        return editorSession;
     }
 
     private EditorSession BuildEditorSession(IRuntime runtime)
@@ -126,7 +136,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         
         worldEditorSurface.RequestedPlayAt += position =>
         {
-            _gameSession.LoadWorld(worldEditorSurface.WorldTemplate, position);
+            _gameSession.LoadWorld(worldEditorSurface.Data, position);
             SwitchToGameSession();
         };
 

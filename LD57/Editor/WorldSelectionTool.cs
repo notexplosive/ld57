@@ -25,7 +25,7 @@ public class WorldSelectionTool : SelectionTool
 
         if (template != null)
         {
-            _surface.WorldTemplate.FillAllPositions(positions, template);
+            _surface.Data.FillAllPositions(positions, template);
         }
     }
 }

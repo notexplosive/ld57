@@ -23,7 +23,7 @@ public class TriggerTool : IEditorTool
     {
         if (_editorSession.HoveredWorldPosition.HasValue)
         {
-            var metadataEntities = _surface.WorldTemplate
+            var metadataEntities = _surface.Data
                 .GetMetadataAt(_editorSession.HoveredWorldPosition.Value).ToList();
 
             if (metadataEntities.Count > 0 &&
@@ -44,7 +44,7 @@ public class TriggerTool : IEditorTool
     {
         if (mouseButton == MouseButton.Left)
         {
-            var foundMetaEntity = _surface.WorldTemplate.GetMetadataAt(position).FirstOrDefault();
+            var foundMetaEntity = _surface.Data.GetMetadataAt(position).FirstOrDefault();
             var defaultText = "";
             if (foundMetaEntity != null)
             {
@@ -59,7 +59,7 @@ public class TriggerTool : IEditorTool
                     {
                         if (string.IsNullOrEmpty(text))
                         {
-                            _surface.WorldTemplate.RemoveExactEntity(foundMetaEntity);
+                            _surface.Data.RemoveExact(foundMetaEntity);
                         }
                         else
                         {
@@ -74,12 +74,12 @@ public class TriggerTool : IEditorTool
                             {
                                 foreach (var cell in _surface.Selection.AllPositions())
                                 {
-                                    _surface.WorldTemplate.AddMetaEntity(cell, text);
+                                    _surface.Data.AddMetaEntity(cell, text);
                                 }
                             }
                             else
                             {
-                                _surface.WorldTemplate.AddMetaEntity(position, text);
+                                _surface.Data.AddMetaEntity(position, text);
                             }
                         }
                     }
