@@ -27,7 +27,7 @@ public class LdResourceAssets
 
     public static LdResourceAssets Instance => instanceImpl ??= new LdResourceAssets();
 
-    public Dictionary<string, SpriteSheet> Sheets { get; } = new();
+    public Dictionary<string, SpriteSheet?> Sheets { get; } = new();
     public Dictionary<string, SoundEffectInstance> SoundInstances { get; set; } = new();
     public Dictionary<string, SoundEffect> SoundEffects { get; set; } = new();
     public Dictionary<string, byte[]> RawFontBytes { get; } = new();

@@ -27,8 +27,3 @@ public record PlacedCanvasTile : IPlacedObject<PlacedCanvasTile>
         return Rendering.TileState.StringCharacter("#");
     }
 }
-
-[Serializable]
-public record CanvasTileData
-{
-}

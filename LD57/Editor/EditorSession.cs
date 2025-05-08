@@ -254,7 +254,7 @@ public class EditorSession : Session
             _cameraPosition += new GridPosition(0, _screen.Height / 4);
         }
 
-        CurrentTool?.UpdateInput(input.Keyboard);
+        CurrentTool?.UpdateInput(input.Keyboard, HoveredWorldPosition);
 
         _hoveredScreenPosition = _screen.GetHoveredTile(input, hitTestStack, Vector2.Zero);
 

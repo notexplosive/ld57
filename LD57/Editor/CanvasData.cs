@@ -7,7 +7,7 @@ namespace LD57.Editor;
 [Serializable]
 public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData>
 {
-    protected override void PlaceInkAt(CanvasTileData template, GridPosition position)
+    public override void PlaceInkAt(GridPosition position, CanvasTileData template)
     {
         Content.Add(new PlacedCanvasTile
         {
@@ -16,7 +16,7 @@ public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData>
         });
     }
 
-    protected override void EraseAt(GridPosition position)
+    public override void EraseAt(GridPosition position)
     {
         Content.RemoveAll(a => a.Position == position);
     }

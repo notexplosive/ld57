@@ -32,6 +32,7 @@ public class AsciiScreen
 
     public GridPosition RoomSize => new(Width - 1, Height - 1);
     public GridPosition CenterPosition => RoomSize / 2;
+    public GridPositionCorners Rectangle => new GridPositionCorners(new GridPosition(0, 0), new GridPosition(Width, Height));
 
     public void Draw(Painter painter, Vector2 offset)
     {

@@ -41,11 +41,11 @@ public abstract class EditorData<TPlaced, TInk> where TPlaced : IPlacedObject<TP
     {
         foreach (var position in positions)
         {
-            PlaceInkAt(ink, position);
+            PlaceInkAt(position, ink);
         }
     }
 
-    protected abstract void PlaceInkAt(TInk template, GridPosition position);
+    public abstract void PlaceInkAt(GridPosition position, TInk template);
 
     public void EraseAtPositions(IEnumerable<GridPosition> allPositions)
     {
@@ -55,18 +55,10 @@ public abstract class EditorData<TPlaced, TInk> where TPlaced : IPlacedObject<TP
         }
     }
 
-    protected abstract void EraseAt(GridPosition position);
+    public abstract void EraseAt(GridPosition position);
 
     public bool HasEntityAt(GridPosition position)
     {
         return Content.Any(a => a.Position == position);
-    }
-
-    public void EraseRectangle(GridPositionCorners rectangle)
-    {
-        foreach (var position in rectangle.AllPositions(true))
-        {
-            EraseAt(position);
-        }
     }
 }

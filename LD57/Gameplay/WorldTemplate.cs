@@ -13,7 +13,7 @@ public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
     {
         foreach (var position in rectangle.AllPositions(true))
         {
-            PlaceInkAt(template, position);
+            PlaceInkAt(position, template);
         }
     }
 
@@ -43,8 +43,8 @@ public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
     {
         Content.RemoveAll(a => a.TemplateName != string.Empty && a.Position == position);
     }
-
-    public void SetTile(GridPosition position, EntityTemplate template)
+    
+    public override void PlaceInkAt(GridPosition position, EntityTemplate template)
     {
         RemoveEntitiesAtExceptMetadata(position);
         PlaceEntity(position, template);
@@ -79,14 +79,8 @@ public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
         }
     }
 
-    protected override void EraseAt(GridPosition position)
+    public override void EraseAt(GridPosition position)
     {
         RemoveEntitiesAtExceptMetadata(position);
-    }
-
-    protected override void PlaceInkAt(EntityTemplate template, GridPosition position)
-    {
-        RemoveEntitiesAtExceptMetadata(position);
-        PlaceEntity(position, template);
     }
 }

@@ -47,7 +47,7 @@ public class MessagePage
                 {
                     if (splitCommand.Length == 3)
                     {
-                        line.Add(TileState.Sprite(LdResourceAssets.Instance.Sheets[splitCommand[1]], int.Parse(splitCommand[2]), currentColor));
+                        line.Add(TileState.Sprite(ResourceAlias.GetSpriteSheetByName(splitCommand[1]) ?? ResourceAlias.Entities, int.Parse(splitCommand[2]), currentColor));
                     }
                 }
             }

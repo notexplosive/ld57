@@ -38,8 +38,8 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             worldName = "default";
         }
 
-        _editorSession = BuildEditorSession(Runtime);
-        _drawSession = BuildDrawSession(Runtime);
+        _editorSession = BuildEditorSession();
+        _drawSession = BuildDrawSession();
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
         _gameSession.RequestLevelEditor += () =>
@@ -69,22 +69,27 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         }
     }
 
-    private EditorSession BuildDrawSession(IRuntime runtime1)
+    private EditorSession BuildDrawSession()
     {
         var canvasSurface = new CanvasEditorSurface();
-        var editorSession = new EditorSession((runtime.Window as RealWindow)!, runtime.FileSystem, canvasSurface);
+        var canvasBrushMode = new CanvasBrushMode();
+        
+        var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, canvasSurface);
+        editorSession.EditorTools.Add(new CanvasEditorBrushTool(editorSession, canvasSurface, canvasBrushMode));
+        editorSession.EditorTools.Add(new CanvasSelectionTool(editorSession, canvasSurface, canvasBrushMode));
+        editorSession.ExtraUi.Add(canvasBrushMode.CreateUi);
         
         editorSession.RebuildScreen();
 
         return editorSession;
     }
 
-    private EditorSession BuildEditorSession(IRuntime runtime)
+    private EditorSession BuildEditorSession()
     {
         EditorSelector<EntityTemplate> templateSelector = new();
         var worldEditorSurface = new WorldEditorSurface();
 
-        var editorSession = new EditorSession((runtime.Window as RealWindow)!, runtime.FileSystem, worldEditorSurface);
+        var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, worldEditorSurface);
         editorSession.EditorTools.Add(new WorldEditorBrushTool(editorSession, worldEditorSurface,
             () => templateSelector.Selected));
         editorSession.EditorTools.Add(new WorldSelectionTool(editorSession, worldEditorSurface,
@@ -195,7 +200,8 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
         yield return new VoidLoadEvent("PopupFrameParts", "Graphics", () =>
         {
-            var texture = LdResourceAssets.Instance.Sheets["PopupFrame"].SourceTexture;
+            
+            var texture = ResourceAlias.PopupFrameRaw.SourceTexture;
             var selectFrameSpriteSheet = new SelectFrameSpriteSheet(texture);
             var tileSize = 11;
             var tileSizeSquare = new Point(tileSize);

@@ -17,8 +17,8 @@ public interface IEditorSurface
     void Open(string path, bool isFullPath);
     void ClearEverything();
     void HandleKeyBinds(ConsumableInput input);
-    void RemoveEntitiesAt(GridPosition position);
+    void RemoveInkAt(GridPosition position);
     bool HasContentAt(GridPosition position);
     void MoveSelection();
-    void EraseAtPositions(IEnumerable<GridPosition> positions);
+    void EraseSelection();
 }

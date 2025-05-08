@@ -19,18 +19,19 @@ public readonly record struct GridPositionCorners
 
     public int Left { get; }
     public int Top { get; }
-    public int Right => Left + Width;
-    public int Bottom => Top + Height;
+    public int Right => Left + Width - 1;
+    public int Bottom => Top + Height - 1;
     public int Width { get; }
     public int Height { get; }
 
     public GridPosition TopLeft => new(Left, Top);
-    public GridPosition BottomRight => new(Left + Width, Top + Height);
+    public GridPosition BottomRight => new(Right, Top);
 
     public GridPosition Size => new(Width, Height);
 
     public GridPosition A { get; init; }
     public GridPosition B { get; init; }
+    public GridPosition TopRight => new(Right, Top);
 
     public Rectangle Rectangle(bool isInclusive)
     {

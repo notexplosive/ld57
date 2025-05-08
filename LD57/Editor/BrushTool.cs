@@ -6,12 +6,12 @@ namespace LD57.Editor;
 
 public abstract class BrushTool : IEditorTool
 {
-    protected EditorSession EditorSession { get; }
-
     protected BrushTool(EditorSession editorEditorSession)
     {
         EditorSession = editorEditorSession;
     }
+
+    protected EditorSession EditorSession { get; }
 
     public TileState TileStateInToolbar => TileState.Sprite(ResourceAlias.Tools, 0);
 
@@ -22,22 +22,21 @@ public abstract class BrushTool : IEditorTool
         return "Brush";
     }
 
-    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
+    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard, GridPosition? hoveredWorldPosition)
     {
-        if (EditorSession.IsDraggingPrimary)
+        if (hoveredWorldPosition.HasValue)
         {
-            OnPaint();
-        }
+            if (EditorSession.IsDraggingPrimary)
+            {
+                OnPaint(hoveredWorldPosition.Value);
+            }
 
-        if (EditorSession.IsDraggingSecondary)
-        {
-            OnErase();
+            if (EditorSession.IsDraggingSecondary)
+            {
+                OnErase(hoveredWorldPosition.Value);
+            }
         }
     }
-
-    protected abstract void OnErase();
-
-    protected abstract void OnPaint();
 
     public void StartMousePressInWorld(GridPosition position, MouseButton mouseButton)
     {
@@ -53,4 +52,8 @@ public abstract class BrushTool : IEditorTool
     {
         // do nothing
     }
+
+    protected abstract void OnErase(GridPosition hoveredWorldPosition);
+
+    protected abstract void OnPaint(GridPosition hoveredWorldPosition);
 }

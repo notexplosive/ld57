@@ -4,20 +4,20 @@ using LD57.Rendering;
 
 namespace LD57.Editor;
 
-public class DynamicText : ISubElement
+public class DynamicTile : ISubElement
 {
     private GridPosition Position { get; }
-    private readonly Func<string> _getString;
+    private readonly Func<TileState> _getTile;
 
-    public DynamicText(GridPosition gridPosition, Func<string> getString)
+    public DynamicTile(GridPosition gridPosition, Func<TileState> getTile)
     {
         Position = gridPosition;
-        _getString = getString;
+        _getTile = getTile;
     }
 
     public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
     {
-        screen.PutString(Position + topLeft, _getString());
+        screen.PutTile(Position + topLeft, _getTile());
     }
 
     public bool Contains(GridPosition position)

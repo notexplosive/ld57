@@ -37,7 +37,7 @@ public class ChangeSignalTool : IEditorTool
         return "Change Signal Color";
     }
 
-    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
+    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard, GridPosition? hoveredWorldPosition)
     {
     }
 

@@ -25,23 +25,13 @@ public class WorldEditorBrushTool : BrushTool
         return _getTemplate()?.CreateAppearance().TileState ?? TileState.TransparentEmpty;
     }
 
-    protected override void OnErase()
+    protected override void OnErase(GridPosition hoveredWorldPosition)
     {
-        if (!EditorSession.HoveredWorldPosition.HasValue)
-        {
-            return;
-        }
-        
-        _surface.Data.RemoveEntitiesAtExceptMetadata(EditorSession.HoveredWorldPosition.Value);
+        _surface.Data.EraseAt(hoveredWorldPosition);
     }
 
-    protected override void OnPaint()
+    protected override void OnPaint(GridPosition hoveredWorldPosition)
     {
-        if (!EditorSession.HoveredWorldPosition.HasValue)
-        {
-            return;
-        }
-
         var template = _getTemplate();
 
         if (template == null)
@@ -49,6 +39,6 @@ public class WorldEditorBrushTool : BrushTool
             return;
         }
         
-        _surface.Data.SetTile(EditorSession.HoveredWorldPosition.Value, template);
+        _surface.Data.PlaceInkAt(hoveredWorldPosition, template);
     }
 }

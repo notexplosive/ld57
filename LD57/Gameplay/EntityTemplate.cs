@@ -32,7 +32,7 @@ public class EntityTemplate
     {
         var sortPriority = SortPriority;
         return SpriteSheetName != null
-            ? new EntityAppearance(LdResourceAssets.Instance.Sheets[SpriteSheetName], Frame, ResourceAlias.Color(Color), sortPriority)
+            ? new EntityAppearance(ResourceAlias.GetSpriteSheetByName(SpriteSheetName) ?? ResourceAlias.Entities, Frame, ResourceAlias.Color(Color), sortPriority)
             : new Invisible();
     }
 }

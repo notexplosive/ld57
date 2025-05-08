@@ -36,7 +36,7 @@ public class TriggerTool : IEditorTool
         return "";
     }
 
-    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
+    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard, GridPosition? hoveredWorldPosition)
     {
     }
 

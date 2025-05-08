@@ -8,24 +8,23 @@ namespace LD57.Editor;
 public class WorldSelectionTool : SelectionTool
 {
     private readonly Func<EntityTemplate?> _getTemplate;
-    private readonly WorldEditorSurface _surface;
 
     public WorldSelectionTool(EditorSession editorSession, WorldEditorSurface surface,
         Func<EntityTemplate?> getTemplate) : base(editorSession)
     {
-        _surface = surface;
+        Surface = surface;
         _getTemplate = getTemplate;
     }
 
-    protected override IEditorSurface Surface => _surface;
+    protected override WorldEditorSurface Surface { get; }
 
-    protected override void FillWithCurrentTemplate(List<GridPosition> positions)
+    protected override void FillWithCurrentInk(List<GridPosition> positions)
     {
         var template = _getTemplate();
 
         if (template != null)
         {
-            _surface.Data.FillAllPositions(positions, template);
+            Surface.Data.FillAllPositions(positions, template);
         }
     }
 }

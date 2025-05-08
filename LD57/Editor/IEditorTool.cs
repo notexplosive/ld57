@@ -9,7 +9,7 @@ public interface IEditorTool
     TileState TileStateInToolbar { get; }
     TileState GetTileStateInWorldOnHover(TileState original);
     string Status();
-    void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard);
+    void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard, GridPosition? hoveredWorldPosition);
     void StartMousePressInWorld(GridPosition position, MouseButton mouseButton);
     void FinishMousePressInWorld(GridPosition? position, MouseButton mouseButton);
     void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition);

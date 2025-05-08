@@ -28,7 +28,7 @@ public class PlayTool : IEditorTool
         return "Play from Select Location";
     }
 
-    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
+    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard, GridPosition? hoveredWorldPosition)
     {
     }
 

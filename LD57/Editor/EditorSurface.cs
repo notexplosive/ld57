@@ -45,7 +45,7 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
 
     public abstract void HandleKeyBinds(ConsumableInput input);
 
-    public void RemoveEntitiesAt(GridPosition position)
+    public void RemoveInkAt(GridPosition position)
     {
         Data.RemoveEntitiesAt(position);
     }
@@ -70,9 +70,9 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
         Selection.RegenerateAtNewPosition();
     }
 
-    public void EraseAtPositions(IEnumerable<GridPosition> positions)
+    public void EraseSelection()
     {
-        Data.EraseAtPositions(positions);
+        Data.EraseAtPositions(Selection.AllPositions());
     }
 
     protected void SetTemplateAndFileName(string? fileName, TData template)

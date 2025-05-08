@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ExplogineCore.Data;
 using ExplogineMonoGame.AssetManagement;
 using ExplogineMonoGame.Data;
@@ -14,11 +13,22 @@ namespace LD57;
 public static class ResourceAlias
 {
     public static FontSystem GameFont => LdResourceAssets.Instance.FontSystems["ConcertOne/ConcertOne-Regular"];
-    public static SpriteSheet Walls => LdResourceAssets.Instance.Sheets["Walls"];
-    public static SpriteSheet Floors => LdResourceAssets.Instance.Sheets["Floors"];
-    public static SpriteSheet Entities => LdResourceAssets.Instance.Sheets["Entities"];
-    public static SpriteSheet PopupFrame => LdResourceAssets.Instance.Sheets["PopupFrameParts"];
-    public static SpriteSheet Tools => LdResourceAssets.Instance.Sheets["Tools"];
+    public static SpriteSheet Walls => LdResourceAssets.Instance.Sheets["Walls"]!;
+    public static SpriteSheet Floors => LdResourceAssets.Instance.Sheets["Floors"]!;
+    public static SpriteSheet Entities => LdResourceAssets.Instance.Sheets["Entities"]!;
+    public static SpriteSheet PopupFrame => LdResourceAssets.Instance.Sheets["PopupFrameParts"]!;
+    public static SpriteSheet PopupFrameRaw => LdResourceAssets.Instance.Sheets["PopupFrame"]!;
+    public static SpriteSheet Tools => LdResourceAssets.Instance.Sheets["Tools"]!;
+
+    public static SpriteSheet? GetSpriteSheetByName(string? name)
+    {
+        if (name == null)
+        {
+            return null;
+        }
+
+        return LdResourceAssets.Instance.Sheets.GetValueOrDefault(name);
+    }
 
     public static IEnumerable<SpriteSheet> Sheets()
     {
@@ -29,8 +39,13 @@ public static class ResourceAlias
         yield return Tools;
     }
 
-    public static Color Color(string colorString)
+    public static Color Color(string? colorString)
     {
+        if (colorString == null)
+        {
+            return LdResourceAssets.MissingColor;
+        }
+        
         if (LdResourceAssets.Instance.HasNamedColor(colorString))
         {
             return LdResourceAssets.Instance.GetNamedColor(colorString);
@@ -76,9 +91,6 @@ public static class ResourceAlias
     {
         var path = $"Sound/{name}";
 
-        return new CallbackTween(() =>
-        {
-            LdResourceAssets.Instance.PlaySound(path, soundEffectSettings);
-        });
+        return new CallbackTween(() => { LdResourceAssets.Instance.PlaySound(path, soundEffectSettings); });
     }
 }

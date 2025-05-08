@@ -66,7 +66,7 @@ public abstract class SelectionTool : IEditorTool
         return "[ALT]*";
     }
 
-    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
+    public void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard, GridPosition? hoveredWorldPosition)
     {
         _isShiftDown = inputKeyboard.Modifiers.ShiftInclusive;
         _isCtrlDown = inputKeyboard.Modifiers.ControlInclusive;
@@ -80,9 +80,11 @@ public abstract class SelectionTool : IEditorTool
         if (inputKeyboard.GetButton(Keys.F).WasPressed)
         {
             var positions = Surface.Selection.AllPositions().ToList();
-            FillWithCurrentTemplate(positions);
+            FillWithCurrentInk(positions);
+            
+            // rebuild selection after doing fill
             Surface.Selection.Clear();
-            CreateOrEditSelection(positions);
+            Surface.Selection.AddPositions(positions);
         }
 
         if (CanMove() && _editorSession.IsDraggingPrimary)
@@ -93,7 +95,7 @@ public abstract class SelectionTool : IEditorTool
 
         if (inputKeyboard.GetButton(Keys.Delete).WasPressed)
         {
-            Surface.EraseAtPositions(Surface.Selection.AllPositions());
+            Surface.EraseSelection();
             Surface.Selection.Clear();
         }
     }
@@ -190,7 +192,7 @@ public abstract class SelectionTool : IEditorTool
         }
     }
 
-    protected abstract void FillWithCurrentTemplate(List<GridPosition> positions);
+    protected abstract void FillWithCurrentInk(List<GridPosition> positions);
 
     private GridPositionCorners? PendingSelectionRectangle()
     {
@@ -230,7 +232,7 @@ public abstract class SelectionTool : IEditorTool
     {
         foreach (var position in Surface.Selection.AllPositions())
         {
-            Surface.RemoveEntitiesAt(position);
+            Surface.RemoveInkAt(position);
         }
     }
 

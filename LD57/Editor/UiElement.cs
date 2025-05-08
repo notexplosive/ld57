@@ -38,6 +38,11 @@ public class UiElement
         _subElement.Add(new DynamicText(relativeGridPosition, getString));
     }
 
+    public void AddDynamicTile(GridPosition relativeGridPosition, Func<TileState> dynamicTile)
+    {
+        _subElement.Add(new DynamicTile(relativeGridPosition, dynamicTile));
+    }
+
     public void AddSelectable<T>(SelectableButton<T> selectableButton) where T : class
     {
         _subElement.Add(selectableButton);
