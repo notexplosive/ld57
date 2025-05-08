@@ -194,7 +194,7 @@ public abstract class SelectionTool : IEditorTool
 
     protected abstract void FillWithCurrentInk(List<GridPosition> positions);
 
-    private GridPositionCorners? PendingSelectionRectangle()
+    private GridRectangle? PendingSelectionRectangle()
     {
         if (!_selectionAnchor.HasValue || !_editorSession.HoveredWorldPosition.HasValue)
         {
@@ -203,7 +203,7 @@ public abstract class SelectionTool : IEditorTool
 
         var topLeft = _selectionAnchor.Value;
         var bottomRight = _editorSession.HoveredWorldPosition.Value;
-        return new GridPositionCorners(topLeft, bottomRight);
+        return new GridRectangle(topLeft, bottomRight);
     }
 
     private IEnumerable<GridPosition> PendingSelectedPositions()

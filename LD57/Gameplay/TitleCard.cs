@@ -27,11 +27,7 @@ public class TitleCard
     {
         if (_isVisible)
         {
-            
-            screen.PutFrameRectangle(ResourceAlias.PopupFrame, 
-                new GridPosition(_rectangle.Value.Location.Rounded().ToPoint()), new GridPosition(
-                    (_rectangle.Value.Location + _rectangle.Value.Size).Rounded().ToPoint()));
-
+            screen.PutFrameRectangle(ResourceAlias.PopupFrame, GridRectangle.FromRectangleF(_rectangle));
             screen.PutString(new GridPosition(_rectangle.Value.Location.Rounded().ToPoint()) + new GridPosition(1, 1),
                 _currentMessage.Substring(0, _characterIndex));
         }

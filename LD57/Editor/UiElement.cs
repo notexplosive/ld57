@@ -8,34 +8,32 @@ namespace LD57.Editor;
 
 public class UiElement
 {
+    public GridRectangle Rectangle { get; }
     private List<ISubElement> _subElement = new();
 
-    public UiElement(GridPosition topLeft, GridPosition bottomRight)
+    public UiElement(GridRectangle corners)
     {
-        TopLeft = topLeft;
-        BottomRight = bottomRight;
+        Rectangle = corners;
     }
-
-    public GridPosition BottomRight { get; }
-    public GridPosition TopLeft { get; }
-    public int Width => Rectangle.Width;
-    public int Height => Rectangle.Height;
-
-    public Rectangle Rectangle => Constants.CreateRectangle(TopLeft, BottomRight);
 
     public void PaintToScreen(AsciiScreen screen)
     {
-        screen.PutFrameRectangle(ResourceAlias.PopupFrame, TopLeft, BottomRight);
+        screen.PutFrameRectangle(ResourceAlias.PopupFrame, Rectangle);
 
         foreach (var subElement in _subElement)
         {
-            subElement.PutOnScreen(screen, TopLeft);
+            subElement.PutOnScreen(screen, Rectangle.TopLeft);
         }
     }
 
     public void AddDynamicText(GridPosition relativeGridPosition, Func<string> getString)
     {
         _subElement.Add(new DynamicText(relativeGridPosition, getString));
+    }
+    
+    public void AddInputListener(Action<ConsumableInput.ConsumableKeyboard> onInput)
+    {
+        _subElement.Add(new InputListener(onInput));
     }
 
     public void AddDynamicTile(GridPosition relativeGridPosition, Func<TileState> dynamicTile)
@@ -47,12 +45,17 @@ public class UiElement
     {
         _subElement.Add(selectableButton);
     }
+    
+    public void AddButton(Button button)
+    {
+        _subElement.Add(button);
+    }
 
     public ISubElement? GetSubElementAt(GridPosition position)
     {
         foreach (var subElement in _subElement)
         {
-            if (subElement.Contains(position - TopLeft))
+            if (subElement.Contains(position - Rectangle.TopLeft))
             {
                 return subElement;
             }
@@ -63,7 +66,7 @@ public class UiElement
 
     public bool Contains(GridPosition position)
     {
-        return Rectangle.Contains(position.ToPoint());
+        return Rectangle.Contains(position, true);
     }
 
     public void AddStaticText(GridPosition position, string text)

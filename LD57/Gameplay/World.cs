@@ -162,7 +162,7 @@ public class World
         return CalculateEntitiesInRoom(GetRoomCornersAt(position), true);
     }
 
-    public IEnumerable<Entity> CalculateEntitiesInRoom(GridPositionCorners corners, bool onlyActive)
+    public IEnumerable<Entity> CalculateEntitiesInRoom(GridRectangle corners, bool onlyActive)
     {
         var rectangle = corners.Rectangle(true);
         foreach (var entity in onlyActive ? AllActiveEntities() : AllEntitiesIncludingInactive())
@@ -333,7 +333,7 @@ public class World
         return new Room(this, corners.TopLeft, corners.BottomRight);
     }
 
-    private GridPositionCorners GetRoomCornersAt(GridPosition position)
+    private GridRectangle GetRoomCornersAt(GridPosition position)
     {
         var inflatedRoomSize = _roomSize + new GridPosition(1, 1);
         var x = position.X % inflatedRoomSize.X;
@@ -349,7 +349,7 @@ public class World
         }
 
         var topLeft = position - new GridPosition(x, y);
-        return new GridPositionCorners(topLeft, topLeft + _roomSize);
+        return new GridRectangle(topLeft, topLeft + _roomSize);
     }
 
     public IEnumerable<Entity> GetActiveEntitiesAt(GridPosition position)

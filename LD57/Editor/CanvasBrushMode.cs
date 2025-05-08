@@ -20,11 +20,11 @@ public class CanvasBrushMode
     {
         var panelSize = new GridPosition(4, 5);
         var topLeft = screen.Rectangle.TopRight + new GridPosition(-panelSize.X, 0);
-        var element = new UiElement(topLeft, topLeft + panelSize);
+        var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize + new GridPosition(1,1)));
 
         element.AddDynamicTile(new GridPosition(1, 1), GetCurrentTileState);
-        
-        element.AddDynamicTile(new GridPosition(1, 2), GetForegroundTileStateWithoutColor);
+
+        element.AddButton(new Button(new GridPosition(1,2), OpenForegroundTileStateModal).SetTileStateGetter(GetForegroundTileStateWithoutColor));
         element.AddDynamicTile(new GridPosition(1, 3), GetForegroundColorTileState);
         element.AddDynamicTile(new GridPosition(1, 4), GetBackgroundTileState);
 
@@ -38,6 +38,13 @@ public class CanvasBrushMode
 
         return element;
     }
+
+    private void OpenForegroundTileStateModal()
+    {
+        RequestModal?.Invoke(new ChooseTileModal(new GridRectangle(new GridPosition(5,5), new GridPosition(20, 20))));
+    }
+
+    public event Action<Popup>? RequestModal;
 
     private TileState GetCurrentTileState()
     {
@@ -80,7 +87,7 @@ public class CanvasBrushMode
         return TileState.BackgroundOnly(Color.LightBlue, 1f);
     }
 
-    private TileState GetForegroundTileStateWithoutColor()
+    private TileState? GetForegroundTileStateWithoutColor()
     {
         return TileState.Sprite(ResourceAlias.Entities, 0, Color.White);
     }

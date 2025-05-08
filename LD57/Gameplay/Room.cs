@@ -10,12 +10,12 @@ public class Room
 {
     private readonly List<Entity> _entitiesInRoom = new();
     private readonly World _world;
-    public GridPositionCorners Corners { get; }
+    public GridRectangle Corners { get; }
 
     public Room(World parentWorld, GridPosition a, GridPosition b)
     {
         _world = parentWorld;
-        Corners = new GridPositionCorners(a, b);
+        Corners = new GridRectangle(a, b);
 
         RecalculateLiveEntities();
     }

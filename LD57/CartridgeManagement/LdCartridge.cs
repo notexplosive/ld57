@@ -80,6 +80,8 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         editorSession.ExtraUi.Add(canvasBrushMode.CreateUi);
         
         editorSession.RebuildScreen();
+        
+        canvasBrushMode.RequestModal += editorSession.OpenPopup;
 
         return editorSession;
     }
@@ -99,7 +101,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         editorSession.EditorTools.Add(new PlayTool(editorSession, worldEditorSurface));
         editorSession.ExtraUi.Add(screen =>
         {
-            var tilePalette = new UiElement(new GridPosition(3, 0), new GridPosition(screen.Width - 1, 3));
+            var tilePalette = new UiElement(new GridRectangle(new GridPosition(3, 0), new GridPosition(screen.Width, 3)));
             var i = 0;
             var j = 0;
 
@@ -112,7 +114,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
                     templateSelector, template));
 
                 i++;
-                if (i > tilePalette.Width - 3)
+                if (i > tilePalette.Rectangle.Width - 3)
                 {
                     i = 0;
                     j++;

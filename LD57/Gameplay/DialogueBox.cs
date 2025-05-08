@@ -36,10 +36,8 @@ public class DialogueBox
     {
         if (IsVisible)
         {
-            var topLeft = new GridPosition(_rectangle.Value.Location.Rounded().ToPoint());
-            screen.PutFrameRectangle(ResourceAlias.PopupFrame,
-                topLeft, new GridPosition(
-                    (_rectangle.Value.Location + _rectangle.Value.Size).Rounded().ToPoint()));
+            var rectangle = GridRectangle.FromRectangleF(_rectangle.Value);
+            screen.PutFrameRectangle(ResourceAlias.PopupFrame, rectangle);
 
             if (_isMessageVisible)
             {
@@ -48,7 +46,7 @@ public class DialogueBox
                     var page = _currentMessage.GetPage(_pageIndex);
                     if (page != null)
                     {
-                        page.PaintToScreen(topLeft + new GridPosition(1, 1), screen);
+                        page.PaintToScreen(rectangle.TopLeft, screen);
                     }
                 }
             }

@@ -4,20 +4,18 @@ using LD57.Rendering;
 
 namespace LD57.Editor;
 
-public class DynamicTile : ISubElement
+public class InputListener : ISubElement
 {
-    private GridPosition Position { get; }
-    private readonly Func<TileState> _getTile;
+    private readonly Action<ConsumableInput.ConsumableKeyboard> _onInput;
 
-    public DynamicTile(GridPosition gridPosition, Func<TileState> getTile)
+    public InputListener(Action<ConsumableInput.ConsumableKeyboard> onInput)
     {
-        Position = gridPosition;
-        _getTile = getTile;
+        _onInput = onInput;
     }
 
     public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
     {
-        screen.PutTile(Position + topLeft, _getTile());
+        
     }
 
     public bool Contains(GridPosition relativePosition)
@@ -42,6 +40,6 @@ public class DynamicTile : ISubElement
 
     public void UpdateKeyboardInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
     {
-        
+        _onInput(inputKeyboard);
     }
 }

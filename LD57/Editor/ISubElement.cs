@@ -6,7 +6,7 @@ namespace LD57.Editor;
 public interface ISubElement
 {
     void PutOnScreen(AsciiScreen screen, GridPosition topLeft);
-    bool Contains(GridPosition position);
+    bool Contains(GridPosition relativePosition);
     void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition);
     void OnClicked();
     void OnTextInput(char[] enteredCharacters);

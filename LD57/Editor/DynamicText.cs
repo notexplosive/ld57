@@ -20,7 +20,7 @@ public class DynamicText : ISubElement
         screen.PutString(Position + topLeft, _getString());
     }
 
-    public bool Contains(GridPosition position)
+    public bool Contains(GridPosition relativePosition)
     {
         return false;
     }

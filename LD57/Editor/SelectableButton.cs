@@ -37,9 +37,9 @@ public class SelectableButton<T> : ISubElement where T : class
         screen.PutTile(_gridPosition + topLeft, renderedTileState);
     }
 
-    public bool Contains(GridPosition position)
+    public bool Contains(GridPosition relativePosition)
     {
-        return position == _gridPosition;
+        return relativePosition == _gridPosition;
     }
 
     public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)

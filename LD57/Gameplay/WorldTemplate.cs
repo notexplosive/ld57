@@ -9,7 +9,7 @@ namespace LD57.Gameplay;
 [Serializable]
 public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
 {
-    public void FillRectangle(GridPositionCorners rectangle, EntityTemplate template)
+    public void FillRectangle(GridRectangle rectangle, EntityTemplate template)
     {
         foreach (var position in rectangle.AllPositions(true))
         {

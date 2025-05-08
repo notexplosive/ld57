@@ -46,9 +46,7 @@ public class PromptBox
         if (IsVisible && _currentPrompt != null)
         {
             var topLeft = new GridPosition(_rectangle.Value.Location.Rounded().ToPoint());
-            screen.PutFrameRectangle(ResourceAlias.PopupFrame,
-                topLeft, new GridPosition(
-                    (_rectangle.Value.Location + _rectangle.Value.Size).Rounded().ToPoint()));
+            screen.PutFrameRectangle(ResourceAlias.PopupFrame, GridRectangle.FromRectangleF(_rectangle.Value));
 
             if (_isTextVisible)
             {

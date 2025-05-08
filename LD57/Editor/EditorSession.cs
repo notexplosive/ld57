@@ -19,6 +19,7 @@ public class EditorSession : Session
     private GridPosition? _hoveredScreenPosition;
     private AsciiScreen _screen;
     private bool _shouldClosePopup;
+    private Stack<UiElement> _popupStack = new();
 
     public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, IEditorSurface surface) : base(runtimeWindow,
         runtimeFileSystem)
@@ -93,7 +94,7 @@ public class EditorSession : Session
 
         var bottomLeftCorner = new GridPosition(0, screen.Height - 3);
 
-        var leftToolbar = new UiElement(new GridPosition(0, 0), new GridPosition(2, EditorTools.Count + 1));
+        var leftToolbar = new UiElement(new GridRectangle(new GridPosition(0, 0), new GridPosition(3, EditorTools.Count + 2)));
 
         var toolIndex = 0;
         foreach (var tool in EditorTools)
@@ -105,7 +106,7 @@ public class EditorSession : Session
 
         _uiElements.Add(leftToolbar);
 
-        var statusBar = new UiElement(bottomLeftCorner, new GridPosition(screen.Width - 1, screen.Height - 1));
+        var statusBar = new UiElement(new GridRectangle(bottomLeftCorner, new GridPosition(screen.Width, screen.Height)));
         statusBar.AddDynamicText(new GridPosition(4, 0), () =>
         {
             if (!HoveredWorldPosition.HasValue)
@@ -140,6 +141,11 @@ public class EditorSession : Session
     {
         HotReloadCache.LevelEditorOpenFileName = Surface.FileName;
         HotReloadCache.LevelEditorCameraPosition = _cameraPosition;
+
+        if (input.Keyboard.GetButton(Keys.R).WasPressed)
+        {
+            RebuildScreen();
+        }
 
         if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
         {
@@ -184,7 +190,7 @@ public class EditorSession : Session
 
         if (_shouldClosePopup)
         {
-            _currentPopup = null;
+            FinishClosingPopup();
             _shouldClosePopup = false;
         }
 
@@ -312,18 +318,30 @@ public class EditorSession : Session
     public void RequestText(string message, string? defaultText, Action<string> onSubmit)
     {
         var topLeft = new GridPosition(4, 12);
-        var textModal = new UiElement(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 3));
+        var textModal = new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 4)));
         textModal.AddStaticText(new GridPosition(1, 1), message);
         var textInput = textModal.AddTextInput(new GridPosition(1, 2), defaultText ?? string.Empty);
 
-        _currentPopup = textModal;
+        OpenPopup(textModal);
         textInput.Submitted += text =>
         {
             onSubmit(text);
-            CloseCurrentPopup();
+            textModal.Close();
         };
 
-        textInput.Cancelled += CloseCurrentPopup;
+        textInput.Cancelled += textModal.Close;
+    }
+
+    public void OpenPopup(Popup popup)
+    {
+        popup.RequestClosePopup += StartClosingPopup;
+        
+        if (_currentPopup != null)
+        {
+            _popupStack.Push(_currentPopup);
+        }
+        
+        _currentPopup = popup;
     }
 
     private void FinishMousePressInWorld(GridPosition? position, MouseButton mouseButton)
@@ -425,21 +443,26 @@ public class EditorSession : Session
     private void SaveAs()
     {
         var topLeft = new GridPosition(4, 12);
-        var saveAsPopup = new UiElement(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 3));
+        var saveAsPopup = new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 4)));
         saveAsPopup.AddStaticText(new GridPosition(1, 1), "Name this World:");
         var textInput = saveAsPopup.AddTextInput(new GridPosition(1, 2), Surface.FileName);
-        _currentPopup = saveAsPopup;
+        OpenPopup(saveAsPopup);
         textInput.Submitted += text =>
         {
             Surface.FileName = text;
             SaveFlow();
-            CloseCurrentPopup();
+            StartClosingPopup();
         };
     }
 
-    private void CloseCurrentPopup()
+    private void StartClosingPopup()
     {
         _shouldClosePopup = true;
+    }
+    
+    private void FinishClosingPopup()
+    {
+        _currentPopup = _popupStack.Count > 0 ? _popupStack.Pop() : null;
     }
 
     private void ResetCameraPosition()

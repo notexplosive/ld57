@@ -43,7 +43,7 @@ public class Inventory
         return new EmptyItemBehavior();
     }
 
-    public void PaintWorldOverlay(ActionButton button,AsciiScreen screen, World world, Entity user, float dt)
+    public void PaintWorldOverlay(ActionButton button, AsciiScreen screen, World world, Entity user, float dt)
     {
         GetBehaviorInSlot(button).PaintInWorld(screen, world, user, dt);
     }
@@ -58,7 +58,7 @@ public class Inventory
     }
 
     /// <summary>
-    /// For unit tests
+    ///     For unit tests
     /// </summary>
     public void EquipBehaviorDirectly(ActionButton slot, string itemBehavior)
     {
@@ -106,9 +106,9 @@ public class Inventory
 
         entity.Position = player.Position;
         world.AddEntity(entity);
-        
+
         GetBehaviorInSlot(slot).OnRemove(world, player);
-        
+
         _itemEntities.Remove(slot);
         _itemBehaviors.Remove(slot);
         return entity;
@@ -127,8 +127,8 @@ public class Inventory
     public void DrawHud(AsciiScreen screen, string? currentZoneName, float dt)
     {
         var bottomHudTopLeft = new GridPosition(0, 19);
-        screen.PutFrameRectangle(ResourceAlias.PopupFrame, bottomHudTopLeft,
-            bottomHudTopLeft + new GridPosition(screen.Width - 1, 2));
+        screen.PutFrameRectangle(ResourceAlias.PopupFrame,
+            GridRectangle.FromTopLeftAndSize(bottomHudTopLeft, new GridPosition(screen.Width, 2)));
         screen.PutString(bottomHudTopLeft + new GridPosition(1, 1), Status());
         screen.PutString(bottomHudTopLeft + new GridPosition(2, 0), "Z[ ]");
         if (HasSomethingInSlot(ActionButton.Primary))
