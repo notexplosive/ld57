@@ -511,7 +511,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 0.aseprite": {
+   "Tools 10.aseprite": {
     "frame": { "x": 26, "y": 91, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -519,7 +519,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 1.aseprite": {
+   "Tools 11.aseprite": {
     "frame": { "x": 39, "y": 91, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -527,7 +527,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 2.aseprite": {
+   "Tools 12.aseprite": {
     "frame": { "x": 52, "y": 91, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -535,7 +535,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 3.aseprite": {
+   "Tools 13.aseprite": {
     "frame": { "x": 65, "y": 91, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -543,7 +543,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 4.aseprite": {
+   "Tools 14.aseprite": {
     "frame": { "x": 78, "y": 91, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -551,7 +551,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 5.aseprite": {
+   "Walls 0.aseprite": {
     "frame": { "x": 91, "y": 91, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -559,7 +559,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 6.aseprite": {
+   "Walls 1.aseprite": {
     "frame": { "x": 104, "y": 91, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -567,7 +567,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 7.aseprite": {
+   "Walls 2.aseprite": {
     "frame": { "x": 117, "y": 91, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -575,7 +575,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 8.aseprite": {
+   "Walls 3.aseprite": {
     "frame": { "x": 0, "y": 100, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -583,7 +583,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 9.aseprite": {
+   "Walls 4.aseprite": {
     "frame": { "x": 13, "y": 100, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -591,7 +591,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 10.aseprite": {
+   "Walls 5.aseprite": {
     "frame": { "x": 26, "y": 104, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -599,7 +599,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 11.aseprite": {
+   "Walls 6.aseprite": {
     "frame": { "x": 39, "y": 104, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -607,7 +607,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 12.aseprite": {
+   "Walls 7.aseprite": {
     "frame": { "x": 52, "y": 104, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -615,7 +615,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 13.aseprite": {
+   "Walls 8.aseprite": {
     "frame": { "x": 65, "y": 104, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -623,7 +623,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 14.aseprite": {
+   "Walls 9.aseprite": {
     "frame": { "x": 78, "y": 104, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -631,7 +631,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 15.aseprite": {
+   "Walls 10.aseprite": {
     "frame": { "x": 91, "y": 104, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -639,7 +639,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 16.aseprite": {
+   "Walls 11.aseprite": {
     "frame": { "x": 104, "y": 104, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -647,7 +647,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 17.aseprite": {
+   "Walls 12.aseprite": {
     "frame": { "x": 117, "y": 104, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -655,7 +655,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 18.aseprite": {
+   "Walls 13.aseprite": {
     "frame": { "x": 0, "y": 113, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -663,7 +663,7 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 19.aseprite": {
+   "Walls 14.aseprite": {
     "frame": { "x": 13, "y": 113, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
@@ -671,8 +671,48 @@
     "sourceSize": { "w": 11, "h": 11 },
     "duration": 100
    },
-   "Walls 20.aseprite": {
+   "Walls 15.aseprite": {
     "frame": { "x": 26, "y": 117, "w": 11, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 11, "h": 11 },
+    "sourceSize": { "w": 11, "h": 11 },
+    "duration": 100
+   },
+   "Walls 16.aseprite": {
+    "frame": { "x": 39, "y": 117, "w": 11, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 11, "h": 11 },
+    "sourceSize": { "w": 11, "h": 11 },
+    "duration": 100
+   },
+   "Walls 17.aseprite": {
+    "frame": { "x": 52, "y": 117, "w": 11, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 11, "h": 11 },
+    "sourceSize": { "w": 11, "h": 11 },
+    "duration": 100
+   },
+   "Walls 18.aseprite": {
+    "frame": { "x": 65, "y": 117, "w": 11, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 11, "h": 11 },
+    "sourceSize": { "w": 11, "h": 11 },
+    "duration": 100
+   },
+   "Walls 19.aseprite": {
+    "frame": { "x": 78, "y": 117, "w": 11, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 11, "h": 11 },
+    "sourceSize": { "w": 11, "h": 11 },
+    "duration": 100
+   },
+   "Walls 20.aseprite": {
+    "frame": { "x": 91, "y": 117, "w": 11, "h": 11 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 11, "h": 11 },

@@ -1,4 +1,5 @@
-﻿using ExplogineMonoGame.AssetManagement;
+﻿using ExplogineCore.Data;
+using ExplogineMonoGame.AssetManagement;
 using Microsoft.Xna.Framework;
 
 namespace LD57.Rendering;
@@ -10,7 +11,8 @@ public readonly record struct TileState(
     string? Character = null,
     SpriteSheet? SpriteSheet = null,
     int Frame = 0,
-    float BackgroundIntensity = 0f
+    float BackgroundIntensity = 0f,
+    XyBool Flip = default
 )
 {
     public static readonly TileState TransparentEmpty = new(TileType.Skip, Color.White, Color.White);

@@ -2,17 +2,10 @@
 
 namespace LD57.Editor;
 
-public class CanvasTileShapeString : ICanvasTileShape
+public record CanvasTileShapeString(string StringContent) : ICanvasTileShape
 {
-    private readonly string _stringContent;
-
-    public CanvasTileShapeString(string stringContent)
-    {
-        _stringContent = stringContent;
-    }
-
     public TileState GetTileState()
     {
-        return TileState.StringCharacter(_stringContent);
+        return TileState.StringCharacter(StringContent);
     }
 }

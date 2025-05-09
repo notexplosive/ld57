@@ -90,7 +90,7 @@ public class AsciiScreen
                     {
                         tileState.SpriteSheet.DrawFrameAsRectangle(painter, tileState.Frame,
                             rectangle.ScaledFromCenter(scale).MovedByOrigin(DrawOrigin.Center).Moved(pixelOffset),
-                            new DrawSettings {Color = color, Origin = DrawOrigin.Center, Angle = rotation});
+                            new DrawSettings {Color = color, Origin = DrawOrigin.Center, Angle = rotation, Flip = tileState.Flip});
                     }
                 }
             }

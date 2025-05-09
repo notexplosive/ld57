@@ -1,4 +1,5 @@
 ﻿using System;
+using ExplogineCore.Data;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -7,14 +8,14 @@ namespace LD57.Editor;
 public class CanvasBrushMode
 {
     private ICanvasTileShape _currentShape = new CanvasTileShapeSprite("Walls", 0);
+    private XyBool _flipState;
     public CanvasBrushLayer ForegroundShapeAndTransform { get; set; } = new(true, true);
     public CanvasBrushLayer ForegroundColor { get; set; } = new(true, true);
     public CanvasBrushLayer BackgroundColorAndIntensity { get; set; } = new(true, true);
 
     public CanvasTileData GetTile()
     {
-        // todo!
-        return new CanvasTileData();
+        return CanvasTileData.FromSettings(_currentShape, _flipState);
     }
 
     public UiElement CreateUi(AsciiScreen screen)
@@ -48,9 +49,16 @@ public class CanvasBrushMode
 
     private void OpenForegroundTileStateModal()
     {
-        var chooseTileModal = new ChooseTileModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)));
-        chooseTileModal.OnChosen += SetTileShape;
+        var chooseTileModal = new ChooseTileModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
+            () => _currentShape, () => _flipState);
+        chooseTileModal.ChoseShape += SetTileShape;
+        chooseTileModal.ChoseFlipState += SetFlipState;
         RequestModal?.Invoke(chooseTileModal);
+    }
+
+    private void SetFlipState(XyBool mirrorState)
+    {
+        _flipState = mirrorState;
     }
 
     public void SetTileShape(ICanvasTileShape shape)
@@ -103,6 +111,6 @@ public class CanvasBrushMode
 
     private TileState? GetForegroundShape()
     {
-        return _currentShape.GetTileState();
+        return _currentShape.GetTileState() with {Flip = _flipState};
     }
 }
