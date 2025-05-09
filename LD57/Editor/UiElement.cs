@@ -55,7 +55,7 @@ public class UiElement
     {
         foreach (var subElement in _subElement)
         {
-            if (subElement.Contains(position - Rectangle.TopLeft))
+            if (subElement.Contains(position))
             {
                 return subElement;
             }

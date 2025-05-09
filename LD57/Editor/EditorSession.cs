@@ -17,11 +17,13 @@ public class EditorSession : Session
     private GridPosition _cameraPosition;
     private UiElement? _currentPopup;
     private GridPosition? _hoveredScreenPosition;
+    private readonly Stack<UiElement> _popupStack = new();
+    private ISubElement? _primedElement;
     private AsciiScreen _screen;
     private bool _shouldClosePopup;
-    private Stack<UiElement> _popupStack = new();
 
-    public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, IEditorSurface surface) : base(runtimeWindow,
+    public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, IEditorSurface surface) : base(
+        runtimeWindow,
         runtimeFileSystem)
     {
         _screen = RebuildScreenWithWidth(46);
@@ -94,7 +96,8 @@ public class EditorSession : Session
 
         var bottomLeftCorner = new GridPosition(0, screen.Height - 3);
 
-        var leftToolbar = new UiElement(new GridRectangle(new GridPosition(0, 0), new GridPosition(3, EditorTools.Count + 2)));
+        var leftToolbar =
+            new UiElement(new GridRectangle(new GridPosition(0, 0), new GridPosition(3, EditorTools.Count + 2)));
 
         var toolIndex = 0;
         foreach (var tool in EditorTools)
@@ -106,7 +109,8 @@ public class EditorSession : Session
 
         _uiElements.Add(leftToolbar);
 
-        var statusBar = new UiElement(new GridRectangle(bottomLeftCorner, new GridPosition(screen.Width, screen.Height)));
+        var statusBar =
+            new UiElement(new GridRectangle(bottomLeftCorner, new GridPosition(screen.Width, screen.Height)));
         statusBar.AddDynamicText(new GridPosition(4, 0), () =>
         {
             if (!HoveredWorldPosition.HasValue)
@@ -149,19 +153,20 @@ public class EditorSession : Session
 
         if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
         {
-            if (_hoveredScreenPosition.HasValue)
-            {
-                var hitUiElement = HitUiElement(_hoveredScreenPosition.Value);
-                if (hitUiElement != null && hitUiElement.Contains(_hoveredScreenPosition.Value))
-                {
-                    var subElement = hitUiElement.GetSubElementAt(_hoveredScreenPosition.Value);
-                    subElement?.OnClicked();
-                }
-            }
+            _primedElement = HitSubElement();
 
             if (HoveredWorldPosition.HasValue)
             {
                 StartMousePressInWorld(HoveredWorldPosition.Value, MouseButton.Left);
+            }
+        }
+
+        if (input.Mouse.GetButton(MouseButton.Left).WasReleased)
+        {
+            if (_primedElement == HitSubElement())
+            {
+                _primedElement?.OnClicked();
+                _primedElement = null;
             }
         }
 
@@ -193,6 +198,8 @@ public class EditorSession : Session
             FinishClosingPopup();
             _shouldClosePopup = false;
         }
+
+        _hoveredScreenPosition = _screen.GetHoveredTile(input, hitTestStack, Vector2.Zero);
 
         if (_currentPopup != null)
         {
@@ -262,8 +269,6 @@ public class EditorSession : Session
 
         CurrentTool?.UpdateInput(input.Keyboard, HoveredWorldPosition);
 
-        _hoveredScreenPosition = _screen.GetHoveredTile(input, hitTestStack, Vector2.Zero);
-
         if (!IsDraggingPrimary && !IsDraggingSecondary)
         {
             var scrollVector = new Vector2(0, input.Mouse.ScrollDelta());
@@ -288,6 +293,25 @@ public class EditorSession : Session
                 }
             }
         }
+    }
+
+    private ISubElement? HitSubElement()
+    {
+        if (!_hoveredScreenPosition.HasValue)
+        {
+            return null;
+        }
+
+        var hitUiElement = HitUiElement(_hoveredScreenPosition.Value);
+        if (hitUiElement == null ||
+            (!hitUiElement.Contains(_hoveredScreenPosition.Value) && hitUiElement != _currentPopup))
+        {
+            return null;
+        }
+
+        var probedPosition = _hoveredScreenPosition.Value - hitUiElement.Rectangle.TopLeft;
+        return hitUiElement.GetSubElementAt(probedPosition);
+
     }
 
     private void OpenFlow()
@@ -318,7 +342,8 @@ public class EditorSession : Session
     public void RequestText(string message, string? defaultText, Action<string> onSubmit)
     {
         var topLeft = new GridPosition(4, 12);
-        var textModal = new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 4)));
+        var textModal =
+            new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 4)));
         textModal.AddStaticText(new GridPosition(1, 1), message);
         var textInput = textModal.AddTextInput(new GridPosition(1, 2), defaultText ?? string.Empty);
 
@@ -335,12 +360,12 @@ public class EditorSession : Session
     public void OpenPopup(Popup popup)
     {
         popup.RequestClosePopup += StartClosingPopup;
-        
+
         if (_currentPopup != null)
         {
             _popupStack.Push(_currentPopup);
         }
-        
+
         _currentPopup = popup;
     }
 
@@ -426,6 +451,7 @@ public class EditorSession : Session
 
     public override void Draw(Painter painter)
     {
+        painter.Clear(ResourceAlias.Color("background"));
         _screen.Draw(painter, Vector2.Zero);
     }
 
@@ -443,7 +469,8 @@ public class EditorSession : Session
     private void SaveAs()
     {
         var topLeft = new GridPosition(4, 12);
-        var saveAsPopup = new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 4)));
+        var saveAsPopup =
+            new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 4)));
         saveAsPopup.AddStaticText(new GridPosition(1, 1), "Name this World:");
         var textInput = saveAsPopup.AddTextInput(new GridPosition(1, 2), Surface.FileName);
         OpenPopup(saveAsPopup);
@@ -459,7 +486,7 @@ public class EditorSession : Session
     {
         _shouldClosePopup = true;
     }
-    
+
     private void FinishClosingPopup()
     {
         _currentPopup = _popupStack.Count > 0 ? _popupStack.Pop() : null;

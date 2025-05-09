@@ -6,6 +6,7 @@ namespace LD57.Editor;
 
 public class CanvasBrushMode
 {
+    private ICanvasTileShape _currentShape = new CanvasTileShape("Walls", 0);
     public CanvasBrushLayer ForegroundShapeAndTransform { get; set; } = new(true, true);
     public CanvasBrushLayer ForegroundColor { get; set; } = new(true, true);
     public CanvasBrushLayer BackgroundColorAndIntensity { get; set; } = new(true, true);
@@ -20,28 +21,41 @@ public class CanvasBrushMode
     {
         var panelSize = new GridPosition(4, 5);
         var topLeft = screen.Rectangle.TopRight + new GridPosition(-panelSize.X, 0);
-        var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize + new GridPosition(1,1)));
+        var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize + new GridPosition(1, 1)));
 
         element.AddDynamicTile(new GridPosition(1, 1), GetCurrentTileState);
 
-        element.AddButton(new Button(new GridPosition(1,2), OpenForegroundTileStateModal).SetTileStateGetter(GetForegroundTileStateWithoutColor));
+        element.AddButton(
+            new Button(new GridPosition(1, 2), OpenForegroundTileStateModal).SetTileStateGetter(
+                GetForegroundShape));
         element.AddDynamicTile(new GridPosition(1, 3), GetForegroundColorTileState);
         element.AddDynamicTile(new GridPosition(1, 4), GetBackgroundTileState);
 
-        element.AddDynamicTile(new GridPosition(2, 2), GetVisibleTileState(()=>ForegroundShapeAndTransform.IsVisible));
-        element.AddDynamicTile(new GridPosition(2, 3), GetVisibleTileState(()=>ForegroundColor.IsVisible));
-        element.AddDynamicTile(new GridPosition(2, 4), GetVisibleTileState(()=>BackgroundColorAndIntensity.IsVisible));
-        
-        element.AddDynamicTile(new GridPosition(3, 2), GetEditingTileState(()=>ForegroundShapeAndTransform.IsEditing));
-        element.AddDynamicTile(new GridPosition(3, 3), GetEditingTileState(()=>ForegroundColor.IsEditing));
-        element.AddDynamicTile(new GridPosition(3, 4), GetEditingTileState(()=>BackgroundColorAndIntensity.IsEditing));
+        element.AddDynamicTile(new GridPosition(2, 2),
+            GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible));
+        element.AddDynamicTile(new GridPosition(2, 3), GetVisibleTileState(() => ForegroundColor.IsVisible));
+        element.AddDynamicTile(new GridPosition(2, 4),
+            GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible));
+
+        element.AddDynamicTile(new GridPosition(3, 2),
+            GetEditingTileState(() => ForegroundShapeAndTransform.IsEditing));
+        element.AddDynamicTile(new GridPosition(3, 3), GetEditingTileState(() => ForegroundColor.IsEditing));
+        element.AddDynamicTile(new GridPosition(3, 4),
+            GetEditingTileState(() => BackgroundColorAndIntensity.IsEditing));
 
         return element;
     }
 
     private void OpenForegroundTileStateModal()
     {
-        RequestModal?.Invoke(new ChooseTileModal(new GridRectangle(new GridPosition(5,5), new GridPosition(20, 20))));
+        var chooseTileModal = new ChooseTileModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)));
+        chooseTileModal.OnChosen += SetTileShape;
+        RequestModal?.Invoke(chooseTileModal);
+    }
+
+    public void SetTileShape(ICanvasTileShape shape)
+    {
+        _currentShape = shape;
     }
 
     public event Action<Popup>? RequestModal;
@@ -63,7 +77,7 @@ public class CanvasBrushMode
             return TileState.Sprite(ResourceAlias.Tools, 8, Color.White);
         };
     }
-    
+
     private Func<TileState> GetEditingTileState(Func<bool> getter)
     {
         return () =>
@@ -87,8 +101,8 @@ public class CanvasBrushMode
         return TileState.BackgroundOnly(Color.LightBlue, 1f);
     }
 
-    private TileState? GetForegroundTileStateWithoutColor()
+    private TileState? GetForegroundShape()
     {
-        return TileState.Sprite(ResourceAlias.Entities, 0, Color.White);
+        return _currentShape.TileState();
     }
 }
