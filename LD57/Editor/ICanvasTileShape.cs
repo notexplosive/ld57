@@ -4,5 +4,5 @@ namespace LD57.Editor;
 
 public interface ICanvasTileShape
 {
-    public TileState TileState();
+    public TileState GetTileState();
 }

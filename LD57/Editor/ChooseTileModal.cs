@@ -32,17 +32,38 @@ public class ChooseTileModal : Popup
             {
                 var gridPosition = new GridPosition(x, y) + topLeftPadding;
                 var capturedFrame = frame;
-                var button = new Button(gridPosition, () => ChooseTile(new CanvasTileShape(sheetName, capturedFrame)));
-                button.SetTileStateGetter(() => TileState.Sprite(sheet, capturedFrame));
+                var shape = new CanvasTileShapeSprite(sheetName, capturedFrame);
+                var button = new Button(gridPosition, () => ChooseTile(shape));
+                button.SetTileStateGetter(() => shape.GetTileState());
                 AddButton(button);
-                x++;
-
-                if (x > maxWidth)
-                {
-                    x = 0;
-                    y++;
-                }
+                HandleLineFeed(ref x, ref y, maxWidth);
             }
+        }
+
+        for (int i = 0; i < 255; i++)
+        {
+            var gridPosition = new GridPosition(x, y) + topLeftPadding;
+
+            var character = (char) i;
+            if (char.IsAscii(character) && !char.IsControl(character) && !char.IsWhiteSpace(character))
+            {
+                var shape = new CanvasTileShapeString(character.ToString());
+                var button = new Button(gridPosition,()=> ChooseTile(shape));
+                button.SetTileStateGetter(() => shape.GetTileState());
+                AddButton(button);
+                HandleLineFeed(ref x, ref y, maxWidth);
+            }
+        }
+    }
+
+    private static void HandleLineFeed(ref int x, ref int y, int maxWidth)
+    {
+        x++;
+
+        if (x > maxWidth)
+        {
+            x = 0;
+            y++;
         }
     }
 

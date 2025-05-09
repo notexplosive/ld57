@@ -6,7 +6,7 @@ namespace LD57.Editor;
 
 public class CanvasBrushMode
 {
-    private ICanvasTileShape _currentShape = new CanvasTileShape("Walls", 0);
+    private ICanvasTileShape _currentShape = new CanvasTileShapeSprite("Walls", 0);
     public CanvasBrushLayer ForegroundShapeAndTransform { get; set; } = new(true, true);
     public CanvasBrushLayer ForegroundColor { get; set; } = new(true, true);
     public CanvasBrushLayer BackgroundColorAndIntensity { get; set; } = new(true, true);
@@ -103,6 +103,6 @@ public class CanvasBrushMode
 
     private TileState? GetForegroundShape()
     {
-        return _currentShape.TileState();
+        return _currentShape.GetTileState();
     }
 }
