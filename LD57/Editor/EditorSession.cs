@@ -390,6 +390,22 @@ public class EditorSession : Session
 
         Surface.PaintWorldToScreen(_screen, _cameraPosition, dt);
 
+        Surface.PaintOverlayBelowTool(_screen, _cameraPosition, HoveredWorldPosition);
+
+        CurrentTool?.PaintToWorld(_screen, _cameraPosition);
+
+        Surface.PaintOverlayAboveTool(_screen, _cameraPosition);
+
+        foreach (var uiElement in _uiElements)
+        {
+            uiElement.PaintToScreen(_screen);
+        }
+
+        if (_currentPopup != null)
+        {
+            _currentPopup.PaintToScreen(_screen);
+        }
+        
         if (_hoveredScreenPosition.HasValue)
         {
             var originalTile = _screen.GetTile(_hoveredScreenPosition.Value);
@@ -405,28 +421,12 @@ public class EditorSession : Session
             }
             else
             {
-                var hoveredSubElement = uiElement.GetSubElementAt(_hoveredScreenPosition.Value);
+                var hoveredSubElement = uiElement.GetSubElementAt(_hoveredScreenPosition.Value - uiElement.Rectangle.TopLeft);
                 if (hoveredSubElement != null)
                 {
-                    hoveredSubElement.ShowHover(_screen, _hoveredScreenPosition.Value);
+                    hoveredSubElement.ShowHover(_screen, _hoveredScreenPosition.Value, uiElement.Rectangle.TopLeft);
                 }
             }
-        }
-
-        Surface.PaintOverlayBelowTool(_screen, _cameraPosition, HoveredWorldPosition);
-
-        CurrentTool?.PaintToWorld(_screen, _cameraPosition);
-
-        Surface.PaintOverlayAboveTool(_screen, _cameraPosition);
-
-        foreach (var uiElement in _uiElements)
-        {
-            uiElement.PaintToScreen(_screen);
-        }
-
-        if (_currentPopup != null)
-        {
-            _currentPopup.PaintToScreen(_screen);
         }
     }
 

@@ -68,7 +68,7 @@ public class AsciiScreen
                 }
 
                 var pixelOffset = tweenableGlyph.PixelOffset.Value;
-                var rotation = tweenableGlyph.Rotation.Value;
+                var rotation = tweenableGlyph.Rotation.Value + tileState.Angle;
                 var scale = tweenableGlyph.Scale;
 
                 if (tileState.TileType == TileType.Character)

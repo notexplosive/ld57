@@ -51,11 +51,11 @@ public class UiElement
         _subElement.Add(button);
     }
 
-    public ISubElement? GetSubElementAt(GridPosition position)
+    public ISubElement? GetSubElementAt(GridPosition screenPosition)
     {
         foreach (var subElement in _subElement)
         {
-            if (subElement.Contains(position))
+            if (subElement.Contains(screenPosition))
             {
                 return subElement;
             }

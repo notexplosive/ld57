@@ -42,7 +42,7 @@ public class SelectableButton<T> : ISubElement where T : class
         return relativePosition == _gridPosition;
     }
 
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
+    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
     {
         var newTile = screen.GetTile(hoveredTilePosition) with {BackgroundColor = Color.LightBlue, BackgroundIntensity = 1f};
         screen.PutTile(hoveredTilePosition, newTile);

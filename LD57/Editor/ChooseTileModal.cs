@@ -1,6 +1,7 @@
 ﻿using System;
 using ExplogineCore.Data;
 using LD57.CartridgeManagement;
+using LD57.Core;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -11,11 +12,13 @@ public class ChooseTileModal : Popup
 {
     private readonly Func<ICanvasTileShape> _getChosenShape;
     private readonly Func<XyBool> _getFlipState;
+    private readonly Func<QuarterRotation> _getRotation;
 
-    public ChooseTileModal(GridRectangle corners, Func<ICanvasTileShape> getChosenShape, Func<XyBool> getFlipState) : base(corners)
+    public ChooseTileModal(GridRectangle corners, Func<ICanvasTileShape> getChosenShape, Func<XyBool> getFlipState, Func<QuarterRotation> getRotation) : base(corners)
     {
         _getChosenShape = getChosenShape;
         _getFlipState = getFlipState;
+        _getRotation = getRotation;
         AddInputListener(keyboard =>
         {
             if (keyboard.GetButton(Keys.Escape).WasPressed)
@@ -25,11 +28,36 @@ public class ChooseTileModal : Popup
         });
         
         var mirrorHorizontallyButton = new Button(new GridPosition(1,1), () => ChooseMirrorState(new XyBool(X: !getFlipState().X, Y: getFlipState().Y)));
-        mirrorHorizontallyButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Tools, 10));
+        mirrorHorizontallyButton.SetTileStateGetter(() =>
+        {
+            var frame = 10;
+            if (getFlipState().X)
+            {
+                frame = 11;
+            }
+            return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue};
+        });
         AddButton(mirrorHorizontallyButton);
+        
         var mirrorVerticallyButton = new Button(new GridPosition(2,1), () => ChooseMirrorState(new XyBool(X: getFlipState().X, Y: !getFlipState().Y)));
-        mirrorVerticallyButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Tools, 12));
+        mirrorVerticallyButton.SetTileStateGetter(() =>
+        {
+            var frame = 12;
+            if (getFlipState().Y)
+            {
+                frame = 13;
+            }
+            return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue};
+        });
         AddButton(mirrorVerticallyButton);
+        
+        var rotateCcwButton = new Button(new GridPosition(3,1), () => ChooseRotation(getRotation().CounterClockwisePrevious()));
+        rotateCcwButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Entities, 27) with {ForegroundColor = Color.LightBlue});
+        AddButton(rotateCcwButton);
+        
+        var rotateCwButton = new Button(new GridPosition(4,1), () => ChooseRotation(getRotation().ClockwiseNext()));
+        rotateCwButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Entities, 27) with {Flip = new XyBool(true,false), ForegroundColor = Color.LightBlue});
+        AddButton(rotateCwButton);
 
         var topLeftPadding = new GridPosition(1, 2);
         var maxWidth = corners.Width - 2 - topLeftPadding.X;
@@ -55,8 +83,9 @@ public class ChooseTileModal : Popup
                         return GetHighlightedTileState(shape);
                     }
 
-                    return shape.GetTileState() with {Flip = getFlipState()};
+                    return GetBasicTileState(shape);
                 });
+                button.SetTileStateOnHoverGetter(() => GetHoveredTileState(shape));
                 AddButton(button);
                 HandleLineFeed(ref x, ref y, maxWidth);
             }
@@ -78,13 +107,31 @@ public class ChooseTileModal : Popup
                         return GetHighlightedTileState(shape);
                     }
 
-                    return shape.GetTileState() with {Flip = getFlipState()};
+                    return GetBasicTileState(shape);
                 });
+                button.SetTileStateOnHoverGetter(() => GetHoveredTileState(shape));
                 AddButton(button);
                 HandleLineFeed(ref x, ref y, maxWidth);
             }
         }
     }
+
+    private TileState GetHoveredTileState(ICanvasTileShape shape)
+    {
+        return GetBasicTileState(shape).WithBackground(Color.Red);
+    }
+
+    private TileState GetBasicTileState(ICanvasTileShape shape)
+    {
+        return shape.GetTileState() with {Flip = _getFlipState(), Angle = _getRotation().Radians};
+    }
+
+    private void ChooseRotation(QuarterRotation newRotation)
+    {
+        ChoseRotation?.Invoke(newRotation);
+    }
+    
+    public event Action<QuarterRotation>? ChoseRotation;
 
     private void ChooseMirrorState(XyBool xyBool)
     {
@@ -95,7 +142,7 @@ public class ChooseTileModal : Popup
 
     private TileState GetHighlightedTileState(ICanvasTileShape shape)
     {
-        return shape.GetTileState() with {ForegroundColor = Color.Orange, Flip = _getFlipState()};
+        return GetBasicTileState(shape) with {ForegroundColor = Color.Orange};
     }
 
     private static void HandleLineFeed(ref int x, ref int y, int maxWidth)

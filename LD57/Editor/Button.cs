@@ -31,12 +31,12 @@ public class Button : ISubElement
         return relativePosition == _position;
     }
 
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
+    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
     {
         var getter = GetTileStateOnHover();
         if (getter.HasValue)
         {
-            screen.PutTile(_position, getter.Value);
+            screen.PutTile(hoveredTilePosition, getter.Value);
         }
     }
 

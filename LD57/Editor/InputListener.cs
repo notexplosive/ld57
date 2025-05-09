@@ -23,7 +23,7 @@ public class InputListener : ISubElement
         return false;
     }
 
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
+    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
     {
         
     }

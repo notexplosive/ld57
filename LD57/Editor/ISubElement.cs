@@ -7,7 +7,7 @@ public interface ISubElement
 {
     void PutOnScreen(AsciiScreen screen, GridPosition topLeft);
     bool Contains(GridPosition relativePosition);
-    void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition);
+    void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft);
     void OnClicked();
     void OnTextInput(char[] enteredCharacters);
     void UpdateKeyboardInput(ConsumableInput.ConsumableKeyboard inputKeyboard);

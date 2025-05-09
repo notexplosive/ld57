@@ -16,6 +16,7 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
 
     public override void PaintWorldToScreen(AsciiScreen screen, GridPosition cameraPosition, float dt)
     {
+        
     }
 
     public override void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition,

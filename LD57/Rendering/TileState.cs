@@ -12,7 +12,8 @@ public readonly record struct TileState(
     SpriteSheet? SpriteSheet = null,
     int Frame = 0,
     float BackgroundIntensity = 0f,
-    XyBool Flip = default
+    XyBool Flip = default,
+    float Angle = 0
 )
 {
     public static readonly TileState TransparentEmpty = new(TileType.Skip, Color.White, Color.White);

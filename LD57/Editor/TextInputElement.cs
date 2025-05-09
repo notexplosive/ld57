@@ -31,7 +31,7 @@ public class TextInputElement : ISubElement
             .Contains(relativePosition, true);
     }
 
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
+    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
     {
         
     }

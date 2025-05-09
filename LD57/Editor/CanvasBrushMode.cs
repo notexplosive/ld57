@@ -1,5 +1,6 @@
 ﻿using System;
 using ExplogineCore.Data;
+using LD57.Core;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -9,6 +10,7 @@ public class CanvasBrushMode
 {
     private ICanvasTileShape _currentShape = new CanvasTileShapeSprite("Walls", 0);
     private XyBool _flipState;
+    private QuarterRotation _rotation = QuarterRotation.Upright;
     public CanvasBrushLayer ForegroundShapeAndTransform { get; set; } = new(true, true);
     public CanvasBrushLayer ForegroundColor { get; set; } = new(true, true);
     public CanvasBrushLayer BackgroundColorAndIntensity { get; set; } = new(true, true);
@@ -50,10 +52,16 @@ public class CanvasBrushMode
     private void OpenForegroundTileStateModal()
     {
         var chooseTileModal = new ChooseTileModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
-            () => _currentShape, () => _flipState);
+            () => _currentShape, () => _flipState, () => _rotation);
         chooseTileModal.ChoseShape += SetTileShape;
         chooseTileModal.ChoseFlipState += SetFlipState;
+        chooseTileModal.ChoseRotation += ChooseRotation;
         RequestModal?.Invoke(chooseTileModal);
+    }
+
+    private void ChooseRotation(QuarterRotation rotation)
+    {
+        _rotation = rotation;
     }
 
     private void SetFlipState(XyBool mirrorState)
