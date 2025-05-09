@@ -9,7 +9,6 @@ namespace LD57.Editor;
 
 public class ChooseColorModal : Popup
 {
-    private readonly bool _shouldUseIntensity;
 
     public ChooseColorModal(GridRectangle rectangle, Func<string> getColor, Func<float>? getIntensity = null) : base(rectangle)
     {
@@ -26,8 +25,6 @@ public class ChooseColorModal : Popup
 
         if (getIntensity != null)
         {
-            _shouldUseIntensity = true;
-
             var numberOfIntensities = 10;
             for (int intensityIndex = 0; intensityIndex < numberOfIntensities; intensityIndex++)
             {
