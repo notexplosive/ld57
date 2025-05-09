@@ -81,7 +81,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         
         editorSession.RebuildScreen();
         
-        canvasBrushMode.RequestModal += editorSession.OpenPopup;
+        canvasBrushMode.RequestedModal += editorSession.OpenPopup;
 
         return editorSession;
     }

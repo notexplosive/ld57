@@ -8,8 +8,11 @@ namespace LD57.Editor;
 
 public class CanvasBrushMode
 {
+    private string _backgroundColorName = "white";
+    private float _backgroundIntensity;
     private ICanvasTileShape _currentShape = new CanvasTileShapeSprite("Walls", 0);
     private XyBool _flipState;
+    private string _foregroundColorName = "white";
     private QuarterRotation _rotation = QuarterRotation.Upright;
     public CanvasBrushLayer ForegroundShapeAndTransform { get; set; } = new(true, true);
     public CanvasBrushLayer ForegroundColor { get; set; } = new(true, true);
@@ -17,7 +20,8 @@ public class CanvasBrushMode
 
     public CanvasTileData GetTile()
     {
-        return CanvasTileData.FromSettings(_currentShape, _flipState, _rotation);
+        return CanvasTileData.FromSettings(_currentShape, _flipState, _rotation, _foregroundColorName,
+            _backgroundColorName, _backgroundIntensity);
     }
 
     public UiElement CreateUi(AsciiScreen screen)
@@ -26,37 +30,78 @@ public class CanvasBrushMode
         var topLeft = screen.Rectangle.TopRight + new GridPosition(-panelSize.X, 0);
         var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize + new GridPosition(1, 1)));
 
-        element.AddDynamicTile(new GridPosition(1, 1), GetCurrentTileState);
-
         element.AddButton(
-            new Button(new GridPosition(1, 2), OpenForegroundTileStateModal).SetTileStateGetter(
-                GetForegroundShape));
-        element.AddDynamicTile(new GridPosition(1, 3), GetForegroundColorTileState);
-        element.AddDynamicTile(new GridPosition(1, 4), GetBackgroundTileState);
+            new Button(new GridPosition(1, 1), OpenShapeModal)
+                .SetTileStateGetter(GetForegroundShape));
+        element.AddButton(
+            new Button(new GridPosition(1, 2), OpenForegroundColorModal)
+                .SetTileStateGetter(GetForegroundColorTileState));
+        element.AddButton(
+            new Button(new GridPosition(1, 3), OpenBackgroundColorModal)
+                .SetTileStateGetter(GetBackgroundTileState));
 
-        element.AddDynamicTile(new GridPosition(2, 2),
+        element.AddDynamicTile(new GridPosition(2, 1),
             GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible));
-        element.AddDynamicTile(new GridPosition(2, 3), GetVisibleTileState(() => ForegroundColor.IsVisible));
-        element.AddDynamicTile(new GridPosition(2, 4),
+        element.AddDynamicTile(new GridPosition(2, 2), GetVisibleTileState(() => ForegroundColor.IsVisible));
+        element.AddDynamicTile(new GridPosition(2, 3),
             GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible));
 
-        element.AddDynamicTile(new GridPosition(3, 2),
+        element.AddDynamicTile(new GridPosition(3, 1),
             GetEditingTileState(() => ForegroundShapeAndTransform.IsEditing));
-        element.AddDynamicTile(new GridPosition(3, 3), GetEditingTileState(() => ForegroundColor.IsEditing));
-        element.AddDynamicTile(new GridPosition(3, 4),
+        element.AddDynamicTile(new GridPosition(3, 2), GetEditingTileState(() => ForegroundColor.IsEditing));
+        element.AddDynamicTile(new GridPosition(3, 3),
             GetEditingTileState(() => BackgroundColorAndIntensity.IsEditing));
 
         return element;
     }
 
-    private void OpenForegroundTileStateModal()
+    private void OpenForegroundColorModal()
     {
-        var chooseTileModal = new ChooseTileModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
+        var modal = new ChooseColorModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
+            () => _foregroundColorName);
+
+        modal.ChoseColor += SetForegroundColor;
+        RequestModal(modal);
+    }
+
+    private void OpenBackgroundColorModal()
+    {
+        var modal = new ChooseColorModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
+            () => _backgroundColorName, () => _backgroundIntensity);
+
+        modal.ChoseColor += SetBackgroundColor;
+        modal.ChoseIntensity += SetIntensity;
+        RequestModal(modal);
+    }
+
+    private void RequestModal(Popup chooseTileModal)
+    {
+        RequestedModal?.Invoke(chooseTileModal);
+    }
+
+    private void SetIntensity(float intensity)
+    {
+        _backgroundIntensity = intensity;
+    }
+
+    private void SetBackgroundColor(string color)
+    {
+        _backgroundColorName = color;
+    }
+
+    private void SetForegroundColor(string color)
+    {
+        _foregroundColorName = color;
+    }
+
+    private void OpenShapeModal()
+    {
+        var chooseTileModal = new ChooseShapeModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
             () => _currentShape, () => _flipState, () => _rotation);
         chooseTileModal.ChoseShape += SetTileShape;
         chooseTileModal.ChoseFlipState += SetFlipState;
         chooseTileModal.ChoseRotation += ChooseRotation;
-        RequestModal?.Invoke(chooseTileModal);
+        RequestModal(chooseTileModal);
     }
 
     private void ChooseRotation(QuarterRotation rotation)
@@ -74,7 +119,7 @@ public class CanvasBrushMode
         _currentShape = shape;
     }
 
-    public event Action<Popup>? RequestModal;
+    public event Action<Popup>? RequestedModal;
 
     private TileState GetCurrentTileState()
     {
@@ -109,15 +154,15 @@ public class CanvasBrushMode
 
     private TileState GetBackgroundTileState()
     {
-        return TileState.BackgroundOnly(Color.Orange, 0.5f);
+        return TileState.BackgroundOnly(ResourceAlias.Color(_backgroundColorName), _backgroundIntensity);
     }
 
     private TileState GetForegroundColorTileState()
     {
-        return TileState.BackgroundOnly(Color.LightBlue, 1f);
+        return TileState.BackgroundOnly(ResourceAlias.Color(_foregroundColorName), 1f);
     }
 
-    private TileState? GetForegroundShape()
+    private TileState GetForegroundShape()
     {
         return _currentShape.GetTileState() with {Flip = _flipState};
     }

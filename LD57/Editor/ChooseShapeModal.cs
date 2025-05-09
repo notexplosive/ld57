@@ -8,13 +8,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LD57.Editor;
 
-public class ChooseTileModal : Popup
+public class ChooseShapeModal : Popup
 {
     private readonly Func<ICanvasTileShape> _getChosenShape;
     private readonly Func<XyBool> _getFlipState;
     private readonly Func<QuarterRotation> _getRotation;
 
-    public ChooseTileModal(GridRectangle corners, Func<ICanvasTileShape> getChosenShape, Func<XyBool> getFlipState, Func<QuarterRotation> getRotation) : base(corners)
+    public ChooseShapeModal(GridRectangle corners, Func<ICanvasTileShape> getChosenShape, Func<XyBool> getFlipState, Func<QuarterRotation> getRotation) : base(corners)
     {
         _getChosenShape = getChosenShape;
         _getFlipState = getFlipState;

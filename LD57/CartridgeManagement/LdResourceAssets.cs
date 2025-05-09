@@ -22,7 +22,7 @@ public class LdResourceAssets
     private static LdResourceAssets? instanceImpl;
 
     private readonly Dictionary<string, Canvas> _dynamicTextures = new();
-    private readonly Dictionary<string, Color?> _namedColors = new();
+    public Dictionary<string, Color?> NamedColors { get; } = new();
     private readonly object _soundLock = new();
 
     public static LdResourceAssets Instance => instanceImpl ??= new LdResourceAssets();
@@ -39,7 +39,7 @@ public class LdResourceAssets
     {
         get
         {
-            foreach (var color in _namedColors.Values)
+            foreach (var color in NamedColors.Values)
             {
                 if (color.HasValue)
                 {
@@ -215,17 +215,17 @@ public class LdResourceAssets
     {
         foreach (var keyValuePair in colorTable)
         {
-            _namedColors.Add(keyValuePair.Key, ColorExtensions.FromRgbaHexString(keyValuePair.Value));
+            NamedColors.Add(keyValuePair.Key, ColorExtensions.FromRgbaHexString(keyValuePair.Value));
         }
     }
 
     public bool HasNamedColor(string name)
     {
-        return _namedColors.ContainsKey(name);
+        return NamedColors.ContainsKey(name);
     }
 
     public Color GetNamedColor(string name)
     {
-        return _namedColors.GetValueOrDefault(name) ?? MissingColor;
+        return NamedColors.GetValueOrDefault(name) ?? MissingColor;
     }
 }

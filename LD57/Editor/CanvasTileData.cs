@@ -38,13 +38,16 @@ public record CanvasTileData
     [JsonProperty("rotation")]
     public float Angle { get; set; }
 
+    [JsonProperty("background_intensity")]
+    public float BackgroundIntensity { get; set; }
+
     public TileState FullTileState()
     {
         if (TileType == TileType.Sprite)
         {
             var sheet = CalculateSheet();
             return TileState.Sprite(sheet, Frame, CalculateForegroundColor())
-                    .WithBackground(CalculateBackgroundColor(), 0.25f) with
+                    .WithBackground(CalculateBackgroundColor(), BackgroundIntensity) with
                 {
                     Flip = GetFlipState(),
                     Angle = Angle
@@ -54,7 +57,7 @@ public record CanvasTileData
         if (TileType == TileType.Character)
         {
             return TileState.StringCharacter(TextString ?? "?", CalculateForegroundColor())
-                    .WithBackground(CalculateBackgroundColor()) with
+                    .WithBackground(CalculateBackgroundColor(), BackgroundIntensity) with
                 {
                     Flip = GetFlipState(),
                     Angle = Angle
@@ -84,7 +87,8 @@ public record CanvasTileData
         return ResourceAlias.Color(ForegroundColorName);
     }
 
-    public static CanvasTileData FromSettings(ICanvasTileShape currentShape, XyBool flipState, QuarterRotation rotation)
+    public static CanvasTileData FromSettings(ICanvasTileShape currentShape, XyBool flipState, QuarterRotation rotation,
+        string foregroundColor, string backgroundColor, float backgroundIntensity)
     {
         var result = new CanvasTileData();
 
@@ -94,6 +98,9 @@ public record CanvasTileData
         result.FlipX = flipState.X;
         result.FlipY = flipState.Y;
         result.Angle = rotation.Radians;
+        result.ForegroundColorName = foregroundColor;
+        result.BackgroundIntensity = backgroundIntensity;
+        result.BackgroundColorName = backgroundColor;
 
         if (currentShape is CanvasTileShapeSprite spriteShape)
         {

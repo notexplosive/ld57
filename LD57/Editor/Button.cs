@@ -8,7 +8,7 @@ public class Button : ISubElement
 {
     private readonly Action _onClick;
     private readonly GridPosition _position;
-    private Func<TileState?>? _getTileState;
+    private Func<TileState>? _getTileState;
     private Func<TileState?>? _getTileStateOnHover;
 
     public Button(GridPosition position, Action onClick)
@@ -53,7 +53,7 @@ public class Button : ISubElement
     {
     }
 
-    public Button SetTileStateGetter(Func<TileState?> getTileState)
+    public Button SetTileStateGetter(Func<TileState> getTileState)
     {
         _getTileState = getTileState;
         return this;
