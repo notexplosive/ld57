@@ -105,15 +105,6 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
                 screen.PutTile(position, previousTileState with {BackgroundColor = color, BackgroundIntensity = 1f});
             }
         }
-
-        foreach (var worldPosition in _selection.AllPositions())
-        {
-            var screenPosition = worldPosition - cameraPosition;
-            if (screen.ContainsPosition(screenPosition))
-            {
-                screen.PutTile(screenPosition, _selection.GetTileStateAt(worldPosition - _selection.Offset));
-            }
-        }
     }
 
     public override void PaintOverlayAboveTool(AsciiScreen screen, GridPosition cameraPosition)

@@ -9,6 +9,8 @@ public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData>
 {
     public override void PlaceInkAt(GridPosition position, CanvasTileData template)
     {
+        EraseAt(position);
+        
         Content.Add(new PlacedCanvasTile
         {
             Position = position,

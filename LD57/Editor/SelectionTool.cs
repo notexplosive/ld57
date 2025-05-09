@@ -203,7 +203,7 @@ public abstract class SelectionTool : IEditorTool
 
         var topLeft = _selectionAnchor.Value;
         var bottomRight = _editorSession.HoveredWorldPosition.Value;
-        return new GridRectangle(topLeft, bottomRight);
+        return new GridRectangle(topLeft, bottomRight, true);
     }
 
     private IEnumerable<GridPosition> PendingSelectedPositions()

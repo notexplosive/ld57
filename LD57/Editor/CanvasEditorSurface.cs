@@ -5,18 +5,19 @@ namespace LD57.Editor;
 
 public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, CanvasTileData>
 {
-    private readonly CanvasEditorSelection _selection;
-
     public CanvasEditorSurface() : base("Canvases")
     {
-        _selection = new CanvasEditorSelection(this);
+        RealSelection = new CanvasEditorSelection(this);
     }
 
-    protected override CanvasEditorSelection RealSelection => _selection;
+    protected override CanvasEditorSelection RealSelection { get; }
 
     public override void PaintWorldToScreen(AsciiScreen screen, GridPosition cameraPosition, float dt)
     {
-        
+        foreach (var item in Data.Content)
+        {
+            screen.PutTile(item.Position - cameraPosition, item.TileState());
+        }
     }
 
     public override void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition,

@@ -27,6 +27,6 @@ public class CanvasEditorBrushTool : BrushTool
 
     protected override void OnPaint(GridPosition hoveredWorldPosition)
     {
-        
+        _canvasEditorSurface.Data.PlaceInkAt(hoveredWorldPosition, _canvasBrushMode.GetTile());
     }
 }

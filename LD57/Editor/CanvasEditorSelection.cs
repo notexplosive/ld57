@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -17,8 +16,13 @@ public class CanvasEditorSelection : EditorSelection<PlacedCanvasTile>
 
     public override TileState GetTileStateAt(GridPosition internalPosition)
     {
-        var entities = PlacedObjects.Where(a => a.Position == internalPosition);
-        return entities.First().TileState();
+        return (PlacedObjects.FirstOrDefault(a => a.Position == internalPosition)?.TileState() ??
+                TileState.BackgroundOnly(Color.White, 1f)) with
+        {
+            ForegroundColor = Color.DarkGoldenrod,
+            BackgroundColor = Color.Goldenrod,
+            BackgroundIntensity = 1f
+        };
     }
 
     protected override IEnumerable<PlacedCanvasTile> GetAllObjectsAt(GridPosition position)

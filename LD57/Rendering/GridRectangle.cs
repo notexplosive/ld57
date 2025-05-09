@@ -7,7 +7,7 @@ namespace LD57.Rendering;
 
 public readonly record struct GridRectangle
 {
-    public GridRectangle(GridPosition a, GridPosition b)
+    public GridRectangle(GridPosition a, GridPosition b, bool isInclusive = false)
     {
         A = a;
         B = b;
@@ -16,6 +16,12 @@ public readonly record struct GridRectangle
         Top = Math.Min(a.Y, b.Y);
         Width = Math.Abs(a.X - b.X);
         Height = Math.Abs(a.Y - b.Y);
+
+        if (isInclusive)
+        {
+            Width++;
+            Height++;
+        }
     }
 
     public int Left { get; init; }

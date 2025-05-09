@@ -1,7 +1,7 @@
 ﻿using System;
 using ExplogineCore.Data;
 using ExplogineMonoGame.AssetManagement;
-using LD57.CartridgeManagement;
+using LD57.Core;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
@@ -13,39 +13,52 @@ public record CanvasTileData
 {
     [JsonProperty("background_color")]
     public string? BackgroundColorName;
-    
+
+    [JsonProperty("flip_x")]
+    public bool FlipX;
+
+    [JsonProperty("flip_y")]
+    public bool FlipY;
+
     [JsonProperty("foreground_color")]
     public string? ForegroundColorName;
-    
-    [JsonProperty("sheet")]
-    public string? SheetName;
-    
+
     [JsonProperty("frame")]
     public int Frame;
-    
+
+    [JsonProperty("sheet")]
+    public string? SheetName;
+
     [JsonProperty("text")]
     public string? TextString;
 
     [JsonProperty("tile_type")]
     public TileType TileType;
 
-    [JsonProperty("flip_x")]
-    public bool FlipX;
-    
-    [JsonProperty("flip_y")]
-    public bool FlipY;
-    
+    [JsonProperty("rotation")]
+    public float Angle { get; set; }
+
     public TileState FullTileState()
     {
         if (TileType == TileType.Sprite)
         {
             var sheet = CalculateSheet();
-            return TileState.Sprite(sheet, Frame, CalculateForegroundColor()).WithBackground(CalculateBackgroundColor() , 0.25f) with {Flip = GetFlipState()};
+            return TileState.Sprite(sheet, Frame, CalculateForegroundColor())
+                    .WithBackground(CalculateBackgroundColor(), 0.25f) with
+                {
+                    Flip = GetFlipState(),
+                    Angle = Angle
+                };
         }
 
         if (TileType == TileType.Character)
         {
-            return TileState.StringCharacter(TextString ?? "?", CalculateForegroundColor()).WithBackground(CalculateBackgroundColor()) with {Flip = GetFlipState()};
+            return TileState.StringCharacter(TextString ?? "?", CalculateForegroundColor())
+                    .WithBackground(CalculateBackgroundColor()) with
+                {
+                    Flip = GetFlipState(),
+                    Angle = Angle
+                };
         }
 
         return TileState.TransparentEmpty;
@@ -71,7 +84,7 @@ public record CanvasTileData
         return ResourceAlias.Color(ForegroundColorName);
     }
 
-    public static CanvasTileData FromSettings(ICanvasTileShape currentShape, XyBool flipState)
+    public static CanvasTileData FromSettings(ICanvasTileShape currentShape, XyBool flipState, QuarterRotation rotation)
     {
         var result = new CanvasTileData();
 
@@ -80,6 +93,7 @@ public record CanvasTileData
         result.TileType = tileStateFromShape.TileType;
         result.FlipX = flipState.X;
         result.FlipY = flipState.Y;
+        result.Angle = rotation.Radians;
 
         if (currentShape is CanvasTileShapeSprite spriteShape)
         {
@@ -92,9 +106,8 @@ public record CanvasTileData
             result.TextString = stringShape.StringContent;
         }
 
-        
-        // todo: take influence from other settings
-        
+        // todo: take influence from other settings (eg: color)
+
         return result;
     }
 }

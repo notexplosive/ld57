@@ -1,4 +1,5 @@
 ﻿using System;
+using ExplogineMonoGame.AssetManagement;
 using LD57.Gameplay;
 using LD57.Rendering;
 using Newtonsoft.Json;
@@ -24,6 +25,6 @@ public record PlacedCanvasTile : IPlacedObject<PlacedCanvasTile>
 
     public TileState TileState()
     {
-        return Rendering.TileState.StringCharacter("#");
+        return CanvasTileData.FullTileState();
     }
 }

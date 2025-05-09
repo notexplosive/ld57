@@ -17,7 +17,7 @@ public class CanvasBrushMode
 
     public CanvasTileData GetTile()
     {
-        return CanvasTileData.FromSettings(_currentShape, _flipState);
+        return CanvasTileData.FromSettings(_currentShape, _flipState, _rotation);
     }
 
     public UiElement CreateUi(AsciiScreen screen)

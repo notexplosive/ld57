@@ -390,6 +390,16 @@ public class EditorSession : Session
 
         Surface.PaintWorldToScreen(_screen, _cameraPosition, dt);
 
+        // paint selection
+        foreach (var worldPosition in Surface.Selection.AllPositions())
+        {
+            var screenPosition = worldPosition - _cameraPosition;
+            if (_screen.ContainsPosition(screenPosition))
+            {
+                _screen.PutTile(screenPosition, Surface.Selection.GetTileStateAt(worldPosition - Surface.Selection.Offset));
+            }
+        }
+        
         Surface.PaintOverlayBelowTool(_screen, _cameraPosition, HoveredWorldPosition);
 
         CurrentTool?.PaintToWorld(_screen, _cameraPosition);
