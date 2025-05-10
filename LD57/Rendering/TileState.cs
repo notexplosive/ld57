@@ -78,4 +78,14 @@ public readonly record struct TileState(
     {
         return this with {BackgroundColor = color, BackgroundIntensity = intensity};
     }
+
+    public TileState WithSprite(SpriteSheet sheet, int frame)
+    {
+        return this with {TileType = TileType.Sprite, Frame = frame, SpriteSheet = sheet};
+    }
+
+    public TileState WithForeground(Color foregroundColor)
+    {
+        return this with { ForegroundColor = foregroundColor };
+    }
 }

@@ -29,16 +29,21 @@ public class CanvasBrushMode
         var panelSize = new GridPosition(4, 4);
         var topLeft = screen.RoomRectangle.TopRight + new GridPosition(-panelSize.X, 0);
         var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize));
-        
-        element.AddButton(
-            new Button(new GridPosition(1, 1), OpenShapeModal)
-                .SetTileStateGetter(GetForegroundShape));
+
+        element.AddButton(new Button(new GridPosition(1, 1), OpenShapeModal)
+            .SetTileStateGetter(GetForegroundShape)
+            .SetTileStateOnHoverGetter(() => GetForegroundShape().WithForeground(Color.LimeGreen))
+        );
         element.AddButton(
             new Button(new GridPosition(1, 2), OpenForegroundColorModal)
-                .SetTileStateGetter(GetForegroundColorTileState));
+                .SetTileStateGetter(GetForegroundColorTileState)
+                .SetTileStateOnHoverGetter(() => GetForegroundColorTileState().WithSprite(ResourceAlias.Tools, 0))
+            );
         element.AddButton(
             new Button(new GridPosition(1, 3), OpenBackgroundColorModal)
-                .SetTileStateGetter(GetBackgroundTileState));
+                .SetTileStateGetter(GetBackgroundTileState)
+                .SetTileStateOnHoverGetter(() => GetBackgroundTileState().WithSprite(ResourceAlias.Tools, 0))
+            );
 
         element.AddDynamicTile(new GridPosition(2, 1),
             GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible));
