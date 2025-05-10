@@ -19,7 +19,7 @@ public class TextInputElement : ISubElement
         _gridPosition = gridPosition;
     }
 
-    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
+    public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
         screen.PutString(_gridPosition, _textBuffer);
         screen.PutTile(_gridPosition + new GridPosition(_textBuffer.Length, 0), TileState.Sprite(ResourceAlias.Walls, 0));

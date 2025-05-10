@@ -13,7 +13,7 @@ public class InputListener : ISubElement
         _onInput = onInput;
     }
 
-    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
+    public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
         
     }

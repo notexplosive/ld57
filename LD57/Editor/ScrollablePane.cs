@@ -1,5 +1,4 @@
-﻿using ExplogineMonoGame;
-using LD57.Rendering;
+﻿using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
 namespace LD57.Editor;
@@ -17,18 +16,20 @@ public class ScrollablePane : UiElement, ISubElement
     public ScrollablePane(GridRectangle viewport) : base(viewport, false)
     {
         _viewport = viewport;
+
         // initially, the content is the same size as the viewport
         _contentBounds = viewport;
     }
 
-    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
+    public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
         screen.PutFilledRectangle(TileState.BackgroundOnly(Color.Blue, 1f), _viewport);
-        PaintUiElement(screen, new GridPosition()); // todo: make it possible to hover things in a scroll pane
+        PaintUiElement(screen, hoveredElement);
     }
 
     public void OnClicked()
     {
+        // do nothing, clicking the scroll area directly doesn't do anything
     }
 
     public void SetContentHeight(int height)

@@ -17,7 +17,7 @@ public class Button : ISubElement
         _onClick = onClick;
     }
 
-    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
+    public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
         var getter = GetTileState();
         if (getter.HasValue)
@@ -25,7 +25,7 @@ public class Button : ISubElement
             screen.PutTile(_position, getter.Value);
         }
         
-        if (isHovered)
+        if (hoveredElement == this)
         {
             var hoverGetter = GetTileStateOnHover();
             if (hoverGetter.HasValue)

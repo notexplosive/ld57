@@ -21,7 +21,7 @@ public class SelectableButton<T> : ISubElement where T : class
         _selector.Selected ??= selectableContent;
     }
 
-    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
+    public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
         var renderedTileState = _tileState;
         if (_selector.IsSelected(_selectableContent))
@@ -36,7 +36,7 @@ public class SelectableButton<T> : ISubElement where T : class
 
         screen.PutTile(_gridPosition, renderedTileState);
 
-        if (isHovered)
+        if (hoveredElement == this)
         {
             var newTile = screen.GetTile(_gridPosition) with
             {

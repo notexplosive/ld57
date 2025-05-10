@@ -19,24 +19,17 @@ public class UiElement
 
     public GridRectangle Rectangle { get; }
 
-    public void PaintUiElement(AsciiScreen screen, GridPosition? hoveredScreenPosition)
+    public void PaintUiElement(AsciiScreen screen, ISubElement? hoveredSubElement)
     {
         if (_shouldDrawFrame)
         {
             screen.PutFrameRectangle(ResourceAlias.PopupFrame, Rectangle);
         }
 
-
-        ISubElement? hoveredSubElement = null;
-        if (hoveredScreenPosition.HasValue)
-        {
-            hoveredSubElement = GetSubElementAt(hoveredScreenPosition.Value);
-        }
-
         screen.PushTransform(Rectangle.TopLeft);
         foreach (var subElement in _subElements)
         {
-            subElement.PutSubElementOnScreen(screen, hoveredSubElement == subElement);
+            subElement.PutSubElementOnScreen(screen, hoveredSubElement);
         }
 
         screen.PopTransform();
@@ -74,12 +67,23 @@ public class UiElement
         return pane;
     }
 
-    public ISubElement? GetSubElementAt(GridPosition absoluteScreenPosition)
+    public ISubElement? GetSubElementAt(GridPosition? absoluteScreenPosition)
     {
+        if (!absoluteScreenPosition.HasValue)
+        {
+            return null;
+        }
+        
         foreach (var subElement in _subElements)
         {
-            if (subElement.Contains(absoluteScreenPosition - Rectangle.TopLeft))
+            var relativePosition = absoluteScreenPosition.Value - Rectangle.TopLeft;
+            if (subElement.Contains(relativePosition))
             {
+                if (subElement is UiElement subUiElement)
+                {
+                    return subUiElement.GetSubElementAt(relativePosition);
+                }
+                
                 return subElement;
             }
         }

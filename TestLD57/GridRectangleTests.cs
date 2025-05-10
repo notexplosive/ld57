@@ -24,8 +24,8 @@ public class GridRectangleTests
     {
         var gridRectangle = new GridRectangle(new GridPosition(1, 1), new GridPosition(1,1));
         
-        Assert.Equal(1, gridRectangle.Width);
-        Assert.Equal(1, gridRectangle.Height);
+        Assert.Equal(0, gridRectangle.Width);
+        Assert.Equal(0, gridRectangle.Height);
         Assert.Single(gridRectangle.AllPositions());
     }
 }

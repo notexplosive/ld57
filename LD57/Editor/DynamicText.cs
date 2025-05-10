@@ -15,7 +15,7 @@ public class DynamicText : ISubElement
         _getString = getString;
     }
 
-    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
+    public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
         screen.PutString(Position, _getString());
     }

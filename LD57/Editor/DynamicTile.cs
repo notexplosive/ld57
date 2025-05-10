@@ -15,7 +15,7 @@ public class DynamicTile : ISubElement
         _getTile = getTile;
     }
 
-    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
+    public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
         screen.PutTile(Position, _getTile());
     }

@@ -404,12 +404,12 @@ public class EditorSession : Session
 
         foreach (var uiElement in _uiElements)
         {
-            uiElement.PaintUiElement(_screen, _hoveredScreenPosition);
+            uiElement.PaintUiElement(_screen, uiElement.GetSubElementAt(_hoveredScreenPosition));
         }
 
         if (_currentPopup != null)
         {
-            _currentPopup.PaintUiElement(_screen, _hoveredScreenPosition);
+            _currentPopup.PaintUiElement(_screen, _currentPopup.GetSubElementAt(_hoveredScreenPosition));
         }
     }
 
