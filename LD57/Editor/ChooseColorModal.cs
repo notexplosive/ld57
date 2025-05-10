@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
@@ -9,8 +8,8 @@ namespace LD57.Editor;
 
 public class ChooseColorModal : Popup
 {
-
-    public ChooseColorModal(GridRectangle rectangle, Func<string> getColor, Func<float>? getIntensity = null) : base(rectangle)
+    public ChooseColorModal(GridRectangle rectangle, Func<string> getColor, Func<float>? getIntensity = null) :
+        base(rectangle)
     {
         AddInputListener(keyboard =>
         {
@@ -20,34 +19,31 @@ public class ChooseColorModal : Popup
             }
         });
 
-        
         var topLeftPadding = new GridPosition(1, 1);
 
         if (getIntensity != null)
         {
             var numberOfIntensities = 10;
-            for (int intensityIndex = 0; intensityIndex < numberOfIntensities; intensityIndex++)
+            for (var intensityIndex = 0; intensityIndex < numberOfIntensities; intensityIndex++)
             {
-                var intensity = (float)intensityIndex / 10;
-                
+                var intensity = (float) intensityIndex / 10;
+
                 var buttonPosition = topLeftPadding + new GridPosition(intensityIndex, 0);
 
-                var intensityButton = new Button(buttonPosition, () =>
-                {
-                    ChooseIntensity(intensity);
-                });
-                
+                var intensityButton = new Button(buttonPosition, () => { ChooseIntensity(intensity); });
+
                 intensityButton.SetTileStateGetter(() =>
                 {
                     if (Math.Abs(getIntensity() - intensity) < 0.01f)
                     {
                         return TileState.BackgroundOnly(Color.Yellow, intensity);
                     }
+
                     return TileState.BackgroundOnly(Color.LightBlue, intensity);
                 });
                 AddButton(intensityButton);
             }
-            
+
             topLeftPadding += new GridPosition(0, 1);
         }
 
@@ -59,7 +55,7 @@ public class ChooseColorModal : Popup
                 continue;
             }
 
-            var buttonPosition = topLeftPadding + new GridPosition(0,i);
+            var buttonPosition = topLeftPadding + new GridPosition(0, i);
             var colorButton = new Button(buttonPosition, () =>
             {
                 ChooseColor(key);
@@ -69,14 +65,14 @@ public class ChooseColorModal : Popup
             {
                 if (getColor() == key)
                 {
-                    return TileState.Sprite(ResourceAlias.Entities, 0).WithBackground(color.Value, 1); 
+                    return TileState.Sprite(ResourceAlias.Entities, 0).WithBackground(color.Value);
                 }
 
                 return TileState.BackgroundOnly(color.Value, 1);
             });
             AddButton(colorButton);
-            
-            AddStaticText(buttonPosition + new GridPosition(1,0), key);
+
+            AddStaticText(buttonPosition + new GridPosition(1, 0), key);
             i++;
         }
     }
