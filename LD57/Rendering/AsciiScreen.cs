@@ -32,7 +32,7 @@ public class AsciiScreen
 
     public GridPosition RoomSize => new(Width - 1, Height - 1);
     public GridPosition CenterPosition => RoomSize / 2;
-    public GridRectangle Rectangle => new GridRectangle(new GridPosition(0, 0), new GridPosition(Width, Height));
+    public GridRectangle RoomRectangle => new GridRectangle(new GridPosition(0, 0), RoomSize);
 
     public void Draw(Painter painter, Vector2 offset)
     {
@@ -179,9 +179,9 @@ public class AsciiScreen
         PutTile(rectangle.BottomRight, TileState.Sprite(frame, 4));
         PutTile(rectangle.BottomLeft, TileState.Sprite(frame, 6));
 
-        for (var x = 1; x < rectangle.Width-1; x++)
+        for (var x = 1; x < rectangle.Width; x++)
         {
-            for (var y = 1; y < rectangle.Height-1; y++)
+            for (var y = 1; y < rectangle.Height; y++)
             {
                 PutTile(rectangle.TopLeft + new GridPosition(x, y), TileState.TransparentEmpty);
             }

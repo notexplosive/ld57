@@ -26,10 +26,10 @@ public class CanvasBrushMode
 
     public UiElement CreateUi(AsciiScreen screen)
     {
-        var panelSize = new GridPosition(4, 5);
-        var topLeft = screen.Rectangle.TopRight + new GridPosition(-panelSize.X, 0);
-        var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize + new GridPosition(1, 1)));
-
+        var panelSize = new GridPosition(4, 4);
+        var topLeft = screen.RoomRectangle.TopRight + new GridPosition(-panelSize.X, 0);
+        var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize));
+        
         element.AddButton(
             new Button(new GridPosition(1, 1), OpenShapeModal)
                 .SetTileStateGetter(GetForegroundShape));
@@ -164,6 +164,6 @@ public class CanvasBrushMode
 
     private TileState GetForegroundShape()
     {
-        return _currentShape.GetTileState() with {Flip = _flipState};
+        return _currentShape.GetTileState() with {Flip = _flipState, Angle = _rotation.Radians};
     }
 }

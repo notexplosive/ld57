@@ -27,7 +27,21 @@ public class ChooseShapeModal : Popup
             }
         });
         
-        var mirrorHorizontallyButton = new Button(new GridPosition(1,1), () => ChooseMirrorState(new XyBool(X: !getFlipState().X, Y: getFlipState().Y)));
+        var resetButton = new Button(new GridPosition(1,1), ResetTransformations);
+        resetButton.SetTileStateGetter(() =>
+        {
+            var color = Color.Gray;
+
+            if (_getFlipState().X || _getFlipState().Y || _getRotation() != QuarterRotation.Upright)
+            {
+                color = Color.Yellow;
+            }
+            
+            return TileState.Sprite(ResourceAlias.Tools, 14) with {ForegroundColor = color};
+        });
+        AddButton(resetButton);
+        
+        var mirrorHorizontallyButton = new Button(new GridPosition(2,1), () => ChooseMirrorState(new XyBool(X: !getFlipState().X, Y: getFlipState().Y)));
         mirrorHorizontallyButton.SetTileStateGetter(() =>
         {
             var frame = 10;
@@ -39,7 +53,7 @@ public class ChooseShapeModal : Popup
         });
         AddButton(mirrorHorizontallyButton);
         
-        var mirrorVerticallyButton = new Button(new GridPosition(2,1), () => ChooseMirrorState(new XyBool(X: getFlipState().X, Y: !getFlipState().Y)));
+        var mirrorVerticallyButton = new Button(new GridPosition(3,1), () => ChooseMirrorState(new XyBool(X: getFlipState().X, Y: !getFlipState().Y)));
         mirrorVerticallyButton.SetTileStateGetter(() =>
         {
             var frame = 12;
@@ -51,16 +65,16 @@ public class ChooseShapeModal : Popup
         });
         AddButton(mirrorVerticallyButton);
         
-        var rotateCcwButton = new Button(new GridPosition(3,1), () => ChooseRotation(getRotation().CounterClockwisePrevious()));
+        var rotateCcwButton = new Button(new GridPosition(4,1), () => ChooseRotation(getRotation().CounterClockwisePrevious()));
         rotateCcwButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Entities, 27) with {ForegroundColor = Color.LightBlue});
         AddButton(rotateCcwButton);
         
-        var rotateCwButton = new Button(new GridPosition(4,1), () => ChooseRotation(getRotation().ClockwiseNext()));
+        var rotateCwButton = new Button(new GridPosition(5,1), () => ChooseRotation(getRotation().ClockwiseNext()));
         rotateCwButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Entities, 27) with {Flip = new XyBool(true,false), ForegroundColor = Color.LightBlue});
         AddButton(rotateCwButton);
 
         var topLeftPadding = new GridPosition(1, 2);
-        var maxWidth = corners.Width - 2 - topLeftPadding.X;
+        var maxWidth = corners.Width - 1 - topLeftPadding.X;
         var x = 0;
         var y = 0;
         foreach (var (sheetName, sheet) in LdResourceAssets.Instance.Sheets)
@@ -114,6 +128,12 @@ public class ChooseShapeModal : Popup
                 HandleLineFeed(ref x, ref y, maxWidth);
             }
         }
+    }
+
+    private void ResetTransformations()
+    {
+        ChooseRotation(QuarterRotation.Upright);
+        ChooseMirrorState(XyBool.False);
     }
 
     private TileState GetHoveredTileState(ICanvasTileShape shape)

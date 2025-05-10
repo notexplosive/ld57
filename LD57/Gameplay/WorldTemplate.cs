@@ -11,7 +11,7 @@ public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
 {
     public void FillRectangle(GridRectangle rectangle, EntityTemplate template)
     {
-        foreach (var position in rectangle.AllPositions(true))
+        foreach (var position in rectangle.AllPositions())
         {
             PlaceInkAt(position, template);
         }

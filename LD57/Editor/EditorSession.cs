@@ -97,7 +97,7 @@ public class EditorSession : Session
         var bottomLeftCorner = new GridPosition(0, screen.Height - 3);
 
         var leftToolbar =
-            new UiElement(new GridRectangle(new GridPosition(0, 0), new GridPosition(3, EditorTools.Count + 2)));
+            new UiElement(new GridRectangle(new GridPosition(0, 0), new GridPosition(2, EditorTools.Count + 1)));
 
         var toolIndex = 0;
         foreach (var tool in EditorTools)
@@ -110,7 +110,7 @@ public class EditorSession : Session
         _uiElements.Add(leftToolbar);
 
         var statusBar =
-            new UiElement(new GridRectangle(bottomLeftCorner, new GridPosition(screen.Width, screen.Height)));
+            new UiElement(new GridRectangle(bottomLeftCorner, new GridPosition(screen.RoomSize.X, screen.RoomSize.Y)));
         statusBar.AddDynamicText(new GridPosition(4, 0), () =>
         {
             if (!HoveredWorldPosition.HasValue)
@@ -343,7 +343,7 @@ public class EditorSession : Session
     {
         var topLeft = new GridPosition(4, 12);
         var textModal =
-            new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 4)));
+            new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 1)));
         textModal.AddStaticText(new GridPosition(1, 1), message);
         var textInput = textModal.AddTextInput(new GridPosition(1, 2), defaultText ?? string.Empty);
 
@@ -480,7 +480,7 @@ public class EditorSession : Session
     {
         var topLeft = new GridPosition(4, 12);
         var saveAsPopup =
-            new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 4)));
+            new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 3)));
         saveAsPopup.AddStaticText(new GridPosition(1, 1), "Name this World:");
         var textInput = saveAsPopup.AddTextInput(new GridPosition(1, 2), Surface.FileName);
         OpenPopup(saveAsPopup);

@@ -165,7 +165,7 @@ public abstract class SelectionTool : IEditorTool
             if (pendingRectangle.HasValue && _isAltDown)
             {
                 // FIRST do a pass on the rectangle, in case we're in ALT mode
-                foreach (var worldPosition in pendingRectangle.Value.AllPositions(true))
+                foreach (var worldPosition in pendingRectangle.Value.AllPositions())
                 {
                     var screenPosition = worldPosition - cameraPosition;
                     var previousTileState = screen.GetTile(screenPosition);
@@ -203,7 +203,7 @@ public abstract class SelectionTool : IEditorTool
 
         var topLeft = _selectionAnchor.Value;
         var bottomRight = _editorSession.HoveredWorldPosition.Value;
-        return new GridRectangle(topLeft, bottomRight, true);
+        return new GridRectangle(topLeft, bottomRight);
     }
 
     private IEnumerable<GridPosition> PendingSelectedPositions()
@@ -211,7 +211,7 @@ public abstract class SelectionTool : IEditorTool
         var rect = PendingSelectionRectangle();
         if (rect.HasValue)
         {
-            foreach (var position in rect.Value.AllPositions(true))
+            foreach (var position in rect.Value.AllPositions())
             {
                 if (_isAltDown)
                 {
