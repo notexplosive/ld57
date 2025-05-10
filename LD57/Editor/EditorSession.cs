@@ -12,12 +12,12 @@ namespace LD57.Editor;
 
 public class EditorSession : Session
 {
+    private readonly Stack<UiElement> _popupStack = new();
     private readonly EditorSelector<IEditorTool> _toolSelector = new();
     private readonly List<UiElement> _uiElements = new();
     private GridPosition _cameraPosition;
     private UiElement? _currentPopup;
     private GridPosition? _hoveredScreenPosition;
-    private readonly Stack<UiElement> _popupStack = new();
     private ISubElement? _primedElement;
     private AsciiScreen _screen;
     private bool _shouldClosePopup;
@@ -57,7 +57,7 @@ public class EditorSession : Session
         {
             if (_hoveredScreenPosition.HasValue)
             {
-                if (HitUiElement(_hoveredScreenPosition.Value) != null)
+                if (UiElementAt(_hoveredScreenPosition.Value) != null)
                 {
                     return null;
                 }
@@ -151,22 +151,20 @@ public class EditorSession : Session
             RebuildScreen();
         }
 
-        if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
+        if (_hoveredScreenPosition.HasValue)
         {
-            _primedElement = HitSubElement();
-
-            if (HoveredWorldPosition.HasValue)
+            var hitUiElement = UiElementAt(_hoveredScreenPosition.Value);
+            if (hitUiElement != null)
             {
-                StartMousePressInWorld(HoveredWorldPosition.Value, MouseButton.Left);
+                hitUiElement.UpdateMouseInput(input.Mouse, _hoveredScreenPosition.Value, ref _primedElement);
             }
         }
 
-        if (input.Mouse.GetButton(MouseButton.Left).WasReleased)
+        if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
         {
-            if (_primedElement == HitSubElement())
+            if (HoveredWorldPosition.HasValue)
             {
-                _primedElement?.OnClicked();
-                _primedElement = null;
+                StartMousePressInWorld(HoveredWorldPosition.Value, MouseButton.Left);
             }
         }
 
@@ -295,25 +293,6 @@ public class EditorSession : Session
         }
     }
 
-    private ISubElement? HitSubElement()
-    {
-        if (!_hoveredScreenPosition.HasValue)
-        {
-            return null;
-        }
-
-        var hitUiElement = HitUiElement(_hoveredScreenPosition.Value);
-        if (hitUiElement == null ||
-            (!hitUiElement.Contains(_hoveredScreenPosition.Value) && hitUiElement != _currentPopup))
-        {
-            return null;
-        }
-
-        var probedPosition = _hoveredScreenPosition.Value - hitUiElement.Rectangle.TopLeft;
-        return hitUiElement.GetSubElementAt(probedPosition);
-
-    }
-
     private void OpenFlow()
     {
         var fullPath =
@@ -388,40 +367,32 @@ public class EditorSession : Session
     {
         _screen.Clear(TileState.TransparentEmpty);
 
-        Surface.PaintWorldToScreen(_screen, _cameraPosition, dt);
+        _screen.PushTransform(-_cameraPosition);
+        Surface.PaintWorldToScreen(_screen, dt);
 
         // paint selection
         foreach (var worldPosition in Surface.Selection.AllPositions())
         {
-            var screenPosition = worldPosition - _cameraPosition;
+            var screenPosition = worldPosition;
             if (_screen.ContainsPosition(screenPosition))
             {
-                _screen.PutTile(screenPosition, Surface.Selection.GetTileStateAt(worldPosition - Surface.Selection.Offset));
+                _screen.PutTile(screenPosition,
+                    Surface.Selection.GetTileStateAt(worldPosition - Surface.Selection.Offset));
             }
         }
-        
-        Surface.PaintOverlayBelowTool(_screen, _cameraPosition, HoveredWorldPosition);
 
-        CurrentTool?.PaintToWorld(_screen, _cameraPosition);
+        Surface.PaintOverlayBelowTool(_screen, HoveredWorldPosition);
 
-        Surface.PaintOverlayAboveTool(_screen, _cameraPosition);
+        CurrentTool?.PaintToWorld(_screen);
 
-        foreach (var uiElement in _uiElements)
-        {
-            uiElement.PaintToScreen(_screen);
-        }
+        Surface.PaintOverlayAboveTool(_screen);
+        _screen.PopTransform();
 
-        if (_currentPopup != null)
-        {
-            _currentPopup.PaintToScreen(_screen);
-        }
-        
         if (_hoveredScreenPosition.HasValue)
         {
             var originalTile = _screen.GetTile(_hoveredScreenPosition.Value);
 
-            var uiElement = HitUiElement(_hoveredScreenPosition.Value);
-            if (uiElement == null)
+            if (UiElementAt(_hoveredScreenPosition.Value) == null)
             {
                 var tile = CurrentTool?.GetTileStateInWorldOnHover(originalTile);
                 if (tile.HasValue)
@@ -429,18 +400,20 @@ public class EditorSession : Session
                     _screen.PutTile(_hoveredScreenPosition.Value, tile.Value);
                 }
             }
-            else
-            {
-                var hoveredSubElement = uiElement.GetSubElementAt(_hoveredScreenPosition.Value - uiElement.Rectangle.TopLeft);
-                if (hoveredSubElement != null)
-                {
-                    hoveredSubElement.ShowHover(_screen, _hoveredScreenPosition.Value, uiElement.Rectangle.TopLeft);
-                }
-            }
+        }
+
+        foreach (var uiElement in _uiElements)
+        {
+            uiElement.PaintUiElement(_screen, _hoveredScreenPosition);
+        }
+
+        if (_currentPopup != null)
+        {
+            _currentPopup.PaintUiElement(_screen, _hoveredScreenPosition);
         }
     }
 
-    private UiElement? HitUiElement(GridPosition hoveredTilePosition)
+    private UiElement? UiElementAt(GridPosition hoveredTilePosition)
     {
         if (_currentPopup != null)
         {
@@ -449,8 +422,8 @@ public class EditorSession : Session
 
         for (var i = _uiElements.Count - 1; i >= 0; i--)
         {
-            var ui = _uiElements[i];
-            if (ui.Contains(hoveredTilePosition))
+            var uiElement = _uiElements[i];
+            if (uiElement.Contains(hoveredTilePosition))
             {
                 return _uiElements[i];
             }

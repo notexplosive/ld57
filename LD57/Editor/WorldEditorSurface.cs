@@ -38,7 +38,7 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
         }
     }
 
-    public override void PaintWorldToScreen(AsciiScreen screen, GridPosition cameraPosition, float dt)
+    public override void PaintWorldToScreen(AsciiScreen screen, float dt)
     {
         var world = new World(Constants.GameRoomSize, Data, true);
 
@@ -49,14 +49,13 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
                 ResourceAlias.EntityTemplate("player") ?? new EntityTemplate()));
         }
 
-        world.SetCurrentRoom(new Room(world, cameraPosition, cameraPosition + screen.RoomSize));
-        world.CameraPosition = cameraPosition;
+        // world.SetCurrentRoom(new Room(world, _cameraPosition, _cameraPosition + screen.RoomSize));
+        // world.CameraPosition = _cameraPosition;
 
         world.PaintToScreen(screen, dt);
     }
 
-    public override void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition,
-        GridPosition? hoveredPosition)
+    public override void PaintOverlayBelowTool(AsciiScreen screen, GridPosition? hoveredPosition)
     {
         // create empty room so we don't have to 
         var world = new World(Constants.GameRoomSize, new WorldTemplate());
@@ -64,8 +63,8 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
         if (hoveredPosition.HasValue)
         {
             var hoveredRoom = world.GetRoomAt(hoveredPosition.Value);
-            var hoveredRoomTopLeft = hoveredRoom.TopLeft - cameraPosition;
-            var hoveredRoomBottomRight = hoveredRoom.BottomRight - cameraPosition;
+            var hoveredRoomTopLeft = hoveredRoom.TopLeft;
+            var hoveredRoomBottomRight = hoveredRoom.BottomRight;
 
             var width = hoveredRoomBottomRight.X - hoveredRoomTopLeft.X;
             var height = hoveredRoomBottomRight.Y - hoveredRoomTopLeft.Y;
@@ -107,7 +106,7 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
         }
     }
 
-    public override void PaintOverlayAboveTool(AsciiScreen screen, GridPosition cameraPosition)
+    public override void PaintOverlayAboveTool(AsciiScreen screen)
     {
         if (MathF.Sin(Client.TotalElapsedTime * 10) > 0)
         {
@@ -115,8 +114,7 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
             {
                 if (placedEntity.ExtraState.ContainsKey(Constants.CommandKey))
                 {
-                    screen.PutTile(placedEntity.Position - cameraPosition,
-                        TileState.StringCharacter("!", Color.OrangeRed));
+                    screen.PutTile(placedEntity.Position, TileState.StringCharacter("!", Color.OrangeRed));
                 }
             }
         }

@@ -13,7 +13,7 @@ public class InputListener : ISubElement
         _onInput = onInput;
     }
 
-    public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
+    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
     {
         
     }
@@ -21,11 +21,6 @@ public class InputListener : ISubElement
     public bool Contains(GridPosition relativePosition)
     {
         return false;
-    }
-
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
-    {
-        
     }
 
     public void OnClicked()

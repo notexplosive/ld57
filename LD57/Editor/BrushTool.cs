@@ -48,7 +48,7 @@ public abstract class BrushTool : IEditorTool
         // do nothing
     }
 
-    public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintToWorld(AsciiScreen screen)
     {
         // do nothing
     }

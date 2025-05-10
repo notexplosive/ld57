@@ -52,7 +52,7 @@ public class PlayTool : IEditorTool
         }
     }
 
-    public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintToWorld(AsciiScreen screen)
     {
         
     }

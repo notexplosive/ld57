@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using ExplogineCore.Data;
 using ExplogineMonoGame;
@@ -14,6 +13,7 @@ public class AsciiScreen
 {
     private readonly Lazy<DynamicSpriteFont> _font;
     private readonly Dictionary<GridPosition, TileState> _tiles = new();
+    private readonly Stack<GridPosition> _transforms = new();
     private readonly Dictionary<GridPosition, TweenableGlyph> _tweenableGlyphs = new();
 
     public AsciiScreen(int width, int height, float tileSize)
@@ -32,11 +32,11 @@ public class AsciiScreen
 
     public GridPosition RoomSize => new(Width - 1, Height - 1);
     public GridPosition CenterPosition => RoomSize / 2;
-    public GridRectangle RoomRectangle => new GridRectangle(new GridPosition(0, 0), RoomSize);
+    public GridRectangle RoomRectangle => new(new GridPosition(0, 0), RoomSize);
 
-    public void Draw(Painter painter, Vector2 offset)
+    public void Draw(Painter painter, Vector2 wholeScreenPixelOffset)
     {
-        var tileRect = new Vector2(TileSize).ToRectangleF().Moved(offset);
+        var tileRect = new Vector2(TileSize).ToRectangleF().Moved(wholeScreenPixelOffset);
         painter.BeginSpriteBatch();
         for (var x = 0; x < Width; x++)
         {
@@ -49,7 +49,7 @@ public class AsciiScreen
                 var tweenBackgroundColor = tweenableGlyph.BackgroundColor.Value;
 
                 var backgroundRectangle = rectangle.ScaledFromCenter(tileState.BackgroundIntensity);
-                
+
                 if (tweenBackgroundColor != Color.Transparent)
                 {
                     painter.DrawRectangle(backgroundRectangle,
@@ -79,7 +79,8 @@ public class AsciiScreen
                         var measuredSize = _font.Value.MeasureString(text);
                         var origin = new Vector2(measuredSize.X / 2f, _font.Value.LineHeight * 4 / 6f);
                         // painter.DrawRectangle(measuredSize.ToRectangleF().Moved(rectangle.Center).Moved(-origin), new DrawSettings{Color = Color.White.WithMultipliedOpacity(0.5f)});
-                        painter.SpriteBatch.DrawString(_font.Value, text, rectangle.Center + pixelOffset, color, rotation,
+                        painter.SpriteBatch.DrawString(_font.Value, text, rectangle.Center + pixelOffset, color,
+                            rotation,
                             origin,
                             Vector2.One * scale);
                     }
@@ -90,7 +91,8 @@ public class AsciiScreen
                     {
                         tileState.SpriteSheet.DrawFrameAsRectangle(painter, tileState.Frame,
                             rectangle.ScaledFromCenter(scale).MovedByOrigin(DrawOrigin.Center).Moved(pixelOffset),
-                            new DrawSettings {Color = color, Origin = DrawOrigin.Center, Angle = rotation, Flip = tileState.Flip});
+                            new DrawSettings
+                                {Color = color, Origin = DrawOrigin.Center, Angle = rotation, Flip = tileState.Flip});
                     }
                 }
             }
@@ -101,6 +103,7 @@ public class AsciiScreen
 
     public void PutTile(GridPosition position, TileState tileState, TweenableGlyph? tweenableGlyph = null)
     {
+        position += CurrentTransform();
         if (position.X >= 0 && position.X < Width && position.Y >= 0 && position.Y < Height)
         {
             _tiles[position] = tileState;
@@ -115,10 +118,20 @@ public class AsciiScreen
         }
     }
 
+    private GridPosition CurrentTransform()
+    {
+        if (_transforms.TryPeek(out var result))
+        {
+            return result;
+        }
+
+        return GridPosition.Zero;
+    }
+
     public void PutSequence(GridPosition position, IEnumerable<TileState> tiles)
     {
         var index = 0;
-        foreach(var tile in tiles)
+        foreach (var tile in tiles)
         {
             PutTile(position + new GridPosition(index, 0), tile);
             index++;
@@ -134,22 +147,17 @@ public class AsciiScreen
         }
     }
 
+    public void PutFilledRectangle(TileState tileState, GridRectangle rectangle)
+    {
+        foreach (var position in rectangle.AllPositions())
+        {
+            PutTile(position, tileState);
+        }
+    }
+
     public void PutFilledRectangle(TileState tileState, GridPosition cornerA, GridPosition cornerB)
     {
-        var minX = Math.Min(cornerA.X, cornerB.X);
-        var minY = Math.Min(cornerA.Y, cornerB.Y);
-        var width = Math.Abs(cornerA.X - cornerB.X);
-        var height = Math.Abs(cornerA.Y - cornerB.Y);
-
-        var topLeft = new GridPosition(minX, minY);
-
-        for (var x = 0; x < width+1; x++)
-        {
-            for (var y = 0; y < height+1; y++)
-            {
-                PutTile(topLeft + new GridPosition(x, y), tileState);
-            }
-        }
+        PutFilledRectangle(tileState, new GridRectangle(cornerA, cornerB));
     }
 
     public void PutFrameRectangle(SpriteSheet frame, GridRectangle rectangle)
@@ -173,7 +181,7 @@ public class AsciiScreen
         {
             PutTile(rectangle.TopLeft + new GridPosition(0, i), TileState.Sprite(frame, 7));
         }
-        
+
         PutTile(rectangle.TopLeft, TileState.Sprite(frame, 0));
         PutTile(rectangle.TopRight, TileState.Sprite(frame, 2));
         PutTile(rectangle.BottomRight, TileState.Sprite(frame, 4));
@@ -213,7 +221,7 @@ public class AsciiScreen
                 var rectangle = tileRect.Moved(new Vector2(TileSize * x, TileSize * y));
                 if (rectangle.Contains(input.Mouse.Position(hitTestStack.WorldMatrix)))
                 {
-                    return position;
+                    return position + CurrentTransform();
                 }
             }
         }
@@ -223,16 +231,31 @@ public class AsciiScreen
 
     public TileState GetTile(GridPosition position)
     {
-        return _tiles.GetValueOrDefault(position);
+        return _tiles.GetValueOrDefault(position + CurrentTransform());
     }
 
     public IEnumerable<GridPosition> AllTiles()
     {
-        return Constants.AllPositionsInRectangle(new GridPosition(0, 0), RoomSize);
+        return Constants.AllPositionsInRectangle(CurrentTransform(), RoomSize);
     }
 
-    public bool ContainsPosition(GridPosition screenPosition)
+    public bool ContainsPosition(GridPosition position)
     {
-        return screenPosition.X >= 0 && screenPosition.Y >= 0 && screenPosition.X < Width && screenPosition.Y < Height;
+        position += CurrentTransform();
+        return position.X >= 0 && position.Y >= 0 && position.X < Width &&
+               position.Y < Height;
+    }
+
+    public void PushTransform(GridPosition offset)
+    {
+        _transforms.Push(CurrentTransform() + offset);
+    }
+
+    public void PopTransform()
+    {
+        if (!_transforms.TryPop(out _))
+        {
+            Client.Debug.LogError("Popped Screen Transform when there was none to pop");
+        }
     }
 }

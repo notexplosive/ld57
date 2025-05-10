@@ -15,19 +15,14 @@ public class DynamicText : ISubElement
         _getString = getString;
     }
 
-    public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
+    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
     {
-        screen.PutString(Position + topLeft, _getString());
+        screen.PutString(Position, _getString());
     }
 
     public bool Contains(GridPosition relativePosition)
     {
         return false;
-    }
-
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
-    {
-        
     }
 
     public void OnClicked()

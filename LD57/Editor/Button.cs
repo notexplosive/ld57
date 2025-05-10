@@ -17,12 +17,21 @@ public class Button : ISubElement
         _onClick = onClick;
     }
 
-    public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
+    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
     {
         var getter = GetTileState();
         if (getter.HasValue)
         {
-            screen.PutTile(_position + topLeft, getter.Value);
+            screen.PutTile(_position, getter.Value);
+        }
+        
+        if (isHovered)
+        {
+            var hoverGetter = GetTileStateOnHover();
+            if (hoverGetter.HasValue)
+            {
+                screen.PutTile(_position, hoverGetter.Value);
+            }
         }
     }
 
@@ -31,13 +40,9 @@ public class Button : ISubElement
         return relativePosition == _position;
     }
 
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
+    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
     {
-        var getter = GetTileStateOnHover();
-        if (getter.HasValue)
-        {
-            screen.PutTile(hoveredTilePosition, getter.Value);
-        }
+        
     }
 
     public void OnClicked()

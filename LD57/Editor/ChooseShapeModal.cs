@@ -14,7 +14,8 @@ public class ChooseShapeModal : Popup
     private readonly Func<XyBool> _getFlipState;
     private readonly Func<QuarterRotation> _getRotation;
 
-    public ChooseShapeModal(GridRectangle corners, Func<ICanvasTileShape> getChosenShape, Func<XyBool> getFlipState, Func<QuarterRotation> getRotation) : base(corners)
+    public ChooseShapeModal(GridRectangle corners, Func<ICanvasTileShape> getChosenShape, Func<XyBool> getFlipState,
+        Func<QuarterRotation> getRotation) : base(corners)
     {
         _getChosenShape = getChosenShape;
         _getFlipState = getFlipState;
@@ -26,8 +27,8 @@ public class ChooseShapeModal : Popup
                 Close();
             }
         });
-        
-        var resetButton = new Button(new GridPosition(1,1), ResetTransformations);
+
+        var resetButton = new Button(new GridPosition(1, 1), ResetTransformations);
         resetButton.SetTileStateGetter(() =>
         {
             var color = Color.Gray;
@@ -36,12 +37,13 @@ public class ChooseShapeModal : Popup
             {
                 color = Color.Yellow;
             }
-            
+
             return TileState.Sprite(ResourceAlias.Tools, 14) with {ForegroundColor = color};
         });
         AddButton(resetButton);
-        
-        var mirrorHorizontallyButton = new Button(new GridPosition(2,1), () => ChooseMirrorState(new XyBool(X: !getFlipState().X, Y: getFlipState().Y)));
+
+        var mirrorHorizontallyButton = new Button(new GridPosition(2, 1),
+            () => ChooseMirrorState(new XyBool(!getFlipState().X, getFlipState().Y)));
         mirrorHorizontallyButton.SetTileStateGetter(() =>
         {
             var frame = 10;
@@ -49,11 +51,13 @@ public class ChooseShapeModal : Popup
             {
                 frame = 11;
             }
+
             return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue};
         });
         AddButton(mirrorHorizontallyButton);
-        
-        var mirrorVerticallyButton = new Button(new GridPosition(3,1), () => ChooseMirrorState(new XyBool(X: getFlipState().X, Y: !getFlipState().Y)));
+
+        var mirrorVerticallyButton = new Button(new GridPosition(3, 1),
+            () => ChooseMirrorState(new XyBool(getFlipState().X, !getFlipState().Y)));
         mirrorVerticallyButton.SetTileStateGetter(() =>
         {
             var frame = 12;
@@ -61,20 +65,30 @@ public class ChooseShapeModal : Popup
             {
                 frame = 13;
             }
+
             return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue};
         });
         AddButton(mirrorVerticallyButton);
-        
-        var rotateCcwButton = new Button(new GridPosition(4,1), () => ChooseRotation(getRotation().CounterClockwisePrevious()));
-        rotateCcwButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Entities, 27) with {ForegroundColor = Color.LightBlue});
+
+        var rotateCcwButton = new Button(new GridPosition(4, 1),
+            () => ChooseRotation(getRotation().CounterClockwisePrevious()));
+        rotateCcwButton.SetTileStateGetter(() =>
+            TileState.Sprite(ResourceAlias.Entities, 27) with {ForegroundColor = Color.LightBlue});
         AddButton(rotateCcwButton);
-        
-        var rotateCwButton = new Button(new GridPosition(5,1), () => ChooseRotation(getRotation().ClockwiseNext()));
-        rotateCwButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Entities, 27) with {Flip = new XyBool(true,false), ForegroundColor = Color.LightBlue});
+
+        var rotateCwButton = new Button(new GridPosition(5, 1), () => ChooseRotation(getRotation().ClockwiseNext()));
+        rotateCwButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Entities, 27) with
+        {
+            Flip = new XyBool(true, false), ForegroundColor = Color.LightBlue
+        });
         AddButton(rotateCwButton);
 
         var topLeftPadding = new GridPosition(1, 2);
-        var maxWidth = corners.Width - 1 - topLeftPadding.X;
+
+        var pane = AddScrollablePane(new GridRectangle(topLeftPadding,
+            new GridPosition(corners.Width - topLeftPadding.X, corners.Height - 1)));
+
+        var maxWidth = pane.Rectangle.Width;
         var x = 0;
         var y = 0;
         foreach (var (sheetName, sheet) in LdResourceAssets.Instance.Sheets)
@@ -86,7 +100,7 @@ public class ChooseShapeModal : Popup
 
             for (var frame = 0; frame < sheet.FrameCount; frame++)
             {
-                var gridPosition = new GridPosition(x, y) + topLeftPadding;
+                var gridPosition = new GridPosition(x, y);
                 var capturedFrame = frame;
                 var shape = new CanvasTileShapeSprite(sheetName, capturedFrame);
                 var button = new Button(gridPosition, () => ChooseTile(shape));
@@ -100,14 +114,14 @@ public class ChooseShapeModal : Popup
                     return GetBasicTileState(shape);
                 });
                 button.SetTileStateOnHoverGetter(() => GetHoveredTileState(shape));
-                AddButton(button);
+                pane.AddButton(button);
                 HandleLineFeed(ref x, ref y, maxWidth);
             }
         }
 
         for (var i = 0; i < 255; i++)
         {
-            var gridPosition = new GridPosition(x, y) + topLeftPadding;
+            var gridPosition = new GridPosition(x, y);
 
             var character = (char) i;
             if (char.IsAscii(character) && !char.IsControl(character) && !char.IsWhiteSpace(character))
@@ -124,10 +138,12 @@ public class ChooseShapeModal : Popup
                     return GetBasicTileState(shape);
                 });
                 button.SetTileStateOnHoverGetter(() => GetHoveredTileState(shape));
-                AddButton(button);
+                pane.AddButton(button);
                 HandleLineFeed(ref x, ref y, maxWidth);
             }
         }
+
+        pane.SetContentHeight(y);
     }
 
     private void ResetTransformations()
@@ -150,7 +166,7 @@ public class ChooseShapeModal : Popup
     {
         ChoseRotation?.Invoke(newRotation);
     }
-    
+
     public event Action<QuarterRotation>? ChoseRotation;
 
     private void ChooseMirrorState(XyBool xyBool)

@@ -15,19 +15,14 @@ public class DynamicTile : ISubElement
         _getTile = getTile;
     }
 
-    public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
+    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
     {
-        screen.PutTile(Position + topLeft, _getTile());
+        screen.PutTile(Position, _getTile());
     }
 
     public bool Contains(GridPosition relativePosition)
     {
         return false;
-    }
-
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
-    {
-        
     }
 
     public void OnClicked()

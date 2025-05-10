@@ -21,6 +21,8 @@ public readonly record struct GridPosition
     [JsonProperty("y")]
     public int Y { get; init; }
 
+    public static GridPosition Zero { get; } = new();
+
     public static GridPosition operator +(GridPosition a, GridPosition b)
     {
         return new GridPosition(a.X + b.X, a.Y + b.Y);
@@ -39,6 +41,11 @@ public readonly record struct GridPosition
     public static GridPosition operator /(GridPosition a, int scalar)
     {
         return new GridPosition(a.X / scalar, a.Y / scalar);
+    }
+    
+    public static GridPosition operator -(GridPosition a)
+    {
+        return new GridPosition(-a.X, -a.Y);
     }
 
     public Point ToPoint()

@@ -19,21 +19,16 @@ public class TextInputElement : ISubElement
         _gridPosition = gridPosition;
     }
 
-    public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
+    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
     {
-        screen.PutString(topLeft + _gridPosition, _textBuffer);
-        screen.PutTile(topLeft+_gridPosition + new GridPosition(_textBuffer.Length, 0), TileState.Sprite(ResourceAlias.Walls, 0));
+        screen.PutString(_gridPosition, _textBuffer);
+        screen.PutTile(_gridPosition + new GridPosition(_textBuffer.Length, 0), TileState.Sprite(ResourceAlias.Walls, 0));
     }
 
     public bool Contains(GridPosition relativePosition)
     {
         return new GridRectangle(_gridPosition, _gridPosition + new GridPosition(0, _textBuffer.Length))
             .Contains(relativePosition, true);
-    }
-
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
-    {
-        
     }
 
     public void OnClicked()

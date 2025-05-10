@@ -11,9 +11,9 @@ public interface IEditorSurface
     string? FileName { get; set; }
     public IEditorSelection Selection { get; }
     void Save(string fileName);
-    void PaintWorldToScreen(AsciiScreen screen, GridPosition cameraPosition, float dt);
-    void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition, GridPosition? hoveredWorldPosition);
-    void PaintOverlayAboveTool(AsciiScreen screen, GridPosition cameraPosition);
+    void PaintWorldToScreen(AsciiScreen screen, float dt);
+    void PaintOverlayBelowTool(AsciiScreen screen, GridPosition? hoveredWorldPosition);
+    void PaintOverlayAboveTool(AsciiScreen screen);
     void Open(string path, bool isFullPath);
     void ClearEverything();
     void HandleKeyBinds(ConsumableInput input);

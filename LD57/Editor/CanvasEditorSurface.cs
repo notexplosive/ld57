@@ -12,20 +12,20 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
 
     protected override CanvasEditorSelection RealSelection { get; }
 
-    public override void PaintWorldToScreen(AsciiScreen screen, GridPosition cameraPosition, float dt)
+    public override void PaintWorldToScreen(AsciiScreen screen, float dt)
     {
         foreach (var item in Data.Content)
         {
-            screen.PutTile(item.Position - cameraPosition, item.TileState());
+            screen.PutTile(item.Position, item.TileState());
         }
     }
 
-    public override void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition,
+    public override void PaintOverlayBelowTool(AsciiScreen screen,
         GridPosition? hoveredWorldPosition)
     {
     }
 
-    public override void PaintOverlayAboveTool(AsciiScreen screen, GridPosition cameraPosition)
+    public override void PaintOverlayAboveTool(AsciiScreen screen)
     {
     }
 

@@ -21,7 +21,7 @@ public class SelectableButton<T> : ISubElement where T : class
         _selector.Selected ??= selectableContent;
     }
 
-    public void PutOnScreen(AsciiScreen screen, GridPosition topLeft)
+    public void PutSubElementOnScreen(AsciiScreen screen, bool isHovered)
     {
         var renderedTileState = _tileState;
         if (_selector.IsSelected(_selectableContent))
@@ -34,7 +34,16 @@ public class SelectableButton<T> : ISubElement where T : class
             };
         }
 
-        screen.PutTile(_gridPosition + topLeft, renderedTileState);
+        screen.PutTile(_gridPosition, renderedTileState);
+
+        if (isHovered)
+        {
+            var newTile = screen.GetTile(_gridPosition) with
+            {
+                BackgroundColor = Color.LightBlue, BackgroundIntensity = 1f
+            };
+            screen.PutTile(_gridPosition, newTile);
+        }
     }
 
     public bool Contains(GridPosition relativePosition)
@@ -42,10 +51,9 @@ public class SelectableButton<T> : ISubElement where T : class
         return relativePosition == _gridPosition;
     }
 
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition, GridPosition topLeft)
+    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
     {
-        var newTile = screen.GetTile(hoveredTilePosition) with {BackgroundColor = Color.LightBlue, BackgroundIntensity = 1f};
-        screen.PutTile(hoveredTilePosition, newTile);
+
     }
 
     public void OnClicked()

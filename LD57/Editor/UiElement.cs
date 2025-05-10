@@ -1,61 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
 using ExplogineMonoGame;
+using ExplogineMonoGame.Input;
 using LD57.Rendering;
-using Microsoft.Xna.Framework;
 
 namespace LD57.Editor;
 
 public class UiElement
 {
-    public GridRectangle Rectangle { get; }
-    private List<ISubElement> _subElement = new();
+    private readonly bool _shouldDrawFrame;
+    private readonly List<ISubElement> _subElements = new();
 
-    public UiElement(GridRectangle corners)
+    public UiElement(GridRectangle corners, bool shouldDrawFrame = true)
     {
+        _shouldDrawFrame = shouldDrawFrame;
         Rectangle = corners;
     }
 
-    public void PaintToScreen(AsciiScreen screen)
-    {
-        screen.PutFrameRectangle(ResourceAlias.PopupFrame, Rectangle);
+    public GridRectangle Rectangle { get; }
 
-        foreach (var subElement in _subElement)
+    public void PaintUiElement(AsciiScreen screen, GridPosition? hoveredScreenPosition)
+    {
+        if (_shouldDrawFrame)
         {
-            subElement.PutOnScreen(screen, Rectangle.TopLeft);
+            screen.PutFrameRectangle(ResourceAlias.PopupFrame, Rectangle);
         }
+
+
+        ISubElement? hoveredSubElement = null;
+        if (hoveredScreenPosition.HasValue)
+        {
+            hoveredSubElement = GetSubElementAt(hoveredScreenPosition.Value);
+        }
+
+        screen.PushTransform(Rectangle.TopLeft);
+        foreach (var subElement in _subElements)
+        {
+            subElement.PutSubElementOnScreen(screen, hoveredSubElement == subElement);
+        }
+
+        screen.PopTransform();
     }
 
     public void AddDynamicText(GridPosition relativeGridPosition, Func<string> getString)
     {
-        _subElement.Add(new DynamicText(relativeGridPosition, getString));
+        _subElements.Add(new DynamicText(relativeGridPosition, getString));
     }
-    
+
     public void AddInputListener(Action<ConsumableInput.ConsumableKeyboard> onInput)
     {
-        _subElement.Add(new InputListener(onInput));
+        _subElements.Add(new InputListener(onInput));
     }
 
     public void AddDynamicTile(GridPosition relativeGridPosition, Func<TileState> dynamicTile)
     {
-        _subElement.Add(new DynamicTile(relativeGridPosition, dynamicTile));
+        _subElements.Add(new DynamicTile(relativeGridPosition, dynamicTile));
     }
 
     public void AddSelectable<T>(SelectableButton<T> selectableButton) where T : class
     {
-        _subElement.Add(selectableButton);
-    }
-    
-    public void AddButton(Button button)
-    {
-        _subElement.Add(button);
+        _subElements.Add(selectableButton);
     }
 
-    public ISubElement? GetSubElementAt(GridPosition screenPosition)
+    public void AddButton(Button button)
     {
-        foreach (var subElement in _subElement)
+        _subElements.Add(button);
+    }
+
+    public ScrollablePane AddScrollablePane(GridRectangle viewport)
+    {
+        var pane = new ScrollablePane(viewport);
+        _subElements.Add(pane);
+        return pane;
+    }
+
+    public ISubElement? GetSubElementAt(GridPosition absoluteScreenPosition)
+    {
+        foreach (var subElement in _subElements)
         {
-            if (subElement.Contains(screenPosition))
+            if (subElement.Contains(absoluteScreenPosition - Rectangle.TopLeft))
             {
                 return subElement;
             }
@@ -71,19 +94,19 @@ public class UiElement
 
     public void AddStaticText(GridPosition position, string text)
     {
-        _subElement.Add(new DynamicText(position, ()=>text));
+        _subElements.Add(new DynamicText(position, () => text));
     }
 
     public TextInputElement AddTextInput(GridPosition gridPosition, string? text)
     {
         var textInputElement = new TextInputElement(gridPosition, text);
-        _subElement.Add(textInputElement);
+        _subElements.Add(textInputElement);
         return textInputElement;
     }
 
     public void OnTextInput(char[] enteredCharacters)
     {
-        foreach (var element in _subElement)
+        foreach (var element in _subElements)
         {
             element.OnTextInput(enteredCharacters);
         }
@@ -91,9 +114,27 @@ public class UiElement
 
     public void UpdateKeyboardInput(ConsumableInput.ConsumableKeyboard inputKeyboard)
     {
-        foreach (var subElement in _subElement)
+        foreach (var subElement in _subElements)
         {
             subElement.UpdateKeyboardInput(inputKeyboard);
+        }
+    }
+
+    
+    public void UpdateMouseInput(ConsumableInput.ConsumableMouse inputMouse, GridPosition hoveredScreenPosition, ref ISubElement? primedElement)
+    {
+        if (inputMouse.GetButton(MouseButton.Left).WasPressed)
+        {
+            primedElement = GetSubElementAt(hoveredScreenPosition);
+        }
+        
+        if (inputMouse.GetButton(MouseButton.Left).WasReleased)
+        {
+            if (primedElement == GetSubElementAt(hoveredScreenPosition))
+            {
+                primedElement?.OnClicked();
+                primedElement = null;
+            }
         }
     }
 }

@@ -142,7 +142,7 @@ public abstract class SelectionTool : IEditorTool
         }
     }
 
-    public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintToWorld(AsciiScreen screen)
     {
         if (_editorSession.IsDraggingPrimary)
         {
@@ -167,7 +167,7 @@ public abstract class SelectionTool : IEditorTool
                 // FIRST do a pass on the rectangle, in case we're in ALT mode
                 foreach (var worldPosition in pendingRectangle.Value.AllPositions())
                 {
-                    var screenPosition = worldPosition - cameraPosition;
+                    var screenPosition = worldPosition;
                     var previousTileState = screen.GetTile(screenPosition);
                     screen.PutTile(screenPosition,
                         previousTileState with
@@ -181,7 +181,7 @@ public abstract class SelectionTool : IEditorTool
             // SECOND highlight all the actual selected parts
             foreach (var worldPosition in PendingSelectedPositions())
             {
-                var screenPosition = worldPosition - cameraPosition;
+                var screenPosition = worldPosition;
                 var previousTileState = screen.GetTile(screenPosition);
                 screen.PutTile(screenPosition,
                     previousTileState with

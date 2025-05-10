@@ -12,6 +12,6 @@ public interface IEditorTool
     void UpdateInput(ConsumableInput.ConsumableKeyboard inputKeyboard, GridPosition? hoveredWorldPosition);
     void StartMousePressInWorld(GridPosition position, MouseButton mouseButton);
     void FinishMousePressInWorld(GridPosition? position, MouseButton mouseButton);
-    void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition);
+    void PaintToWorld(AsciiScreen screen);
     
 }

@@ -91,7 +91,7 @@ public class TriggerTool : IEditorTool
     {
     }
 
-    public void PaintToWorld(AsciiScreen screen, GridPosition cameraPosition)
+    public void PaintToWorld(AsciiScreen screen)
     {
     }
 

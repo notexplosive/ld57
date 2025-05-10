@@ -29,12 +29,12 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
         Constants.WriteJsonToResources(Data, _resourceSubDirectory, fileName);
     }
 
-    public abstract void PaintWorldToScreen(AsciiScreen screen, GridPosition cameraPosition, float dt);
+    public abstract void PaintWorldToScreen(AsciiScreen screen, float dt);
 
-    public abstract void PaintOverlayBelowTool(AsciiScreen screen, GridPosition cameraPosition,
+    public abstract void PaintOverlayBelowTool(AsciiScreen screen,
         GridPosition? hoveredWorldPosition);
 
-    public abstract void PaintOverlayAboveTool(AsciiScreen screen, GridPosition cameraPosition);
+    public abstract void PaintOverlayAboveTool(AsciiScreen screen);
 
     public abstract void Open(string path, bool isFullPath);
 
