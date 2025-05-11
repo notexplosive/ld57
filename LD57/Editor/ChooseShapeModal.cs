@@ -123,6 +123,12 @@ public class ChooseShapeModal : Popup
                 continue;
             }
 
+            // todo: temporary hack to prevent the whole popupframe sprite from showing up
+            if (sheetName == "PopupFrame")
+            {
+                continue;
+            }
+
             for (var frame = 0; frame < sheet.FrameCount; frame++)
             {
                 var gridPosition = new GridPosition(x, y);

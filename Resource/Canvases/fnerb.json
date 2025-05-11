@@ -1,0 +1,760 @@
+{
+  "content": [
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 8,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 8,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 17,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 16,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 8,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 26,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 26,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 11,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 11,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 11,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 13,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 12,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 12,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 17,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 17,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 3.1415927,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 17,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 3.1415927,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 12
+      }
+    }
+  ]
+}
