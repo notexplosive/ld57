@@ -19,20 +19,26 @@ public class UiElement
 
     public GridRectangle Rectangle { get; }
 
-    public void PaintUiElement(AsciiScreen screen, ISubElement? hoveredSubElement)
+    public void PaintSubElements(AsciiScreen screen, ISubElement? hoveredSubElement)
     {
         if (_shouldDrawFrame)
         {
             screen.PutFrameRectangle(ResourceAlias.PopupFrame, Rectangle);
         }
-
-        screen.PushTransform(Rectangle.TopLeft);
+        
+        screen.PushTransform(Transform);
         foreach (var subElement in _subElements)
         {
             subElement.PutSubElementOnScreen(screen, hoveredSubElement);
         }
-
         screen.PopTransform();
+    }
+
+    private GridPosition Transform => Rectangle.TopLeft + AdditionalTransform();
+
+    protected virtual GridPosition AdditionalTransform()
+    {
+        return GridPosition.Zero;
     }
 
     public void AddDynamicText(GridPosition relativeGridPosition, Func<string> getString)
@@ -60,6 +66,13 @@ public class UiElement
         _subElements.Add(button);
     }
 
+    public DynamicImage AddDynamicImage(GridRectangle gridRectangle)
+    {
+        var dynamicImage = new DynamicImage(gridRectangle); 
+        _subElements.Add(dynamicImage);
+        return dynamicImage;
+    }
+
     public ScrollablePane AddScrollablePane(GridRectangle viewport)
     {
         var pane = new ScrollablePane(viewport);
@@ -76,7 +89,7 @@ public class UiElement
         
         foreach (var subElement in _subElements)
         {
-            var relativePosition = absoluteScreenPosition.Value - Rectangle.TopLeft;
+            var relativePosition = absoluteScreenPosition.Value - Transform;
             if (subElement.Contains(relativePosition))
             {
                 if (subElement is UiElement subUiElement)
@@ -127,18 +140,25 @@ public class UiElement
     
     public void UpdateMouseInput(ConsumableInput.ConsumableMouse inputMouse, GridPosition hoveredScreenPosition, ref ISubElement? primedElement)
     {
+        var hoveredElement = GetSubElementAt(hoveredScreenPosition);
         if (inputMouse.GetButton(MouseButton.Left).WasPressed)
         {
-            primedElement = GetSubElementAt(hoveredScreenPosition);
+            primedElement = hoveredElement;
         }
         
         if (inputMouse.GetButton(MouseButton.Left).WasReleased)
         {
-            if (primedElement == GetSubElementAt(hoveredScreenPosition))
+            if (primedElement == hoveredElement)
             {
                 primedElement?.OnClicked();
                 primedElement = null;
             }
+        }
+        
+        var scrollDelta = -inputMouse.NormalizedScrollDelta();
+        foreach (var element in _subElements)
+        {
+            element.OnScroll(scrollDelta, hoveredElement);
         }
     }
 }

@@ -83,14 +83,39 @@ public class ChooseShapeModal : Popup
         });
         AddButton(rotateCwButton);
 
-        var topLeftPadding = new GridPosition(1, 2);
+        var scrollAreaTopLeft = new GridPosition(1, 2);
 
-        var pane = AddScrollablePane(new GridRectangle(topLeftPadding,
-            new GridPosition(corners.Width - topLeftPadding.X, corners.Height - 1)));
+        var scrollAreaBottomRight = new GridPosition(corners.Width - scrollAreaTopLeft.X - 1, corners.Height - 1);
+        var pane = AddScrollablePane(
+            new GridRectangle(scrollAreaTopLeft, scrollAreaBottomRight));
+
+        var scrollBarRectangle = new GridRectangle(new GridPosition(scrollAreaBottomRight.X+1,scrollAreaTopLeft.Y),scrollAreaBottomRight + new GridPosition(1,0));
+        var dynamicImage = AddDynamicImage(scrollBarRectangle);
+        dynamicImage.SetDrawAction(screen =>
+        {
+            if (pane.ShouldHaveThumb())
+            {
+                var thumbPosition = pane.ThumbPosition(pane.ViewRectangle.Height);
+                screen.PutFilledRectangle(TileState.Sprite(ResourceAlias.Tools, 17, Color.Gray), scrollBarRectangle.MovedToZero());
+                screen.PutTile(new GridPosition(0, thumbPosition), TileState.Sprite(ResourceAlias.Tools, 16, Color.LightBlue));
+            }
+            else
+            {
+                screen.PutFilledRectangle(TileState.Sprite(ResourceAlias.Tools, 17, ResourceAlias.Color("background")), scrollBarRectangle.MovedToZero());
+            }
+        });
 
         var maxWidth = pane.Rectangle.Width;
         var x = 0;
         var y = 0;
+        var yToScrollTo = 0;
+        
+        var emptyShape = new CanvasTileShapeEmpty();
+        var emptyButton = new Button(new GridPosition(x,y), () => ChooseTile(emptyShape));
+        emptyButton.SetTileStateOnHoverGetter(() => GetHoveredTileState(emptyShape));
+        pane.AddButton(emptyButton);
+        HandleLineFeed(ref x, ref y, maxWidth);
+        
         foreach (var (sheetName, sheet) in LdResourceAssets.Instance.Sheets)
         {
             if (sheet == null)
@@ -104,6 +129,12 @@ public class ChooseShapeModal : Popup
                 var capturedFrame = frame;
                 var shape = new CanvasTileShapeSprite(sheetName, capturedFrame);
                 var button = new Button(gridPosition, () => ChooseTile(shape));
+
+                if (_getChosenShape().GetHashCode() == shape.GetHashCode())
+                {
+                    yToScrollTo = y;
+                }
+                
                 button.SetTileStateGetter(() =>
                 {
                     if (_getChosenShape().GetHashCode() == shape.GetHashCode())
@@ -128,6 +159,11 @@ public class ChooseShapeModal : Popup
             {
                 var shape = new CanvasTileShapeString(character.ToString());
                 var button = new Button(gridPosition, () => ChooseTile(shape));
+                if (_getChosenShape().GetHashCode() == shape.GetHashCode())
+                {
+                    yToScrollTo = y;
+                }
+                
                 button.SetTileStateGetter(() =>
                 {
                     if (_getChosenShape().GetHashCode() == shape.GetHashCode())
@@ -144,6 +180,8 @@ public class ChooseShapeModal : Popup
         }
 
         pane.SetContentHeight(y);
+        
+        pane.ScrollToPosition(yToScrollTo);
     }
 
     private void ResetTransformations()
@@ -199,4 +237,16 @@ public class ChooseShapeModal : Popup
     }
 
     public event Action<ICanvasTileShape>? ChoseShape;
+}
+
+public class CanvasTileShapeEmpty : ICanvasTileShape
+{
+    public CanvasTileShapeEmpty()
+    {
+    }
+
+    public TileState GetTileState()
+    {
+        return TileState.BackgroundOnly(Color.Transparent, 0f);
+    }
 }

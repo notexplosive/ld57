@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.AssetManagement;
@@ -15,6 +16,7 @@ public class AsciiScreen
     private readonly Dictionary<GridPosition, TileState> _tiles = new();
     private readonly Stack<GridPosition> _transforms = new();
     private readonly Dictionary<GridPosition, TweenableGlyph> _tweenableGlyphs = new();
+    private readonly Stack<GridRectangle> _stencils = new();
 
     public AsciiScreen(int width, int height, float tileSize)
     {
@@ -101,19 +103,19 @@ public class AsciiScreen
         painter.EndSpriteBatch();
     }
 
-    public void PutTile(GridPosition position, TileState tileState, TweenableGlyph? tweenableGlyph = null)
+    public void PutTile(GridPosition rawPosition, TileState tileState, TweenableGlyph? tweenableGlyph = null)
     {
-        position += CurrentTransform();
-        if (position.X >= 0 && position.X < Width && position.Y >= 0 && position.Y < Height)
+        if (ContainsPosition(rawPosition + CurrentTransform()))
         {
-            _tiles[position] = tileState;
+            var transformedPosition = rawPosition + CurrentTransform();
+            _tiles[transformedPosition] = tileState;
             if (tweenableGlyph != null)
             {
-                _tweenableGlyphs[position] = tweenableGlyph;
+                _tweenableGlyphs[transformedPosition] = tweenableGlyph;
             }
             else
             {
-                _tweenableGlyphs.Remove(position);
+                _tweenableGlyphs.Remove(transformedPosition);
             }
         }
     }
@@ -239,12 +241,23 @@ public class AsciiScreen
         return Constants.AllPositionsInRectangle(CurrentTransform(), RoomSize);
     }
 
-    public bool ContainsPosition(GridPosition position)
+    public bool ContainsPosition(GridPosition transformedPosition)
     {
-        position += CurrentTransform();
-        return position.X >= 0 && position.Y >= 0 && position.X < Width &&
-               position.Y < Height;
+        if (_stencils.Count == 0)
+        {
+            return new GridRectangle(0, 0, Width, Height).Contains(transformedPosition, true);
+        }
+
+        foreach (var stencil in _stencils)
+        {
+            if (!stencil.Contains(transformedPosition, true))
+            {
+                return false;
+            }
+        }
+        return true;
     }
+
 
     public void PushTransform(GridPosition offset)
     {
@@ -256,6 +269,22 @@ public class AsciiScreen
         if (!_transforms.TryPop(out _))
         {
             Client.Debug.LogError("Popped Screen Transform when there was none to pop");
+        }
+    }
+
+    /// <summary>
+    /// Pushes a stencil using the current Transform
+    /// </summary>
+    public void PushStencil(GridRectangle stencil)
+    {
+        _stencils.Push(stencil.Moved(CurrentTransform()));
+    }
+
+    public void PopStencil()
+    {
+        if (!_stencils.TryPop(out _))
+        {
+            Client.Debug.LogError("Popped Screen Stencil when there was none to pop");
         }
     }
 }

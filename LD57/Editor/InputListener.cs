@@ -37,4 +37,9 @@ public class InputListener : ISubElement
     {
         _onInput(inputKeyboard);
     }
+
+    public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
+    {
+        
+    }
 }

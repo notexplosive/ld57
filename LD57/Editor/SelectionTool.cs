@@ -167,9 +167,8 @@ public abstract class SelectionTool : IEditorTool
                 // FIRST do a pass on the rectangle, in case we're in ALT mode
                 foreach (var worldPosition in pendingRectangle.Value.AllPositions())
                 {
-                    var screenPosition = worldPosition;
-                    var previousTileState = screen.GetTile(screenPosition);
-                    screen.PutTile(screenPosition,
+                    var previousTileState = screen.GetTile(worldPosition);
+                    screen.PutTile(worldPosition,
                         previousTileState with
                         {
                             BackgroundColor = Color.White,
@@ -181,9 +180,8 @@ public abstract class SelectionTool : IEditorTool
             // SECOND highlight all the actual selected parts
             foreach (var worldPosition in PendingSelectedPositions())
             {
-                var screenPosition = worldPosition;
-                var previousTileState = screen.GetTile(screenPosition);
-                screen.PutTile(screenPosition,
+                var previousTileState = screen.GetTile(worldPosition);
+                screen.PutTile(worldPosition,
                     previousTileState with
                     {
                         BackgroundColor = backgroundColor, ForegroundColor = foregroundColor, BackgroundIntensity = 1f

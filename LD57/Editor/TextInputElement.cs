@@ -71,4 +71,9 @@ public class TextInputElement : ISubElement
             Cancelled?.Invoke();
         }
     }
+
+    public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
+    {
+        
+    }
 }

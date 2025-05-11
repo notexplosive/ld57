@@ -269,26 +269,21 @@ public class EditorSession : Session
 
         if (!IsDraggingPrimary && !IsDraggingSecondary)
         {
-            var scrollVector = new Vector2(0, input.Mouse.ScrollDelta());
-            if (scrollVector.Y != 0)
+            var flippedDelta = -input.Mouse.NormalizedScrollDelta();
+            
+            if (input.Keyboard.Modifiers.Control)
             {
-                var scrollDelta = (int) scrollVector.Normalized().Y;
-                var flippedDelta = -scrollDelta;
-
-                if (input.Keyboard.Modifiers.Control)
+                if (CurrentTool != null)
                 {
-                    if (CurrentTool != null)
-                    {
-                        var currentIndex = EditorTools.IndexOf(CurrentTool);
-                        var newIndex = Math.Clamp(currentIndex + flippedDelta, 0, EditorTools.Count - 1);
-                        _toolSelector.Selected = EditorTools[newIndex];
-                    }
+                    var currentIndex = EditorTools.IndexOf(CurrentTool);
+                    var newIndex = Math.Clamp(currentIndex + flippedDelta, 0, EditorTools.Count - 1);
+                    _toolSelector.Selected = EditorTools[newIndex];
                 }
+            }
 
-                foreach (var extraKeyBindEvent in ExtraKeyBinds)
-                {
-                    extraKeyBindEvent(input, flippedDelta);
-                }
+            foreach (var extraKeyBindEvent in ExtraKeyBinds)
+            {
+                extraKeyBindEvent(input, flippedDelta);
             }
         }
     }
@@ -373,12 +368,8 @@ public class EditorSession : Session
         // paint selection
         foreach (var worldPosition in Surface.Selection.AllPositions())
         {
-            var screenPosition = worldPosition;
-            if (_screen.ContainsPosition(screenPosition))
-            {
-                _screen.PutTile(screenPosition,
-                    Surface.Selection.GetTileStateAt(worldPosition - Surface.Selection.Offset));
-            }
+            _screen.PutTile(worldPosition,
+                Surface.Selection.GetTileStateAt(worldPosition - Surface.Selection.Offset));
         }
 
         Surface.PaintOverlayBelowTool(_screen, HoveredWorldPosition);
@@ -404,12 +395,12 @@ public class EditorSession : Session
 
         foreach (var uiElement in _uiElements)
         {
-            uiElement.PaintUiElement(_screen, uiElement.GetSubElementAt(_hoveredScreenPosition));
+            uiElement.PaintSubElements(_screen, uiElement.GetSubElementAt(_hoveredScreenPosition));
         }
 
         if (_currentPopup != null)
         {
-            _currentPopup.PaintUiElement(_screen, _currentPopup.GetSubElementAt(_hoveredScreenPosition));
+            _currentPopup.PaintSubElements(_screen, _currentPopup.GetSubElementAt(_hoveredScreenPosition));
         }
     }
 

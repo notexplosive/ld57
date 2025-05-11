@@ -4,20 +4,23 @@ using LD57.Rendering;
 
 namespace LD57.Editor;
 
-public class DynamicTile : ISubElement
+public class DynamicImage : ISubElement
 {
-    private GridPosition Position { get; }
-    private readonly Func<TileState> _getTile;
+    private readonly GridRectangle _gridRectangle;
+    private Action<AsciiScreen>? _doDraw;
 
-    public DynamicTile(GridPosition gridPosition, Func<TileState> getTile)
+    public DynamicImage(GridRectangle gridRectangle)
     {
-        Position = gridPosition;
-        _getTile = getTile;
+        _gridRectangle = gridRectangle;
     }
 
     public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
-        screen.PutTile(Position, _getTile());
+        screen.PushStencil(_gridRectangle);
+        screen.PushTransform(_gridRectangle.TopLeft);
+        _doDraw?.Invoke(screen);
+        screen.PopTransform();
+        screen.PopStencil();
     }
 
     public bool Contains(GridPosition relativePosition)
@@ -43,5 +46,11 @@ public class DynamicTile : ISubElement
     public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
     {
         
+    }
+
+    public DynamicImage SetDrawAction(Action<AsciiScreen> doDraw)
+    {
+        _doDraw = doDraw;
+        return this;
     }
 }

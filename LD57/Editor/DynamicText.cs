@@ -39,4 +39,9 @@ public class DynamicText : ISubElement
     {
         
     }
+
+    public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
+    {
+        
+    }
 }

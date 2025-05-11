@@ -77,4 +77,9 @@ public readonly record struct GridRectangle(int Left, int Top, int Width, int He
     {
         return FromTopLeftAndSize(rectangle.Location.RoundToGridPosition(), rectangle.Size.RoundToGridPosition());
     }
+
+    public GridRectangle MovedToZero()
+    {
+        return Moved(-TopLeft);
+    }
 }

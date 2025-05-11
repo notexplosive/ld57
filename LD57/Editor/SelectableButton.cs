@@ -71,6 +71,11 @@ public class SelectableButton<T> : ISubElement where T : class
         
     }
 
+    public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
+    {
+        
+    }
+
     public void Select()
     {
         _selector.Selected = _selectableContent;

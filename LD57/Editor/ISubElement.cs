@@ -10,4 +10,5 @@ public interface ISubElement
     void OnClicked();
     void OnTextInput(char[] enteredCharacters);
     void UpdateKeyboardInput(ConsumableInput.ConsumableKeyboard inputKeyboard);
+    void OnScroll(int scrollDelta, ISubElement? hoveredElement);
 }

@@ -24,7 +24,7 @@ public class ChooseColorModal : Popup
         if (getIntensity != null)
         {
             var numberOfIntensities = 10;
-            for (var intensityIndex = 0; intensityIndex < numberOfIntensities; intensityIndex++)
+            for (var intensityIndex = 0; intensityIndex <= numberOfIntensities; intensityIndex++)
             {
                 var intensity = (float) intensityIndex / 10;
 

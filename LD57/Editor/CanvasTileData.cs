@@ -64,6 +64,11 @@ public record CanvasTileData
                 };
         }
 
+        if (TileType == TileType.Invisible)
+        {
+            return TileState.BackgroundOnly(CalculateBackgroundColor(), BackgroundIntensity);
+        }
+
         return TileState.TransparentEmpty;
     }
 

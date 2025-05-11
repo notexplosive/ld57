@@ -58,6 +58,11 @@ public class Button : ISubElement
     {
     }
 
+    public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
+    {
+        
+    }
+
     public Button SetTileStateGetter(Func<TileState> getTileState)
     {
         _getTileState = getTileState;
