@@ -18,7 +18,7 @@ public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData>
     {
         var existingTile = AllInkAt(position).FirstOrDefault();
 
-        if (existingTile == null && !_canvasBrushMode.ForegroundShapeAndTransform.IsEditing)
+        if (existingTile == null && !_canvasBrushMode.ForegroundShapeAndTransform.IsVisibleAndEditing)
         {
             return;
         }

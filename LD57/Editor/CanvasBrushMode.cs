@@ -203,7 +203,7 @@ public class CanvasBrushMode
     {
         var result = incomingTile;
 
-        if (!ForegroundShapeAndTransform.IsVisibleOrEditing)
+        if (!ForegroundShapeAndTransform.IsVisibleAndEditing)
         {
             result = result with
             {
@@ -217,7 +217,7 @@ public class CanvasBrushMode
             };
         }
 
-        if (!ForegroundColor.IsVisibleOrEditing)
+        if (!ForegroundColor.IsVisibleAndEditing)
         {
             result = result with
             {
@@ -225,7 +225,7 @@ public class CanvasBrushMode
             };
         }
 
-        if (!BackgroundColorAndIntensity.IsVisibleOrEditing)
+        if (!BackgroundColorAndIntensity.IsVisibleAndEditing)
         {
             result = result with
             {
