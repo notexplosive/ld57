@@ -52,11 +52,14 @@ public class CanvasBrushMode
         CreateToggle(element, new GridPosition(2, 3), GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible),
             BackgroundColorAndIntensity.ToggleVisible);
 
-        CreateToggle(element, new GridPosition(3, 1), GetEditingTileState(() => ForegroundShapeAndTransform.IsEditing),
+        CreateToggle(element, new GridPosition(3, 1), GetEditingTileState(
+                () => ForegroundShapeAndTransform.IsEditing, () => ForegroundShapeAndTransform.IsVisible),
             ForegroundShapeAndTransform.ToggleEditing);
-        CreateToggle(element, new GridPosition(3, 2), GetEditingTileState(() => ForegroundColor.IsEditing),
+        CreateToggle(element, new GridPosition(3, 2), GetEditingTileState(
+                () => ForegroundColor.IsEditing, () => ForegroundColor.IsVisible),
             ForegroundColor.ToggleEditing);
-        CreateToggle(element, new GridPosition(3, 3), GetEditingTileState(() => BackgroundColorAndIntensity.IsEditing),
+        CreateToggle(element, new GridPosition(3, 3), GetEditingTileState(
+                () => BackgroundColorAndIntensity.IsEditing, () => BackgroundColorAndIntensity.IsVisible),
             BackgroundColorAndIntensity.ToggleEditing);
 
         return element;
@@ -156,17 +159,29 @@ public class CanvasBrushMode
         };
     }
 
-    private Func<TileState> GetEditingTileState(Func<bool> getter)
+    private Func<TileState> GetEditingTileState(Func<bool> isEditable, Func<bool> isVisible)
     {
         return () =>
         {
-            if (getter())
-            {
-                return TileState.Sprite(ResourceAlias.Tools, 0, Color.White);
-            }
+            var result= GetEditableTileState(isEditable());
 
-            return TileState.Sprite(ResourceAlias.Tools, 9, Color.White);
+            if (!isVisible())
+            {
+                return result with {ForegroundColor = Color.Gray};
+            }
+            
+            return result;
         };
+    }
+
+    private static TileState GetEditableTileState(bool editable)
+    {
+        if (editable)
+        {
+            return TileState.Sprite(ResourceAlias.Tools, 0, Color.White);
+        }
+
+        return TileState.Sprite(ResourceAlias.Tools, 9, Color.White);
     }
 
     private TileState GetBackgroundTileState()
@@ -188,7 +203,7 @@ public class CanvasBrushMode
     {
         var result = incomingTile;
 
-        if (!ForegroundShapeAndTransform.IsEditing)
+        if (!ForegroundShapeAndTransform.IsVisibleOrEditing)
         {
             result = result with
             {
@@ -202,7 +217,7 @@ public class CanvasBrushMode
             };
         }
 
-        if (!ForegroundColor.IsEditing)
+        if (!ForegroundColor.IsVisibleOrEditing)
         {
             result = result with
             {
@@ -210,7 +225,7 @@ public class CanvasBrushMode
             };
         }
 
-        if (!BackgroundColorAndIntensity.IsEditing)
+        if (!BackgroundColorAndIntensity.IsVisibleOrEditing)
         {
             result = result with
             {
@@ -220,11 +235,5 @@ public class CanvasBrushMode
         }
 
         return result;
-    }
-
-    public bool IsEditingOnAllLayers()
-    {
-        return BackgroundColorAndIntensity.IsEditing && ForegroundColor.IsEditing &&
-               ForegroundShapeAndTransform.IsEditing;
     }
 }
