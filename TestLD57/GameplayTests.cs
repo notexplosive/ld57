@@ -383,8 +383,6 @@ public class GameplayTests
     [Fact]
     public void Item_Capture_CantCapture()
     {
-        // todo: attempt to drop into a solid
-
         var item = new CaptureGloveItemBehavior();
         var user = CreateEntity(new GridPosition(0, 0), [], []);
         user.MostRecentMoveDirection = Direction.Right;

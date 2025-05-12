@@ -118,8 +118,6 @@ public record CanvasTileData
             result.TextString = stringShape.StringContent;
         }
 
-        // todo: take influence from other settings (eg: color)
-
         return result;
     }
     
