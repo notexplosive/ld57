@@ -18,7 +18,7 @@ public class CanvasBrushMode
     public CanvasBrushLayer ForegroundColor { get; set; } = new(true, true);
     public CanvasBrushLayer BackgroundColorAndIntensity { get; set; } = new(true, true);
 
-    public CanvasTileData GetTile()
+    public CanvasTileData GetFullTile()
     {
         return CanvasTileData.FromSettings(_currentShape, _flipState, _rotation, _foregroundColorName,
             _backgroundColorName, _backgroundIntensity);
@@ -45,20 +45,18 @@ public class CanvasBrushMode
                 .SetTileStateOnHoverGetter(() => GetBackgroundTileState().WithSprite(ResourceAlias.Tools, 0))
         );
 
-        CraeteToggle(element, new GridPosition(2, 1), GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible), ForegroundShapeAndTransform.ToggleVisible);
-        CraeteToggle(element, new GridPosition(2, 2), GetVisibleTileState(() => ForegroundColor.IsVisible), ForegroundColor.ToggleVisible);
-        CraeteToggle(element, new GridPosition(2, 3), GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible), BackgroundColorAndIntensity.ToggleVisible);
+        CreateToggle(element, new GridPosition(2, 1), GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible), ForegroundShapeAndTransform.ToggleVisible);
+        CreateToggle(element, new GridPosition(2, 2), GetVisibleTileState(() => ForegroundColor.IsVisible), ForegroundColor.ToggleVisible);
+        CreateToggle(element, new GridPosition(2, 3), GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible), BackgroundColorAndIntensity.ToggleVisible);
 
-        element.AddDynamicTile(new GridPosition(3, 1),
-            GetEditingTileState(() => ForegroundShapeAndTransform.IsEditing));
-        element.AddDynamicTile(new GridPosition(3, 2), GetEditingTileState(() => ForegroundColor.IsEditing));
-        element.AddDynamicTile(new GridPosition(3, 3),
-            GetEditingTileState(() => BackgroundColorAndIntensity.IsEditing));
-
+        CreateToggle(element, new GridPosition(3, 1), GetEditingTileState(() => ForegroundShapeAndTransform.IsEditing), ForegroundShapeAndTransform.ToggleEditing);
+        CreateToggle(element, new GridPosition(3, 2), GetEditingTileState(() => ForegroundColor.IsEditing), ForegroundColor.ToggleEditing);
+        CreateToggle(element, new GridPosition(3, 3), GetEditingTileState(() => BackgroundColorAndIntensity.IsEditing), BackgroundColorAndIntensity.ToggleEditing);
+        
         return element;
     }
 
-    private static void CraeteToggle(UiElement element, GridPosition position, Func<TileState> getVisibleTileState, Action doToggle)
+    private static void CreateToggle(UiElement element, GridPosition position, Func<TileState> getVisibleTileState, Action doToggle)
     {
         element.AddButton(
             new Button(position, doToggle)
@@ -135,7 +133,7 @@ public class CanvasBrushMode
 
     private TileState GetCurrentTileState()
     {
-        return GetTile().FullTileState();
+        return GetFullTile().TileState();
     }
 
     private Func<TileState> GetVisibleTileState(Func<bool> getter)

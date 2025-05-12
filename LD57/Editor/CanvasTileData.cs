@@ -41,12 +41,12 @@ public record CanvasTileData
     [JsonProperty("background_intensity")]
     public float BackgroundIntensity { get; set; }
 
-    public TileState FullTileState()
+    public TileState TileState()
     {
         if (TileType == TileType.Sprite)
         {
             var sheet = CalculateSheet();
-            return TileState.Sprite(sheet, Frame, CalculateForegroundColor())
+            return Rendering.TileState.Sprite(sheet, Frame, CalculateForegroundColor())
                     .WithBackground(CalculateBackgroundColor(), BackgroundIntensity) with
                 {
                     Flip = GetFlipState(),
@@ -56,7 +56,7 @@ public record CanvasTileData
 
         if (TileType == TileType.Character)
         {
-            return TileState.StringCharacter(TextString ?? "?", CalculateForegroundColor())
+            return Rendering.TileState.StringCharacter(TextString ?? "?", CalculateForegroundColor())
                     .WithBackground(CalculateBackgroundColor(), BackgroundIntensity) with
                 {
                     Flip = GetFlipState(),
@@ -66,10 +66,10 @@ public record CanvasTileData
 
         if (TileType == TileType.Invisible)
         {
-            return TileState.BackgroundOnly(CalculateBackgroundColor(), BackgroundIntensity);
+            return Rendering.TileState.BackgroundOnly(CalculateBackgroundColor(), BackgroundIntensity);
         }
 
-        return TileState.TransparentEmpty;
+        return Rendering.TileState.TransparentEmpty;
     }
 
     private XyBool GetFlipState()
@@ -119,6 +119,28 @@ public record CanvasTileData
         }
 
         // todo: take influence from other settings (eg: color)
+
+        return result;
+    }
+    
+    public TileState GetTileWithMode(CanvasBrushMode mode)
+    {
+        var result = TileState();
+
+        if (!mode.ForegroundShapeAndTransform.IsVisible)
+        {
+            result = result.WithSprite(ResourceAlias.Utility, 34);
+        }
+
+        if (!mode.ForegroundColor.IsVisible)
+        {
+            result = result with {ForegroundColor = Color.White};
+        }
+
+        if (!mode.BackgroundColorAndIntensity.IsVisible)
+        {
+            result = result with {BackgroundIntensity = 0};
+        }
 
         return result;
     }

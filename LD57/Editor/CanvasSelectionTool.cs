@@ -18,6 +18,6 @@ public class CanvasSelectionTool : SelectionTool
 
     protected override void FillWithCurrentInk(List<GridPosition> positions)
     {
-        Surface.Data.FillAllPositions(positions, _canvasBrushMode.GetTile());
+        Surface.Data.FillAllPositions(positions, _canvasBrushMode.GetFullTile());
     }
 }

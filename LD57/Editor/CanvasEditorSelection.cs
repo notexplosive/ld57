@@ -16,7 +16,7 @@ public class CanvasEditorSelection : EditorSelection<PlacedCanvasTile>
 
     public override TileState GetTileStateAt(GridPosition internalPosition)
     {
-        return (PlacedObjects.FirstOrDefault(a => a.Position == internalPosition)?.TileState() ??
+        return (PlacedObjects.FirstOrDefault(a => a.Position == internalPosition)?.CanvasTileData.TileState() ??
                 TileState.BackgroundOnly(Color.White, 1f)) with
         {
             ForegroundColor = Color.DarkGoldenrod,

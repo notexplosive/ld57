@@ -17,7 +17,7 @@ public class CanvasEditorBrushTool : BrushTool
 
     public override TileState GetTileStateInWorldOnHover(TileState original)
     {
-        return TileState.BackgroundOnly(Color.White, 1f);
+        return _canvasBrushMode.GetFullTile().GetTileWithMode(_canvasBrushMode);
     }
 
     protected override void OnErase(GridPosition hoveredWorldPosition)
@@ -27,6 +27,6 @@ public class CanvasEditorBrushTool : BrushTool
 
     protected override void OnPaint(GridPosition hoveredWorldPosition)
     {
-        _canvasEditorSurface.Data.PlaceInkAt(hoveredWorldPosition, _canvasBrushMode.GetTile());
+        _canvasEditorSurface.Data.PlaceInkAt(hoveredWorldPosition, _canvasBrushMode.GetFullTile());
     }
 }
