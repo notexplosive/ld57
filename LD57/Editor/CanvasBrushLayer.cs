@@ -10,4 +10,14 @@ public class CanvasBrushLayer
 
     public bool IsVisible { get; set; }
     public bool IsEditing { get; set; }
+
+    public void ToggleVisible()
+    {
+        IsVisible = !IsVisible;
+    }
+
+    public void ToggleEditing()
+    {
+        IsEditing = !IsEditing;
+    }
 }

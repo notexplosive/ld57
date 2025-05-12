@@ -19,6 +19,7 @@ public static class ResourceAlias
     public static SpriteSheet PopupFrame => LdResourceAssets.Instance.Sheets["PopupFrameParts"]!;
     public static SpriteSheet PopupFrameRaw => LdResourceAssets.Instance.Sheets["PopupFrame"]!;
     public static SpriteSheet Tools => LdResourceAssets.Instance.Sheets["Tools"]!;
+    public static SpriteSheet Utility => LdResourceAssets.Instance.Sheets["Utility"]!;
 
     public static SpriteSheet? GetSpriteSheetByName(string? name)
     {

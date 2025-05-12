@@ -71,8 +71,8 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     private EditorSession BuildDrawSession()
     {
-        var canvasSurface = new CanvasEditorSurface();
         var canvasBrushMode = new CanvasBrushMode();
+        var canvasSurface = new CanvasEditorSurface(canvasBrushMode);
         
         var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, canvasSurface);
         editorSession.EditorTools.Add(new CanvasEditorBrushTool(editorSession, canvasSurface, canvasBrushMode));

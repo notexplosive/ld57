@@ -38,18 +38,16 @@ public class CanvasBrushMode
             new Button(new GridPosition(1, 2), OpenForegroundColorModal)
                 .SetTileStateGetter(GetForegroundColorTileState)
                 .SetTileStateOnHoverGetter(() => GetForegroundColorTileState().WithSprite(ResourceAlias.Tools, 0))
-            );
+        );
         element.AddButton(
             new Button(new GridPosition(1, 3), OpenBackgroundColorModal)
                 .SetTileStateGetter(GetBackgroundTileState)
                 .SetTileStateOnHoverGetter(() => GetBackgroundTileState().WithSprite(ResourceAlias.Tools, 0))
-            );
+        );
 
-        element.AddDynamicTile(new GridPosition(2, 1),
-            GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible));
-        element.AddDynamicTile(new GridPosition(2, 2), GetVisibleTileState(() => ForegroundColor.IsVisible));
-        element.AddDynamicTile(new GridPosition(2, 3),
-            GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible));
+        CraeteToggle(element, new GridPosition(2, 1), GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible), ForegroundShapeAndTransform.ToggleVisible);
+        CraeteToggle(element, new GridPosition(2, 2), GetVisibleTileState(() => ForegroundColor.IsVisible), ForegroundColor.ToggleVisible);
+        CraeteToggle(element, new GridPosition(2, 3), GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible), BackgroundColorAndIntensity.ToggleVisible);
 
         element.AddDynamicTile(new GridPosition(3, 1),
             GetEditingTileState(() => ForegroundShapeAndTransform.IsEditing));
@@ -58,6 +56,15 @@ public class CanvasBrushMode
             GetEditingTileState(() => BackgroundColorAndIntensity.IsEditing));
 
         return element;
+    }
+
+    private static void CraeteToggle(UiElement element, GridPosition position, Func<TileState> getVisibleTileState, Action doToggle)
+    {
+        element.AddButton(
+            new Button(position, doToggle)
+                .SetTileStateGetter(getVisibleTileState)
+                .SetTileStateOnHoverGetter(() => getVisibleTileState().WithBackground(Color.LightBlue))
+        );
     }
 
     private void OpenForegroundColorModal()

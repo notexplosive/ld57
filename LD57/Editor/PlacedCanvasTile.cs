@@ -1,7 +1,7 @@
 ﻿using System;
-using ExplogineMonoGame.AssetManagement;
 using LD57.Gameplay;
 using LD57.Rendering;
+using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
 namespace LD57.Editor;
@@ -26,5 +26,27 @@ public record PlacedCanvasTile : IPlacedObject<PlacedCanvasTile>
     public TileState TileState()
     {
         return CanvasTileData.FullTileState();
+    }
+
+    public TileState TileStateWithMode(CanvasBrushMode canvasBrushMode)
+    {
+        var result = TileState();
+
+        if (!canvasBrushMode.ForegroundShapeAndTransform.IsVisible)
+        {
+            result = result.WithSprite(ResourceAlias.Utility, 34);
+        }
+
+        if (!canvasBrushMode.ForegroundColor.IsVisible)
+        {
+            result = result with {ForegroundColor = Color.White};
+        }
+
+        if (!canvasBrushMode.BackgroundColorAndIntensity.IsVisible)
+        {
+            result = result with {BackgroundIntensity = 0};
+        }
+
+        return result;
     }
 }
