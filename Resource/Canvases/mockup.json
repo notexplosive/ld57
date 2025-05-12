@@ -1,0 +1,3262 @@
+{
+  "content": [
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 6,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "Floors",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "water",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "water",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 6,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 27,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "blue_brick",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "wood",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "green_text",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 29,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 30,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 31,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 32,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 32,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 32,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 32,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 32,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 0,
+        "sheet": null,
+        "text": "R",
+        "tile_type": 1,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 32,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 32,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 27,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 6,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 6,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 6,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 7,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 7,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 7,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 8,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 8,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 8,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 22,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 6,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 22,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 6,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 22,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 7,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 22,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 7,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 22,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 8,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 22,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 8,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 6,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 22,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 22,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 10,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "rock",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "button",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 17,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 15,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 15,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 15,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 25,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 25,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 14,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 25,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 27,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "Floors",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "wood",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 25,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 25,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 25,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 25,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 25,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 24,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 24,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 24,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 24,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 24,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 9,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 38,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 38,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 38,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 38,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 38,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "player",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 5,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 19,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 20,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 1,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 21,
+        "y": 9
+      }
+    }
+  ]
+}

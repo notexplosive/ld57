@@ -127,17 +127,17 @@ public record CanvasTileData
     {
         var result = GetTile();
 
-        if (!mode.ForegroundShapeAndTransform.IsVisibleAndEditing)
+        if (!mode.ForegroundShapeAndTransform.IsVisible)
         {
             result = result.WithSprite(ResourceAlias.Utility, 34);
         }
 
-        if (!mode.ForegroundColor.IsVisibleAndEditing)
+        if (!mode.ForegroundColor.IsVisible)
         {
             result = result with {ForegroundColor = Color.White};
         }
 
-        if (!mode.BackgroundColorAndIntensity.IsVisibleAndEditing)
+        if (!mode.BackgroundColorAndIntensity.IsVisible)
         {
             result = result with {BackgroundIntensity = 0};
         }
