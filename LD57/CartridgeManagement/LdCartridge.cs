@@ -71,17 +71,18 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     private EditorSession BuildDrawSession()
     {
-        var canvasBrushMode = new CanvasBrushMode();
-        var canvasSurface = new CanvasEditorSurface(canvasBrushMode);
+        var filter = new CanvasBrushFilter();
+        var canvasSurface = new CanvasEditorSurface(filter);
         
         var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, canvasSurface);
-        editorSession.EditorTools.Add(new CanvasEditorBrushTool(editorSession, canvasSurface, canvasBrushMode));
-        editorSession.EditorTools.Add(new CanvasSelectionTool(editorSession, canvasSurface, canvasBrushMode));
-        editorSession.ExtraUi.Add(canvasBrushMode.CreateUi);
+        editorSession.EditorTools.Add(new CanvasEditorBrushTool(editorSession, canvasSurface, filter));
+        editorSession.EditorTools.Add(new CanvasSelectionTool(editorSession, canvasSurface, filter));
+        editorSession.EditorTools.Add(new CanvasTextTool(editorSession, canvasSurface, filter));
+        editorSession.ExtraUi.Add(filter.CreateUi);
         
         editorSession.RebuildScreen();
         
-        canvasBrushMode.RequestedModal += editorSession.OpenPopup;
+        filter.RequestedModal += editorSession.OpenPopup;
 
         return editorSession;
     }

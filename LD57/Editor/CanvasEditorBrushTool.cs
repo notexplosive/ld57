@@ -7,18 +7,18 @@ namespace LD57.Editor;
 public class CanvasEditorBrushTool : BrushTool
 {
     private readonly CanvasEditorSurface _canvasEditorSurface;
-    private readonly CanvasBrushMode _canvasBrushMode;
+    private readonly CanvasBrushFilter _canvasBrushFilter;
 
     public CanvasEditorBrushTool(EditorSession editorEditorSession, CanvasEditorSurface canvasEditorSurface,
-        CanvasBrushMode canvasBrushMode) : base(editorEditorSession)
+        CanvasBrushFilter canvasBrushFilter) : base(editorEditorSession)
     {
         _canvasEditorSurface = canvasEditorSurface;
-        _canvasBrushMode = canvasBrushMode;
+        _canvasBrushFilter = canvasBrushFilter;
     }
 
     public override TileState GetTileStateInWorldOnHover(TileState original)
     {
-        return _canvasBrushMode.GetFullTile().GetTileWithMode(_canvasBrushMode);
+        return _canvasBrushFilter.GetFullTile().GetTileStateWithFilter(_canvasBrushFilter);
     }
 
     protected override void OnErase(GridPosition hoveredWorldPosition)
@@ -28,6 +28,6 @@ public class CanvasEditorBrushTool : BrushTool
 
     protected override void OnPaint(GridPosition hoveredWorldPosition)
     {
-        _canvasEditorSurface.Data.PlaceInkAt(hoveredWorldPosition, _canvasBrushMode.GetFullTile());
+        _canvasEditorSurface.Data.PlaceInkAt(hoveredWorldPosition, _canvasBrushFilter.GetFullTile());
     }
 }

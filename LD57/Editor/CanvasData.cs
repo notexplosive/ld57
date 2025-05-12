@@ -7,23 +7,23 @@ namespace LD57.Editor;
 [Serializable]
 public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData>
 {
-    private readonly CanvasBrushMode _canvasBrushMode;
+    private readonly CanvasBrushFilter _canvasBrushFilter;
 
-    public CanvasData(CanvasBrushMode canvasBrushMode)
+    public CanvasData(CanvasBrushFilter canvasBrushFilter)
     {
-        _canvasBrushMode = canvasBrushMode;
+        _canvasBrushFilter = canvasBrushFilter;
     }
     
     public override void PlaceInkAt(GridPosition position, CanvasTileData template)
     {
-        var existingTile = AllInkAt(position).FirstOrDefault();
+        var existingTile = InkAt(position);
 
-        if (existingTile == null && !_canvasBrushMode.ForegroundShapeAndTransform.IsVisibleAndEditing)
+        if (existingTile == null && !_canvasBrushFilter.ForegroundShapeAndTransform.IsFunctionallyActive)
         {
             return;
         }
         
-        template = _canvasBrushMode.Combine(existingTile?.CanvasTileData ?? new(), template);
+        template = _canvasBrushFilter.Combine(existingTile?.CanvasTileData ?? new(), template);
         
         EraseAt(position);
 
@@ -32,6 +32,11 @@ public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData>
             Position = position,
             CanvasTileData = template
         });
+    }
+
+    public PlacedCanvasTile? InkAt(GridPosition position)
+    {
+        return AllInkAt(position).FirstOrDefault();
     }
 
     public override void EraseAt(GridPosition position)

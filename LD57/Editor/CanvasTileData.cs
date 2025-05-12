@@ -46,7 +46,7 @@ public record CanvasTileData
         if (TileType == TileType.Sprite)
         {
             var sheet = CalculateSheet();
-            return Rendering.TileState.Sprite(sheet, Frame, CalculateForegroundColor())
+            return TileState.Sprite(sheet, Frame, CalculateForegroundColor())
                     .WithBackground(CalculateBackgroundColor(), BackgroundIntensity) with
                 {
                     Flip = GetFlipState(),
@@ -56,7 +56,7 @@ public record CanvasTileData
 
         if (TileType == TileType.Character)
         {
-            return Rendering.TileState.StringCharacter(TextString ?? "?", CalculateForegroundColor())
+            return TileState.StringCharacter(TextString ?? "?", CalculateForegroundColor())
                     .WithBackground(CalculateBackgroundColor(), BackgroundIntensity) with
                 {
                     Flip = GetFlipState(),
@@ -66,10 +66,10 @@ public record CanvasTileData
 
         if (TileType == TileType.Invisible)
         {
-            return Rendering.TileState.BackgroundOnly(CalculateBackgroundColor(), BackgroundIntensity);
+            return TileState.BackgroundOnly(CalculateBackgroundColor(), BackgroundIntensity);
         }
 
-        return Rendering.TileState.TransparentEmpty;
+        return TileState.TransparentEmpty;
     }
 
     private XyBool GetFlipState()
@@ -120,26 +120,41 @@ public record CanvasTileData
 
         return result;
     }
-    
-    public TileState GetTileWithMode(CanvasBrushMode mode)
+
+    public TileState GetTileStateWithFilter(CanvasBrushFilter filter)
     {
         var result = GetTile();
 
-        if (!mode.ForegroundShapeAndTransform.IsVisible)
+        if (!filter.ForegroundShapeAndTransform.IsVisible)
         {
             result = result.WithSprite(ResourceAlias.Utility, 34);
         }
 
-        if (!mode.ForegroundColor.IsVisible)
+        if (!filter.ForegroundColor.IsVisible)
         {
             result = result with {ForegroundColor = Color.White};
         }
 
-        if (!mode.BackgroundColorAndIntensity.IsVisible)
+        if (!filter.BackgroundColorAndIntensity.IsVisible)
         {
             result = result with {BackgroundIntensity = 0};
         }
 
         return result;
+    }
+
+    public CanvasTileData WithShapeData(TileType tileType, string? sheetName, int frame, string? text, bool flipX,
+        bool flipY, float angle)
+    {
+        return this with
+        {
+            TileType = tileType,
+            FlipX = flipX,
+            FlipY = flipY,
+            Angle = angle,
+            SheetName = sheetName,
+            Frame = frame,
+            TextString = text
+        };
     }
 }

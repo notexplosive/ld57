@@ -8,17 +8,17 @@ namespace LD57.Editor;
 public class CanvasEditorSelection : EditorSelection<PlacedCanvasTile>
 {
     private readonly CanvasEditorSurface _surface;
-    private readonly CanvasBrushMode _mode;
+    private readonly CanvasBrushFilter _filter;
 
-    public CanvasEditorSelection(CanvasEditorSurface surface, CanvasBrushMode mode)
+    public CanvasEditorSelection(CanvasEditorSurface surface, CanvasBrushFilter filter)
     {
         _surface = surface;
-        _mode = mode;
+        _filter = filter;
     }
 
     public override TileState GetTileStateAt(GridPosition internalPosition)
     {
-        return (PlacedObjects.FirstOrDefault(a => a.Position == internalPosition)?.CanvasTileData.GetTileWithMode(_mode) ??
+        return (PlacedObjects.FirstOrDefault(a => a.Position == internalPosition)?.CanvasTileData.GetTileStateWithFilter(_filter) ??
                 TileState.BackgroundOnly(Color.White, 1f)) with
         {
             ForegroundColor = Color.DarkGoldenrod,
@@ -29,6 +29,6 @@ public class CanvasEditorSelection : EditorSelection<PlacedCanvasTile>
 
     protected override IEnumerable<PlacedCanvasTile> GetAllObjectsAt(GridPosition position)
     {
-        return _surface.AllItemsAt(position);
+        return _surface.AllInkAt(position);
     }
 }

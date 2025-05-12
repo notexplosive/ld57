@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace LD57.Editor;
 
-public class CanvasBrushMode
+public class CanvasBrushFilter
 {
     private string _backgroundColorName = "white";
     private float _backgroundIntensity;
@@ -23,7 +23,7 @@ public class CanvasBrushMode
         return CanvasTileData.FromSettings(_currentShape, _flipState, _rotation, _foregroundColorName,
             _backgroundColorName, _backgroundIntensity);
     }
-
+    
     public UiElement CreateUi(AsciiScreen screen)
     {
         var panelSize = new GridPosition(4, 4);
@@ -31,8 +31,8 @@ public class CanvasBrushMode
         var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize));
 
         element.AddButton(new Button(new GridPosition(1, 1), OpenShapeModal)
-            .SetTileStateGetter(GetForegroundShape)
-            .SetTileStateOnHoverGetter(() => GetForegroundShape().WithForeground(Color.LimeGreen))
+            .SetTileStateGetter(GetForegroundShapeTileState)
+            .SetTileStateOnHoverGetter(() => GetForegroundShapeTileState().WithForeground(Color.LimeGreen))
         );
         element.AddButton(
             new Button(new GridPosition(1, 2), OpenForegroundColorModal)
@@ -194,7 +194,7 @@ public class CanvasBrushMode
         return TileState.BackgroundOnly(ResourceAlias.Color(_foregroundColorName), 1f);
     }
 
-    private TileState GetForegroundShape()
+    private TileState GetForegroundShapeTileState()
     {
         return _currentShape.GetTileState() with {Flip = _flipState, Angle = _rotation.Radians};
     }
@@ -203,21 +203,13 @@ public class CanvasBrushMode
     {
         var result = incomingTile;
 
-        if (!ForegroundShapeAndTransform.IsVisibleAndEditing)
+        if (!ForegroundShapeAndTransform.IsFunctionallyActive)
         {
-            result = result with
-            {
-                TileType = currentTile.TileType,
-                FlipX = currentTile.FlipX,
-                FlipY = currentTile.FlipY,
-                Angle = currentTile.Angle,
-                SheetName = currentTile.SheetName,
-                Frame = currentTile.Frame,
-                TextString = currentTile.TextString
-            };
+            result = result.WithShapeData(currentTile.TileType, currentTile.SheetName, currentTile.Frame,
+                currentTile.TextString, currentTile.FlipX, currentTile.FlipY, currentTile.Angle);
         }
 
-        if (!ForegroundColor.IsVisibleAndEditing)
+        if (!ForegroundColor.IsFunctionallyActive)
         {
             result = result with
             {
@@ -225,7 +217,7 @@ public class CanvasBrushMode
             };
         }
 
-        if (!BackgroundColorAndIntensity.IsVisibleAndEditing)
+        if (!BackgroundColorAndIntensity.IsFunctionallyActive)
         {
             result = result with
             {

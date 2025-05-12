@@ -5,12 +5,12 @@ namespace LD57.Editor;
 
 public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, CanvasTileData>
 {
-    private readonly CanvasBrushMode _canvasBrushMode;
+    private readonly CanvasBrushFilter _canvasBrushFilter;
 
-    public CanvasEditorSurface(CanvasBrushMode canvasBrushMode) : base("Canvases", new CanvasData(canvasBrushMode))
+    public CanvasEditorSurface(CanvasBrushFilter canvasBrushFilter) : base("Canvases", new CanvasData(canvasBrushFilter))
     {
-        _canvasBrushMode = canvasBrushMode;
-        RealSelection = new CanvasEditorSelection(this, canvasBrushMode);
+        _canvasBrushFilter = canvasBrushFilter;
+        RealSelection = new CanvasEditorSelection(this, canvasBrushFilter);
     }
 
     protected override CanvasEditorSelection RealSelection { get; }
@@ -19,7 +19,7 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
     {
         foreach (var item in Data.Content)
         {
-            screen.PutTile(item.Position, item.CanvasTileData.GetTileWithMode(_canvasBrushMode));
+            screen.PutTile(item.Position, item.CanvasTileData.GetTileStateWithFilter(_canvasBrushFilter));
         }
     }
 
@@ -42,6 +42,6 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
 
     protected override CanvasData CreateEmptyData()
     {
-        return new CanvasData(_canvasBrushMode);
+        return new CanvasData(_canvasBrushFilter);
     }
 }

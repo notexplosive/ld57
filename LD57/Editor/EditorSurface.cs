@@ -85,7 +85,7 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
         RequestResetCamera?.Invoke();
     }
 
-    public IEnumerable<TPlaced> AllItemsAt(GridPosition position)
+    public IEnumerable<TPlaced> AllInkAt(GridPosition position)
     {
         return Data.AllInkAt(position);
     }

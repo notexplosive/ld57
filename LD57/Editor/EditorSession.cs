@@ -201,7 +201,8 @@ public class EditorSession : Session
 
         if (_currentPopup != null)
         {
-            var enteredCharacters = input.Keyboard.GetEnteredCharacters();
+            var enteredCharacters = input.Keyboard.GetEnteredCharacters(true);
+
             _currentPopup.OnTextInput(enteredCharacters);
             _currentPopup.UpdateKeyboardInput(input.Keyboard);
             return;
@@ -235,6 +236,9 @@ public class EditorSession : Session
             Surface.ClearEverything();
         }
 
+        CurrentTool?.UpdateInput(input.Keyboard, HoveredWorldPosition);
+        
+        
         if (input.Keyboard.GetButton(Keys.OemMinus).WasPressed)
         {
             _screen = RebuildScreenWithWidth(_screen.Width + 1);
@@ -264,8 +268,6 @@ public class EditorSession : Session
         {
             _cameraPosition += new GridPosition(0, _screen.Height / 4);
         }
-
-        CurrentTool?.UpdateInput(input.Keyboard, HoveredWorldPosition);
 
         if (!IsDraggingPrimary && !IsDraggingSecondary)
         {

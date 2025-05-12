@@ -13,7 +13,7 @@ public class CanvasBrushLayer
     /// <summary>
     /// Reflects if we're allowed to Edit right now
     /// </summary>
-    public bool IsVisibleAndEditing => IsVisible && IsEditing;
+    public bool IsFunctionallyActive => IsVisible && IsEditing;
 
     /// <summary>
     /// Reflects if we've explicitly permitted editing or not

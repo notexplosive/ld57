@@ -5,12 +5,12 @@ namespace LD57.Editor;
 
 public class CanvasSelectionTool : SelectionTool
 {
-    private readonly CanvasBrushMode _canvasBrushMode;
+    private readonly CanvasBrushFilter _canvasBrushFilter;
 
     public CanvasSelectionTool(EditorSession editorSession, CanvasEditorSurface surface,
-        CanvasBrushMode canvasBrushMode) : base(editorSession)
+        CanvasBrushFilter canvasBrushFilter) : base(editorSession)
     {
-        _canvasBrushMode = canvasBrushMode;
+        _canvasBrushFilter = canvasBrushFilter;
         Surface = surface;
     }
 
@@ -18,6 +18,6 @@ public class CanvasSelectionTool : SelectionTool
 
     protected override void FillWithCurrentInk(List<GridPosition> positions)
     {
-        Surface.Data.FillAllPositions(positions, _canvasBrushMode.GetFullTile());
+        Surface.Data.FillAllPositions(positions, _canvasBrushFilter.GetFullTile());
     }
 }
