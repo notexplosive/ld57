@@ -2,6 +2,8 @@
 
 public class CanvasBrushLayer
 {
+    private bool _isEditing;
+
     public CanvasBrushLayer(bool isVisible, bool isEditing)
     {
         IsVisible = isVisible;
@@ -9,7 +11,12 @@ public class CanvasBrushLayer
     }
 
     public bool IsVisible { get; set; }
-    public bool IsEditing { get; set; }
+
+    public bool IsEditing
+    {
+        get => IsVisible && _isEditing;
+        set => _isEditing = value;
+    }
 
     public void ToggleVisible()
     {
@@ -18,6 +25,6 @@ public class CanvasBrushLayer
 
     public void ToggleEditing()
     {
-        IsEditing = !IsEditing;
+        _isEditing = !_isEditing;
     }
 }

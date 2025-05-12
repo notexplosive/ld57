@@ -21,7 +21,7 @@ public record CanvasTileData
     public bool FlipY;
 
     [JsonProperty("foreground_color")]
-    public string? ForegroundColorName;
+    public string? ForegroundColorName = "white";
 
     [JsonProperty("frame")]
     public int Frame;
@@ -41,7 +41,7 @@ public record CanvasTileData
     [JsonProperty("background_intensity")]
     public float BackgroundIntensity { get; set; }
 
-    public TileState TileState()
+    public TileState GetTile()
     {
         if (TileType == TileType.Sprite)
         {
@@ -125,7 +125,7 @@ public record CanvasTileData
     
     public TileState GetTileWithMode(CanvasBrushMode mode)
     {
-        var result = TileState();
+        var result = GetTile();
 
         if (!mode.ForegroundShapeAndTransform.IsVisible)
         {

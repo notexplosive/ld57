@@ -7,17 +7,18 @@ using LD57.Rendering;
 namespace LD57.Editor;
 
 public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
-    where TData : EditorData<TPlaced, TInk>, new()
+    where TData : EditorData<TPlaced, TInk>
     where TPlaced : IPlacedObject<TPlaced>
 {
     private readonly string _resourceSubDirectory;
 
-    protected EditorSurface(string resourceSubDirectory)
+    protected EditorSurface(string resourceSubDirectory, TData data)
     {
         _resourceSubDirectory = resourceSubDirectory;
+        Data = data;
     }
 
-    public TData Data { get; private set; } = new();
+    public TData Data { get; private set; }
     protected abstract EditorSelection<TPlaced> RealSelection { get; }
     public event Action? RequestResetCamera;
     public string? FileName { get; set; }
@@ -40,7 +41,7 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
 
     public void ClearEverything()
     {
-        SetTemplateAndFileName(null, new TData());
+        SetTemplateAndFileName(null, CreateEmptyData());
     }
 
     public abstract void HandleKeyBinds(ConsumableInput input);
@@ -52,7 +53,7 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
 
     public bool HasContentAt(GridPosition position)
     {
-        return Data.HasEntityAt(position);
+        return Data.HasInkAt(position);
     }
 
     public void MoveSelection()
@@ -72,8 +73,10 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
 
     public void EraseSelection()
     {
-        Data.EraseAtPositions(Selection.AllPositions());
+        Data.EraseAllPositions(Selection.AllPositions());
     }
+
+    protected abstract TData CreateEmptyData();
 
     protected void SetTemplateAndFileName(string? fileName, TData template)
     {
@@ -84,6 +87,6 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
 
     public IEnumerable<TPlaced> AllItemsAt(GridPosition position)
     {
-        return Data.AllEntitiesAt(position);
+        return Data.AllInkAt(position);
     }
 }

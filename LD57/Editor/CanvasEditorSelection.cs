@@ -8,15 +8,17 @@ namespace LD57.Editor;
 public class CanvasEditorSelection : EditorSelection<PlacedCanvasTile>
 {
     private readonly CanvasEditorSurface _surface;
+    private readonly CanvasBrushMode _mode;
 
-    public CanvasEditorSelection(CanvasEditorSurface surface)
+    public CanvasEditorSelection(CanvasEditorSurface surface, CanvasBrushMode mode)
     {
         _surface = surface;
+        _mode = mode;
     }
 
     public override TileState GetTileStateAt(GridPosition internalPosition)
     {
-        return (PlacedObjects.FirstOrDefault(a => a.Position == internalPosition)?.CanvasTileData.TileState() ??
+        return (PlacedObjects.FirstOrDefault(a => a.Position == internalPosition)?.CanvasTileData.GetTileWithMode(_mode) ??
                 TileState.BackgroundOnly(Color.White, 1f)) with
         {
             ForegroundColor = Color.DarkGoldenrod,

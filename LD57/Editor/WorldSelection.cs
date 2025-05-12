@@ -17,7 +17,7 @@ public class WorldSelection : EditorSelection<PlacedEntity>
 
     protected override IEnumerable<PlacedEntity> GetAllObjectsAt(GridPosition position)
     {
-        return _surface.Data.AllEntitiesAt(position);
+        return _surface.Data.AllInkAt(position);
     }
 
     public override TileState GetTileStateAt(GridPosition internalPosition)

@@ -11,14 +11,12 @@ namespace LD57.Editor;
 
 public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, EntityTemplate>
 {
-    private readonly WorldSelection _selection;
-
-    public WorldEditorSurface() : base("Worlds")
+    public WorldEditorSurface() : base("Worlds", new WorldTemplate())
     {
-        _selection = new WorldSelection(this);
+        RealSelection = new WorldSelection(this);
     }
 
-    protected override WorldSelection RealSelection => _selection;
+    protected override WorldSelection RealSelection { get; }
 
     public override void HandleKeyBinds(ConsumableInput input)
     {
@@ -36,6 +34,11 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
                 RequestedPlayAt?.Invoke(position);
             }
         }
+    }
+
+    protected override WorldTemplate CreateEmptyData()
+    {
+        return new WorldTemplate();
     }
 
     public override void PaintWorldToScreen(AsciiScreen screen, float dt)

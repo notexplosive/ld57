@@ -16,7 +16,7 @@ public abstract class EditorData<TPlaced, TInk> where TPlaced : IPlacedObject<TP
         Content.RemoveAll(a => a.Position == position);
     }
 
-    public IEnumerable<TPlaced> AllEntitiesAt(GridPosition position)
+    public IEnumerable<TPlaced> AllInkAt(GridPosition position)
     {
         foreach (var entity in Content)
         {
@@ -47,7 +47,7 @@ public abstract class EditorData<TPlaced, TInk> where TPlaced : IPlacedObject<TP
 
     public abstract void PlaceInkAt(GridPosition position, TInk template);
 
-    public void EraseAtPositions(IEnumerable<GridPosition> allPositions)
+    public void EraseAllPositions(IEnumerable<GridPosition> allPositions)
     {
         foreach (var position in allPositions)
         {
@@ -57,7 +57,7 @@ public abstract class EditorData<TPlaced, TInk> where TPlaced : IPlacedObject<TP
 
     public abstract void EraseAt(GridPosition position);
 
-    public bool HasEntityAt(GridPosition position)
+    public bool HasInkAt(GridPosition position)
     {
         return Content.Any(a => a.Position == position);
     }

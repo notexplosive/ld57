@@ -14,9 +14,9 @@ public class CanvasBrushMode
     private XyBool _flipState;
     private string _foregroundColorName = "white";
     private QuarterRotation _rotation = QuarterRotation.Upright;
-    public CanvasBrushLayer ForegroundShapeAndTransform { get; set; } = new(true, true);
-    public CanvasBrushLayer ForegroundColor { get; set; } = new(true, true);
-    public CanvasBrushLayer BackgroundColorAndIntensity { get; set; } = new(true, true);
+    public CanvasBrushLayer ForegroundShapeAndTransform { get; } = new(true, true);
+    public CanvasBrushLayer ForegroundColor { get; } = new(true, true);
+    public CanvasBrushLayer BackgroundColorAndIntensity { get; } = new(true, true);
 
     public CanvasTileData GetFullTile()
     {
@@ -45,18 +45,25 @@ public class CanvasBrushMode
                 .SetTileStateOnHoverGetter(() => GetBackgroundTileState().WithSprite(ResourceAlias.Tools, 0))
         );
 
-        CreateToggle(element, new GridPosition(2, 1), GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible), ForegroundShapeAndTransform.ToggleVisible);
-        CreateToggle(element, new GridPosition(2, 2), GetVisibleTileState(() => ForegroundColor.IsVisible), ForegroundColor.ToggleVisible);
-        CreateToggle(element, new GridPosition(2, 3), GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible), BackgroundColorAndIntensity.ToggleVisible);
+        CreateToggle(element, new GridPosition(2, 1), GetVisibleTileState(() => ForegroundShapeAndTransform.IsVisible),
+            ForegroundShapeAndTransform.ToggleVisible);
+        CreateToggle(element, new GridPosition(2, 2), GetVisibleTileState(() => ForegroundColor.IsVisible),
+            ForegroundColor.ToggleVisible);
+        CreateToggle(element, new GridPosition(2, 3), GetVisibleTileState(() => BackgroundColorAndIntensity.IsVisible),
+            BackgroundColorAndIntensity.ToggleVisible);
 
-        CreateToggle(element, new GridPosition(3, 1), GetEditingTileState(() => ForegroundShapeAndTransform.IsEditing), ForegroundShapeAndTransform.ToggleEditing);
-        CreateToggle(element, new GridPosition(3, 2), GetEditingTileState(() => ForegroundColor.IsEditing), ForegroundColor.ToggleEditing);
-        CreateToggle(element, new GridPosition(3, 3), GetEditingTileState(() => BackgroundColorAndIntensity.IsEditing), BackgroundColorAndIntensity.ToggleEditing);
-        
+        CreateToggle(element, new GridPosition(3, 1), GetEditingTileState(() => ForegroundShapeAndTransform.IsEditing),
+            ForegroundShapeAndTransform.ToggleEditing);
+        CreateToggle(element, new GridPosition(3, 2), GetEditingTileState(() => ForegroundColor.IsEditing),
+            ForegroundColor.ToggleEditing);
+        CreateToggle(element, new GridPosition(3, 3), GetEditingTileState(() => BackgroundColorAndIntensity.IsEditing),
+            BackgroundColorAndIntensity.ToggleEditing);
+
         return element;
     }
 
-    private static void CreateToggle(UiElement element, GridPosition position, Func<TileState> getVisibleTileState, Action doToggle)
+    private static void CreateToggle(UiElement element, GridPosition position, Func<TileState> getVisibleTileState,
+        Action doToggle)
     {
         element.AddButton(
             new Button(position, doToggle)
@@ -133,7 +140,7 @@ public class CanvasBrushMode
 
     private TileState GetCurrentTileState()
     {
-        return GetFullTile().TileState();
+        return GetFullTile().GetTile();
     }
 
     private Func<TileState> GetVisibleTileState(Func<bool> getter)
@@ -175,5 +182,49 @@ public class CanvasBrushMode
     private TileState GetForegroundShape()
     {
         return _currentShape.GetTileState() with {Flip = _flipState, Angle = _rotation.Radians};
+    }
+
+    public CanvasTileData Combine(CanvasTileData currentTile, CanvasTileData incomingTile)
+    {
+        var result = incomingTile;
+
+        if (!ForegroundShapeAndTransform.IsEditing)
+        {
+            result = result with
+            {
+                TileType = currentTile.TileType,
+                FlipX = currentTile.FlipX,
+                FlipY = currentTile.FlipY,
+                Angle = currentTile.Angle,
+                SheetName = currentTile.SheetName,
+                Frame = currentTile.Frame,
+                TextString = currentTile.TextString
+            };
+        }
+
+        if (!ForegroundColor.IsEditing)
+        {
+            result = result with
+            {
+                ForegroundColorName = currentTile.ForegroundColorName
+            };
+        }
+
+        if (!BackgroundColorAndIntensity.IsEditing)
+        {
+            result = result with
+            {
+                BackgroundIntensity = currentTile.BackgroundIntensity,
+                BackgroundColorName = currentTile.BackgroundColorName
+            };
+        }
+
+        return result;
+    }
+
+    public bool IsEditingOnAllLayers()
+    {
+        return BackgroundColorAndIntensity.IsEditing && ForegroundColor.IsEditing &&
+               ForegroundShapeAndTransform.IsEditing;
     }
 }

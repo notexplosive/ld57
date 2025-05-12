@@ -7,10 +7,10 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
 {
     private readonly CanvasBrushMode _canvasBrushMode;
 
-    public CanvasEditorSurface(CanvasBrushMode canvasBrushMode) : base("Canvases")
+    public CanvasEditorSurface(CanvasBrushMode canvasBrushMode) : base("Canvases", new CanvasData(canvasBrushMode))
     {
         _canvasBrushMode = canvasBrushMode;
-        RealSelection = new CanvasEditorSelection(this);
+        RealSelection = new CanvasEditorSelection(this, canvasBrushMode);
     }
 
     protected override CanvasEditorSelection RealSelection { get; }
@@ -38,5 +38,10 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
 
     public override void HandleKeyBinds(ConsumableInput input)
     {
+    }
+
+    protected override CanvasData CreateEmptyData()
+    {
+        return new CanvasData(_canvasBrushMode);
     }
 }

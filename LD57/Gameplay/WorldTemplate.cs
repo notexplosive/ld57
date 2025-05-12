@@ -70,7 +70,7 @@ public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
 
     public IEnumerable<PlacedEntity> GetMetadataAt(GridPosition position)
     {
-        foreach (var entity in AllEntitiesAt(position))
+        foreach (var entity in AllInkAt(position))
         {
             if (entity.ExtraState.Count > 0)
             {
