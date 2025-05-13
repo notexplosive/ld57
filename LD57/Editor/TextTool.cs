@@ -1,45 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
-using LD57.Core;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MoonSharp.Interpreter;
 
 namespace LD57.Editor;
 
 public class CanvasTextTool : IEditorTool
 {
-    private readonly EditorSession _editorSession;
-    private readonly CanvasEditorSurface _canvasSurface;
+    private readonly List<char> _buffer = new();
     private readonly CanvasBrushFilter _canvasBrushFilter;
+    private readonly CanvasEditorSurface _canvasSurface;
+    private float _lastTimeStamp;
     private GridPosition? _startPosition;
-    private List<char> _buffer = new();
-    private float _snapshottedTimeStamp;
 
-    public CanvasTextTool(EditorSession editorSession, CanvasEditorSurface canvasSurface, CanvasBrushFilter canvasBrushFilter)
+    public CanvasTextTool(CanvasEditorSurface canvasSurface, CanvasBrushFilter canvasBrushFilter)
     {
-        _editorSession = editorSession;
         _canvasSurface = canvasSurface;
         _canvasBrushFilter = canvasBrushFilter;
     }
 
     public TileState TileStateInToolbar { get; } = TileState.Sprite(ResourceAlias.Tools, 15);
+
     public TileState GetTileStateInWorldOnHover(TileState original)
     {
         if (!_startPosition.HasValue)
         {
             return original.WithSprite(ResourceAlias.Tools, 15);
         }
-        else
-        {
-            return original with {BackgroundColor = Color.White, BackgroundIntensity = 0.5f};
-        }
+
+        return original with {BackgroundColor = Color.White, BackgroundIntensity = 0.5f};
     }
 
     public string Status()
@@ -58,7 +51,7 @@ public class CanvasTextTool : IEditorTool
 
             foreach (var character in inputKeyboard.GetEnteredCharacters(true))
             {
-                _snapshottedTimeStamp = Client.TotalElapsedTime;
+                _lastTimeStamp = Client.TotalElapsedTime;
                 if (!char.IsControl(character))
                 {
                     _buffer.Add(character);
@@ -83,44 +76,15 @@ public class CanvasTextTool : IEditorTool
         }
     }
 
-    private void ClearState()
-    {
-        _buffer.Clear();
-        _startPosition = null;
-    }
-
-    private void PutStringAt(List<char> characters, GridPosition startPosition)
-    {
-        var xOffset = 0;
-        foreach (var character in characters)
-        {
-            var targetPosition = startPosition + new GridPosition(xOffset, 0);
-            var existingTile = _canvasSurface.Data.InkAt(targetPosition);
-            var tileToPaint = _canvasBrushFilter.GetFullTile();
-                
-            if (existingTile != null)
-            {
-                tileToPaint = existingTile.CanvasTileData;
-            }
-
-            tileToPaint =
-                tileToPaint.WithShapeData(TileType.Character, null, 0, character.ToString(), false, false, 0);
-                
-            _canvasSurface.Data.PlaceInkAt(targetPosition, tileToPaint);
-            xOffset++;
-        }
-    }
-
     public void StartMousePressInWorld(GridPosition position, MouseButton mouseButton)
     {
-        
     }
 
     public void FinishMousePressInWorld(GridPosition? position, MouseButton mouseButton)
     {
         if (position.HasValue && mouseButton == MouseButton.Left)
         {
-            _snapshottedTimeStamp = Client.TotalElapsedTime;
+            _lastTimeStamp = Client.TotalElapsedTime;
             _startPosition = position.Value;
         }
     }
@@ -144,9 +108,37 @@ public class CanvasTextTool : IEditorTool
         }
     }
 
+    private void ClearState()
+    {
+        _buffer.Clear();
+        _startPosition = null;
+    }
+
+    private void PutStringAt(List<char> characters, GridPosition startPosition)
+    {
+        var xOffset = 0;
+        foreach (var character in characters)
+        {
+            var targetPosition = startPosition + new GridPosition(xOffset, 0);
+            var existingTile = _canvasSurface.Data.InkAt(targetPosition);
+            var tileToPaint = _canvasBrushFilter.GetFullTile();
+
+            if (existingTile != null)
+            {
+                tileToPaint = existingTile.CanvasTileData;
+            }
+
+            tileToPaint =
+                tileToPaint.WithShapeData(TileType.Character, null, 0, character.ToString(), false, false, 0);
+
+            _canvasSurface.Data.PlaceInkAt(targetPosition, tileToPaint);
+            xOffset++;
+        }
+    }
+
     private float CurrentTimer()
     {
-        return Client.TotalElapsedTime - _snapshottedTimeStamp;
+        return Client.TotalElapsedTime - _lastTimeStamp;
     }
 
     private string BufferToString()

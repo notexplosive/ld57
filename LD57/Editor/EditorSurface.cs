@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using ExplogineCore;
 using ExplogineMonoGame;
 using LD57.Gameplay;
 using LD57.Rendering;
+using Newtonsoft.Json;
 
 namespace LD57.Editor;
 
@@ -37,7 +40,31 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
 
     public abstract void PaintOverlayAboveTool(AsciiScreen screen);
 
-    public abstract void Open(string path, bool isFullPath);
+    public void Open(string path, bool isFullPath)
+    {
+        string fileName;
+        string json;
+
+        if (isFullPath)
+        {
+            json = Client.Debug.RepoFileSystem.ReadFile(path);
+            fileName = new FileInfo(path).Name;
+        }
+        else
+        {
+            json = Client.Debug.RepoFileSystem.GetDirectory($"Resource/{_resourceSubDirectory}")
+                .ReadFile(path + ".json");
+            fileName = path;
+        }
+
+        var worldTemplate = JsonConvert.DeserializeObject<TData>(json);
+
+        if (worldTemplate != null)
+        {
+            var newFileName = fileName.RemoveFileExtension();
+            SetTemplateAndFileName(newFileName, worldTemplate);
+        }
+    }
 
     public void ClearEverything()
     {

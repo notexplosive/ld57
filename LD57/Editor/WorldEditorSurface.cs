@@ -123,28 +123,6 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
         }
     }
 
-    public override void Open(string path, bool isFullPath)
-    {
-        var fileName = path;
-        WorldTemplate? worldTemplate;
-
-        if (isFullPath)
-        {
-            fileName = new FileInfo(path).Name;
-            worldTemplate = Constants.AttemptLoadWorldTemplateFromFullPath(path);
-        }
-        else
-        {
-            worldTemplate = Constants.AttemptLoadWorldTemplateFromWorldDirectory(path);
-        }
-
-        if (worldTemplate != null)
-        {
-            var newFileName = fileName.RemoveFileExtension();
-            SetTemplateAndFileName(newFileName, worldTemplate);
-        }
-    }
-
     public event Action<GridPosition>? RequestedPlayAt;
 
     public void RequestPlay(GridPosition position)

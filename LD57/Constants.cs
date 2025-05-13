@@ -107,12 +107,6 @@ public static class Constants
         return JsonConvert.DeserializeObject<WorldTemplate>(worldData);
     }
 
-    public static WorldTemplate? AttemptLoadWorldTemplateFromFullPath(string fullPath)
-    {
-        var json = Client.Debug.RepoFileSystem.ReadFile(fullPath);
-        return JsonConvert.DeserializeObject<WorldTemplate>(json);
-    }
-
     public static void WriteJsonToResources<T>(T data, string subDirectory, string fileName)
     {
         Client.Debug.RepoFileSystem.WriteToFile($"Resource/{subDirectory}/{fileName}.json",

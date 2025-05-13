@@ -32,10 +32,6 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
     {
     }
 
-    public override void Open(string path, bool isFullPath)
-    {
-    }
-
     public override void HandleKeyBinds(ConsumableInput input)
     {
     }
