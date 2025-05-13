@@ -57,12 +57,12 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
             fileName = path;
         }
 
-        var worldTemplate = JsonConvert.DeserializeObject<TData>(json);
+        var data = JsonConvert.DeserializeObject<TData>(json);
 
-        if (worldTemplate != null)
+        if (data != null)
         {
             var newFileName = fileName.RemoveFileExtension();
-            SetTemplateAndFileName(newFileName, worldTemplate);
+            SetTemplateAndFileName(newFileName, data);
         }
     }
 
