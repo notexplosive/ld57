@@ -68,4 +68,31 @@ public class QuarterRotation
         // Should never happen
         return this;
     }
+
+    public static QuarterRotation FromAngle(float angle)
+    {
+        // insanely forgiving tolerance
+        var tolerance = 45;
+        if (Math.Abs(angle - 0f) < tolerance)
+        {
+            return Upright;
+        }
+
+        if (Math.Abs(angle - 90) < tolerance)
+        {
+            return Quarter;
+        }
+
+        if (Math.Abs(angle - 180) < tolerance)
+        {
+            return Half;
+        }
+
+        if (Math.Abs(angle - 270f) < tolerance)
+        {
+            return ThreeQuarters;
+        }
+
+        return Upright;
+    }
 }

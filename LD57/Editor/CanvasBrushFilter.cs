@@ -26,11 +26,10 @@ public class CanvasBrushFilter : IBrushFilter
     
     public UiElement CreateUi(AsciiScreen screen)
     {
-        var panelSize = new GridPosition(4, 4);
-        var topLeft = screen.RoomRectangle.TopRight + new GridPosition(-panelSize.X, 0);
-        var element = new UiElement(new GridRectangle(topLeft, topLeft + panelSize));
+        var topLeft = PanelTopLeft(screen);
+        var element = new UiElement(new GridRectangle(topLeft, topLeft + PanelSize));
 
-        element.AddButton(new Button(new GridPosition(1, 1), OpenShapeModal)
+        element.AddButton(new Button(new GridPosition(1, 1), ()=>OpenShapeModal(screen))
             .SetTileStateGetter(GetForegroundShapeTileState)
             .SetTileStateOnHoverGetter(() => GetForegroundShapeTileState().WithForeground(Color.LimeGreen))
         );
@@ -64,6 +63,13 @@ public class CanvasBrushFilter : IBrushFilter
 
         return element;
     }
+
+    private static GridPosition PanelTopLeft(AsciiScreen screen)
+    {
+        return screen.RoomRectangle.TopRight + new GridPosition(-PanelSize.X, 0);
+    }
+
+    private static GridPosition PanelSize => new(4, 4);
 
     private static void CreateToggle(UiElement element, GridPosition position, Func<TileState> getVisibleTileState,
         Action doToggle)
@@ -114,9 +120,9 @@ public class CanvasBrushFilter : IBrushFilter
         _foregroundColorName = color;
     }
 
-    private void OpenShapeModal()
+    private void OpenShapeModal(AsciiScreen screen)
     {
-        var chooseTileModal = new ChooseShapeModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
+        var chooseTileModal = new ChooseShapeModal(new GridRectangle(PanelTopLeft(screen) + new GridPosition(-10, 10), PanelTopLeft(screen)),
             () => _currentShape, () => _flipState, () => _rotation);
         chooseTileModal.ChoseShape += SetTileShape;
         chooseTileModal.ChoseFlipState += SetFlipState;
@@ -227,5 +233,29 @@ public class CanvasBrushFilter : IBrushFilter
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Gets the current Shape and Colors based on what filters are currently active
+    /// </summary>
+    public void SetBasedOnData(CanvasTileData tileData)
+    {
+        if (ForegroundShapeAndTransform.IsFunctionallyActive)
+        {
+            _currentShape = tileData.GetShape();
+            _rotation = QuarterRotation.FromAngle(tileData.Angle);
+            _flipState = new XyBool(tileData.FlipX, tileData.FlipY);
+        }
+
+        if (ForegroundColor.IsFunctionallyActive)
+        {
+            _foregroundColorName = tileData.ForegroundColorName ?? "white";
+        }
+
+        if (BackgroundColorAndIntensity.IsFunctionallyActive)
+        {
+            _backgroundIntensity = tileData.BackgroundIntensity;
+            _backgroundColorName = tileData.BackgroundColorName ?? "white";
+        }
     }
 }

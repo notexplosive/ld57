@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ExplogineCore.Data;
 using ExplogineMonoGame.AssetManagement;
 using LD57.Core;
@@ -155,6 +156,52 @@ public record CanvasTileData
             SheetName = sheetName,
             Frame = frame,
             TextString = text
+        };
+    }
+
+    public override string ToString()
+    {
+        var stringBuilder = new StringBuilder();
+        // shows up in Eye Dropper Tool Status
+        if (TileType == TileType.Sprite)
+        {
+            stringBuilder.Append($"Sprite: {SheetName}[{Frame}] ");
+            
+            // only sprites can be flipped for reasons I don't understand
+            stringBuilder.Append($"{(FlipX ? "FlipX, " : "")}{(FlipX ? "FlipY" : "")} ");
+        }
+
+        if (TileType == TileType.Character)
+        {
+            stringBuilder.Append($"Text: {TextString} ");
+            
+        }
+
+        if (TileType != TileType.Skip)
+        {
+            if (Angle != 0)
+            {
+                stringBuilder.Append($"Rot: {Angle} ");
+            }
+
+            stringBuilder.Append($"Fg: {ForegroundColorName} ");
+        }
+
+        if (BackgroundIntensity > 0 && BackgroundColorName != null)
+        {
+            stringBuilder.Append($"Bg: {BackgroundColorName}@{BackgroundIntensity}");
+        }
+
+        return stringBuilder.ToString();
+    }
+
+    public ICanvasTileShape GetShape()
+    {
+        return TileType switch
+        {
+            TileType.Character => new CanvasTileShapeString(TextString ?? "?"),
+            TileType.Sprite => new CanvasTileShapeSprite(SheetName ?? "Entities", Frame),
+            _ => new CanvasTileShapeEmpty()
         };
     }
 }

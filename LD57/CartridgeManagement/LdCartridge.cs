@@ -77,6 +77,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, canvasSurface);
         editorSession.EditorTools.Add(new CanvasEditorBrushTool(editorSession, canvasSurface, filter));
         editorSession.EditorTools.Add(new CanvasSelectionTool(editorSession, canvasSurface, filter));
+        editorSession.EditorTools.Add(new CanvasEyeDropperTool(editorSession, canvasSurface, filter));
         editorSession.EditorTools.Add(new CanvasTextTool(canvasSurface, filter));
         editorSession.ExtraUi.Add(filter.CreateUi);
         
