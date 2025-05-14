@@ -168,7 +168,7 @@ public record CanvasTileData
             stringBuilder.Append($"Sprite: {SheetName}[{Frame}] ");
             
             // only sprites can be flipped for reasons I don't understand
-            stringBuilder.Append($"{(FlipX ? "FlipX, " : "")}{(FlipX ? "FlipY" : "")} ");
+            stringBuilder.Append($"{(FlipX ? "FlipX, " : "")}{(FlipY ? "FlipY" : "")} ");
         }
 
         if (TileType == TileType.Character)

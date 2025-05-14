@@ -66,6 +66,11 @@ public class UiElement
         _subElements.Add(button);
     }
 
+    public void AddExtraDraw(ExtraDraw extraDraw)
+    {
+        _subElements.Add(extraDraw);
+    }
+
     public DynamicImage AddDynamicImage(GridRectangle gridRectangle)
     {
         var dynamicImage = new DynamicImage(gridRectangle); 

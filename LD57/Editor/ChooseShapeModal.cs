@@ -28,6 +28,8 @@ public class ChooseShapeModal : Popup
             }
         });
 
+        AddExtraDraw(new ExtraDraw(DrawExtraBorder));
+
         var resetButton = new Button(new GridPosition(1, 1), ResetTransformations);
         resetButton.SetTileStateGetter(() =>
         {
@@ -89,19 +91,23 @@ public class ChooseShapeModal : Popup
         var pane = AddScrollablePane(
             new GridRectangle(scrollAreaTopLeft, scrollAreaBottomRight));
 
-        var scrollBarRectangle = new GridRectangle(new GridPosition(scrollAreaBottomRight.X+1,scrollAreaTopLeft.Y),scrollAreaBottomRight + new GridPosition(1,0));
+        var scrollBarRectangle = new GridRectangle(new GridPosition(scrollAreaBottomRight.X + 1, scrollAreaTopLeft.Y),
+            scrollAreaBottomRight + new GridPosition(1, 0));
         var dynamicImage = AddDynamicImage(scrollBarRectangle);
         dynamicImage.SetDrawAction(screen =>
         {
             if (pane.ShouldHaveThumb())
             {
                 var thumbPosition = pane.ThumbPosition(pane.ViewRectangle.Height);
-                screen.PutFilledRectangle(TileState.Sprite(ResourceAlias.Tools, 17, Color.Gray), scrollBarRectangle.MovedToZero());
-                screen.PutTile(new GridPosition(0, thumbPosition), TileState.Sprite(ResourceAlias.Tools, 16, Color.LightBlue));
+                screen.PutFilledRectangle(TileState.Sprite(ResourceAlias.Tools, 17, Color.Gray),
+                    scrollBarRectangle.MovedToZero());
+                screen.PutTile(new GridPosition(0, thumbPosition),
+                    TileState.Sprite(ResourceAlias.Tools, 16, Color.LightBlue));
             }
             else
             {
-                screen.PutFilledRectangle(TileState.Sprite(ResourceAlias.Tools, 17, ResourceAlias.Color("background")), scrollBarRectangle.MovedToZero());
+                screen.PutFilledRectangle(TileState.Sprite(ResourceAlias.Tools, 17, ResourceAlias.Color("background")),
+                    scrollBarRectangle.MovedToZero());
             }
         });
 
@@ -109,13 +115,13 @@ public class ChooseShapeModal : Popup
         var x = 0;
         var y = 0;
         var yToScrollTo = 0;
-        
+
         var emptyShape = new CanvasTileShapeEmpty();
-        var emptyButton = new Button(new GridPosition(x,y), () => ChooseTile(emptyShape));
+        var emptyButton = new Button(new GridPosition(x, y), () => ChooseTile(emptyShape));
         emptyButton.SetTileStateOnHoverGetter(() => GetHoveredTileState(emptyShape));
         pane.AddButton(emptyButton);
         HandleLineFeed(ref x, ref y, maxWidth);
-        
+
         foreach (var (sheetName, sheet) in LdResourceAssets.Instance.Sheets)
         {
             if (sheet == null)
@@ -140,7 +146,7 @@ public class ChooseShapeModal : Popup
                 {
                     yToScrollTo = y;
                 }
-                
+
                 button.SetTileStateGetter(() =>
                 {
                     if (_getChosenShape().GetHashCode() == shape.GetHashCode())
@@ -169,7 +175,7 @@ public class ChooseShapeModal : Popup
                 {
                     yToScrollTo = y;
                 }
-                
+
                 button.SetTileStateGetter(() =>
                 {
                     if (_getChosenShape().GetHashCode() == shape.GetHashCode())
@@ -186,8 +192,22 @@ public class ChooseShapeModal : Popup
         }
 
         pane.SetContentHeight(y);
-        
+
         pane.ScrollToPosition(yToScrollTo);
+    }
+
+    private void DrawExtraBorder(AsciiScreen screen)
+    {
+        var width = Rectangle.Width;
+        screen.PutTile(new GridPosition(width, 0), TileState.Sprite(ResourceAlias.PopupFrame, 1));
+        screen.PutTile(new GridPosition(width, 1), TileState.TransparentEmpty);
+        screen.PutTile(new GridPosition(width, 2),
+            TileState.Sprite(ResourceAlias.Utility, 27).WithFlip(new XyBool(true, false)));
+        screen.PutTile(new GridPosition(width + 1, 2), TileState.Sprite(ResourceAlias.PopupFrame, 5));
+        screen.PutTile(new GridPosition(width + 1, 0), TileState.Sprite(ResourceAlias.PopupFrame, 1));
+        screen.PutTile(new GridPosition(width + 2, 0), TileState.Sprite(ResourceAlias.PopupFrame, 2));
+        screen.PutTile(new GridPosition(width + 2, 1), TileState.Sprite(ResourceAlias.PopupFrame, 3));
+        screen.PutTile(new GridPosition(width + 2, 2), TileState.Sprite(ResourceAlias.PopupFrame, 4));
     }
 
     private void ResetTransformations()
@@ -247,10 +267,6 @@ public class ChooseShapeModal : Popup
 
 public class CanvasTileShapeEmpty : ICanvasTileShape
 {
-    public CanvasTileShapeEmpty()
-    {
-    }
-
     public TileState GetTileState()
     {
         return TileState.BackgroundOnly(Color.Transparent, 0f);

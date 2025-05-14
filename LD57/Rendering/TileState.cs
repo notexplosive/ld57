@@ -88,4 +88,9 @@ public readonly record struct TileState(
     {
         return this with { ForegroundColor = foregroundColor };
     }
+
+    public TileState WithFlip(XyBool flip)
+    {
+        return this with {Flip = flip};
+    }
 }
