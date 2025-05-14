@@ -7,12 +7,14 @@ namespace LD57.Editor;
 
 public class WorldSelectionTool : SelectionTool
 {
+    private readonly WorldEditorBrushFilter _worldEditorBrushFilter;
     private readonly Func<EntityTemplate?> _getTemplate;
 
-    public WorldSelectionTool(EditorSession editorSession, WorldEditorSurface surface,
+    public WorldSelectionTool(EditorSession editorSession, WorldEditorSurface surface, WorldEditorBrushFilter worldEditorBrushFilter,
         Func<EntityTemplate?> getTemplate) : base(editorSession)
     {
         Surface = surface;
+        _worldEditorBrushFilter = worldEditorBrushFilter;
         _getTemplate = getTemplate;
     }
 
@@ -24,7 +26,7 @@ public class WorldSelectionTool : SelectionTool
 
         if (template != null)
         {
-            Surface.Data.FillAllPositions(positions, template);
+            Surface.Data.FillAllPositions(positions, template, _worldEditorBrushFilter);
         }
     }
 }

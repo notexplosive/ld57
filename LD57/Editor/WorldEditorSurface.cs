@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using ExplogineCore;
 using ExplogineMonoGame;
 using LD57.Gameplay;
 using LD57.Rendering;
@@ -9,7 +7,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LD57.Editor;
 
-public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, EntityTemplate>
+public class WorldEditorBrushFilter : IBrushFilter
+{
+}
+
+public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, EntityTemplate, WorldEditorBrushFilter>
 {
     public WorldEditorSurface() : base("Worlds", new WorldTemplate())
     {

@@ -6,7 +6,14 @@ using Newtonsoft.Json;
 
 namespace LD57.Editor;
 
-public abstract class EditorData<TPlaced, TInk> where TPlaced : IPlacedObject<TPlaced>
+public interface IBrushFilter
+{
+    
+}
+
+public abstract class EditorData<TPlaced, TInk, TFilter>
+    where TPlaced : IPlacedObject<TPlaced>
+    where TFilter : IBrushFilter
 {
     [JsonProperty("content")]
     public List<TPlaced> Content = new();
@@ -36,16 +43,24 @@ public abstract class EditorData<TPlaced, TInk> where TPlaced : IPlacedObject<TP
     {
         Content.Add(item);
     }
-
-    public void FillAllPositions(IEnumerable<GridPosition> positions, TInk ink)
+    
+    public void FillRectangle(GridRectangle rectangle, TInk ink, TFilter filter)
     {
-        foreach (var position in positions)
+        foreach (var position in rectangle.AllPositions())
         {
-            PlaceInkAt(position, ink);
+            PlaceInkAt(position, ink, filter);
         }
     }
 
-    public abstract void PlaceInkAt(GridPosition position, TInk template);
+    public void FillAllPositions(IEnumerable<GridPosition> positions, TInk ink, TFilter filter)
+    {
+        foreach (var position in positions)
+        {
+            PlaceInkAt(position, ink, filter);
+        }
+    }
+
+    public abstract void PlaceInkAt(GridPosition position, TInk template, TFilter filter);
 
     public void EraseAllPositions(IEnumerable<GridPosition> allPositions)
     {

@@ -131,7 +131,7 @@ public class CanvasTextTool : IEditorTool
             tileToPaint =
                 tileToPaint.WithShapeData(TileType.Character, null, 0, character.ToString(), false, false, 0);
 
-            _canvasSurface.Data.PlaceInkAt(targetPosition, tileToPaint);
+            _canvasSurface.Data.PlaceInkAt(targetPosition, tileToPaint, _canvasBrushFilter);
             xOffset++;
         }
     }

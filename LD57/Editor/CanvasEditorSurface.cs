@@ -3,11 +3,11 @@ using LD57.Rendering;
 
 namespace LD57.Editor;
 
-public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, CanvasTileData>
+public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, CanvasTileData, CanvasBrushFilter>
 {
     private readonly CanvasBrushFilter _canvasBrushFilter;
 
-    public CanvasEditorSurface(CanvasBrushFilter canvasBrushFilter) : base("Canvases", new CanvasData(canvasBrushFilter))
+    public CanvasEditorSurface(CanvasBrushFilter canvasBrushFilter) : base("Canvases", new CanvasData())
     {
         _canvasBrushFilter = canvasBrushFilter;
         RealSelection = new CanvasEditorSelection(this, canvasBrushFilter);
@@ -38,6 +38,6 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
 
     protected override CanvasData CreateEmptyData()
     {
-        return new CanvasData(_canvasBrushFilter);
+        return new CanvasData();
     }
 }

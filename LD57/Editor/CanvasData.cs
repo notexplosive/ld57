@@ -5,25 +5,18 @@ using LD57.Rendering;
 namespace LD57.Editor;
 
 [Serializable]
-public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData>
+public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData, CanvasBrushFilter>
 {
-    private readonly CanvasBrushFilter _canvasBrushFilter;
-
-    public CanvasData(CanvasBrushFilter canvasBrushFilter)
-    {
-        _canvasBrushFilter = canvasBrushFilter;
-    }
-    
-    public override void PlaceInkAt(GridPosition position, CanvasTileData template)
+    public override void PlaceInkAt(GridPosition position, CanvasTileData template, CanvasBrushFilter canvasBrushFilter)
     {
         var existingTile = InkAt(position);
 
-        if (existingTile == null && !_canvasBrushFilter.ForegroundShapeAndTransform.IsFunctionallyActive)
+        if (existingTile == null && !canvasBrushFilter.ForegroundShapeAndTransform.IsFunctionallyActive)
         {
             return;
         }
         
-        template = _canvasBrushFilter.Combine(existingTile?.CanvasTileData ?? new(), template);
+        template = canvasBrushFilter.Combine(existingTile?.CanvasTileData ?? new(), template);
         
         EraseAt(position);
 

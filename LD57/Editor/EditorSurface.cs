@@ -9,9 +9,10 @@ using Newtonsoft.Json;
 
 namespace LD57.Editor;
 
-public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
-    where TData : EditorData<TPlaced, TInk>
+public abstract class EditorSurface<TData, TPlaced, TInk, TFilter> : IEditorSurface
+    where TData : EditorData<TPlaced, TInk, TFilter>
     where TPlaced : IPlacedObject<TPlaced>
+    where TFilter : IBrushFilter
 {
     private readonly string _resourceSubDirectory;
 
@@ -61,8 +62,7 @@ public abstract class EditorSurface<TData, TPlaced, TInk> : IEditorSurface
 
         if (data != null)
         {
-            var newFileName = fileName.RemoveFileExtension();
-            SetTemplateAndFileName(newFileName, data);
+            SetTemplateAndFileName(fileName.RemoveFileExtension(), data);
         }
     }
 

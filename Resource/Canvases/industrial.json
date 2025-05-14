@@ -5523,96 +5523,6 @@
       },
       "position": {
         "x": 33,
-        "y": 5
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 33,
-        "y": 6
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 33,
-        "y": 7
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 33,
-        "y": 8
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 33,
-        "y": 9
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 33,
         "y": 10
       }
     },
@@ -5685,114 +5595,6 @@
       },
       "position": {
         "x": 34,
-        "y": 5
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 34,
-        "y": 6
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 34,
-        "y": 7
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 34,
-        "y": 8
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 34,
-        "y": 9
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 34,
-        "y": 10
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 34,
         "y": 11
       }
     },
@@ -5846,114 +5648,6 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 35,
-        "y": 5
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 35,
-        "y": 6
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 35,
-        "y": 7
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 35,
-        "y": 8
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 35,
-        "y": 9
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 35,
-        "y": 10
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 36,
         "y": 3
       }
@@ -5974,114 +5668,6 @@
       "position": {
         "x": 36,
         "y": 4
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 36,
-        "y": 5
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 36,
-        "y": 6
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 36,
-        "y": 7
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 36,
-        "y": 8
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 36,
-        "y": 9
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 36,
-        "y": 10
       }
     },
     {
@@ -6154,42 +5740,6 @@
       "position": {
         "x": 37,
         "y": 6
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 37,
-        "y": 7
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 37,
-        "y": 8
       }
     },
     {
@@ -6712,24 +6262,6 @@
       "position": {
         "x": 38,
         "y": 16
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "rock",
-        "frame": 6,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 35,
-        "y": 11
       }
     },
     {
@@ -18699,60 +18231,6 @@
       },
       "position": {
         "x": 18,
-        "y": -6
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 18,
-        "y": -9
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 18,
-        "y": -8
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 19,
         "y": -9
       }
     },
@@ -18789,43 +18267,7 @@
       },
       "position": {
         "x": 21,
-        "y": -12
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 21,
         "y": -11
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 21,
-        "y": -10
       }
     },
     {
@@ -18844,24 +18286,6 @@
       "position": {
         "x": 22,
         "y": -12
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 22,
-        "y": -11
       }
     },
     {
@@ -18915,24 +18339,6 @@
       },
       "position": {
         "x": 23,
-        "y": -11
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 23,
         "y": -10
       }
     },
@@ -18969,24 +18375,6 @@
       },
       "position": {
         "x": 24,
-        "y": -11
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 24,
         "y": -10
       }
     },
@@ -19005,61 +18393,7 @@
       },
       "position": {
         "x": 25,
-        "y": -12
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 25,
         "y": -11
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 25,
-        "y": -10
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 27,
-        "y": -14
       }
     },
     {
@@ -19112,24 +18446,6 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 27,
-        "y": -11
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 28,
         "y": -14
       }
@@ -19148,98 +18464,8 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 28,
-        "y": -13
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 28,
-        "y": -12
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 28,
-        "y": -11
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 29,
         "y": -14
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 29,
-        "y": -13
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 29,
-        "y": -12
       }
     },
     {
@@ -19293,42 +18519,6 @@
       },
       "position": {
         "x": 30,
-        "y": -13
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 30,
-        "y": -12
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 30,
         "y": -11
       }
     },
@@ -19348,42 +18538,6 @@
       "position": {
         "x": 31,
         "y": -14
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 31,
-        "y": -13
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 31,
-        "y": -12
       }
     },
     {
@@ -19437,61 +18591,7 @@
       },
       "position": {
         "x": 32,
-        "y": -13
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 32,
-        "y": -12
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 32,
         "y": -11
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 33,
-        "y": -14
       }
     },
     {
@@ -19528,24 +18628,6 @@
       "position": {
         "x": 33,
         "y": -12
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "water2",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 33,
-        "y": -11
       }
     },
     {
@@ -19814,42 +18896,6 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 46,
-        "y": -2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 46,
-        "y": -1
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 47,
         "y": -4
       }
@@ -19886,42 +18932,6 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 47,
-        "y": -2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 47,
-        "y": -1
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 48,
         "y": -4
       }
@@ -19942,42 +18952,6 @@
       "position": {
         "x": 48,
         "y": -3
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 48,
-        "y": -2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 16,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 48,
-        "y": -1
       }
     },
     {
@@ -28220,78 +27194,6 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 107,
-        "y": 3
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 108,
-        "y": 3
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 109,
-        "y": 3
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 110,
-        "y": 3
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 111,
         "y": 3
       }
@@ -28418,222 +27320,6 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 107,
-        "y": 0
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 107,
-        "y": 1
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 107,
-        "y": 2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 108,
-        "y": 0
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 108,
-        "y": 1
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 108,
-        "y": 2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 109,
-        "y": 0
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 109,
-        "y": 1
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 109,
-        "y": 2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 110,
-        "y": 0
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 110,
-        "y": 1
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 110,
-        "y": 2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 111,
         "y": 0
       }
@@ -28868,42 +27554,6 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 107,
-        "y": -2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 107,
-        "y": -1
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 108,
         "y": -6
       }
@@ -28960,42 +27610,6 @@
       "position": {
         "x": 108,
         "y": -3
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 108,
-        "y": -2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 108,
-        "y": -1
       }
     },
     {
@@ -29084,42 +27698,6 @@
         "background_intensity": 0.0
       },
       "position": {
-        "x": 109,
-        "y": -2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 109,
-        "y": -1
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
         "x": 110,
         "y": -6
       }
@@ -29176,42 +27754,6 @@
       "position": {
         "x": 110,
         "y": -3
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 110,
-        "y": -2
-      }
-    },
-    {
-      "data": {
-        "background_color": "white",
-        "flip_x": false,
-        "flip_y": false,
-        "foreground_color": "crate",
-        "frame": 0,
-        "sheet": "Walls",
-        "text": null,
-        "tile_type": 2,
-        "rotation": 0.0,
-        "background_intensity": 0.0
-      },
-      "position": {
-        "x": 110,
-        "y": -1
       }
     },
     {
@@ -32020,6 +30562,5190 @@
       "position": {
         "x": 125,
         "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 113,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 113,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 112,
+        "y": 1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 112,
+        "y": 0
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 112,
+        "y": -1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 112,
+        "y": -2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 112,
+        "y": -3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 112,
+        "y": -4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 105,
+        "y": -4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 105,
+        "y": -3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 105,
+        "y": -2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 105,
+        "y": -1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 105,
+        "y": 0
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 105,
+        "y": 1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 104,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 104,
+        "y": 4
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 29,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 113,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "white",
+        "frame": 29,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 104,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 6,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 112,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 105,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 27,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 113,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 27,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 104,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 111,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 112,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 106,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "white",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 105,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 107,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 108,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 109,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 110,
+        "y": 3
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 107,
+        "y": 1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 108,
+        "y": 1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 109,
+        "y": 1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 110,
+        "y": 1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 107,
+        "y": -2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 107,
+        "y": -1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 107,
+        "y": 0
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 108,
+        "y": -2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 108,
+        "y": -1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 108,
+        "y": 0
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 109,
+        "y": -2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 109,
+        "y": -1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 109,
+        "y": 0
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 110,
+        "y": -2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 110,
+        "y": -1
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 110,
+        "y": 0
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "crate",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 107,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": true,
+        "foreground_color": "crate",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 110,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": true,
+        "foreground_color": "crate",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 108,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "crate",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 109,
+        "y": 2
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 28,
+        "y": -11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": -5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": -17
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": -18
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": -15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 38,
+        "y": -15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 39,
+        "y": -18
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 40,
+        "y": -15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 42,
+        "y": -16
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "water2",
+        "frame": 16,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 41,
+        "y": -18
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 5
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "rock",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 6
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 33,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 34,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 35,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 37,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "red_brick",
+        "frame": 6,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 36,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 50,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 50,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 50,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 50,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 24
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 24
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 24
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 24
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 22
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 23
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 22
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 23
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 22
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 23
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 22
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 23
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 20
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 21
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 20
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 21
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 20
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 21
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 20
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 21
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 68,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 68,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 68,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 68,
+        "y": 29
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 68,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 18
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 50,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 30
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 0,
+        "sheet": "AndrewsBricks",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Entities",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "grass",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "grass",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "grass",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "grass",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": true,
+        "foreground_color": "grass",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": true,
+        "foreground_color": "grass",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": true,
+        "foreground_color": "grass",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": true,
+        "foreground_color": "grass",
+        "frame": 30,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 19
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 11,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 11,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 11,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 11,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 11,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 17
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Entities",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 61,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Entities",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Entities",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 57,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 26
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 18,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Entities",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 53,
+        "y": 28
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 23,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 65,
+        "y": 27
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 66,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 67,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 68,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 62,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 63,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 64,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 58,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 59,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 60,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 55,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 56,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 54,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 50,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 51,
+        "y": 25
+      }
+    },
+    {
+      "data": {
+        "background_color": "blue_brick",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "grass",
+        "frame": 3,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 52,
+        "y": 25
       }
     }
   ]

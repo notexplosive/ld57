@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace LD57.Editor;
 
-public class CanvasBrushFilter
+public class CanvasBrushFilter : IBrushFilter
 {
     private string _backgroundColorName = "white";
     private float _backgroundIntensity;

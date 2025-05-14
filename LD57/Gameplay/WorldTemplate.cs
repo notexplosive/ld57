@@ -7,16 +7,8 @@ using LD57.Rendering;
 namespace LD57.Gameplay;
 
 [Serializable]
-public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
+public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate, WorldEditorBrushFilter>
 {
-    public void FillRectangle(GridRectangle rectangle, EntityTemplate template)
-    {
-        foreach (var position in rectangle.AllPositions())
-        {
-            PlaceInkAt(position, template);
-        }
-    }
-
     private void PlaceEntity(GridPosition position, EntityTemplate template)
     {
         if (template.TemplateName == "player")
@@ -44,7 +36,7 @@ public class WorldTemplate : EditorData<PlacedEntity, EntityTemplate>
         Content.RemoveAll(a => a.TemplateName != string.Empty && a.Position == position);
     }
     
-    public override void PlaceInkAt(GridPosition position, EntityTemplate template)
+    public override void PlaceInkAt(GridPosition position, EntityTemplate template, WorldEditorBrushFilter filter)
     {
         RemoveEntitiesAtExceptMetadata(position);
         PlaceEntity(position, template);

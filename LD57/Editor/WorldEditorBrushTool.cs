@@ -8,11 +8,13 @@ public class WorldEditorBrushTool : BrushTool
 {
     private readonly Func<EntityTemplate?> _getTemplate;
     private readonly WorldEditorSurface _surface;
+    private readonly WorldEditorBrushFilter _worldEditorBrushFilter;
 
-    public WorldEditorBrushTool(EditorSession editorSession, WorldEditorSurface surface, Func<EntityTemplate?> getTemplate) : base(editorSession)
+    public WorldEditorBrushTool(EditorSession editorSession, WorldEditorSurface surface,  WorldEditorBrushFilter worldEditorBrushFilter, Func<EntityTemplate?> getTemplate) : base(editorSession)
     {
         _getTemplate = getTemplate;
         _surface = surface;
+        _worldEditorBrushFilter = worldEditorBrushFilter;
     }
     
     public override TileState GetTileStateInWorldOnHover(TileState original)
@@ -39,6 +41,6 @@ public class WorldEditorBrushTool : BrushTool
             return;
         }
         
-        _surface.Data.PlaceInkAt(hoveredWorldPosition, template);
+        _surface.Data.PlaceInkAt(hoveredWorldPosition, template, _worldEditorBrushFilter);
     }
 }
