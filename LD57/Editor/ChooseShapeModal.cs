@@ -263,12 +263,9 @@ public class ChooseShapeModal : Popup
     }
 
     public event Action<ICanvasTileShape>? ChoseShape;
-}
 
-public class CanvasTileShapeEmpty : ICanvasTileShape
-{
-    public TileState GetTileState()
+    protected override void OnClickedNothing()
     {
-        return TileState.BackgroundOnly(Color.Transparent, 0f);
+        Close();
     }
 }

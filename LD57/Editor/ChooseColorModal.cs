@@ -152,4 +152,9 @@ public class ChooseColorModal : Popup
 
     public event Action<string>? ChoseColor;
     public event Action<float>? ChoseIntensity;
+
+    protected override void OnClickedNothing()
+    {
+        Close();
+    }
 }

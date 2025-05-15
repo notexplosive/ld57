@@ -19,22 +19,23 @@ public class UiElement
 
     public GridRectangle Rectangle { get; }
 
+    private GridPosition Transform => Rectangle.TopLeft + AdditionalTransform();
+
     public void PaintSubElements(AsciiScreen screen, ISubElement? hoveredSubElement)
     {
         if (_shouldDrawFrame)
         {
             screen.PutFrameRectangle(ResourceAlias.PopupFrame, Rectangle);
         }
-        
+
         screen.PushTransform(Transform);
         foreach (var subElement in _subElements)
         {
             subElement.PutSubElementOnScreen(screen, hoveredSubElement);
         }
+
         screen.PopTransform();
     }
-
-    private GridPosition Transform => Rectangle.TopLeft + AdditionalTransform();
 
     protected virtual GridPosition AdditionalTransform()
     {
@@ -73,7 +74,7 @@ public class UiElement
 
     public DynamicImage AddDynamicImage(GridRectangle gridRectangle)
     {
-        var dynamicImage = new DynamicImage(gridRectangle); 
+        var dynamicImage = new DynamicImage(gridRectangle);
         _subElements.Add(dynamicImage);
         return dynamicImage;
     }
@@ -91,7 +92,7 @@ public class UiElement
         {
             return null;
         }
-        
+
         foreach (var subElement in _subElements)
         {
             var relativePosition = absoluteScreenPosition.Value - Transform;
@@ -101,7 +102,7 @@ public class UiElement
                 {
                     return subUiElement.GetSubElementAt(relativePosition);
                 }
-                
+
                 return subElement;
             }
         }
@@ -142,28 +143,37 @@ public class UiElement
         }
     }
 
-    
-    public void UpdateMouseInput(ConsumableInput.ConsumableMouse inputMouse, GridPosition hoveredScreenPosition, ref ISubElement? primedElement)
+    public void UpdateMouseInput(ConsumableInput.ConsumableMouse inputMouse, GridPosition hoveredScreenPosition,
+        ref ISubElement? primedElement)
     {
         var hoveredElement = GetSubElementAt(hoveredScreenPosition);
         if (inputMouse.GetButton(MouseButton.Left).WasPressed)
         {
             primedElement = hoveredElement;
         }
-        
+
         if (inputMouse.GetButton(MouseButton.Left).WasReleased)
         {
             if (primedElement == hoveredElement)
             {
+                if (primedElement == null)
+                {
+                    OnClickedNothing();
+                }
+
                 primedElement?.OnClicked();
                 primedElement = null;
             }
         }
-        
+
         var scrollDelta = -inputMouse.NormalizedScrollDelta();
         foreach (var element in _subElements)
         {
             element.OnScroll(scrollDelta, hoveredElement);
         }
+    }
+
+    protected virtual void OnClickedNothing()
+    {
     }
 }
