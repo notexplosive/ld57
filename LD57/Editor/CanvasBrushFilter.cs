@@ -1,5 +1,6 @@
 ﻿using System;
 using ExplogineCore.Data;
+using LD57.CartridgeManagement;
 using LD57.Core;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
@@ -18,28 +19,30 @@ public class CanvasBrushFilter : IBrushFilter
     public CanvasBrushLayer ForegroundColor { get; } = new(true, true);
     public CanvasBrushLayer BackgroundColorAndIntensity { get; } = new(true, true);
 
+    private static GridPosition PanelSize => new(4, 4);
+
     public CanvasTileData GetFullTile()
     {
         return CanvasTileData.FromSettings(_currentShape, _flipState, _rotation, _foregroundColorName,
             _backgroundColorName, _backgroundIntensity);
     }
-    
+
     public UiElement CreateUi(AsciiScreen screen)
     {
         var topLeft = PanelTopLeft(screen);
         var element = new UiElement(new GridRectangle(topLeft, topLeft + PanelSize));
 
-        element.AddButton(new Button(new GridPosition(1, 1), ()=>OpenShapeModal(screen))
+        element.AddButton(new Button(new GridPosition(1, 1), () => OpenShapeModal(screen))
             .SetTileStateGetter(GetForegroundShapeTileState)
             .SetTileStateOnHoverGetter(() => GetForegroundShapeTileState().WithForeground(Color.LimeGreen))
         );
         element.AddButton(
-            new Button(new GridPosition(1, 2), OpenForegroundColorModal)
+            new Button(new GridPosition(1, 2), () => OpenForegroundColorModal(screen))
                 .SetTileStateGetter(GetForegroundColorTileState)
                 .SetTileStateOnHoverGetter(() => GetForegroundColorTileState().WithSprite(ResourceAlias.Tools, 0))
         );
         element.AddButton(
-            new Button(new GridPosition(1, 3), OpenBackgroundColorModal)
+            new Button(new GridPosition(1, 3), () => OpenBackgroundColorModal(screen))
                 .SetTileStateGetter(GetBackgroundTileState)
                 .SetTileStateOnHoverGetter(() => GetBackgroundTileState().WithSprite(ResourceAlias.Tools, 0))
         );
@@ -69,8 +72,6 @@ public class CanvasBrushFilter : IBrushFilter
         return screen.RoomRectangle.TopRight + new GridPosition(-PanelSize.X, 0);
     }
 
-    private static GridPosition PanelSize => new(4, 4);
-
     private static void CreateToggle(UiElement element, GridPosition position, Func<TileState> getVisibleTileState,
         Action doToggle)
     {
@@ -81,18 +82,32 @@ public class CanvasBrushFilter : IBrushFilter
         );
     }
 
-    private void OpenForegroundColorModal()
+    private void OpenForegroundColorModal(AsciiScreen screen)
     {
-        var modal = new ChooseColorModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
+        var modal = new ChooseColorModal(
+            new GridRectangle(PanelTopLeft(screen) + new GridPosition(-ColorModalWidth(), 10), PanelTopLeft(screen))
+                .Moved(new GridPosition(0, 1)),
             () => _foregroundColorName);
 
         modal.ChoseColor += SetForegroundColor;
         RequestModal(modal);
     }
 
-    private void OpenBackgroundColorModal()
+    private static int ColorModalWidth()
     {
-        var modal = new ChooseColorModal(new GridRectangle(new GridPosition(5, 5), new GridPosition(20, 20)),
+        var width = 1;
+        foreach (var color in LdResourceAssets.Instance.NamedColors)
+        {
+            width = Math.Max(color.Key.Length, width);
+        }
+
+        return width + 3;
+    }
+
+    private void OpenBackgroundColorModal(AsciiScreen screen)
+    {
+        var modal = new ChooseColorModal(
+            new GridRectangle(PanelTopLeft(screen) + new GridPosition(-ColorModalWidth(), 10), PanelTopLeft(screen)).Moved(new GridPosition(0, 2)),
             () => _backgroundColorName, () => _backgroundIntensity);
 
         modal.ChoseColor += SetBackgroundColor;
@@ -122,7 +137,8 @@ public class CanvasBrushFilter : IBrushFilter
 
     private void OpenShapeModal(AsciiScreen screen)
     {
-        var chooseTileModal = new ChooseShapeModal(new GridRectangle(PanelTopLeft(screen) + new GridPosition(-10, 10), PanelTopLeft(screen)),
+        var chooseTileModal = new ChooseShapeModal(
+            new GridRectangle(PanelTopLeft(screen) + new GridPosition(-10, 10), PanelTopLeft(screen)),
             () => _currentShape, () => _flipState, () => _rotation);
         chooseTileModal.ChoseShape += SetTileShape;
         chooseTileModal.ChoseFlipState += SetFlipState;
@@ -169,13 +185,13 @@ public class CanvasBrushFilter : IBrushFilter
     {
         return () =>
         {
-            var result= GetEditableTileState(isEditable());
+            var result = GetEditableTileState(isEditable());
 
             if (!isVisible())
             {
                 return result with {ForegroundColor = Color.Gray};
             }
-            
+
             return result;
         };
     }
@@ -236,7 +252,7 @@ public class CanvasBrushFilter : IBrushFilter
     }
 
     /// <summary>
-    /// Gets the current Shape and Colors based on what filters are currently active
+    ///     Gets the current Shape and Colors based on what filters are currently active
     /// </summary>
     public void SetBasedOnData(CanvasTileData tileData)
     {

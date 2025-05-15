@@ -29,4 +29,14 @@ public class CanvasBrushLayer
     {
         IsEditing = !IsEditing;
     }
+
+    public bool Check(bool visible)
+    {
+        if (visible)
+        {
+            return IsVisible;
+        }
+
+        return IsFunctionallyActive;
+    }
 }

@@ -19,7 +19,7 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
     {
         foreach (var item in Data.Content)
         {
-            screen.PutTile(item.Position, item.CanvasTileData.GetTileStateWithFilter(_canvasBrushFilter));
+            screen.PutTile(item.Position, item.CanvasTileData.GetTileStateWithFilter(_canvasBrushFilter, true));
         }
     }
 

@@ -25,6 +25,7 @@ public class ScrollablePane : UiElement, ISubElement
     }
 
     public GridRectangle ViewRectangle => _viewport.MovedToZero().Moved(_viewPosition);
+    public GridRectangle ViewPort => _viewport;
 
     public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {

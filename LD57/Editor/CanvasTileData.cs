@@ -122,21 +122,21 @@ public record CanvasTileData
         return result;
     }
 
-    public TileState GetTileStateWithFilter(CanvasBrushFilter filter)
+    public TileState GetTileStateWithFilter(CanvasBrushFilter filter, bool isForVisibility)
     {
         var result = GetTile();
 
-        if (!filter.ForegroundShapeAndTransform.IsVisible)
+        if (!filter.ForegroundShapeAndTransform.Check(isForVisibility))
         {
             result = result.WithSprite(ResourceAlias.Utility, 34);
         }
 
-        if (!filter.ForegroundColor.IsVisible)
+        if (!filter.ForegroundColor.Check(isForVisibility))
         {
             result = result with {ForegroundColor = Color.White};
         }
 
-        if (!filter.BackgroundColorAndIntensity.IsVisible)
+        if (!filter.BackgroundColorAndIntensity.Check(isForVisibility))
         {
             result = result with {BackgroundIntensity = 0};
         }

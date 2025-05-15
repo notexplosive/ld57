@@ -18,7 +18,7 @@ public class CanvasEditorBrushTool : BrushTool
 
     public override TileState GetTileStateInWorldOnHover(TileState original)
     {
-        return _canvasBrushFilter.GetFullTile().GetTileStateWithFilter(_canvasBrushFilter);
+        return _canvasBrushFilter.GetFullTile().GetTileStateWithFilter(_canvasBrushFilter, false);
     }
 
     protected override void OnErase(GridPosition hoveredWorldPosition)
