@@ -62,4 +62,9 @@ public class ChordPopup : Popup
             y++;
         }
     }
+    
+    protected override void OnClickedNothing()
+    {
+        Close();
+    }
 }

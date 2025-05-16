@@ -140,35 +140,6 @@ public class ChooseShapeModal : Popup
             }
         }
 
-        for (var i = 0; i < 255; i++)
-        {
-            var gridPosition = new GridPosition(x, y);
-
-            var character = (char) i;
-            if (char.IsAscii(character) && !char.IsControl(character) && !char.IsWhiteSpace(character))
-            {
-                var shape = new CanvasTileShapeString(character.ToString());
-                var button = new Button(gridPosition, () => ChooseTile(shape));
-                if (_getChosenShape().GetHashCode() == shape.GetHashCode())
-                {
-                    yToScrollTo = y;
-                }
-
-                button.SetTileStateGetter(() =>
-                {
-                    if (_getChosenShape().GetHashCode() == shape.GetHashCode())
-                    {
-                        return GetHighlightedTileState(shape);
-                    }
-
-                    return GetBasicTileState(shape);
-                });
-                button.SetTileStateOnHoverGetter(() => GetHoveredTileState(shape));
-                pane.AddButton(button);
-                HandleLineFeed(ref x, ref y, maxWidth);
-            }
-        }
-
         pane.SetContentHeight(y);
 
         pane.ScrollToPosition(yToScrollTo);

@@ -11,15 +11,16 @@ using LD57.Gameplay;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 
 namespace LD57.CartridgeManagement;
 
 public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 {
+    private EditorSession _drawSession = null!;
     private EditorSession _editorSession = null!;
     private LdSession _gameSession = null!;
-    private EditorSession _drawSession = null!;
     private ISession? _session;
 
     public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.PointClamp);
@@ -74,16 +75,22 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         var chords = new List<KeybindChord>();
         var filter = new CanvasBrushFilter(chords);
         var canvasSurface = new CanvasEditorSurface(filter, chords);
-        
+        var toolChord = new KeybindChord(Keys.Q, "Tools");
+        chords.Add(toolChord);
+
         var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, canvasSurface);
-        editorSession.EditorTools.Add(new CanvasEditorBrushTool(editorSession, canvasSurface, filter));
-        editorSession.EditorTools.Add(new CanvasSelectionTool(editorSession, canvasSurface, filter));
-        editorSession.EditorTools.Add(new CanvasEyeDropperTool(editorSession, canvasSurface, filter));
-        editorSession.EditorTools.Add(new CanvasTextTool(canvasSurface, filter));
+        editorSession.AddTool(
+            toolChord, Keys.B, "Brush", new CanvasEditorBrushTool(editorSession, canvasSurface, filter));
+        editorSession.AddTool(
+            toolChord, Keys.S, "Selection", new CanvasSelectionTool(editorSession, canvasSurface, filter));
+        editorSession.AddTool(
+            toolChord, Keys.E, "Eye Dropper", new CanvasEyeDropperTool(editorSession, canvasSurface, filter));
+        editorSession.AddTool(
+            toolChord, Keys.T, "Text", new CanvasTextTool(canvasSurface, filter));
         editorSession.ExtraUi.Add(filter.CreateUi);
-        
+
         editorSession.RebuildScreen();
-        
+
         filter.RequestedModal += editorSession.OpenPopup;
 
         return editorSession;
@@ -91,21 +98,28 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     private EditorSession BuildEditorSession()
     {
-        EditorSelector<EntityTemplate> templateSelector = new();
+        var templateSelector = new EditorSelector<EntityTemplate>();
+        var chords = new List<KeybindChord>();
         var worldEditorSurface = new WorldEditorSurface();
         var filter = new WorldEditorBrushFilter();
 
+        var toolChord = new KeybindChord(Keys.Q, "Tools");
+        chords.Add(toolChord);
+
         var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, worldEditorSurface);
-        editorSession.EditorTools.Add(new WorldEditorBrushTool(editorSession, worldEditorSurface, filter, 
-            () => templateSelector.Selected));
-        editorSession.EditorTools.Add(new WorldSelectionTool(editorSession, worldEditorSurface, filter,
-            () => templateSelector.Selected));
-        editorSession.EditorTools.Add(new ChangeSignalTool(editorSession, worldEditorSurface));
-        editorSession.EditorTools.Add(new TriggerTool(editorSession, worldEditorSurface));
-        editorSession.EditorTools.Add(new PlayTool(editorSession, worldEditorSurface));
+        editorSession.AddTool(
+            toolChord, Keys.B, "Brush",
+            new WorldEditorBrushTool(editorSession, worldEditorSurface, filter, () => templateSelector.Selected));
+        editorSession.AddTool(
+            toolChord, Keys.S, "Selection", new WorldSelectionTool(editorSession, worldEditorSurface, filter,
+                () => templateSelector.Selected));
+        editorSession.AddTool(toolChord, Keys.G, "Signal", new ChangeSignalTool(editorSession, worldEditorSurface));
+        editorSession.AddTool(toolChord, Keys.T, "Trigger", new TriggerTool(editorSession, worldEditorSurface));
+        editorSession.AddTool(toolChord, Keys.P, "Play", new PlayTool(editorSession, worldEditorSurface));
         editorSession.ExtraUi.Add(screen =>
         {
-            var tilePalette = new UiElement(new GridRectangle(new GridPosition(3, 0), new GridPosition(screen.Width, 3)));
+            var tilePalette =
+                new UiElement(new GridRectangle(new GridPosition(3, 0), new GridPosition(screen.Width, 3)));
             var i = 0;
             var j = 0;
 
@@ -143,8 +157,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         });
 
         editorSession.RebuildScreen();
-        
-        
+
         worldEditorSurface.RequestedPlayAt += position =>
         {
             _gameSession.LoadWorld(worldEditorSurface.Data, position);
@@ -206,7 +219,6 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
         yield return new VoidLoadEvent("PopupFrameParts", "Graphics", () =>
         {
-            
             var texture = ResourceAlias.PopupFrameRaw.SourceTexture;
             var selectFrameSpriteSheet = new SelectFrameSpriteSheet(texture);
             var tileSize = 11;

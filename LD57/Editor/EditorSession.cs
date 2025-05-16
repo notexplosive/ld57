@@ -17,11 +17,11 @@ public class EditorSession : Session
     private readonly List<UiElement> _uiElements = new();
     private GridPosition _cameraPosition;
     private Popup? _currentPopup;
+
+    private readonly List<IEditorTool> _editorTools = new();
     private GridPosition? _hoveredScreenPosition;
     private ISubElement? _primedElement;
     private AsciiScreen _screen;
-
-    public GridRectangle CurrentScreenSize => _screen.RoomRectangle;
 
     public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, IEditorSurface surface) : base(
         runtimeWindow,
@@ -45,13 +45,7 @@ public class EditorSession : Session
         }
     }
 
-    private void OnPopupRequested(CreatePopupDelegate popupDelegate)
-    {
-        var popup = popupDelegate(_screen.RoomRectangle);
-        OpenPopup(popup);
-    }
-
-    public List<IEditorTool> EditorTools { get; } = new();
+    public GridRectangle CurrentScreenSize => _screen.RoomRectangle;
     public List<Func<AsciiScreen, UiElement>> ExtraUi { get; } = new();
 
     public IEditorSurface Surface { get; }
@@ -77,6 +71,12 @@ public class EditorSession : Session
 
     private IEditorTool? CurrentTool => _toolSelector.Selected;
     public List<Action<ConsumableInput, int>> ExtraKeyBinds { get; } = new();
+
+    private void OnPopupRequested(CreatePopupDelegate popupDelegate)
+    {
+        var popup = popupDelegate(_screen.RoomRectangle);
+        OpenPopup(popup);
+    }
 
     public void RebuildScreen()
     {
@@ -105,10 +105,10 @@ public class EditorSession : Session
         var bottomLeftCorner = new GridPosition(0, screen.Height - 3);
 
         var leftToolbar =
-            new UiElement(new GridRectangle(new GridPosition(0, 0), new GridPosition(2, EditorTools.Count + 1)));
+            new UiElement(new GridRectangle(new GridPosition(0, 0), new GridPosition(2, _editorTools.Count + 1)));
 
         var toolIndex = 0;
-        foreach (var tool in EditorTools)
+        foreach (var tool in _editorTools)
         {
             leftToolbar.AddSelectable(new SelectableButton<IEditorTool>(new GridPosition(1, 1 + toolIndex),
                 tool.TileStateInToolbar, _toolSelector, tool));
@@ -209,12 +209,14 @@ public class EditorSession : Session
         if (_currentPopup != null)
         {
             _currentPopup.UpdateKeyboardInput(input.Keyboard);
-            
+
             var enteredCharacters = input.Keyboard.GetEnteredCharacters(true);
             _currentPopup.OnTextInput(enteredCharacters);
             return;
         }
 
+        CurrentTool?.UpdateInput(input.Keyboard, HoveredWorldPosition);
+        
         Surface.HandleKeyBinds(input);
 
         if (input.Keyboard.GetButton(Keys.S).WasPressed)
@@ -243,9 +245,7 @@ public class EditorSession : Session
             Surface.ClearEverything();
         }
 
-        CurrentTool?.UpdateInput(input.Keyboard, HoveredWorldPosition);
-        
-        
+
         if (input.Keyboard.GetButton(Keys.OemMinus).WasPressed)
         {
             _screen = RebuildScreenWithWidth(_screen.Width + 1);
@@ -279,14 +279,14 @@ public class EditorSession : Session
         if (!IsDraggingPrimary && !IsDraggingSecondary)
         {
             var flippedDelta = -input.Mouse.NormalizedScrollDelta();
-            
+
             if (input.Keyboard.Modifiers.Control)
             {
                 if (CurrentTool != null)
                 {
-                    var currentIndex = EditorTools.IndexOf(CurrentTool);
-                    var newIndex = Math.Clamp(currentIndex + flippedDelta, 0, EditorTools.Count - 1);
-                    _toolSelector.Selected = EditorTools[newIndex];
+                    var currentIndex = _editorTools.IndexOf(CurrentTool);
+                    var newIndex = Math.Clamp(currentIndex + flippedDelta, 0, _editorTools.Count - 1);
+                    _toolSelector.Selected = _editorTools[newIndex];
                 }
             }
 
@@ -471,5 +471,11 @@ public class EditorSession : Session
     private void ResetCameraPosition()
     {
         _cameraPosition = DefaultCameraPosition();
+    }
+
+    public void AddTool(KeybindChord toolChord, Keys key, string label, IEditorTool tool)
+    {
+        toolChord.Add(key, label, true, () => { _toolSelector.Selected = tool; });
+        _editorTools.Add(tool);
     }
 }

@@ -41,7 +41,7 @@ public class CanvasBrushFilter : IBrushFilter
         var topLeft = PanelTopLeft(screen);
         var element = new UiElement(new GridRectangle(topLeft, topLeft + PanelSize));
 
-        _chords.Add(new KeybindChord(Keys.R, "Brush Filter")
+        _chords.Add(new KeybindChord(Keys.E, "Brush Filter")
             .Add(Keys.S, "Shape", true,() => OpenShapeModal(screen))
             .Add(Keys.C, "Foreground Color", true,() => OpenForegroundColorModal(screen))
             .Add(Keys.F, "Background Color", true,() => OpenBackgroundColorModal(screen))
