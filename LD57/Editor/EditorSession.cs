@@ -12,15 +12,16 @@ namespace LD57.Editor;
 
 public class EditorSession : Session
 {
-    private readonly Stack<UiElement> _popupStack = new();
+    private readonly Stack<Popup> _popupStack = new();
     private readonly EditorSelector<IEditorTool> _toolSelector = new();
     private readonly List<UiElement> _uiElements = new();
     private GridPosition _cameraPosition;
-    private UiElement? _currentPopup;
+    private Popup? _currentPopup;
     private GridPosition? _hoveredScreenPosition;
     private ISubElement? _primedElement;
     private AsciiScreen _screen;
-    private bool _shouldClosePopup;
+
+    public GridRectangle CurrentScreenSize => _screen.RoomRectangle;
 
     public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, IEditorSurface surface) : base(
         runtimeWindow,
@@ -28,7 +29,8 @@ public class EditorSession : Session
     {
         _screen = RebuildScreenWithWidth(46);
         Surface = surface;
-        Surface.RequestResetCamera += ResetCameraPosition;
+        Surface.RequestedResetCamera += ResetCameraPosition;
+        Surface.RequestedPopup += OnPopupRequested;
         _cameraPosition = DefaultCameraPosition();
 
         var cachedFileName = HotReloadCache.LevelEditorOpenFileName;
@@ -41,6 +43,12 @@ public class EditorSession : Session
         {
             _cameraPosition = HotReloadCache.LevelEditorCameraPosition.Value;
         }
+    }
+
+    private void OnPopupRequested(CreatePopupDelegate popupDelegate)
+    {
+        var popup = popupDelegate(_screen.RoomRectangle);
+        OpenPopup(popup);
     }
 
     public List<IEditorTool> EditorTools { get; } = new();
@@ -191,20 +199,19 @@ public class EditorSession : Session
             element.UpdateKeyboardInput(input.Keyboard);
         }
 
-        if (_shouldClosePopup)
+        if (_currentPopup != null && _currentPopup.ShouldClose)
         {
             FinishClosingPopup();
-            _shouldClosePopup = false;
         }
 
         _hoveredScreenPosition = _screen.GetHoveredTile(input, hitTestStack, Vector2.Zero);
 
         if (_currentPopup != null)
         {
-            var enteredCharacters = input.Keyboard.GetEnteredCharacters(true);
-
-            _currentPopup.OnTextInput(enteredCharacters);
             _currentPopup.UpdateKeyboardInput(input.Keyboard);
+            
+            var enteredCharacters = input.Keyboard.GetEnteredCharacters(true);
+            _currentPopup.OnTextInput(enteredCharacters);
             return;
         }
 
@@ -335,8 +342,6 @@ public class EditorSession : Session
 
     public void OpenPopup(Popup popup)
     {
-        popup.RequestClosePopup += StartClosingPopup;
-
         if (_currentPopup != null)
         {
             _popupStack.Push(_currentPopup);
@@ -454,13 +459,8 @@ public class EditorSession : Session
         {
             Surface.FileName = text;
             SaveFlow();
-            StartClosingPopup();
+            saveAsPopup.Close();
         };
-    }
-
-    private void StartClosingPopup()
-    {
-        _shouldClosePopup = true;
     }
 
     private void FinishClosingPopup()

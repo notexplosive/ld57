@@ -9,10 +9,10 @@ public class Popup : UiElement
     {
     }
 
-    public event Action? RequestClosePopup;
-
     public void Close()
     {
-        RequestClosePopup?.Invoke();
+        ShouldClose = true;
     }
+
+    public bool ShouldClose { get; private set; }
 }

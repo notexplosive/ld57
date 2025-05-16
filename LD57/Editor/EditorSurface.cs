@@ -24,7 +24,7 @@ public abstract class EditorSurface<TData, TPlaced, TInk, TFilter> : IEditorSurf
 
     public TData Data { get; private set; }
     protected abstract EditorSelection<TPlaced> RealSelection { get; }
-    public event Action? RequestResetCamera;
+    public event Action? RequestedResetCamera;
     public string? FileName { get; set; }
 
     public IEditorSelection Selection => RealSelection;
@@ -103,13 +103,20 @@ public abstract class EditorSurface<TData, TPlaced, TInk, TFilter> : IEditorSurf
         Data.EraseAllPositions(Selection.AllPositions());
     }
 
+    public void RequestPopup(CreatePopupDelegate createPopup)
+    {
+        RequestedPopup?.Invoke(createPopup);
+    }
+
+    public event Action<CreatePopupDelegate>? RequestedPopup;
+
     protected abstract TData CreateEmptyData();
 
-    protected void SetTemplateAndFileName(string? fileName, TData template)
+    private void SetTemplateAndFileName(string? fileName, TData template)
     {
         FileName = fileName;
         Data = template;
-        RequestResetCamera?.Invoke();
+        RequestedResetCamera?.Invoke();
     }
 
     public IEnumerable<TPlaced> AllInkAt(GridPosition position)

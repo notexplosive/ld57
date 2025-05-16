@@ -71,8 +71,9 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     private EditorSession BuildDrawSession()
     {
-        var filter = new CanvasBrushFilter();
-        var canvasSurface = new CanvasEditorSurface(filter);
+        var chords = new List<KeybindChord>();
+        var filter = new CanvasBrushFilter(chords);
+        var canvasSurface = new CanvasEditorSurface(filter, chords);
         
         var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, canvasSurface);
         editorSession.EditorTools.Add(new CanvasEditorBrushTool(editorSession, canvasSurface, filter));

@@ -1,5 +1,6 @@
 ﻿using ExplogineCore.Data;
 using ExplogineMonoGame.AssetManagement;
+using LD57.Core;
 using Microsoft.Xna.Framework;
 
 namespace LD57.Rendering;
@@ -92,5 +93,10 @@ public readonly record struct TileState(
     public TileState WithFlip(XyBool flip)
     {
         return this with {Flip = flip};
+    }
+
+    public TileState WithRotation(QuarterRotation rotation)
+    {
+        return this with {Angle = rotation.Radians};
     }
 }

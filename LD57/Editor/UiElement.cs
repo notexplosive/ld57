@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
 using LD57.Rendering;
+using Microsoft.Xna.Framework;
 
 namespace LD57.Editor;
 
@@ -44,46 +45,48 @@ public class UiElement
 
     public void AddDynamicText(GridPosition relativeGridPosition, Func<string> getString)
     {
-        _subElements.Add(new DynamicText(relativeGridPosition, getString));
+        AddSubElement(new DynamicText(relativeGridPosition, getString));
     }
 
     public void AddInputListener(Action<ConsumableInput.ConsumableKeyboard> onInput)
     {
-        _subElements.Add(new InputListener(onInput));
+        AddSubElement(new InputListener(onInput));
     }
 
     public void AddDynamicTile(GridPosition relativeGridPosition, Func<TileState> dynamicTile)
     {
-        _subElements.Add(new DynamicTile(relativeGridPosition, dynamicTile));
+        AddSubElement(new DynamicTile(relativeGridPosition, dynamicTile));
     }
 
     public void AddSelectable<T>(SelectableButton<T> selectableButton) where T : class
     {
-        _subElements.Add(selectableButton);
+        AddSubElement(selectableButton);
     }
 
     public void AddButton(Button button)
     {
-        _subElements.Add(button);
+        AddSubElement(button);
     }
 
     public void AddExtraDraw(ExtraDraw extraDraw)
     {
-        _subElements.Add(extraDraw);
+        AddSubElement(extraDraw);
     }
 
     public DynamicImage AddDynamicImage(GridRectangle gridRectangle)
     {
-        var dynamicImage = new DynamicImage(gridRectangle);
-        _subElements.Add(dynamicImage);
-        return dynamicImage;
+        return AddSubElement(new DynamicImage(gridRectangle));
     }
 
     public ScrollablePane AddScrollablePane(GridRectangle viewport)
     {
-        var pane = new ScrollablePane(viewport);
-        _subElements.Add(pane);
-        return pane;
+        return AddSubElement(new ScrollablePane(viewport));
+    }
+
+    public T AddSubElement<T>(T subElement) where T : ISubElement
+    {
+        _subElements.Add(subElement);
+        return subElement;
     }
 
     public ISubElement? GetSubElementAt(GridPosition? absoluteScreenPosition)
@@ -115,9 +118,9 @@ public class UiElement
         return Rectangle.Contains(position, true);
     }
 
-    public void AddStaticText(GridPosition position, string text)
+    public void AddStaticText(GridPosition position, string text, Color? color = null)
     {
-        _subElements.Add(new DynamicText(position, () => text));
+        _subElements.Add(new DynamicText(position, () => text, color));
     }
 
     public TextInputElement AddTextInput(GridPosition gridPosition, string? text)
@@ -175,5 +178,13 @@ public class UiElement
 
     protected virtual void OnClickedNothing()
     {
+    }
+
+    public void AddSubElements(IEnumerable<ISubElement> subElements)
+    {
+        foreach (var subElement in subElements)
+        {
+            AddSubElement(subElement);
+        }
     }
 }

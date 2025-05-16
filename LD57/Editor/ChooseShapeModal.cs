@@ -46,43 +46,21 @@ public class ChooseShapeModal : Popup
 
         var mirrorHorizontallyButton = new Button(new GridPosition(2, 1),
             () => ChooseMirrorState(new XyBool(!getFlipState().X, getFlipState().Y)));
-        mirrorHorizontallyButton.SetTileStateGetter(() =>
-        {
-            var frame = 10;
-            if (getFlipState().X)
-            {
-                frame = 11;
-            }
-
-            return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue};
-        });
+        mirrorHorizontallyButton.SetTileStateGetter(GetMirrorHorizontallyTile(getFlipState, _getRotation));
         AddButton(mirrorHorizontallyButton);
 
         var mirrorVerticallyButton = new Button(new GridPosition(3, 1),
             () => ChooseMirrorState(new XyBool(getFlipState().X, !getFlipState().Y)));
-        mirrorVerticallyButton.SetTileStateGetter(() =>
-        {
-            var frame = 12;
-            if (getFlipState().Y)
-            {
-                frame = 13;
-            }
-
-            return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue};
-        });
+        mirrorVerticallyButton.SetTileStateGetter(GetMirrorVerticallyTile(getFlipState, _getRotation));
         AddButton(mirrorVerticallyButton);
 
         var rotateCcwButton = new Button(new GridPosition(4, 1),
             () => ChooseRotation(getRotation().CounterClockwisePrevious()));
-        rotateCcwButton.SetTileStateGetter(() =>
-            TileState.Sprite(ResourceAlias.Entities, 27) with {ForegroundColor = Color.LightBlue});
+        rotateCcwButton.SetTileStateGetter(GetCcwRotationTile);
         AddButton(rotateCcwButton);
 
         var rotateCwButton = new Button(new GridPosition(5, 1), () => ChooseRotation(getRotation().ClockwiseNext()));
-        rotateCwButton.SetTileStateGetter(() => TileState.Sprite(ResourceAlias.Entities, 27) with
-        {
-            Flip = new XyBool(true, false), ForegroundColor = Color.LightBlue
-        });
+        rotateCwButton.SetTileStateGetter(GetCwRotationTile);
         AddButton(rotateCwButton);
 
         var scrollAreaTopLeft = new GridPosition(1, 2);
@@ -196,6 +174,44 @@ public class ChooseShapeModal : Popup
         pane.ScrollToPosition(yToScrollTo);
     }
 
+    public static Func<TileState> GetMirrorHorizontallyTile(Func<XyBool> getFlipState, Func<QuarterRotation> rotation)
+    {
+        return () =>
+        {
+            var frame = 10;
+            if (getFlipState().X)
+            {
+                frame = 11;
+            }
+
+            return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue, Angle = rotation().Radians};
+        };
+    }
+
+    public static Func<TileState> GetMirrorVerticallyTile(Func<XyBool> getFlipState, Func<QuarterRotation> rotation)
+    {
+        return () =>
+        {
+            var frame = 12;
+            if (getFlipState().Y)
+            {
+                frame = 13;
+            }
+
+            return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue, Angle = rotation().Radians};
+        };
+    }
+
+    public static TileState GetCcwRotationTile()
+    {
+        return TileState.Sprite(ResourceAlias.Entities, 27) with {ForegroundColor = Color.LightBlue};
+    }
+
+    public static TileState GetCwRotationTile()
+    {
+        return TileState.Sprite(ResourceAlias.Entities, 27) with {Flip = new XyBool(true, false), ForegroundColor = Color.LightBlue};
+    }
+
     private void DrawExtraBorder(AsciiScreen screen)
     {
         var width = Rectangle.Width;
@@ -267,5 +283,10 @@ public class ChooseShapeModal : Popup
     protected override void OnClickedNothing()
     {
         Close();
+    }
+
+    public static Func<TileState> GetCurrentRotationTile(Func<QuarterRotation> getRotation)
+    {
+        return () => TileState.Sprite(ResourceAlias.Tools, 22).WithRotation(getRotation()) with {ForegroundColor = getRotation() != QuarterRotation.Upright? Color.Yellow : Color.LightBlue};
     }
 }

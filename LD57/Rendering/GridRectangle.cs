@@ -24,6 +24,7 @@ public readonly record struct GridRectangle(int Left, int Top, int Width, int He
 
     public GridPosition TopRight => new(Right, Top);
     public GridPosition BottomLeft => new(Left, Bottom);
+    public GridPosition Center => TopLeft + Size / 2;
 
     public static GridRectangle FromTopLeftAndSize(GridPosition topLeft, GridPosition size)
     {
@@ -81,5 +82,10 @@ public readonly record struct GridRectangle(int Left, int Top, int Width, int He
     public GridRectangle MovedToZero()
     {
         return Moved(-TopLeft);
+    }
+
+    public static GridRectangle FromCenterAndSize(GridPosition center, GridPosition size)
+    {
+        return FromRectangleF(RectangleF.FromCenterAndSize(center.ToVector2(), size.ToVector2()));
     }
 }

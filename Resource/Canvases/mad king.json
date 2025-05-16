@@ -1,0 +1,1210 @@
+{
+  "content": [
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 29,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 3.1415927,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 13,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 13,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 12,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 13,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 13,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 4,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 13,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 13,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 3,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 20,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 13,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 16,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 25,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 19,
+        "sheet": "Entities",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 15,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 3,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "crate",
+        "frame": 20,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 12,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 2,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 17,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 7
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 8
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "player",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 9
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "blood",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 10
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 7,
+        "sheet": "PopupFrameParts",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 29,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 1.5707964,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 6,
+        "sheet": "Entities",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 14,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 6,
+        "sheet": "Entities",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 16,
+        "y": 11
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": true,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 24,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": true,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 14
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 19,
+        "sheet": "Tools",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 4.712389,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 24,
+        "y": 12
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 15
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 22,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 24,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "white",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 16
+      }
+    },
+    {
+      "data": {
+        "background_color": "hook",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 22,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "hook",
+        "flip_x": true,
+        "flip_y": false,
+        "foreground_color": "crate",
+        "frame": 5,
+        "sheet": "Utility",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 1.0
+      },
+      "position": {
+        "x": 24,
+        "y": 13
+      }
+    },
+    {
+      "data": {
+        "background_color": "hook",
+        "flip_x": false,
+        "flip_y": false,
+        "foreground_color": "hook",
+        "frame": 0,
+        "sheet": "Walls",
+        "text": null,
+        "tile_type": 2,
+        "rotation": 0.0,
+        "background_intensity": 0.0
+      },
+      "position": {
+        "x": 23,
+        "y": 13
+      }
+    }
+  ]
+}
