@@ -12,7 +12,7 @@ namespace LD57.Rendering;
 
 public class AsciiScreen
 {
-    private readonly Lazy<DynamicSpriteFont> _font;
+    private Lazy<DynamicSpriteFont> _font;
     private readonly Dictionary<GridPosition, TileState> _tiles = new();
     private readonly Stack<GridPosition> _transforms = new();
     private readonly Dictionary<GridPosition, TweenableGlyph> _tweenableGlyphs = new();
@@ -27,10 +27,20 @@ public class AsciiScreen
         _font = new Lazy<DynamicSpriteFont>(() => ResourceAlias.GameFont.GetFont(tileSize * 0.8f));
     }
 
-    public float TileSize { get; }
+    public float TileSize { get; private set; }
 
-    public int Width { get; }
-    public int Height { get; }
+    public int Width { get; private set; }
+    public int Height { get; private set; }
+
+    public void SetWidth(int width)
+    {
+        TileSize = (int)Math.Round(1920f / width);
+        Height = (int)Math.Round(1080f / TileSize);
+        Width = width;
+        _font = new Lazy<DynamicSpriteFont>(() => ResourceAlias.GameFont.GetFont(TileSize * 0.8f));
+        
+        Clear(TileState.TransparentEmpty);
+    }
 
     public GridPosition RoomSize => new(Width - 1, Height - 1);
     public GridPosition CenterPosition => RoomSize / 2;
@@ -198,15 +208,20 @@ public class AsciiScreen
         }
     }
 
+    /// <summary>
+    /// Fills the screen with the specified tileState
+    /// </summary>
     public void Clear(TileState tileState)
     {
+        _tiles.Clear();
+        _tweenableGlyphs.Clear();
+        
         for (var x = 0; x < Width; x++)
         {
             for (var y = 0; y < Height; y++)
             {
                 var gridPosition = new GridPosition(x, y);
                 _tiles[gridPosition] = tileState;
-                _tweenableGlyphs.Remove(gridPosition);
             }
         }
     }

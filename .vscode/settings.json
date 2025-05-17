@@ -4,6 +4,10 @@
         "program",
         "files",
         "strings",
-        "lib"
+        "lib",
+        "ipsum"
+    ],
+    "Lua.diagnostics.disable": [
+        "duplicate-set-field"
     ]
 }

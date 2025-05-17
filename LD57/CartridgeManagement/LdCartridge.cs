@@ -11,6 +11,7 @@ using LD57.Core;
 using LD57.Editor;
 using LD57.Gameplay;
 using LD57.Rendering;
+using LD57.Tableau;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,6 +21,7 @@ namespace LD57.CartridgeManagement;
 
 public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 {
+    private TableauSession _tableauSession = null!;
     private EditorSession _drawSession = null!;
     private EditorSession _editorSession = null!;
     private LdSession _gameSession = null!;
@@ -43,6 +45,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
         _editorSession = BuildEditorSession();
         _drawSession = BuildDrawSession();
+        _tableauSession = new TableauSession();
         _gameSession = new LdSession((Runtime.Window as RealWindow)!, Runtime.FileSystem);
 
         _gameSession.RequestLevelEditor += () =>
@@ -50,7 +53,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             _gameSession.StopAllAmbientSounds();
             _session = _editorSession;
         };
-
+        
         if (targetMode == "edit")
         {
             _session = _editorSession;
@@ -58,6 +61,10 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         else if (targetMode == "draw")
         {
             _session = _drawSession;
+        }
+        else if (targetMode == "tableau")
+        {
+            _session = _tableauSession;
         }
         else
         {
