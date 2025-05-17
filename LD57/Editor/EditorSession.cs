@@ -422,10 +422,17 @@ public class EditorSession : Session
                 }
             }
         }
-
+        
         foreach (var uiElement in _uiElements)
         {
-            uiElement.PaintSubElements(_screen, uiElement.GetSubElementAt(_hoveredScreenPosition));
+            var hoveredElement = uiElement.GetSubElementAt(_hoveredScreenPosition);
+
+            if (_currentPopup != null)
+            {
+                hoveredElement = null;
+            }
+            
+            uiElement.PaintSubElements(_screen, hoveredElement);
         }
 
         if (_currentPopup != null)
@@ -434,6 +441,7 @@ public class EditorSession : Session
         }
         else
         {
+
             var keyboardChordPosition = _screen.RoomRectangle.BottomRight - new GridPosition(_chords.Count, 0);
             foreach (var chord in _chords)
             {
