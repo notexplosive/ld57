@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExplogineMonoGame.Input;
@@ -265,22 +264,22 @@ public class EditorSession : Session
 
         if (input.Keyboard.GetButton(Keys.A).WasPressed)
         {
-            _cameraPosition += new GridPosition(-_screen.Width / 4, 0);
+            MoveCameraKeybind(input.Keyboard.Modifiers,Direction.Left);
         }
 
         if (input.Keyboard.GetButton(Keys.D).WasPressed)
         {
-            _cameraPosition += new GridPosition(_screen.Width / 4, 0);
+            MoveCameraKeybind(input.Keyboard.Modifiers,Direction.Right);
         }
 
         if (input.Keyboard.GetButton(Keys.W).WasPressed)
         {
-            _cameraPosition += new GridPosition(0, -_screen.Height / 4);
+            MoveCameraKeybind(input.Keyboard.Modifiers,Direction.Up);
         }
 
         if (input.Keyboard.GetButton(Keys.S).WasPressed)
         {
-            _cameraPosition += new GridPosition(0, _screen.Height / 4);
+            MoveCameraKeybind(input.Keyboard.Modifiers, Direction.Down);
         }
 
         if (!IsDraggingPrimary && !IsDraggingSecondary)
@@ -302,6 +301,22 @@ public class EditorSession : Session
                 extraKeyBindEvent(input, flippedDelta);
             }
         }
+    }
+
+    private void MoveCameraKeybind(ModifierKeys keyboardModifiers, Direction direction)
+    {
+        var fraction = 4;
+        var stepSize = direction
+            .ToVector()
+            .StraightMultiply(_screen.Width  *  1f / fraction, _screen.Height * 1f / fraction)
+            .RoundToGridPosition();
+
+        if (keyboardModifiers.Shift)
+        {
+            stepSize = stepSize.ToVector2().Normalized().RoundToGridPosition();
+        }
+        
+        _cameraPosition += stepSize;
     }
 
     private void OpenFlow()
@@ -411,10 +426,11 @@ public class EditorSession : Session
         }
         else
         {
-            var keyboardChordPosition = _screen.RoomRectangle.BottomRight - new GridPosition(_chords.Count,0);
+            var keyboardChordPosition = _screen.RoomRectangle.BottomRight - new GridPosition(_chords.Count, 0);
             foreach (var chord in _chords)
             {
-                _screen.PutTile(keyboardChordPosition, TileState.StringCharacter(chord.FirstKey.ToString(), Color.Yellow));
+                _screen.PutTile(keyboardChordPosition,
+                    TileState.StringCharacter(chord.FirstKey.ToString(), Color.Yellow));
                 keyboardChordPosition += new GridPosition(1, 0);
             }
         }

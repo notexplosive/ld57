@@ -93,6 +93,11 @@ public static class Constants
 
     public static int RoundToInt(float x)
     {
+        if (float.IsNaN(x))
+        {
+            return 0;
+        }
+        
         return (int) Math.Round(x);
     }
 
