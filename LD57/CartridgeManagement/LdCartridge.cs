@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExplogineCore;
+using ExplogineCore.Data;
 using ExplogineMonoGame;
 using ExplogineMonoGame.AssetManagement;
 using ExplogineMonoGame.Cartridges;
 using ExplogineMonoGame.Data;
+using LD57.Core;
 using LD57.Editor;
 using LD57.Gameplay;
 using LD57.Rendering;
@@ -73,14 +75,15 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
     private EditorSession BuildDrawSession()
     {
         var chords = new List<KeybindChord>();
-        var filter = new CanvasBrushFilter(chords);
-        var canvasSurface = new CanvasEditorSurface(filter, chords);
+        var filter = new CanvasBrushFilter();
+        var canvasSurface = new CanvasEditorSurface(filter);
         var toolChord = new KeybindChord(Keys.Q, "Tools");
         chords.Add(toolChord);
 
-        var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, canvasSurface);
+        var editorSession =
+            new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, canvasSurface, chords);
         editorSession.AddTool(
-            toolChord, Keys.B, "Brush", new CanvasEditorBrushTool(editorSession, canvasSurface, filter));
+            toolChord, Keys.R, "Brush", new CanvasEditorBrushTool(editorSession, canvasSurface, filter));
         editorSession.AddTool(
             toolChord, Keys.S, "Selection", new CanvasSelectionTool(editorSession, canvasSurface, filter));
         editorSession.AddTool(
@@ -88,6 +91,47 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         editorSession.AddTool(
             toolChord, Keys.T, "Text", new CanvasTextTool(canvasSurface, filter));
         editorSession.ExtraUi.Add(filter.CreateUi);
+
+        chords.Add(new KeybindChord(Keys.E, "Brush Filter")
+            .Add(Keys.S, "Shape", true, screen => filter.OpenShapeModal(screen))
+            .Add(Keys.D, "Foreground Color", true, screen => filter.OpenForegroundColorModal(screen))
+            .Add(Keys.F, "Background Color", true, screen => filter.OpenBackgroundColorModal(screen))
+        );
+
+        chords.Add(new KeybindChord(Keys.T, "Transform")
+            .AddDynamicTile(ChooseShapeModal.GetMirrorHorizontallyTile(() => filter.FlipState, () => filter.Rotation))
+            .AddDynamicTile(ChooseShapeModal.GetMirrorVerticallyTile(() => filter.FlipState, () => filter.Rotation))
+            .AddDynamicTile(ChooseShapeModal.GetCurrentRotationTile(() => filter.Rotation))
+            .Add(Keys.R, "Reset Transform", false, screen =>
+            {
+                filter.Rotation = QuarterRotation.Upright;
+                filter.FlipState = XyBool.False;
+            })
+            .Add(Keys.H, "Flip Horizontal", false, screen =>
+            {
+                if (filter.Rotation == QuarterRotation.Upright || filter.Rotation == QuarterRotation.Half)
+                {
+                    filter.FlipState = filter.FlipState with {X = !filter.FlipState.X};
+                }
+                else
+                {
+                    filter.FlipState = filter.FlipState with {Y = !filter.FlipState.Y};
+                }
+            })
+            .Add(Keys.V, "Flip Vertical", false, screen =>
+            {
+                if (filter.Rotation == QuarterRotation.Upright || filter.Rotation == QuarterRotation.Half)
+                {
+                    filter.FlipState = filter.FlipState with {Y = !filter.FlipState.Y};
+                }
+                else
+                {
+                    filter.FlipState = filter.FlipState with {X = !filter.FlipState.X};
+                }
+            })
+            .Add(Keys.Q, "Rotate CCW", false, screen => filter.Rotation = filter.Rotation.CounterClockwisePrevious())
+            .Add(Keys.E, "Rotate CW", false, screen => filter.Rotation = filter.Rotation.ClockwiseNext())
+        );
 
         editorSession.RebuildScreen();
 
@@ -106,7 +150,8 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         var toolChord = new KeybindChord(Keys.Q, "Tools");
         chords.Add(toolChord);
 
-        var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, worldEditorSurface);
+        var editorSession = new EditorSession((Runtime.Window as RealWindow)!, Runtime.FileSystem, worldEditorSurface,
+            chords);
         editorSession.AddTool(
             toolChord, Keys.B, "Brush",
             new WorldEditorBrushTool(editorSession, worldEditorSurface, filter, () => templateSelector.Selected));

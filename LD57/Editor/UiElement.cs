@@ -73,6 +73,11 @@ public class UiElement
         AddSubElement(extraDraw);
     }
 
+    public void AddScrollListener(Func<ModifierKeys, bool> shouldScroll, Action<int> onScroll)
+    {
+        AddSubElement(new ScrollListener(shouldScroll, onScroll));
+    }
+
     public DynamicImage AddDynamicImage(GridRectangle gridRectangle)
     {
         return AddSubElement(new DynamicImage(gridRectangle));
@@ -146,16 +151,16 @@ public class UiElement
         }
     }
 
-    public void UpdateMouseInput(ConsumableInput.ConsumableMouse inputMouse, GridPosition hoveredScreenPosition,
+    public void UpdateMouseInput(ConsumableInput input, GridPosition hoveredScreenPosition,
         ref ISubElement? primedElement)
     {
         var hoveredElement = GetSubElementAt(hoveredScreenPosition);
-        if (inputMouse.GetButton(MouseButton.Left).WasPressed)
+        if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
         {
             primedElement = hoveredElement;
         }
 
-        if (inputMouse.GetButton(MouseButton.Left).WasReleased)
+        if (input.Mouse.GetButton(MouseButton.Left).WasReleased)
         {
             if (primedElement == hoveredElement)
             {
@@ -169,10 +174,10 @@ public class UiElement
             }
         }
 
-        var scrollDelta = -inputMouse.NormalizedScrollDelta();
+        var scrollDelta = -input.Mouse.NormalizedScrollDelta();
         foreach (var element in _subElements)
         {
-            element.OnScroll(scrollDelta, hoveredElement);
+            element.OnScroll(scrollDelta, hoveredElement, input.Keyboard.Modifiers);
         }
     }
 

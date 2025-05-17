@@ -12,21 +12,23 @@ namespace LD57.Editor;
 
 public class EditorSession : Session
 {
+    private readonly List<KeybindChord> _chords;
+    private readonly List<IEditorTool> _editorTools = new();
     private readonly Stack<Popup> _popupStack = new();
     private readonly EditorSelector<IEditorTool> _toolSelector = new();
     private readonly List<UiElement> _uiElements = new();
     private GridPosition _cameraPosition;
     private Popup? _currentPopup;
-
-    private readonly List<IEditorTool> _editorTools = new();
     private GridPosition? _hoveredScreenPosition;
     private ISubElement? _primedElement;
     private AsciiScreen _screen;
 
-    public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, IEditorSurface surface) : base(
+    public EditorSession(RealWindow runtimeWindow, ClientFileSystem runtimeFileSystem, IEditorSurface surface,
+        List<KeybindChord> chords) : base(
         runtimeWindow,
         runtimeFileSystem)
     {
+        _chords = chords;
         _screen = RebuildScreenWithWidth(46);
         Surface = surface;
         Surface.RequestedResetCamera += ResetCameraPosition;
@@ -164,7 +166,7 @@ public class EditorSession : Session
             var hitUiElement = UiElementAt(_hoveredScreenPosition.Value);
             if (hitUiElement != null)
             {
-                hitUiElement.UpdateMouseInput(input.Mouse, _hoveredScreenPosition.Value, ref _primedElement);
+                hitUiElement.UpdateMouseInput(input, _hoveredScreenPosition.Value, ref _primedElement);
             }
         }
 
@@ -216,7 +218,12 @@ public class EditorSession : Session
         }
 
         CurrentTool?.UpdateInput(input.Keyboard, HoveredWorldPosition);
-        
+
+        foreach (var chord in _chords)
+        {
+            chord.ListenForFirstKey(input, Surface);
+        }
+
         Surface.HandleKeyBinds(input);
 
         if (input.Keyboard.GetButton(Keys.S).WasPressed)
@@ -244,7 +251,6 @@ public class EditorSession : Session
             SaveFlow();
             Surface.ClearEverything();
         }
-
 
         if (input.Keyboard.GetButton(Keys.OemMinus).WasPressed)
         {
@@ -409,6 +415,18 @@ public class EditorSession : Session
         {
             _currentPopup.PaintSubElements(_screen, _currentPopup.GetSubElementAt(_hoveredScreenPosition));
         }
+        else
+        {
+            var keyboardChordPosition = _screen.RoomRectangle.BottomLeft + new GridPosition(1, -4);
+            foreach (var chord in _chords)
+            {
+                _screen.PutFrameRectangle(ResourceAlias.PopupFrame,
+                    new GridRectangle(keyboardChordPosition - new GridPosition(1, 1),
+                        keyboardChordPosition + new GridPosition(1, 1)));
+                _screen.PutTile(keyboardChordPosition, TileState.StringCharacter(chord.FirstKey.ToString()));
+                keyboardChordPosition += new GridPosition(3, 0);
+            }
+        }
     }
 
     private UiElement? UiElementAt(GridPosition hoveredTilePosition)
@@ -475,7 +493,7 @@ public class EditorSession : Session
 
     public void AddTool(KeybindChord toolChord, Keys key, string label, IEditorTool tool)
     {
-        toolChord.Add(key, label, true, () => { _toolSelector.Selected = tool; });
+        toolChord.Add(key, label, true, screen => { _toolSelector.Selected = tool; });
         _editorTools.Add(tool);
     }
 }

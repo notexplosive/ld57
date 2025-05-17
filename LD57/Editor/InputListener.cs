@@ -1,5 +1,6 @@
 ﻿using System;
 using ExplogineMonoGame;
+using ExplogineMonoGame.Input;
 using LD57.Rendering;
 
 namespace LD57.Editor;
@@ -38,7 +39,7 @@ public class InputListener : ISubElement
         _onInput(inputKeyboard);
     }
 
-    public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
+    public void OnScroll(int scrollDelta, ISubElement? hoveredElement, ModifierKeys keyboardModifiers)
     {
         
     }

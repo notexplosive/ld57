@@ -5,18 +5,20 @@ using LD57.Rendering;
 
 namespace LD57.Editor;
 
-public class ExtraDraw : ISubElement
+public class ScrollListener : ISubElement
 {
-    private readonly Action<AsciiScreen> _extraDrawFunction;
+    private readonly Func<ModifierKeys, bool> _shouldListen;
+    private readonly Action<int> _onScroll;
 
-    public ExtraDraw(Action<AsciiScreen> extraDrawFunction)
+    public ScrollListener(Func<ModifierKeys, bool> shouldListen, Action<int> onScroll)
     {
-        _extraDrawFunction = extraDrawFunction;
+        _shouldListen = shouldListen;
+        _onScroll = onScroll;
     }
-    
+
     public void PutSubElementOnScreen(AsciiScreen screen, ISubElement? hoveredElement)
     {
-        _extraDrawFunction(screen);
+        
     }
 
     public bool Contains(GridPosition relativePosition)
@@ -41,6 +43,9 @@ public class ExtraDraw : ISubElement
 
     public void OnScroll(int scrollDelta, ISubElement? hoveredElement, ModifierKeys keyboardModifiers)
     {
-        
+        if (_shouldListen(keyboardModifiers))
+        {
+            _onScroll(scrollDelta);
+        }
     }
 }

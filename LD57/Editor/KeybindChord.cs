@@ -8,25 +8,25 @@ namespace LD57.Editor;
 
 public class KeybindChord
 {
-    private readonly Keys _firstKey;
+    public Keys FirstKey { get; }
     private readonly List<SecondNote> _secondNotes = new();
     private readonly List<Func<GridPosition,ISubElement>> _subElements = new();
     private readonly string _title;
 
     public KeybindChord(Keys firstKey, string title)
     {
-        _firstKey = firstKey;
+        FirstKey = firstKey;
         _title = title;
     }
 
     public void ListenForFirstKey(ConsumableInput input, IEditorSurface surface)
     {
-        if (input.Keyboard.GetButton(_firstKey, true).WasPressed)
+        if (input.Keyboard.GetButton(FirstKey, true).WasPressed)
         {
             surface.RequestPopup(screenSize =>
             {
                 var rectangle = GridRectangle.FromCenterAndSize(screenSize.Center, PopupSize());
-                var chordPopup = new ChordPopup(rectangle, this, Title(), _subElements, new GridPosition());
+                var chordPopup = new ChordPopup(screenSize,rectangle, this, Title(), _subElements, new GridPosition());
                 return chordPopup;
             });
         }
@@ -77,7 +77,7 @@ public class KeybindChord
         return (ChordNoteStatus.None, null);
     }
 
-    public KeybindChord Add(Keys key, string label, bool shouldCloseOnPress, Action function)
+    public KeybindChord Add(Keys key, string label, bool shouldCloseOnPress, Action<GridRectangle> function)
     {
         _secondNotes.Add(new SecondNote(key, label, function, shouldCloseOnPress));
         return this;
@@ -94,7 +94,7 @@ public class KeybindChord
         return this;
     }
 
-    public record SecondNote(Keys Key, string Description, Action Function, bool ShouldCloseImmediately);
+    public record SecondNote(Keys Key, string Description, Action<GridRectangle> Function, bool ShouldCloseImmediately);
 }
 
 public enum ChordNoteStatus

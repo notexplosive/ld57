@@ -9,8 +9,8 @@ namespace LD57.Editor;
 
 public class ChordPopup : Popup
 {
-    public ChordPopup(GridRectangle screenSize, KeybindChord keybindChord, string title, List<Func<GridPosition,ISubElement>> subElements,
-        GridPosition startPosition) : base(screenSize)
+    public ChordPopup(GridRectangle totalScreenSize, GridRectangle popupSize, KeybindChord keybindChord, string title, List<Func<GridPosition,ISubElement>> subElements,
+        GridPosition startPosition) : base(popupSize)
     {
         AddInputListener(keyboard =>
         {
@@ -20,7 +20,7 @@ public class ChordPopup : Popup
             {
                 if (status == ChordNoteStatus.Pressed)
                 {
-                    note.Function();
+                    note.Function(totalScreenSize);
                     if (note.ShouldCloseImmediately)
                     {
                         Close();

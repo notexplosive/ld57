@@ -1,5 +1,6 @@
 ﻿using ExplogineMonoGame;
 using ExplogineMonoGame.Debugging;
+using ExplogineMonoGame.Input;
 using LD57.Rendering;
 
 namespace LD57.Editor;
@@ -39,10 +40,13 @@ public class ScrollablePane : UiElement, ISubElement
         // do nothing, clicking the scroll area directly doesn't do anything
     }
 
-    public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
+    public void OnScroll(int scrollDelta, ISubElement? hoveredElement, ModifierKeys keyboardModifiers)
     {
-        _viewPosition += new GridPosition(0, scrollDelta);
-        ClampViewPosition();
+        if (keyboardModifiers.None)
+        {
+            _viewPosition += new GridPosition(0, scrollDelta);
+            ClampViewPosition();
+        }
     }
 
     private void ClampViewPosition()
@@ -94,5 +98,10 @@ public class ScrollablePane : UiElement, ISubElement
     public bool ShouldHaveThumb()
     {
         return _viewport.Height < _contentBounds.Bottom;
+    }
+
+    public bool IsInView(int yPosition)
+    {
+        return yPosition > ViewRectangle.Top && yPosition < ViewRectangle.Bottom;
     }
 }

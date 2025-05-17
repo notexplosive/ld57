@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ExplogineMonoGame;
+﻿using ExplogineMonoGame;
 using LD57.Rendering;
 
 namespace LD57.Editor;
@@ -7,12 +6,10 @@ namespace LD57.Editor;
 public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, CanvasTileData, CanvasBrushFilter>
 {
     private readonly CanvasBrushFilter _canvasBrushFilter;
-    private readonly List<KeybindChord> _chords;
 
-    public CanvasEditorSurface(CanvasBrushFilter canvasBrushFilter, List<KeybindChord> chords) : base("Canvases", new CanvasData())
+    public CanvasEditorSurface(CanvasBrushFilter canvasBrushFilter) : base("Canvases", new CanvasData())
     {
         _canvasBrushFilter = canvasBrushFilter;
-        _chords = chords;
         RealSelection = new CanvasEditorSelection(this, canvasBrushFilter);
     }
 
@@ -37,10 +34,6 @@ public class CanvasEditorSurface : EditorSurface<CanvasData, PlacedCanvasTile, C
 
     public override void HandleKeyBinds(ConsumableInput input)
     {
-        foreach (var chord in _chords)
-        {
-            chord.ListenForFirstKey(input, this);
-        }
     }
 
     protected override CanvasData CreateEmptyData()

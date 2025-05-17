@@ -1,5 +1,6 @@
 ﻿using System;
 using ExplogineMonoGame;
+using ExplogineMonoGame.Input;
 using LD57.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -71,7 +72,7 @@ public class SelectableButton<T> : ISubElement where T : class
         
     }
 
-    public void OnScroll(int scrollDelta, ISubElement? hoveredElement)
+    public void OnScroll(int scrollDelta, ISubElement? hoveredElement, ModifierKeys keyboardModifiers)
     {
         
     }

@@ -162,32 +162,32 @@ public class AsciiScreen
         PutFilledRectangle(tileState, new GridRectangle(cornerA, cornerB));
     }
 
-    public void PutFrameRectangle(SpriteSheet frame, GridRectangle rectangle)
+    public void PutFrameRectangle(SpriteSheet sheet, GridRectangle rectangle)
     {
         for (var i = 1; i < rectangle.Width; i++)
         {
-            PutTile(rectangle.TopLeft + new GridPosition(i, 0), TileState.Sprite(frame, 1));
+            PutTile(rectangle.TopLeft + new GridPosition(i, 0), TileState.Sprite(sheet, 1));
         }
 
         for (var i = 1; i < rectangle.Height; i++)
         {
-            PutTile(rectangle.TopRight + new GridPosition(0, i), TileState.Sprite(frame, 3));
+            PutTile(rectangle.TopRight + new GridPosition(0, i), TileState.Sprite(sheet, 3));
         }
 
         for (var i = 1; i < rectangle.Width; i++)
         {
-            PutTile(rectangle.BottomLeft + new GridPosition(i, 0), TileState.Sprite(frame, 5));
+            PutTile(rectangle.BottomLeft + new GridPosition(i, 0), TileState.Sprite(sheet, 5));
         }
 
         for (var i = 1; i < rectangle.Height; i++)
         {
-            PutTile(rectangle.TopLeft + new GridPosition(0, i), TileState.Sprite(frame, 7));
+            PutTile(rectangle.TopLeft + new GridPosition(0, i), TileState.Sprite(sheet, 7));
         }
 
-        PutTile(rectangle.TopLeft, TileState.Sprite(frame, 0));
-        PutTile(rectangle.TopRight, TileState.Sprite(frame, 2));
-        PutTile(rectangle.BottomRight, TileState.Sprite(frame, 4));
-        PutTile(rectangle.BottomLeft, TileState.Sprite(frame, 6));
+        PutTile(rectangle.TopLeft, TileState.Sprite(sheet, 0));
+        PutTile(rectangle.TopRight, TileState.Sprite(sheet, 2));
+        PutTile(rectangle.BottomRight, TileState.Sprite(sheet, 4));
+        PutTile(rectangle.BottomLeft, TileState.Sprite(sheet, 6));
 
         for (var x = 1; x < rectangle.Width; x++)
         {

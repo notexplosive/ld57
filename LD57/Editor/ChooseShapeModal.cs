@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ExplogineCore.Data;
 using LD57.CartridgeManagement;
 using LD57.Core;
@@ -13,6 +14,7 @@ public class ChooseShapeModal : Popup
     private readonly Func<ICanvasTileShape> _getChosenShape;
     private readonly Func<XyBool> _getFlipState;
     private readonly Func<QuarterRotation> _getRotation;
+    private readonly List<(ICanvasTileShape, GridPosition)> _shapesInOrder = new();
 
     public ChooseShapeModal(GridRectangle corners, Func<ICanvasTileShape> getChosenShape, Func<XyBool> getFlipState,
         Func<QuarterRotation> getRotation) : base(corners)
@@ -95,7 +97,7 @@ public class ChooseShapeModal : Popup
         var yToScrollTo = 0;
 
         var emptyShape = new CanvasTileShapeEmpty();
-        var emptyButton = new Button(new GridPosition(x, y), () => ChooseTile(emptyShape));
+        var emptyButton = new Button(new GridPosition(x, y), () => ChooseTileAndClose(emptyShape));
         emptyButton.SetTileStateOnHoverGetter(() => GetHoveredTileState(emptyShape));
         pane.AddButton(emptyButton);
         HandleLineFeed(ref x, ref y, maxWidth);
@@ -118,7 +120,7 @@ public class ChooseShapeModal : Popup
                 var gridPosition = new GridPosition(x, y);
                 var capturedFrame = frame;
                 var shape = new CanvasTileShapeSprite(sheetName, capturedFrame);
-                var button = new Button(gridPosition, () => ChooseTile(shape));
+                var button = new Button(gridPosition, () => ChooseTileAndClose(shape));
 
                 if (_getChosenShape().GetHashCode() == shape.GetHashCode())
                 {
@@ -136,6 +138,9 @@ public class ChooseShapeModal : Popup
                 });
                 button.SetTileStateOnHoverGetter(() => GetHoveredTileState(shape));
                 pane.AddButton(button);
+
+                _shapesInOrder.Add((shape, gridPosition));
+
                 HandleLineFeed(ref x, ref y, maxWidth);
             }
         }
@@ -143,6 +148,25 @@ public class ChooseShapeModal : Popup
         pane.SetContentHeight(y);
 
         pane.ScrollToPosition(yToScrollTo);
+
+        AddScrollListener(modifierKeys => modifierKeys.Alt, delta =>
+        {
+            if (delta == 0)
+            {
+                return;
+            }
+            var currentIndex = _shapesInOrder.FindIndex(a => a.Item1.GetHashCode() == _getChosenShape().GetHashCode());
+            var newIndex = currentIndex + delta;
+
+            if (_shapesInOrder.IsValidIndex(newIndex))
+            {
+                ChooseTile(_shapesInOrder[newIndex].Item1);
+                if (!pane.IsInView(_shapesInOrder[newIndex].Item2.Y))
+                {
+                    pane.ScrollToPosition(_shapesInOrder[newIndex].Item2.Y);
+                }
+            }
+        });
     }
 
     public static Func<TileState> GetMirrorHorizontallyTile(Func<XyBool> getFlipState, Func<QuarterRotation> rotation)
@@ -155,7 +179,10 @@ public class ChooseShapeModal : Popup
                 frame = 11;
             }
 
-            return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue, Angle = rotation().Radians};
+            return TileState.Sprite(ResourceAlias.Tools, frame) with
+            {
+                ForegroundColor = Color.LightBlue, Angle = rotation().Radians
+            };
         };
     }
 
@@ -169,7 +196,10 @@ public class ChooseShapeModal : Popup
                 frame = 13;
             }
 
-            return TileState.Sprite(ResourceAlias.Tools, frame) with {ForegroundColor = Color.LightBlue, Angle = rotation().Radians};
+            return TileState.Sprite(ResourceAlias.Tools, frame) with
+            {
+                ForegroundColor = Color.LightBlue, Angle = rotation().Radians
+            };
         };
     }
 
@@ -180,7 +210,10 @@ public class ChooseShapeModal : Popup
 
     public static TileState GetCwRotationTile()
     {
-        return TileState.Sprite(ResourceAlias.Entities, 27) with {Flip = new XyBool(true, false), ForegroundColor = Color.LightBlue};
+        return TileState.Sprite(ResourceAlias.Entities, 27) with
+        {
+            Flip = new XyBool(true, false), ForegroundColor = Color.LightBlue
+        };
     }
 
     private void DrawExtraBorder(AsciiScreen screen)
@@ -243,10 +276,15 @@ public class ChooseShapeModal : Popup
         }
     }
 
+    private void ChooseTileAndClose(ICanvasTileShape shape)
+    {
+        ChooseTile(shape);
+        Close();
+    }
+
     private void ChooseTile(ICanvasTileShape shape)
     {
         ChoseShape?.Invoke(shape);
-        Close();
     }
 
     public event Action<ICanvasTileShape>? ChoseShape;
@@ -258,6 +296,9 @@ public class ChooseShapeModal : Popup
 
     public static Func<TileState> GetCurrentRotationTile(Func<QuarterRotation> getRotation)
     {
-        return () => TileState.Sprite(ResourceAlias.Tools, 22).WithRotation(getRotation()) with {ForegroundColor = getRotation() != QuarterRotation.Upright? Color.Yellow : Color.LightBlue};
+        return () => TileState.Sprite(ResourceAlias.Tools, 22).WithRotation(getRotation()) with
+        {
+            ForegroundColor = getRotation() != QuarterRotation.Upright ? Color.Yellow : Color.LightBlue
+        };
     }
 }
