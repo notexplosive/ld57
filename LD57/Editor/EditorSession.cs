@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using ExplogineMonoGame.Input;
@@ -410,14 +411,11 @@ public class EditorSession : Session
         }
         else
         {
-            var keyboardChordPosition = _screen.RoomRectangle.BottomLeft + new GridPosition(1, -4);
+            var keyboardChordPosition = _screen.RoomRectangle.BottomRight - new GridPosition(_chords.Count,0);
             foreach (var chord in _chords)
             {
-                _screen.PutFrameRectangle(ResourceAlias.PopupFrame,
-                    new GridRectangle(keyboardChordPosition - new GridPosition(1, 1),
-                        keyboardChordPosition + new GridPosition(1, 1)));
-                _screen.PutTile(keyboardChordPosition, TileState.StringCharacter(chord.FirstKey.ToString()));
-                keyboardChordPosition += new GridPosition(3, 0);
+                _screen.PutTile(keyboardChordPosition, TileState.StringCharacter(chord.FirstKey.ToString(), Color.Yellow));
+                keyboardChordPosition += new GridPosition(1, 0);
             }
         }
     }
