@@ -42,7 +42,7 @@ public record CanvasTileData
     [JsonProperty("background_intensity")]
     public float BackgroundIntensity { get; set; }
 
-    public TileState GetTile()
+    public TileState GetTileUnfiltered()
     {
         if (TileType == TileType.Sprite)
         {
@@ -124,7 +124,7 @@ public record CanvasTileData
 
     public TileState GetTileStateWithFilter(CanvasBrushFilter filter, bool isForVisibility)
     {
-        var result = GetTile();
+        var result = GetTileUnfiltered();
 
         if (!filter.ForegroundShapeAndTransform.Check(isForVisibility))
         {
