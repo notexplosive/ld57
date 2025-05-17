@@ -49,7 +49,7 @@ public abstract class EyeDropperTool : IEditorTool
         }
     }
 
-    protected abstract void GrabTile(GridPosition position);
+    public abstract void GrabTile(GridPosition position);
 
     public void PaintToWorld(AsciiScreen screen)
     {

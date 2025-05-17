@@ -22,4 +22,5 @@ public interface IEditorSurface
     void MoveSelection();
     void EraseSelection();
     void RequestPopup(CreatePopupDelegate createPopup);
+    void OnMiddleClickInWorld(GridPosition position);
 }

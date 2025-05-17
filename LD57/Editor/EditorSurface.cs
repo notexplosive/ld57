@@ -108,7 +108,13 @@ public abstract class EditorSurface<TData, TPlaced, TInk, TFilter> : IEditorSurf
         RequestedPopup?.Invoke(createPopup);
     }
 
+    public void OnMiddleClickInWorld(GridPosition position)
+    {
+        RequestedEyeDropper?.Invoke(position);
+    }
+
     public event Action<CreatePopupDelegate>? RequestedPopup;
+    public event Action<GridPosition>? RequestedEyeDropper;
 
     protected abstract TData CreateEmptyData();
 

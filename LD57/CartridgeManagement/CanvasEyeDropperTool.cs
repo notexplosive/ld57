@@ -27,7 +27,7 @@ public class CanvasEyeDropperTool : EyeDropperTool
         return "";
     }
 
-    protected override void GrabTile(GridPosition position)
+    public override void GrabTile(GridPosition position)
     {
         var ink = _canvasSurface.AllInkAt(position).FirstOrDefault();
         if (ink != null)

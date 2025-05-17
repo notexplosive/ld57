@@ -86,7 +86,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             toolChord, Keys.R, "Brush", new CanvasEditorBrushTool(editorSession, canvasSurface, filter));
         editorSession.AddTool(
             toolChord, Keys.S, "Selection", new CanvasSelectionTool(editorSession, canvasSurface, filter));
-        editorSession.AddTool(
+        var eyeDropper = editorSession.AddTool(
             toolChord, Keys.E, "Eye Dropper", new CanvasEyeDropperTool(editorSession, canvasSurface, filter));
         editorSession.AddTool(
             toolChord, Keys.T, "Text", new CanvasTextTool(canvasSurface, filter));
@@ -136,6 +136,7 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
         editorSession.RebuildScreen();
 
         filter.RequestedModal += editorSession.OpenPopup;
+        canvasSurface.RequestedEyeDropper += eyeDropper.GrabTile;
 
         return editorSession;
     }

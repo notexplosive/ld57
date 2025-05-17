@@ -170,6 +170,14 @@ public class EditorSession : Session
             }
         }
 
+        if (input.Mouse.GetButton(MouseButton.Middle).WasPressed)
+        {
+            if (HoveredWorldPosition.HasValue)
+            {
+                Surface.OnMiddleClickInWorld(HoveredWorldPosition.Value);
+            }
+        }
+
         if (input.Mouse.GetButton(MouseButton.Left).WasPressed)
         {
             if (HoveredWorldPosition.HasValue)
@@ -498,9 +506,10 @@ public class EditorSession : Session
         _cameraPosition = DefaultCameraPosition();
     }
 
-    public void AddTool(KeybindChord toolChord, Keys key, string label, IEditorTool tool)
+    public T AddTool<T>(KeybindChord toolChord, Keys key, string label, T tool) where T : IEditorTool
     {
         toolChord.Add(key, label, true, _ => { _toolSelector.Selected = tool; });
         _editorTools.Add(tool);
+        return tool;
     }
 }
