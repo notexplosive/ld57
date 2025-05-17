@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
 using LD57.Rendering;
@@ -7,6 +8,7 @@ namespace LD57.Editor;
 
 public class Button : ISubElement
 {
+    private readonly List<GridRectangle> _additionalSurface = new();
     private readonly Action _onClick;
     private readonly GridPosition _position;
     private Func<TileState>? _getTileState;
@@ -25,7 +27,7 @@ public class Button : ISubElement
         {
             screen.PutTile(_position, getter.Value);
         }
-        
+
         if (hoveredElement == this)
         {
             var hoverGetter = GetTileStateOnHover();
@@ -38,12 +40,20 @@ public class Button : ISubElement
 
     public bool Contains(GridPosition relativePosition)
     {
-        return relativePosition == _position;
-    }
+        if (relativePosition == _position)
+        {
+            return true;
+        }
 
-    public void ShowHover(AsciiScreen screen, GridPosition hoveredTilePosition)
-    {
-        
+        foreach (var surface in _additionalSurface)
+        {
+            if (surface.Contains(relativePosition, true))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void OnClicked()
@@ -61,7 +71,6 @@ public class Button : ISubElement
 
     public void OnScroll(int scrollDelta, ISubElement? hoveredElement, ModifierKeys keyboardModifiers)
     {
-        
     }
 
     public Button SetTileStateGetter(Func<TileState> getTileState)
@@ -84,5 +93,10 @@ public class Button : ISubElement
     private TileState? GetTileStateOnHover()
     {
         return _getTileStateOnHover?.Invoke();
+    }
+
+    public void AddClickableSurface(GridRectangle gridRectangle)
+    {
+        _additionalSurface.Add(gridRectangle);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ExplogineCore.Data;
 using LD57.CartridgeManagement;
 using LD57.Rendering;
@@ -36,7 +38,7 @@ public class ChooseColorModal : Popup
                 intensityButton.SetTileStateGetter(() =>
                 {
                     var isSelected = Math.Abs(getIntensity() - intensity) < 0.01f;
-                    
+
                     if (intensity == 0)
                     {
                         if (isSelected)
@@ -59,11 +61,13 @@ public class ChooseColorModal : Popup
 
             topLeftPadding += new GridPosition(0, 1);
         }
-        
-        
+
         AddExtraDraw(new ExtraDraw(DrawExtraBorder));
+
+        var scrollablePane = AddScrollablePane(new GridRectangle(topLeftPadding,
+            new GridPosition(rectangle.Width, rectangle.Height) - new GridPosition(1, 1)));
         
-        var scrollablePane = AddScrollablePane(new GridRectangle(topLeftPadding, new GridPosition(rectangle.Width,rectangle.Height) - new GridPosition(1,1)));
+        var colorKeys = new List<(string, int)>();
         
         var i = 0;
         var selectedIndex = 0;
@@ -85,22 +89,30 @@ public class ChooseColorModal : Popup
             {
                 selectedIndex = i;
             }
-            
+
             colorButton.SetTileStateGetter(() =>
             {
                 if (getColor() == key)
                 {
-                    return TileState.Sprite(ResourceAlias.Entities, 0).WithBackground(color.Value);
+                    return TileState.Sprite(ResourceAlias.Tools, 0).WithBackground(color.Value);
                 }
 
                 return TileState.BackgroundOnly(color.Value, 1);
             });
-            
+
+            colorButton.SetTileStateOnHoverGetter(() => TileState.Sprite(ResourceAlias.Floors, 7).WithBackground(color.Value));
+
+            colorButton.AddClickableSurface(
+                new GridRectangle(buttonPosition,
+                    buttonPosition + new GridPosition(rectangle.Width, 0)));
+
             scrollablePane.AddButton(colorButton);
             scrollablePane.AddStaticText(buttonPosition + new GridPosition(1, 0), key);
+            
+            colorKeys.Add((key, i));
             i++;
         }
-        
+
         var scrollBarRectangle = new GridRectangle(
             scrollablePane.ViewPort.TopRight + new GridPosition(0, 0),
             scrollablePane.ViewPort.BottomRight + new GridPosition(0, 0));
@@ -121,9 +133,29 @@ public class ChooseColorModal : Popup
                     scrollBarRectangle.MovedToZero());
             }
         });
-        
+
         scrollablePane.SetContentHeight(i);
         scrollablePane.ScrollToPosition(selectedIndex);
+        
+        AddScrollListener(modifierKeys => modifierKeys.Alt, delta =>
+        {
+            if (delta == 0)
+            {
+                return;
+            }
+
+            var currentIndex = colorKeys.FindIndex(colorKey => colorKey.Item1 == getColor());
+            var newIndex = currentIndex + delta;
+
+            if (colorKeys.IsValidIndex(newIndex))
+            {
+                ChooseColor(colorKeys[newIndex].Item1);
+                if (!scrollablePane.IsInView(colorKeys[newIndex].Item2))
+                {
+                    scrollablePane.ScrollToPosition(colorKeys[newIndex].Item2);
+                }
+            }
+        });
     }
 
     private void DrawExtraBorder(AsciiScreen screen)
