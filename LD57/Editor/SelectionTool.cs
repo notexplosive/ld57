@@ -144,6 +144,14 @@ public abstract class SelectionTool : IEditorTool
 
     public void PaintToWorld(AsciiScreen screen)
     {
+        
+        // paint selection
+        foreach (var worldPosition in Surface.Selection.AllPositions())
+        {
+            screen.PutTile(worldPosition,
+                Surface.Selection.GetTileStateAt(worldPosition - Surface.Selection.Offset));
+        }
+        
         if (_editorSession.IsDraggingPrimary)
         {
             var backgroundColor = Color.LimeGreen;

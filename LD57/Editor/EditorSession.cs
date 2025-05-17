@@ -378,13 +378,6 @@ public class EditorSession : Session
         _screen.PushTransform(-_cameraPosition);
         Surface.PaintWorldToScreen(_screen, dt);
 
-        // paint selection
-        foreach (var worldPosition in Surface.Selection.AllPositions())
-        {
-            _screen.PutTile(worldPosition,
-                Surface.Selection.GetTileStateAt(worldPosition - Surface.Selection.Offset));
-        }
-
         Surface.PaintOverlayBelowTool(_screen, HoveredWorldPosition);
 
         CurrentTool?.PaintToWorld(_screen);
@@ -493,7 +486,7 @@ public class EditorSession : Session
 
     public void AddTool(KeybindChord toolChord, Keys key, string label, IEditorTool tool)
     {
-        toolChord.Add(key, label, true, screen => { _toolSelector.Selected = tool; });
+        toolChord.Add(key, label, true, _ => { _toolSelector.Selected = tool; });
         _editorTools.Add(tool);
     }
 }
