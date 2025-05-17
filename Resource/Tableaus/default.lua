@@ -10,4 +10,6 @@ function ipsum.update(dt)
     elapsedTime = elapsedTime + dt
     ipsum.putTile(sprite, 1, 10)
     ipsum.putTile(sprite, 2, 10)
+
+    ipsum.width = 40 + (math.sin(elapsedTime * 10) * 5)
 end
