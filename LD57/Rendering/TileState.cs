@@ -17,16 +17,16 @@ public readonly record struct TileState(
     float Angle = 0
 )
 {
-    public static readonly TileState TransparentEmpty = new(TileType.Skip, Color.White, Color.White);
+    public static readonly TileState TransparentEmpty = new(TileType.Skip, ResourceAlias.Color("default"), ResourceAlias.Color("default"));
 
     public static TileState StringCharacter(string content, Color? color = null)
     {
-        return new TileState(TileType.Character, color ?? Color.White, Color.White, content);
+        return new TileState(TileType.Character, color ?? ResourceAlias.Color("default"), ResourceAlias.Color("default"), content);
     }
 
     public static TileState Sprite(SpriteSheet spriteSheet, int frame, Color? color = null)
     {
-        return new TileState(TileType.Sprite, color ?? Color.White, Color.White, null, spriteSheet, frame);
+        return new TileState(TileType.Sprite, color ?? ResourceAlias.Color("default"), ResourceAlias.Color("default"), null, spriteSheet, frame);
     }
 
     public static TileState CombineLayers(TileState higher, TileState lower)
@@ -72,7 +72,7 @@ public readonly record struct TileState(
 
     public static TileState BackgroundOnly(Color backgroundColor, float intensity)
     {
-        return new TileState(TileType.Invisible, Color.White, Color.White) { BackgroundColor = backgroundColor, BackgroundIntensity = intensity };
+        return new TileState(TileType.Invisible, ResourceAlias.Color("default"), ResourceAlias.Color("default")) { BackgroundColor = backgroundColor, BackgroundIntensity = intensity };
     }
 
     public TileState WithBackground(Color color, float intensity = 1)

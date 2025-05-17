@@ -29,7 +29,7 @@ public class SelectableButton<T> : ISubElement where T : class
         {
             renderedTileState = renderedTileState with
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = ResourceAlias.Color("default"),
                 ForegroundColor = Color.Black,
                 BackgroundIntensity = 1f,
             };
@@ -41,7 +41,7 @@ public class SelectableButton<T> : ISubElement where T : class
         {
             var newTile = screen.GetTile(_gridPosition) with
             {
-                BackgroundColor = Color.LightBlue, BackgroundIntensity = 1f
+                BackgroundColor = ResourceAlias.Color("hovered"), BackgroundIntensity = 1f
             };
             screen.PutTile(_gridPosition, newTile);
         }

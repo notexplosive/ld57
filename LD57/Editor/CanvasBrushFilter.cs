@@ -9,10 +9,10 @@ namespace LD57.Editor;
 
 public class CanvasBrushFilter : IBrushFilter
 {
-    private string _backgroundColorName = "white";
+    private string _backgroundColorName = "default";
     private float _backgroundIntensity;
     private ICanvasTileShape _currentShape = new CanvasTileShapeSprite("Walls", 0);
-    private string _foregroundColorName = "white";
+    private string _foregroundColorName = "default";
     public XyBool FlipState { get; set; }
     public QuarterRotation Rotation { get; set; } = QuarterRotation.Upright;
 
@@ -35,7 +35,7 @@ public class CanvasBrushFilter : IBrushFilter
 
         element.AddButton(new Button(new GridPosition(1, 1), () => OpenShapeModal(screen.RoomRectangle))
             .SetTileStateGetter(GetForegroundShapeTileState)
-            .SetTileStateOnHoverGetter(() => GetForegroundShapeTileState().WithBackground(Color.LightBlue))
+            .SetTileStateOnHoverGetter(() => GetForegroundShapeTileState().WithBackground(ResourceAlias.Color("hovered")))
         );
         element.AddButton(
             new Button(new GridPosition(1, 2), () => OpenForegroundColorModal(screen.RoomRectangle))
@@ -79,7 +79,7 @@ public class CanvasBrushFilter : IBrushFilter
         element.AddButton(
             new Button(position, doToggle)
                 .SetTileStateGetter(getVisibleTileState)
-                .SetTileStateOnHoverGetter(() => getVisibleTileState().WithBackground(Color.LightBlue))
+                .SetTileStateOnHoverGetter(() => getVisibleTileState().WithBackground(ResourceAlias.Color("hovered")))
         );
     }
 
@@ -171,10 +171,10 @@ public class CanvasBrushFilter : IBrushFilter
         {
             if (getter())
             {
-                return TileState.Sprite(ResourceAlias.Tools, 7, Color.White);
+                return TileState.Sprite(ResourceAlias.Tools, 7, ResourceAlias.Color("default"));
             }
 
-            return TileState.Sprite(ResourceAlias.Tools, 8, Color.White);
+            return TileState.Sprite(ResourceAlias.Tools, 8, ResourceAlias.Color("default"));
         };
     }
 
@@ -186,7 +186,7 @@ public class CanvasBrushFilter : IBrushFilter
 
             if (!isVisible())
             {
-                return result with {ForegroundColor = Color.Gray};
+                return result with {ForegroundColor = ResourceAlias.Color("grayed-out")};
             }
 
             return result;
@@ -197,10 +197,10 @@ public class CanvasBrushFilter : IBrushFilter
     {
         if (editable)
         {
-            return TileState.Sprite(ResourceAlias.Tools, 23, Color.White);
+            return TileState.Sprite(ResourceAlias.Tools, 23, ResourceAlias.Color("default"));
         }
 
-        return TileState.Sprite(ResourceAlias.Utility, 24, Color.White);
+        return TileState.Sprite(ResourceAlias.Utility, 24, ResourceAlias.Color("default"));
     }
 
     private TileState GetBackgroundTileState()
@@ -262,13 +262,13 @@ public class CanvasBrushFilter : IBrushFilter
 
         if (ForegroundColor.IsFunctionallyActive)
         {
-            _foregroundColorName = tileData.ForegroundColorName ?? "white";
+            _foregroundColorName = tileData.ForegroundColorName ?? "default";
         }
 
         if (BackgroundColorAndIntensity.IsFunctionallyActive)
         {
             _backgroundIntensity = tileData.BackgroundIntensity;
-            _backgroundColorName = tileData.BackgroundColorName ?? "white";
+            _backgroundColorName = tileData.BackgroundColorName ?? "default";
         }
     }
 }

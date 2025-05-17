@@ -1,5 +1,5 @@
 {
-    "white": "ffffff",
+    "default": "ffffff",
     "crate": "968b7b",
     "player": "edcb07",
     "button": "bfb4d6",
@@ -26,5 +26,8 @@
     "phantom": "7cf7ad",
     "swap": "ff80ff",
     "metal": "f0d5ce",
-    "arrow": "ff80ff"
+    "arrow": "ff80ff",
+    "hovered": "1b7780",
+    "editor-button": "83ec73",
+    "grayed-out": "9ba699"
 }

@@ -2,7 +2,7 @@
     "sort_priority": 5,
     "sprite_sheet": "Floors",
     "frame": 5,
-    "color": "white",
+    "color": "default",
     "tags": [
         "Signal",
         "Bridge",

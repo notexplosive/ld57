@@ -93,7 +93,7 @@ public class World
         //     if (!IsEditMode)
         //     {
         //         entity.TweenableGlyph.SetAnimation(Animations.CrystalShimmer(ResourceAlias.Color("blood"),
-        //             ResourceAlias.Color("white"), ResourceAlias.Color("blue_text")));
+        //             ResourceAlias.Color("default"), ResourceAlias.Color("blue_text")));
         //     }
         // }
 

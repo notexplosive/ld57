@@ -9,7 +9,7 @@ namespace LD57.Gameplay;
 public class MessagePage
 {
     private List<List<TileState>> _lines = new();
-    private Color _currentColor = Color.White;
+    private Color _currentColor = ResourceAlias.Color("default");
     public int Width { get; private set; }
     public int Height => _lines.Count;
 

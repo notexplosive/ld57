@@ -12,7 +12,7 @@ public class PromptOption
 
     public PromptOption(string text, Action onChoose)
     {
-        var color = Color.White;
+        var color = ResourceAlias.Color("default");
         Text = MessagePage.BuildLine(text, ref color);
         _onChoose = onChoose;
     }

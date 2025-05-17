@@ -22,7 +22,7 @@ public record CanvasTileData
     public bool FlipY;
 
     [JsonProperty("foreground_color")]
-    public string? ForegroundColorName = "white";
+    public string? ForegroundColorName = "default";
 
     [JsonProperty("frame")]
     public int Frame;
@@ -133,7 +133,7 @@ public record CanvasTileData
 
         if (!filter.ForegroundColor.Check(isForVisibility))
         {
-            result = result with {ForegroundColor = Color.White};
+            result = result with {ForegroundColor = ResourceAlias.Color("default")};
         }
 
         if (!filter.BackgroundColorAndIntensity.Check(isForVisibility))

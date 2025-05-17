@@ -76,7 +76,7 @@ public class WorldEditorSurface : EditorSurface<WorldTemplate, PlacedEntity, Ent
 
             foreach (var position in Constants.TraceRectangle(hoveredRoomTopLeft, hoveredRoomBottomRight))
             {
-                var color = Color.LightBlue;
+                var color = ResourceAlias.Color("hovered");
                 var previousTileState = screen.GetTile(position);
                 var increment = 2;
 

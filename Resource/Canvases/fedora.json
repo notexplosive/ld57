@@ -2,10 +2,10 @@
   "content": [
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -20,10 +20,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -38,10 +38,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -56,10 +56,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -74,10 +74,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -92,10 +92,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -110,10 +110,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -128,10 +128,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -146,10 +146,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -164,10 +164,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -182,10 +182,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -200,10 +200,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -218,10 +218,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -236,10 +236,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -254,10 +254,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -272,10 +272,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -290,10 +290,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -308,10 +308,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -326,10 +326,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -344,10 +344,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -362,10 +362,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -380,10 +380,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -398,10 +398,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -416,10 +416,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -434,10 +434,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -452,10 +452,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -470,10 +470,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -488,10 +488,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -506,10 +506,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -524,10 +524,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -542,10 +542,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -560,10 +560,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -578,10 +578,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -596,10 +596,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -614,10 +614,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -632,10 +632,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -650,10 +650,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -668,10 +668,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -686,10 +686,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -704,10 +704,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -722,10 +722,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -740,10 +740,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -758,10 +758,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -776,10 +776,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -794,10 +794,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -812,10 +812,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -830,10 +830,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -848,10 +848,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -866,10 +866,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -884,10 +884,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -902,10 +902,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -920,10 +920,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -938,10 +938,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -956,10 +956,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -974,10 +974,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -992,10 +992,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1010,10 +1010,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1028,10 +1028,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1046,10 +1046,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1064,10 +1064,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1082,10 +1082,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1100,10 +1100,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1118,10 +1118,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1136,10 +1136,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1154,10 +1154,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1172,10 +1172,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1190,10 +1190,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1208,10 +1208,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1226,10 +1226,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1244,10 +1244,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1262,10 +1262,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1280,10 +1280,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1298,10 +1298,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1316,10 +1316,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1334,10 +1334,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1352,10 +1352,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1370,10 +1370,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1388,10 +1388,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1406,10 +1406,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1424,10 +1424,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1442,10 +1442,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1460,10 +1460,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1478,10 +1478,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1496,10 +1496,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1514,10 +1514,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1532,10 +1532,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1550,10 +1550,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1568,10 +1568,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1586,10 +1586,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1604,10 +1604,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1622,10 +1622,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1640,10 +1640,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1658,10 +1658,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1676,10 +1676,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1694,10 +1694,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1712,10 +1712,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1730,10 +1730,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1748,10 +1748,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1766,10 +1766,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1784,10 +1784,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1802,10 +1802,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1820,10 +1820,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1838,10 +1838,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1856,10 +1856,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1874,10 +1874,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1892,10 +1892,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1910,10 +1910,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1928,10 +1928,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1946,10 +1946,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1964,10 +1964,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -1982,10 +1982,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2000,10 +2000,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2018,10 +2018,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2036,10 +2036,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2054,10 +2054,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2072,10 +2072,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2090,10 +2090,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2108,10 +2108,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2126,10 +2126,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2144,10 +2144,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2162,10 +2162,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2180,10 +2180,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2198,10 +2198,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2216,10 +2216,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2234,10 +2234,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2252,10 +2252,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2270,10 +2270,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2288,10 +2288,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2306,10 +2306,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2324,10 +2324,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2342,10 +2342,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2360,10 +2360,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2378,10 +2378,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2396,10 +2396,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2414,10 +2414,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2432,10 +2432,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2450,10 +2450,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2468,10 +2468,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2486,10 +2486,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2504,10 +2504,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2522,10 +2522,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2540,10 +2540,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2558,10 +2558,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2576,10 +2576,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2594,10 +2594,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2612,10 +2612,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2630,10 +2630,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2648,10 +2648,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2666,10 +2666,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2684,10 +2684,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2702,10 +2702,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2720,10 +2720,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 7,
         "sheet": "Utility",
         "text": null,
@@ -2738,10 +2738,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 13,
         "sheet": "Utility",
         "text": null,
@@ -2756,10 +2756,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 13,
         "sheet": "Utility",
         "text": null,
@@ -2774,10 +2774,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 12,
         "sheet": "Utility",
         "text": null,
@@ -2792,10 +2792,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 12,
         "sheet": "Utility",
         "text": null,
@@ -2810,10 +2810,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 12,
         "sheet": "Utility",
         "text": null,
@@ -2828,10 +2828,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 12,
         "sheet": "Utility",
         "text": null,
@@ -2846,10 +2846,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 12,
         "sheet": "Utility",
         "text": null,
@@ -2864,10 +2864,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 12,
         "sheet": "Utility",
         "text": null,
@@ -2882,10 +2882,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2900,10 +2900,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2918,10 +2918,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2936,10 +2936,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 4,
         "sheet": "Walls",
         "text": null,
@@ -2954,10 +2954,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 9,
         "sheet": "Utility",
         "text": null,
@@ -2972,10 +2972,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -2990,10 +2990,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -3008,10 +3008,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 9,
         "sheet": "Utility",
         "text": null,
@@ -3026,10 +3026,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -3044,10 +3044,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -3062,10 +3062,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 13,
         "sheet": "Tools",
         "text": null,
@@ -3080,10 +3080,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 20,
         "sheet": "Utility",
         "text": null,
@@ -3098,10 +3098,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 6,
         "sheet": "Entities",
         "text": null,
@@ -3116,10 +3116,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 4,
         "sheet": "Utility",
         "text": null,
@@ -3134,10 +3134,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -3152,10 +3152,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -3170,10 +3170,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 9,
         "sheet": "Utility",
         "text": null,
@@ -3188,10 +3188,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": true,
         "flip_y": true,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -3206,10 +3206,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -3224,10 +3224,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 4,
         "sheet": "Walls",
         "text": null,
@@ -3242,10 +3242,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 9,
         "sheet": "Utility",
         "text": null,
@@ -3260,10 +3260,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 5,
         "sheet": "Utility",
         "text": null,
@@ -3278,10 +3278,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 19,
         "sheet": "Entities",
         "text": null,
@@ -3296,10 +3296,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 19,
         "sheet": "Entities",
         "text": null,
@@ -3314,10 +3314,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3332,10 +3332,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3350,10 +3350,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3368,10 +3368,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3386,10 +3386,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3404,10 +3404,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3422,10 +3422,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3440,10 +3440,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3458,10 +3458,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3476,10 +3476,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 16,
         "sheet": "Tools",
         "text": null,
@@ -3494,10 +3494,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 32,
         "sheet": "Entities",
         "text": null,
@@ -3512,10 +3512,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 32,
         "sheet": "Entities",
         "text": null,
@@ -3530,10 +3530,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 19,
         "sheet": "Entities",
         "text": null,
@@ -3548,10 +3548,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 19,
         "sheet": "Entities",
         "text": null,
@@ -3566,10 +3566,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 25,
         "sheet": "Entities",
         "text": null,
@@ -3584,10 +3584,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 26,
         "sheet": "Utility",
         "text": null,
@@ -3602,10 +3602,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 26,
         "sheet": "Utility",
         "text": null,
@@ -3620,10 +3620,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 26,
         "sheet": "Utility",
         "text": null,
@@ -3638,10 +3638,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 26,
         "sheet": "Utility",
         "text": null,
@@ -3656,10 +3656,10 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
-        "foreground_color": "white",
+        "foreground_color": "default",
         "frame": 26,
         "sheet": "Utility",
         "text": null,

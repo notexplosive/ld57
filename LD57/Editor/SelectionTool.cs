@@ -179,7 +179,7 @@ public abstract class SelectionTool : IEditorTool
                     screen.PutTile(worldPosition,
                         previousTileState with
                         {
-                            BackgroundColor = Color.White,
+                            BackgroundColor = ResourceAlias.Color("default"),
                             BackgroundIntensity = 1f
                         });
                 }

@@ -12,7 +12,7 @@ public class TweenableGlyph
     public TweenableVector2 PixelOffset { get; } = new();
     public TweenableFloat Rotation { get; } = new();
     public TweenableFloat Scale { get; } = new(1f);
-    public TweenableColor ForegroundColorOverride { get; } = new(Color.White);
+    public TweenableColor ForegroundColorOverride { get; } = new(ResourceAlias.Color("default"));
     public TweenableColor BackgroundColor { get; } = new(Color.Transparent);
 
     public CallbackTween StartOverridingColor => new(() => { ShouldOverrideColor = true; });

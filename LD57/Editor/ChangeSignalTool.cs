@@ -84,7 +84,7 @@ public class ChangeSignalTool : IEditorTool
             return original;
         }
 
-        return original.WithBackground(color.Value) with {ForegroundColor = Color.White};
+        return original.WithBackground(color.Value) with {ForegroundColor = ResourceAlias.Color("default")};
     }
 
     private void IncrementSignalAt(GridPosition position, int delta)

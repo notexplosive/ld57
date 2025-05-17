@@ -80,7 +80,7 @@ public class AsciiScreen
                     {
                         var measuredSize = _font.Value.MeasureString(text);
                         var origin = new Vector2(measuredSize.X / 2f, _font.Value.LineHeight * 4 / 6f);
-                        // painter.DrawRectangle(measuredSize.ToRectangleF().Moved(rectangle.Center).Moved(-origin), new DrawSettings{Color = Color.White.WithMultipliedOpacity(0.5f)});
+                        // painter.DrawRectangle(measuredSize.ToRectangleF().Moved(rectangle.Center).Moved(-origin), new DrawSettings{Color = ResourceAlias.Color("default").WithMultipliedOpacity(0.5f)});
                         painter.SpriteBatch.DrawString(_font.Value, text, rectangle.Center + pixelOffset, color,
                             rotation,
                             origin,

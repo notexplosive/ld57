@@ -2,7 +2,7 @@
   "content": [
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -20,7 +20,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -38,7 +38,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -56,7 +56,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -74,7 +74,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -92,7 +92,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -110,7 +110,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -128,7 +128,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -146,7 +146,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -164,7 +164,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -182,7 +182,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -200,7 +200,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -218,7 +218,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -236,7 +236,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -254,7 +254,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -272,7 +272,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -290,7 +290,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -308,7 +308,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -326,7 +326,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -344,7 +344,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -362,7 +362,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -380,7 +380,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "blue_brick_bright",
@@ -398,7 +398,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "blue_brick_bright",
@@ -416,7 +416,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -434,7 +434,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -452,7 +452,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "player",
@@ -470,7 +470,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "blue_brick_bright",
@@ -488,7 +488,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -506,7 +506,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -524,7 +524,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "hook",
@@ -542,7 +542,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "wood",
@@ -560,7 +560,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "wood",
@@ -578,7 +578,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "wood",
@@ -596,7 +596,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "wood",
@@ -614,7 +614,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "blood",
@@ -632,7 +632,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "blood",
@@ -650,7 +650,7 @@
     },
     {
       "data": {
-        "background_color": "white",
+        "background_color": "default",
         "flip_x": false,
         "flip_y": false,
         "foreground_color": "blood",

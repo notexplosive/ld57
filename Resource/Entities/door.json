@@ -2,7 +2,7 @@
     "sort_priority": 8,
     "sprite_sheet": "Entities",
     "frame": 3,
-    "color": "white",
+    "color": "default",
     "tags": [
         "Door",
         "Signal"

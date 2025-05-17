@@ -32,7 +32,7 @@ public class CanvasTextTool : IEditorTool
             return original.WithSprite(ResourceAlias.Tools, 15);
         }
 
-        return original with {BackgroundColor = Color.White, BackgroundIntensity = 0.5f};
+        return original with {BackgroundColor = ResourceAlias.Color("default"), BackgroundIntensity = 0.5f};
     }
 
     public string Status()

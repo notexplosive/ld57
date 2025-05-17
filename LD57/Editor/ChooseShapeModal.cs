@@ -82,7 +82,7 @@ public class ChooseShapeModal : Popup
                 screen.PutFilledRectangle(TileState.Sprite(ResourceAlias.Tools, 17, Color.Gray),
                     scrollBarRectangle.MovedToZero());
                 screen.PutTile(new GridPosition(0, thumbPosition),
-                    TileState.Sprite(ResourceAlias.Tools, 16, Color.LightBlue));
+                    TileState.Sprite(ResourceAlias.Tools, 16, ResourceAlias.Color("editor-button")));
             }
             else
             {
@@ -181,7 +181,7 @@ public class ChooseShapeModal : Popup
 
             return TileState.Sprite(ResourceAlias.Tools, frame) with
             {
-                ForegroundColor = Color.LightBlue, Angle = rotation().Radians
+                ForegroundColor = ResourceAlias.Color("editor-button"), Angle = rotation().Radians
             };
         };
     }
@@ -198,21 +198,21 @@ public class ChooseShapeModal : Popup
 
             return TileState.Sprite(ResourceAlias.Tools, frame) with
             {
-                ForegroundColor = Color.LightBlue, Angle = rotation().Radians
+                ForegroundColor = ResourceAlias.Color("editor-button"), Angle = rotation().Radians
             };
         };
     }
 
     public static TileState GetCcwRotationTile()
     {
-        return TileState.Sprite(ResourceAlias.Entities, 27) with {ForegroundColor = Color.LightBlue};
+        return TileState.Sprite(ResourceAlias.Entities, 27) with {ForegroundColor = ResourceAlias.Color("editor-button")};
     }
 
     public static TileState GetCwRotationTile()
     {
         return TileState.Sprite(ResourceAlias.Entities, 27) with
         {
-            Flip = new XyBool(true, false), ForegroundColor = Color.LightBlue
+            Flip = new XyBool(true, false), ForegroundColor = ResourceAlias.Color("editor-button")
         };
     }
 
@@ -238,7 +238,7 @@ public class ChooseShapeModal : Popup
 
     private TileState GetHoveredTileState(ICanvasTileShape shape)
     {
-        return GetBasicTileState(shape).WithBackground(Color.LightBlue);
+        return GetBasicTileState(shape).WithBackground(ResourceAlias.Color("hovered"));
     }
 
     private TileState GetBasicTileState(ICanvasTileShape shape)
@@ -298,7 +298,7 @@ public class ChooseShapeModal : Popup
     {
         return () => TileState.Sprite(ResourceAlias.Tools, 22).WithRotation(getRotation()) with
         {
-            ForegroundColor = getRotation() != QuarterRotation.Upright ? Color.Yellow : Color.LightBlue
+            ForegroundColor = getRotation() != QuarterRotation.Upright ? Color.Yellow : ResourceAlias.Color("hovered")
         };
     }
 }

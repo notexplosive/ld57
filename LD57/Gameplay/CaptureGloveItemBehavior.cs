@@ -173,7 +173,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
     private SequenceTween RejectAnimation(World world, Entity user)
     {
         var error = ResourceAlias.Color("blood");
-        var normal = ResourceAlias.Color("white");
+        var normal = ResourceAlias.Color("default");
         return new SequenceTween()
             .Add(ResourceAlias.CallbackPlaySound("clank", new SoundEffectSettings{Pitch =1f}))
             .Add(new CallbackTween(() => _showRejection = true))
@@ -200,7 +200,7 @@ public class CaptureGloveItemBehavior : ItemBehavior
 
         if (_showRejection)
         {
-            var rejectionTile = TileState.StringCharacter("X", Color.White);
+            var rejectionTile = TileState.StringCharacter("X", ResourceAlias.Color("default"));
             if (_capturedEntity != null)
             {
                 rejectionTile = _capturedEntity.TileState;

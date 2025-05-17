@@ -46,7 +46,7 @@ public class ChooseColorModal : Popup
                             return TileState.Sprite(ResourceAlias.Utility, 0, Color.Yellow);
                         }
 
-                        return TileState.Sprite(ResourceAlias.Utility, 0, Color.LightBlue);
+                        return TileState.Sprite(ResourceAlias.Utility, 0, ResourceAlias.Color("editor-button"));
                     }
 
                     if (isSelected)
@@ -54,7 +54,7 @@ public class ChooseColorModal : Popup
                         return TileState.BackgroundOnly(Color.Yellow, intensity);
                     }
 
-                    return TileState.BackgroundOnly(Color.LightBlue, intensity);
+                    return TileState.BackgroundOnly(ResourceAlias.Color(getColor()), intensity);
                 });
                 AddButton(intensityButton);
             }
@@ -125,7 +125,7 @@ public class ChooseColorModal : Popup
                 screen.PutFilledRectangle(TileState.Sprite(ResourceAlias.Tools, 17, Color.Gray),
                     scrollBarRectangle.MovedToZero());
                 screen.PutTile(new GridPosition(0, thumbPosition),
-                    TileState.Sprite(ResourceAlias.Tools, 16, Color.LightBlue));
+                    TileState.Sprite(ResourceAlias.Tools, 16, ResourceAlias.Color("editor-button")));
             }
             else
             {
