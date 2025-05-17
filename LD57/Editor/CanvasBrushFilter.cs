@@ -197,10 +197,10 @@ public class CanvasBrushFilter : IBrushFilter
     {
         if (editable)
         {
-            return TileState.Sprite(ResourceAlias.Tools, 0, Color.White);
+            return TileState.Sprite(ResourceAlias.Tools, 23, Color.White);
         }
 
-        return TileState.Sprite(ResourceAlias.Tools, 9, Color.White);
+        return TileState.Sprite(ResourceAlias.Utility, 24, Color.White);
     }
 
     private TileState GetBackgroundTileState()
