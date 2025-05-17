@@ -35,7 +35,7 @@ public class CanvasBrushFilter : IBrushFilter
 
         element.AddButton(new Button(new GridPosition(1, 1), () => OpenShapeModal(screen.RoomRectangle))
             .SetTileStateGetter(GetForegroundShapeTileState)
-            .SetTileStateOnHoverGetter(() => GetForegroundShapeTileState().WithForeground(Color.LimeGreen))
+            .SetTileStateOnHoverGetter(() => GetForegroundShapeTileState().WithBackground(Color.LightBlue))
         );
         element.AddButton(
             new Button(new GridPosition(1, 2), () => OpenForegroundColorModal(screen.RoomRectangle))

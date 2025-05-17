@@ -238,7 +238,7 @@ public class ChooseShapeModal : Popup
 
     private TileState GetHoveredTileState(ICanvasTileShape shape)
     {
-        return GetBasicTileState(shape).WithBackground(Color.Red);
+        return GetBasicTileState(shape).WithBackground(Color.LightBlue);
     }
 
     private TileState GetBasicTileState(ICanvasTileShape shape)
