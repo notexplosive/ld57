@@ -477,6 +477,8 @@ public class EditorSession : Session
         _screen.Draw(painter, Vector2.Zero);
     }
 
+    public override AsciiScreen Screen => _screen;
+
     public void SaveFlow()
     {
         if (Surface.FileName == null)

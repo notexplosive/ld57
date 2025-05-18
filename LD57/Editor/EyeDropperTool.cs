@@ -1,9 +1,8 @@
 ﻿using ExplogineMonoGame;
 using ExplogineMonoGame.Input;
-using LD57.Editor;
 using LD57.Rendering;
 
-namespace LD57.CartridgeManagement;
+namespace LD57.Editor;
 
 public abstract class EyeDropperTool : IEditorTool
 {

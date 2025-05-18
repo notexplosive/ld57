@@ -1,6 +1,7 @@
 using ExplogineMonoGame;
 using ExplogineMonoGame.Data;
 using LD57.CartridgeManagement;
+using LD57.Rendering;
 
 namespace LD57.Core;
 
@@ -30,4 +31,6 @@ public abstract class Session : ISession
     public virtual void Draw(Painter painter)
     {
     }
+
+    public abstract AsciiScreen Screen { get; }
 }

@@ -84,6 +84,8 @@ public class TableauSession : ISession
         _screen.Draw(painter, Vector2.Zero);
     }
 
+    public AsciiScreen Screen => _screen;
+
     public void OpenFile(string fileName)
     {
         var fileSystem = Client.Debug.RepoFileSystem.GetDirectory("Resource/Tableaus");

@@ -1,0 +1,76 @@
+{
+  "content": [
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 2
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 3
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 4
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 5
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 6
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 7
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 8
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 9
+      }
+    },
+    {
+      "extra_state": {},
+      "template_name": "fence_veritical",
+      "position": {
+        "x": 12,
+        "y": 10
+      }
+    }
+  ]
+}

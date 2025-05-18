@@ -435,6 +435,8 @@ public class LdSession : Session
         _screen.Draw(painter, new Vector2(0, _screen.TileSize / 4f));
     }
 
+    public override AsciiScreen Screen => _screen;
+
     public void LoadWorld(WorldTemplate worldTemplate, GridPosition? playerSpawnPoint = null)
     {
         StopAllAmbientSounds();

@@ -150,12 +150,19 @@ public class AsciiScreen
         }
     }
 
-    public void PutString(GridPosition position, string content, Color? color = null)
+    public void PutString(GridPosition position, string content, Color? color = null, Color? backgroundColor = null)
     {
         for (var index = 0; index < content.Length; index++)
         {
             var character = content.Substring(index, 1);
-            PutTile(position + new GridPosition(index, 0), TileState.StringCharacter(character, color));
+            var tile = TileState.StringCharacter(character, color);
+
+            if (backgroundColor.HasValue)
+            {
+                tile = tile.WithBackground(backgroundColor.Value);
+            }
+            
+            PutTile(position + new GridPosition(index, 0), tile);
         }
     }
 

@@ -26,11 +26,14 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
     private EditorSession _editorSession = null!;
     private LdSession _gameSession = null!;
     private ISession? _session;
+    private SessionSwitcherOverlay? _sessionSwitcher;
 
     public override CartridgeConfig CartridgeConfig { get; } = new(new Point(1920, 1080), SamplerState.PointClamp);
 
     public override void OnCartridgeStarted()
     {
+        _sessionSwitcher = new();
+        
         var targetMode = Client.Args.GetValue<string>("mode");
         var worldName = Client.Args.GetValue<string>("level");
 
@@ -77,6 +80,41 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
             _gameSession.OpenMainMenu();
         }
+
+        _sessionSwitcher.CommandSent += OnConsoleCommand;
+    }
+
+    private void OnConsoleCommand(string command, ConsoleCommandResponse response)
+    {
+        if (command == "edit")
+        {
+            _session = _editorSession;
+            response.SuccessAndClose("Loading Editor Session");
+            return;
+        }
+
+        if (command == "tableau")
+        {
+            _session = _tableauSession;
+            response.SuccessAndClose("Loading Tableau Session");
+            return;
+        }
+
+        if (command == "play")
+        {
+            _session = _gameSession;
+            response.SuccessAndClose("Loading Play Session");
+            return;
+        }
+
+        if (command == "exit")
+        {
+            Client.Exit();
+            response.SuccessAndClose("Exiting Game");
+            return;
+        }
+
+        response.FailUnrecognized();
     }
 
     private EditorSession BuildDrawSession()
@@ -229,12 +267,29 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
 
     public override void UpdateInput(ConsumableInput input, HitTestStack hitTestStack)
     {
+        if (input.Keyboard.Modifiers.None && input.Keyboard.GetButton(Keys.OemTilde, true).WasPressed)
+        {
+            _sessionSwitcher?.ToggleVisible();
+            return;
+        }
+
+        if (_sessionSwitcher != null && _sessionSwitcher.Visible)
+        {
+            _sessionSwitcher.UpdateInput(input, hitTestStack);
+            return;
+        }
+        
         _session?.UpdateInput(input, hitTestStack);
     }
 
     public override void Update(float dt)
     {
         _session?.Update(dt);
+        
+        if (_sessionSwitcher != null && _sessionSwitcher.Visible && _session != null)
+        {
+            _sessionSwitcher.Update(_session.Screen,dt);
+        }
     }
 
     public override void Draw(Painter painter)

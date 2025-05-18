@@ -16,4 +16,6 @@ local frames = image:queryTagPositions("frame")
 
 function ipsum.update(dt)
     elapsedTime = elapsedTime + dt
+
+    ipsum:putImage(image, -10, -6)
 end

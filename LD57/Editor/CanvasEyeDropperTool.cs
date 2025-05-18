@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using LD57.Editor;
 using LD57.Rendering;
 
-namespace LD57.CartridgeManagement;
+namespace LD57.Editor;
 
 public class CanvasEyeDropperTool : EyeDropperTool
 {
