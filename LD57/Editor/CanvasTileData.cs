@@ -42,6 +42,9 @@ public record CanvasTileData
     [JsonProperty("background_intensity")]
     public float BackgroundIntensity { get; set; }
 
+    [JsonProperty("extra_data")]
+    public string ExtraData { get; set; } = string.Empty;
+
     public TileState GetTileUnfiltered()
     {
         if (TileType == TileType.Sprite)
@@ -192,6 +195,11 @@ public record CanvasTileData
             stringBuilder.Append($"Bg: {BackgroundColorName}@{BackgroundIntensity}");
         }
 
+        if (HasExtraData())
+        {
+            stringBuilder.Append($"ExtraData: {ExtraData}");
+        }
+
         return stringBuilder.ToString();
     }
 
@@ -203,5 +211,10 @@ public record CanvasTileData
             TileType.Sprite => new CanvasTileShapeSprite(SheetName ?? "Entities", Frame),
             _ => new CanvasTileShapeEmpty()
         };
+    }
+
+    public bool HasExtraData()
+    {
+        return !string.IsNullOrEmpty(ExtraData);
     }
 }

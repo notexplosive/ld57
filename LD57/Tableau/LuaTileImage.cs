@@ -15,8 +15,8 @@ public record LuaTileImage
 {
     private readonly Dictionary<GridPosition, CanvasTileData> _content = new();
     private readonly int _height;
-    private readonly int _width;
     private readonly LuaRuntime _luaRuntime;
+    private readonly int _width;
 
     public LuaTileImage(string fileName, LuaRuntime luaRuntime)
     {
@@ -29,7 +29,7 @@ public record LuaTileImage
         int? minY = null;
         int? maxX = null;
         int? maxY = null;
-        
+
         data.Content.Sort((a, b) =>
         {
             var x = a.Position.X.CompareTo(b.Position.X);
@@ -42,7 +42,7 @@ public record LuaTileImage
 
             return x;
         });
-        
+
         foreach (var item in data.Content)
         {
             if (!minX.HasValue || !maxX.HasValue || !maxY.HasValue || !minY.HasValue)
@@ -68,13 +68,28 @@ public record LuaTileImage
         }
     }
 
-    public void Draw(AsciiScreen screen, GridPosition gridPosition)
+    public void PaintToScreen(AsciiScreen screen, GridPosition gridPosition)
     {
         screen.PushTransform(gridPosition);
 
         foreach (var (position, tileData) in _content)
         {
             screen.PutTile(position, tileData.GetTileUnfiltered());
+        }
+
+        screen.PopTransform();
+    }
+    
+    public void PaintToScreenSlice(AsciiScreen screen, GridPosition gridPosition, GridRectangle innerRect)
+    {
+        screen.PushTransform(gridPosition);
+
+        foreach (var (position, tileData) in _content)
+        {
+            if (innerRect.Contains(position, true))
+            {
+                screen.PutTile(position - innerRect.TopLeft, tileData.GetTileUnfiltered());
+            }
         }
 
         screen.PopTransform();
@@ -156,12 +171,54 @@ public record LuaTileImage
     {
         return _width;
     }
-    
+
     [UsedImplicitly]
     [LuaMember("height")]
     public int Height()
     {
         return _height;
+    }
+
+    [UsedImplicitly]
+    [LuaMember("allTagsNames")]
+    public Table GetTagNames()
+    {
+        var table = _luaRuntime.NewTable();
+
+        HashSet<string> seenTags = new();
+        foreach (var item in _content.Values)
+        {
+            if (item.HasExtraData())
+            {
+                var tag = item.ExtraData;
+                if (!seenTags.Contains(tag))
+                {
+                    table.Append(DynValue.NewString(tag));
+                }
+
+                seenTags.Add(tag);
+            }
+        }
+
+        return table;
+    }
+
+    [UsedImplicitly]
+    [LuaMember("queryTagPositions")]
+    public Table QueryTagPositions(string targetTag)
+    {
+        var result = _luaRuntime.NewTable();
+        foreach (var (position, item) in _content)
+        {
+            if (item.ExtraData == targetTag)
+            {
+                var positionTable = _luaRuntime.NewTable();
+                positionTable.Set("x",DynValue.NewNumber(position.X));
+                positionTable.Set("y",DynValue.NewNumber(position.Y));
+                result.Append(DynValue.NewTable(positionTable));
+            }
+        }
+        return result;
     }
 
     private IEnumerable<GridPosition> GetPositionsRaw()

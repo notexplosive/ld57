@@ -97,6 +97,8 @@ public class LdCartridge(IRuntime runtime) : BasicGameCartridge(runtime)
             toolChord, Keys.E, "Eye Dropper", new CanvasEyeDropperTool(editorSession, canvasSurface, filter));
         editorSession.AddTool(
             toolChord, Keys.T, "Text", new CanvasTextTool(canvasSurface, filter));
+        editorSession.AddTool(
+            toolChord, Keys.D, "Metadata", new CanvasMetadataTool(editorSession,canvasSurface));
         editorSession.ExtraUi.Add(filter.CreateUi);
 
         chords.Add(new KeybindChord(Keys.E, "Brush Filter")

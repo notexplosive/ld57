@@ -356,7 +356,7 @@ public class EditorSession : Session
     {
         var topLeft = new GridPosition(4, 12);
         var textModal =
-            new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 1)));
+            new Popup(new GridRectangle(topLeft, new GridPosition(_screen.Width - topLeft.X, topLeft.Y + 3)));
         textModal.AddStaticText(new GridPosition(1, 1), message);
         var textInput = textModal.AddTextInput(new GridPosition(1, 2), defaultText ?? string.Empty);
 

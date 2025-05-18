@@ -7,7 +7,7 @@ namespace LD57.Editor;
 [Serializable]
 public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData, CanvasBrushFilter>
 {
-    public override void PlaceInkAt(GridPosition position, CanvasTileData template, CanvasBrushFilter canvasBrushFilter)
+    public override void PlaceInkAt(GridPosition position, CanvasTileData tileData, CanvasBrushFilter canvasBrushFilter)
     {
         var existingTile = InkAt(position);
 
@@ -15,16 +15,28 @@ public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData, CanvasBru
         {
             return;
         }
-        
-        template = canvasBrushFilter.Combine(existingTile?.CanvasTileData ?? new(), template);
-        
+
+        tileData = canvasBrushFilter.Combine(existingTile?.CanvasTileData ?? new CanvasTileData(), tileData);
+
         EraseAt(position);
 
-        Content.Add(new PlacedCanvasTile
+        var ink = InkAt(position);
+        if (ink != null && ink.CanvasTileData.HasExtraData())
         {
-            Position = position,
-            CanvasTileData = template
-        });
+            tileData = tileData with {ExtraData = ink.CanvasTileData.ExtraData};
+            
+            // replace existing data
+            ink.CanvasTileData = tileData;
+        }
+        else
+        {
+            // place new data
+            Content.Add(new PlacedCanvasTile
+            {
+                Position = position,
+                CanvasTileData = tileData
+            });
+        }
     }
 
     public PlacedCanvasTile? InkAt(GridPosition position)
@@ -34,6 +46,21 @@ public class CanvasData : EditorData<PlacedCanvasTile, CanvasTileData, CanvasBru
 
     public override void EraseAt(GridPosition position)
     {
-        Content.RemoveAll(a => a.Position == position);
+        var items = Content.Where(a => a.Position == position).ToList();
+
+        foreach (var item in items)
+        {
+            Content.Remove(item);
+        }
+
+        var tileWithMetadata = items.FirstOrDefault(a => a.CanvasTileData.HasExtraData());
+        if (tileWithMetadata != null)
+        {
+            Content.Add(new PlacedCanvasTile
+            {
+                Position = position,
+                CanvasTileData = new CanvasTileData {ExtraData = tileWithMetadata.CanvasTileData.ExtraData}
+            });
+        }
     }
 }

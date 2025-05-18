@@ -28,7 +28,7 @@ public class LuaIpsum
         _seed = Client.Random.Clean.NextInt();
     }
 
-    public int DesiredWidth { get; private set; }
+    public int DesiredWidth { get; private set; } = 20;
 
     [LuaMember("update")]
     public Closure? Update { get; set; }
@@ -91,7 +91,25 @@ public class LuaIpsum
     [LuaMember("putImage")]
     public void PutImage(LuaTileImage image, float x, float y)
     {
-        image.Draw(_screen, new GridPosition(Constants.RoundToInt(x), Constants.RoundToInt(y)));
+        image.PaintToScreen(_screen, new GridPosition(Constants.RoundToInt(x), Constants.RoundToInt(y)));
+    }
+
+    [UsedImplicitly]
+    [LuaMember("putImageSlice")]
+    public void PutImageSlice(LuaTileImage image, float worldX, float worldY, float innerX, float innerY, float width,
+        float height)
+    {
+        var rect = new GridRectangle(Constants.RoundToInt(innerX), Constants.RoundToInt(innerY), Constants.RoundToInt(width), Constants.RoundToInt(height));
+
+        image.PaintToScreenSlice(_screen, new GridPosition(Constants.RoundToInt(worldX), Constants.RoundToInt(worldY)),
+            rect);
+    }
+
+    [UsedImplicitly]
+    [LuaMember("putText")]
+    public void PutText(string text, float x, float y)
+    {
+        _screen.PutString(new GridPosition(Constants.RoundToInt(x), Constants.RoundToInt(y)), text);
     }
 
     [UsedImplicitly]
