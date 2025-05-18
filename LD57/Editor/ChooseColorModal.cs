@@ -97,7 +97,7 @@ public class ChooseColorModal : Popup
                     return TileState.Sprite(ResourceAlias.Tools, 0).WithBackground(color.Value);
                 }
 
-                return TileState.BackgroundOnly(color.Value, 1);
+                return TileState.Sprite(ResourceAlias.Utility, 12).WithForeground(color.Value);
             });
 
             colorButton.SetTileStateOnHoverGetter(() => TileState.Sprite(ResourceAlias.Floors, 7).WithBackground(color.Value));

@@ -8,6 +8,7 @@
         "ipsum"
     ],
     "Lua.diagnostics.disable": [
-        "duplicate-set-field"
+        "duplicate-set-field",
+        "cast-local-type"
     ]
 }

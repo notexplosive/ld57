@@ -72,7 +72,7 @@ public readonly record struct TileState(
 
     public static TileState BackgroundOnly(Color backgroundColor, float intensity)
     {
-        return new TileState(TileType.Invisible, ResourceAlias.Color("default"), ResourceAlias.Color("default")) { BackgroundColor = backgroundColor, BackgroundIntensity = intensity };
+        return new TileState(TileType.BackgroundOnly, ResourceAlias.Color("default"), ResourceAlias.Color("default")) { BackgroundColor = backgroundColor, BackgroundIntensity = intensity };
     }
 
     public TileState WithBackground(Color color, float intensity = 1)

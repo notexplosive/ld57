@@ -256,7 +256,7 @@ public class CanvasBrushFilter : IBrushFilter
         if (ForegroundShapeAndTransform.IsFunctionallyActive)
         {
             _currentShape = tileData.GetShape();
-            Rotation = QuarterRotation.FromAngle(tileData.Angle);
+            Rotation = QuarterRotation.FromAngleDegrees(tileData.Angle);
             FlipState = new XyBool(tileData.FlipX, tileData.FlipY);
         }
 

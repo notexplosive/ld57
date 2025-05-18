@@ -69,7 +69,7 @@ public class QuarterRotation
         return this;
     }
 
-    public static QuarterRotation FromAngle(float angle)
+    public static QuarterRotation FromAngleDegrees(float angle)
     {
         // insanely forgiving tolerance
         var tolerance = 45;

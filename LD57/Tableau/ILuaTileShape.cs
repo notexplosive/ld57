@@ -2,7 +2,7 @@
 
 namespace LD57.Tableau;
 
-public interface ITileInfo
+public interface ILuaTileShape
 {
     TileState GetTileState();
 }
