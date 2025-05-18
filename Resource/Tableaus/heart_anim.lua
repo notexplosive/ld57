@@ -16,4 +16,5 @@ local frames = image:queryTagPositions("frame")
 
 function ipsum.update(dt)
     elapsedTime = elapsedTime + dt
+    frameAnimation.drawFrame(image, frames, 10, 10, 4, 4, elapsedTime * 5)
 end

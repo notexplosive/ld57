@@ -35,6 +35,16 @@ public class TableauSession : ISession
         {
             OpenFile(_fileName);
         }
+        
+        if (input.Keyboard.Modifiers.Control &&input.Keyboard.GetButton(Keys.O, true).WasPressed)
+        {
+            var fileName = PlatformFileApi.OpenFileDialogue("Open Tableau",
+                new PlatformFileApi.ExtensionDescription("lua", "Tableau Lua"));
+            if (fileName != null)
+            {
+                OpenFile(fileName);
+            }
+        }
     }
 
     public void Update(float dt)
