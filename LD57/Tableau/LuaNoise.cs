@@ -16,7 +16,7 @@ public class LuaNoise
 
     [UsedImplicitly]
     [LuaMember("integer")]
-    public int Integer(int index, int max)
+    public int Integer(int index, int max = 0)
     {
         return _noise.PositiveIntAt(index, max);
     }

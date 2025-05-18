@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -227,5 +228,18 @@ public class LdResourceAssets
     public Color GetNamedColor(string name)
     {
         return NamedColors.GetValueOrDefault(name) ?? MissingColor;
+    }
+
+    public IEnumerable<KeyValuePair<string, SpriteSheet?>> AllNamedSheets()
+    {
+        foreach (var sheet in Sheets)
+        {
+            if (sheet.Key == "PopupFrame")
+            {
+                continue;
+            }
+            
+            yield return sheet;
+        }
     }
 }

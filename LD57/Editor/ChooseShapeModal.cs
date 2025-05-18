@@ -102,15 +102,9 @@ public class ChooseShapeModal : Popup
         pane.AddButton(emptyButton);
         HandleLineFeed(ref x, ref y, maxWidth);
 
-        foreach (var (sheetName, sheet) in LdResourceAssets.Instance.Sheets)
+        foreach (var (sheetName, sheet) in LdResourceAssets.Instance.AllNamedSheets())
         {
             if (sheet == null)
-            {
-                continue;
-            }
-
-            // todo: temporary hack to prevent the whole popupframe sprite from showing up
-            if (sheetName == "PopupFrame")
             {
                 continue;
             }

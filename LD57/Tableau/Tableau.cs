@@ -26,14 +26,14 @@ public class Tableau
             _updateFunction = dt => luaRuntime.SafeCallFunction(ipsum.Update, dt);
         }
 
-        _screen.SetWidth(ipsum.Width);
+        _screen.SetWidth(ipsum.DesiredWidth);
     }
 
     public void Update(float dt)
     {
-        if (_ipsum.Width != _screen.Width)
+        if (_ipsum.DesiredWidth != _screen.Width)
         {
-            _screen.SetWidth(_ipsum.Width);
+            _screen.SetWidth(_ipsum.DesiredWidth);
         }
         
         _updateFunction?.Invoke(dt);
