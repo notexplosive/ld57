@@ -44,7 +44,7 @@ public class SessionSwitcherOverlay
         
         if(response.Status == ConsoleCommandResponse.StatusType.Unrecognized)
         {
-            _logBuffer.Add($"Unrecognized Command: {text}");
+            _logBuffer.Add($"Unrecognized Command");
         }
         
         _textInput.Clear();
